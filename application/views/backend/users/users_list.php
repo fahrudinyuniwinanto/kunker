@@ -94,7 +94,7 @@
                                                 }
                                                 if (allow([1])) {
                                                     echo ' | ';
-                                                    echo anchor(site_url('users/reset_password/' . $users->id_user), '<i class="fa fa-key"></i>', 'class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Reset Password" title="Hapus" onclick="javascript: return confirm(\'Yakin mereset password user ini?\')"');
+                                                    echo anchor(site_url('users/reset_password/' . $users->id_user), '<i class="fa fa-sync"></i>', 'class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Reset Password" title="Hapus" onclick="javascript: return confirm(\'Yakin mereset password user ini?\')"');
                                                     echo ' | ';
                                                     echo anchor(site_url('users/delete/' . $users->id_user), '<i class="fa fa-trash"></i>', 'class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus" onclick="javascript: return confirm(\'Yakin hapus data?\')"');
                                                 }
