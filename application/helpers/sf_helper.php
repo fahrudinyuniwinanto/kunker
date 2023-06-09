@@ -405,67 +405,6 @@ function sf_upload($nama_gambar, $lokasi_gambar, $tipe_gambar, $ukuran_gambar, $
     return $dfile;
 }
 
-//fumgsi api whatsapp
-function api_sendwa($nowa, $chat)
-{
-    $curl = curl_init();
-    $token = "O6UT8a7LZ5mug1gEGcRgKP1DxrGBQo2t9wMqT31GgMdtdU9xwFQk42k2m615hkC0";
-    $data = [
-
-        'phone'     => $nowa,
-        'message'   => $chat,
-        'secret'    => false, // or true
-        'priority'  => false, // or true
-    ];
-
-    curl_setopt(
-        $curl,
-        CURLOPT_HTTPHEADER,
-        array(
-            "Authorization: $token",
-        )
-    );
-    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
-    curl_setopt($curl, CURLOPT_URL, "https://kudus.wablas.com/api/send-message");
-    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-    $result = curl_exec($curl);
-    curl_close($curl);
-
-    return json_decode($result);
-}
-
-//fungsi multiple send text whatsapp
-function api_sendwa_multiple($data)
-{
-
-    $curl   = curl_init();
-    $token  = "O6UT8a7LZ5mug1gEGcRgKP1DxrGBQo2t9wMqT31GgMdtdU9xwFQk42k2m615hkC0";
-    $random = true;
-    $payload = $data;
-    curl_setopt(
-        $curl,
-        CURLOPT_HTTPHEADER,
-        array(
-            "Authorization : $token",
-            "Content-Type  : application/json"
-        )
-    );
-    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload));
-    curl_setopt($curl, CURLOPT_URL, "https://kudus.wablas.com/api/v2/send-message?random=$random");
-    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-
-    $result = curl_exec($curl);
-    curl_close($curl);
-
-    return json_decode($result);
-}
-
 function curl_get($url)
 {
     $ch = curl_init();

@@ -15,7 +15,7 @@
         <meta content="" name="author" />
 
         <!-- Favicon -->
-        <link rel="icon" href="<?= base_url() ?>assets/img/temanggung.png">
+        <link rel="icon" href="<?= base_url() ?>assets/img/dpr.png">
 
         <!-- START Color Admin -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -155,7 +155,7 @@
                                 ?>
                                 <img alt="image" src="<?= base_url() ?>assets/foto_users/<?= $this->session->userdata('foto') ?>" style="width: 45px;" />
                             <?php } else { ?>
-                                <img alt="image" src="<?= base_url() ?>assets/img/temanggung.png" style="width: 45px;" />
+                                <img alt="image" src="<?= base_url() ?>assets/img/dpr.png" style="width: 45px;" />
                             <?php } ?>
                             <span>
                                 <span class="d-none d-md-inline"><?= $CI->Users_model->get_by_id($this->session->userdata('id_user'))->fullname ?></span>
@@ -188,7 +188,7 @@
                                         ?>
                                         <img alt="image" class="img-circle" src="<?= base_url() ?>assets/foto_users/<?= $this->session->userdata('foto') ?>" style="width: 45px;" />
                                     <?php } else { ?>
-                                        <img alt="image" class="img-circle" src="<?= base_url() ?>assets/img/temanggung.png" style="width: 45px;" />
+                                        <img alt="image" class="img-circle" src="<?= base_url() ?>assets/img/dpr.png" style="width: 45px;" />
                                     <?php } ?>
                                 </div>
                                 <div class="menu-profile-info">
