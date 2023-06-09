@@ -96,52 +96,11 @@
                             <div class="dropdown-header">NOTIFICATIONS (5)</div>
                             <a href="javascript:;" class="dropdown-item media">
                                 <div class="media-left">
-                                    <i class="fa fa-bug media-object bg-gray-500"></i>
+                                    <i class="fa fa-inbox media-object bg-gray-500"></i>
                                 </div>
                                 <div class="media-body">
-                                    <h6 class="media-heading">Server Error Reports <i class="fa fa-exclamation-circle text-danger"></i></h6>
+                                    <h6 class="media-heading">Disposisi dari Mr. X <i class="fa fa-exclamation-circle text-danger"></i></h6>
                                     <div class="text-muted fs-10px">3 minutes ago</div>
-                                </div>
-                            </a>
-                            <a href="javascript:;" class="dropdown-item media">
-                                <div class="media-left">
-                                    <img src="<?= base_url() ?>assets/vendor/coloradmin/assets/img/user/user-1.jpg" class="media-object" alt="" />
-                                    <i class="fab fa-facebook-messenger text-blue media-object-icon"></i>
-                                </div>
-                                <div class="media-body">
-                                    <h6 class="media-heading">John Smith</h6>
-                                    <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
-                                    <div class="text-muted fs-10px">25 minutes ago</div>
-                                </div>
-                            </a>
-                            <a href="javascript:;" class="dropdown-item media">
-                                <div class="media-left">
-                                    <img src="<?= base_url() ?>assets/vendor/coloradmin/assets/img/user/user-2.jpg" class="media-object" alt="" />
-                                    <i class="fab fa-facebook-messenger text-blue media-object-icon"></i>
-                                </div>
-                                <div class="media-body">
-                                    <h6 class="media-heading">Olivia</h6>
-                                    <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
-                                    <div class="text-muted fs-10px">35 minutes ago</div>
-                                </div>
-                            </a>
-                            <a href="javascript:;" class="dropdown-item media">
-                                <div class="media-left">
-                                    <i class="fa fa-plus media-object bg-gray-500"></i>
-                                </div>
-                                <div class="media-body">
-                                    <h6 class="media-heading"> New User Registered</h6>
-                                    <div class="text-muted fs-10px">1 hour ago</div>
-                                </div>
-                            </a>
-                            <a href="javascript:;" class="dropdown-item media">
-                                <div class="media-left">
-                                    <i class="fa fa-envelope media-object bg-gray-500"></i>
-                                    <i class="fab fa-google text-warning media-object-icon fs-14px"></i>
-                                </div>
-                                <div class="media-body">
-                                    <h6 class="media-heading"> New Email From John</h6>
-                                    <div class="text-muted fs-10px">2 hour ago</div>
                                 </div>
                             </a>
                             <div class="dropdown-footer text-center">
@@ -204,21 +163,9 @@
                         </div>
                         <div id="appSidebarProfileMenu" class="collapse">
                             <div class="menu-item pt-5px">
-                                <a href="javascript:;" class="menu-link">
-                                    <div class="menu-icon"><i class="fa fa-cog"></i></div>
-                                    <div class="menu-text">Settings</div>
-                                </a>
-                            </div>
-                            <div class="menu-item">
-                                <a href="javascript:;" class="menu-link">
-                                    <div class="menu-icon"><i class="fa fa-pencil-alt"></i></div>
-                                    <div class="menu-text"> Send Feedback</div>
-                                </a>
-                            </div>
-                            <div class="menu-item pb-5px">
-                                <a href="javascript:;" class="menu-link">
-                                    <div class="menu-icon"><i class="fa fa-question-circle"></i></div>
-                                    <div class="menu-text"> Helps</div>
+                                <a href="<?=base_url()?>users/ubah_password/<?=getSession('id_user')?>" class="menu-link">
+                                    <div class="menu-icon"><i class="fa fa-key"></i></div>
+                                    <div class="menu-text">Ganti Password</div>
                                 </a>
                             </div>
                             <div class="menu-divider m-0"></div>

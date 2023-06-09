@@ -149,6 +149,11 @@ function layout($l = 'back')
     }
 }
 
+function getSession(){
+    $ci = &get_instance();
+    return $ci->session->userdata('id_user');
+}
+
 
 //fungsi cek session akses
 function cek_session_akses($link, $id)
