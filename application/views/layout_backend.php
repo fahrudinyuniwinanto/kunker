@@ -77,7 +77,7 @@
             <div id="header" class="app-header">
 
                 <div class="navbar-header">
-                    <a href="<?= site_url('Backend') ?>" class="navbar-brand"><span class="navbar-logo"></span> <b><?= data_app('APP_NAME') ?></b></a>
+                    <a href="<?= site_url('Backend') ?>" class="navbar-brand"><img alt="image" src="<?= base_url() ?>assets/img/dpr.png" style="width: 45px;" /> <b><?= data_app('APP_NAME') ?></b></a>
                     <button type="button" class="navbar-mobile-toggler" data-toggle="app-sidebar-mobile">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -155,7 +155,7 @@
                                 ?>
                                 <img alt="image" src="<?= base_url() ?>assets/foto_users/<?= $this->session->userdata('foto') ?>" style="width: 45px;" />
                             <?php } else { ?>
-                                <img alt="image" src="<?= base_url() ?>assets/img/dpr.png" style="width: 45px;" />
+                                <img alt="image" src="<?= base_url() ?>assets/img/user.png" style="width: 45px;" />
                             <?php } ?>
                             <span>
                                 <span class="d-none d-md-inline"><?= $CI->Users_model->get_by_id($this->session->userdata('id_user'))->fullname ?></span>
@@ -188,7 +188,7 @@
                                         ?>
                                         <img alt="image" class="img-circle" src="<?= base_url() ?>assets/foto_users/<?= $this->session->userdata('foto') ?>" style="width: 45px;" />
                                     <?php } else { ?>
-                                        <img alt="image" class="img-circle" src="<?= base_url() ?>assets/img/dpr.png" style="width: 45px;" />
+                                        <img alt="image" class="img-circle" src="<?= base_url() ?>assets/img/user.png" style="width: 45px;" />
                                     <?php } ?>
                                 </div>
                                 <div class="menu-profile-info">
