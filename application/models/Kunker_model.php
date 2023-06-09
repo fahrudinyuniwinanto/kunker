@@ -25,65 +25,77 @@ class Kunker_model extends CI_Model
     // get data by id
     function get_by_id($id)
     {
-        $this->db->where($this->id, $id);
-        return $this->db->get($this->table)->row();
+        $this->db->join('fraksi bb', 'bb.id_fraksi=aa.id_fraksi');
+        $this->db->join('jenis_kunjungan cc', 'cc.id_jenis_kunjungan=aa.id_jenis_kunjungan');
+        $this->db->join('users dd', 'dd.id_user=aa.id_anggota_fraksi');
+        $this->db->where('aa.' . $this->id, $id);
+        return $this->db->get($this->table . ' aa')->row();
     }
-    
+
     // get total rows
-    function total_rows($q = NULL) {
+    function total_rows($q = NULL)
+    {
+        $this->db->join('fraksi bb', 'bb.id_fraksi=aa.id_fraksi');
+        $this->db->join('jenis_kunjungan cc', 'cc.id_jenis_kunjungan=aa.id_jenis_kunjungan');
+        $this->db->join('users dd', 'dd.id_user=aa.id_anggota_fraksi');
+
         $this->db->like('id_kunker', $q);
-	$this->db->or_like('id_jenis_kunjungan', $q);
-	$this->db->or_like('nomor_surat', $q);
-	$this->db->or_like('tanggal_surat', $q);
-	$this->db->or_like('perihal_surat', $q);
-	$this->db->or_like('lampiran_surat', $q);
-	$this->db->or_like('tingkat_keamanan', $q);
-	$this->db->or_like('id_fraksi', $q);
-	$this->db->or_like('id_anggota_fraksi', $q);
-	$this->db->or_like('id_kunker_ta', $q);
-	$this->db->or_like('nama_daerah_tujuan', $q);
-	$this->db->or_like('file_surat', $q);
-	$this->db->or_like('file_nodin', $q);
-	$this->db->or_like('pemberi_disposisi', $q);
-	$this->db->or_like('isi_disposisi', $q);
-	$this->db->or_like('tujuan_disposisi', $q);
-	$this->db->or_like('status_disposisi', $q);
-	$this->db->or_like('created_at', $q);
-	$this->db->or_like('disposisi_at', $q);
-	$this->db->or_like('created_by', $q);
-	$this->db->or_like('disposisi_by', $q);
-	$this->db->or_like('diposisi_note', $q);
-	$this->db->from($this->table);
+        $this->db->or_like('aa.id_jenis_kunjungan', $q);
+        $this->db->or_like('aa.nomor_surat', $q);
+        $this->db->or_like('aa.tanggal_surat', $q);
+        $this->db->or_like('aa.perihal_surat', $q);
+        $this->db->or_like('aa.lampiran_surat', $q);
+        $this->db->or_like('aa.tingkat_keamanan', $q);
+        $this->db->or_like('aa.id_fraksi', $q);
+        $this->db->or_like('aa.id_anggota_fraksi', $q);
+        $this->db->or_like('aa.id_kunker_ta', $q);
+        $this->db->or_like('aa.nama_daerah_tujuan', $q);
+        $this->db->or_like('aa.file_surat', $q);
+        $this->db->or_like('aa.file_nodin', $q);
+        $this->db->or_like('aa.pemberi_disposisi', $q);
+        $this->db->or_like('aa.isi_disposisi', $q);
+        $this->db->or_like('aa.tujuan_disposisi', $q);
+        $this->db->or_like('aa.status_disposisi', $q);
+        $this->db->or_like('aa.created_at', $q);
+        $this->db->or_like('aa.disposisi_at', $q);
+        $this->db->or_like('aa.created_by', $q);
+        $this->db->or_like('aa.disposisi_by', $q);
+        $this->db->or_like('aa.diposisi_note', $q);
+        $this->db->from($this->table . ' aa');
         return $this->db->count_all_results();
     }
 
     // get data with limit and search
-    function get_limit_data($limit, $start = 0, $q = NULL) {
+    function get_limit_data($limit, $start = 0, $q = NULL)
+    {
+        $this->db->join('fraksi bb', 'bb.id_fraksi=aa.id_fraksi');
+        $this->db->join('jenis_kunjungan cc', 'cc.id_jenis_kunjungan=aa.id_jenis_kunjungan');
+        $this->db->join('users dd', 'dd.id_user=aa.id_anggota_fraksi');
         $this->db->order_by($this->id, $this->order);
         $this->db->like('id_kunker', $q);
-	$this->db->or_like('id_jenis_kunjungan', $q);
-	$this->db->or_like('nomor_surat', $q);
-	$this->db->or_like('tanggal_surat', $q);
-	$this->db->or_like('perihal_surat', $q);
-	$this->db->or_like('lampiran_surat', $q);
-	$this->db->or_like('tingkat_keamanan', $q);
-	$this->db->or_like('id_fraksi', $q);
-	$this->db->or_like('id_anggota_fraksi', $q);
-	$this->db->or_like('id_kunker_ta', $q);
-	$this->db->or_like('nama_daerah_tujuan', $q);
-	$this->db->or_like('file_surat', $q);
-	$this->db->or_like('file_nodin', $q);
-	$this->db->or_like('pemberi_disposisi', $q);
-	$this->db->or_like('isi_disposisi', $q);
-	$this->db->or_like('tujuan_disposisi', $q);
-	$this->db->or_like('status_disposisi', $q);
-	$this->db->or_like('created_at', $q);
-	$this->db->or_like('disposisi_at', $q);
-	$this->db->or_like('created_by', $q);
-	$this->db->or_like('disposisi_by', $q);
-	$this->db->or_like('diposisi_note', $q);
-	$this->db->limit($limit, $start);
-        return $this->db->get($this->table)->result();
+        $this->db->or_like('aa.id_jenis_kunjungan', $q);
+        $this->db->or_like('aa.nomor_surat', $q);
+        $this->db->or_like('aa.tanggal_surat', $q);
+        $this->db->or_like('aa.perihal_surat', $q);
+        $this->db->or_like('aa.lampiran_surat', $q);
+        $this->db->or_like('aa.tingkat_keamanan', $q);
+        $this->db->or_like('aa.id_fraksi', $q);
+        $this->db->or_like('aa.id_anggota_fraksi', $q);
+        $this->db->or_like('aa.id_kunker_ta', $q);
+        $this->db->or_like('aa.nama_daerah_tujuan', $q);
+        $this->db->or_like('aa.file_surat', $q);
+        $this->db->or_like('aa.file_nodin', $q);
+        $this->db->or_like('aa.pemberi_disposisi', $q);
+        $this->db->or_like('aa.isi_disposisi', $q);
+        $this->db->or_like('aa.tujuan_disposisi', $q);
+        $this->db->or_like('aa.status_disposisi', $q);
+        $this->db->or_like('aa.created_at', $q);
+        $this->db->or_like('aa.disposisi_at', $q);
+        $this->db->or_like('aa.created_by', $q);
+        $this->db->or_like('aa.disposisi_by', $q);
+        $this->db->or_like('aa.diposisi_note', $q);
+        $this->db->limit($limit, $start);
+        return $this->db->get($this->table . ' aa')->result();
     }
 
     // insert data
@@ -105,7 +117,6 @@ class Kunker_model extends CI_Model
         $this->db->where($this->id, $id);
         $this->db->delete($this->table);
     }
-
 }
 
 /* End of file Kunker_model.php */
