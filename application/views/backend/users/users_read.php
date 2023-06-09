@@ -9,7 +9,7 @@
 
 <h1 class="page-header">Users <small></small></h1>
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-4">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h2 style="margin-top:0px" class="panel-title">Detail User</h2>
