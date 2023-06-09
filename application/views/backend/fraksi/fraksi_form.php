@@ -17,7 +17,7 @@
     <?php } ?>
 
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h2 class="panel-title" style="margin-top:0px"><?php echo $button ?> Fraksi </h2>
@@ -33,7 +33,7 @@
         <div class="panel-body">
 	    <div class="mb-3">
             <label class="form-label" for="varchar">Nama Fraksi <?php echo form_error('nama_fraksi') ?></label>
-            <input type="text" class="form-control" name="nama_fraksi" id="nama_fraksi" placeholder="Nama Fraksi" value="<?php echo $nama_fraksi; ?>" />
+            <input type="text" class="form-control text-uppercase" maxlength="50" name="nama_fraksi" id="nama_fraksi" placeholder="Nama Fraksi" value="<?php echo $nama_fraksi; ?>" />
         </div>
 	    <input type="hidden" name="id_fraksi" value="<?php echo $id_fraksi; ?>" /> 
 	    <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" >
