@@ -28,10 +28,10 @@
                     <!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a> -->
                 </div>
             </div>
-
             <form action="<?php echo $action; ?>" method="post">
 
                 <div class="panel-body">
+
 
                     <div class="row">
                         <div class="col-lg-4">
@@ -112,29 +112,12 @@
                                 <table class="table table-bordered table-hover table-condensed" style="margin-bottom: 10px">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th class="text-center">No</th>
+                                            <!-- <th class="text-center">No</th> -->
                                             <th class="text-center">Nama Anggota (TA)</th>
                                             <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="text-center" width="50px">1</td>
-                                            <td>
-                                                Akhmad
-                                                <!-- id_ta -->
-                                            </td>
-                                            <td style="text-align:center" width="50px">
-                                                <i class="fa fa-trash"></i>
-                                                <!-- <?php
-                                                        // echo anchor(site_url('kunker/read/' . $kunker->id_kunker), '<i class="fa fa-eye"></i>', 'class="btn btn-xs btn-success"');
-                                                        // echo ' | ';
-                                                        // echo anchor(site_url('kunker/update/' . $kunker->id_kunker), '<i class="fa fa-edit"></i>', 'class="btn btn-xs btn-warning"');
-                                                        // echo ' | ';
-                                                        // echo anchor(site_url('kunker/delete/' . $kunker->id_kunker), '<i class="fa fa-trash"></i>', 'class="btn btn-xs btn-danger" onclick="javascript: return confirm(\'Yakin hapus data?\')"');
-                                                        ?> -->
-                                            </td>
-                                        </tr>
+                                    <tbody id="dynamic-fields">
 
                                     </tbody>
                                 </table>
@@ -174,7 +157,7 @@
                     <input type="hidden" name="id_kunker" value="<?php echo $id_kunker; ?>" />
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
                     <button type="submit" class="btn btn-flat btn-success"><?php echo $button ?></button>
-                    <button type="submit" class="btn btn-flat btn-warning">Tambah Anggota</button>
+                    <button class="btn btn-warning" id="add-field" onclick="event.preventDefault()">Tambah Anggota</button>
                     <a href="<?php echo site_url('kunker') ?>" class="btn btn-flat btn-default">Cancel</a>
                 </div>
 
@@ -183,3 +166,17 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        // Menambahkan field baru
+        $('#add-field').click(function() {
+            var field = "<tr id=\"row[]\"><td><select name=\"id_user[]\" class=\"form-control\"><option value=\"\">--Pilih--</option></select></td><td class=\"text-center\"><button class=\"btn btn-sm btn-danger remove-field \"><i class=\"fa fa-trash \"></i></button></td ></tr>";
+            $('#dynamic-fields').append(field);
+        });
+
+        // Menghapus field
+        $('#dynamic-fields').on('click', '.remove-field', function() {
+            $(this).parent().parent().remove();
+        });
+    });
+</script>
