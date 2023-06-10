@@ -59,16 +59,16 @@
                             <tr>
                                 <th class="text-center">No</th>
                                 <th class="text-center">Jenis Kunjungan</th>
-                                <th class="text-center">Nomor Surat</th>
-                                <th class="text-center">Tanggal Surat</th>
-                                <th class="text-center">Perihal Surat</th>
-                                <th class="text-center">Lampiran Surat</th>
-                                <th class="text-center">Tingkat Keamanan</th>
                                 <th class="text-center">Fraksi</th>
                                 <th class="text-center">Nama Anggota</th>
-                                <th class="text-center">Tujuan</th>
+                                <th class="text-center">Tingkat Keamanan</th>
+                                <!-- <th class="text-center">Nomor Surat</th> -->
+                                <!-- <th class="text-center">Tanggal Surat</th>
+                                <th class="text-center">Perihal Surat</th>
+                                <th class="text-center">Lampiran Surat</th> -->
+                                <!-- <th class="text-center">Tujuan</th> -->
+                                <th class="text-center">Tgl. Dibuat</th>
                                 <th class="text-center">Status</th>
-                                <th class="text-center">Created At</th>
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
@@ -78,15 +78,15 @@
                                 <tr>
                                     <td width="80px"><?php echo ++$start ?></td>
                                     <td><?php echo $kunker->nama_jenis_kunjungan ?></td>
-                                    <td><?php echo $kunker->nomor_surat ?></td>
-                                    <td><?php echo $kunker->tanggal_surat ?></td>
-                                    <td><?php echo $kunker->perihal_surat ?></td>
-                                    <td><?php echo $kunker->tingkat_keamanan ?></td>
                                     <td><?php echo $kunker->nama_fraksi ?></td>
                                     <td><?php echo $kunker->nama_anggota_fraksi ?></td>
-                                    <td><?php echo $kunker->nama_daerah_tujuan ?></td>
-                                    <td><?php echo $kunker->status_disposisi ?></td>
+                                    <td><?php echo $kunker->tingkat_keamanan ?></td>
+                                    <!-- <td><?php echo $kunker->nomor_surat ?></td>
+                                    <td><?php echo $kunker->tanggal_surat ?></td>
+                                    <td><?php echo $kunker->perihal_surat ?></td> -->
+                                    <!-- <td><?php echo $kunker->nama_daerah_tujuan ?></td> -->
                                     <td><?php echo $kunker->created_at ?></td>
+                                    <td><?php echo $kunker->status_disposisi ?></td>
                                     <td style="text-align:center" width="200px">
                                         <?php
                                             echo anchor(site_url('kunker/read/' . $kunker->id_kunker), '<i class="fa fa-eye"></i>', 'class="btn btn-xs btn-success"');

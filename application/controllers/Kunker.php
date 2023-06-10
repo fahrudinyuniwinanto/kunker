@@ -131,8 +131,8 @@ class Kunker extends CI_Controller
 			'perihal_surat' => set_value('perihal_surat'),
 			'lampiran_surat' => set_value('lampiran_surat'),
 			'tingkat_keamanan' => set_value('tingkat_keamanan'),
-			'id_fraksi' => set_value('id_fraksi'),
-			'id_anggota_fraksi' => set_value('id_anggota_fraksi'),
+			'id_fraksi' => set_value('id_fraksi', $this->session->userdata('id_fraksi')),
+			'id_anggota_fraksi' => set_value('id_anggota_fraksi', $this->session->userdata('id_user')),
 			'id_kunker_ta' => set_value('id_kunker_ta'),
 			'nama_daerah_tujuan' => set_value('nama_daerah_tujuan'),
 			'file_surat' => set_value('file_surat'),
@@ -276,6 +276,17 @@ class Kunker extends CI_Controller
 			$this->session->set_flashdata('message', 'Record Not Found');
 			redirect(site_url('kunker'));
 		}
+	}
+
+	public function getArrTa()
+	{
+		$search = $this->input->get('q');
+		$id_ta = $this->input->get('id_ta');
+		$this->db->select('id_user, fullname');
+		$this->db->like('fullname', $search);
+		$this->db->where('id_parent', $id_ta);
+		$q = $this->db->get('users')->result();
+		echo json_encode($q);
 	}
 
 	public function _rules()

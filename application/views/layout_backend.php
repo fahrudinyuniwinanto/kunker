@@ -67,9 +67,9 @@
     <body>
 
 
-        <div id="loader" class="app-loader">
+        <!-- <div id="loader" class="app-loader">
             <span class="spinner"></span>
-        </div>
+        </div> -->
 
 
         <div id="app" class="app app-header-fixed app-sidebar-fixed app-content-full-height">
@@ -163,13 +163,13 @@
                         </div>
                         <div id="appSidebarProfileMenu" class="collapse">
                             <div class="menu-item pt-5px">
-                                <a href="<?=base_url()?>users/read/<?=getSession('id_user')?>" class="menu-link">
+                                <a href="<?= base_url() ?>users/read/<?= getSession('id_user') ?>" class="menu-link">
                                     <div class="menu-icon"><i class="fa fa-user"></i></div>
                                     <div class="menu-text">Lihat Profil</div>
                                 </a>
                             </div>
                             <div class="menu-item pt-5px">
-                                <a href="<?=base_url()?>users/ubah_password/<?=getSession('id_user')?>" class="menu-link">
+                                <a href="<?= base_url() ?>users/ubah_password/<?= getSession('id_user') ?>" class="menu-link">
                                     <div class="menu-icon"><i class="fa fa-key"></i></div>
                                     <div class="menu-text">Ganti Password</div>
                                 </a>

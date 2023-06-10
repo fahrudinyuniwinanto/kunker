@@ -36,6 +36,14 @@
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="mb-3">
+                                <label class="form-label" for="int">Fraksi <?php echo form_error('id_fraksi') ?></label>
+                                <?= form_dropdown('fraksi', get_combo('fraksi', 'id_fraksi', 'nama_fraksi', ['' => "--Pilih--"]), $id_fraksi, ['class' => 'form-control']) ?>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="int">Anggota Fraksi <?php echo form_error('id_anggota_fraksi') ?></label>
+                                <?= form_dropdown('id_anggota_fraksi', get_combo('users', 'id_user', 'fullname', ['' => "--Pilih--"]), $id_anggota_fraksi, ['class' => 'form-control']) ?>
+                            </div>
+                            <div class="mb-3">
                                 <label class="form-label" for="int">Jenis Kunjungan <?php echo form_error('id_jenis_kunjungan') ?></label>
                                 <?= form_dropdown('jenis_kunjungan', get_combo('jenis_kunjungan', 'id_jenis_kunjungan', 'nama_kunker', ['' => "--Pilih--"]), $id_jenis_kunjungan, ['class' => 'form-control']) ?>
                             </div>
@@ -53,14 +61,6 @@
                                         <input type="text" class="form-control numeric" name="jumlah_hari" id="jumlah_hari" placeholder="" value="<?php echo $jumlah_hari; ?>" />
                                     </div>
                                 </div>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="int">Fraksi <?php echo form_error('id_fraksi') ?></label>
-                                <?= form_dropdown('fraksi', get_combo('fraksi', 'id_fraksi', 'nama_fraksi', ['' => "--Pilih--"]), $id_fraksi, ['class' => 'form-control']) ?>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="int">Anggota Fraksi <?php echo form_error('id_anggota_fraksi') ?></label>
-                                <input type="text" class="form-control" name="id_anggota_fraksi" id="id_anggota_fraksi" placeholder="Id Anggota Fraksi" value="<?php echo $id_anggota_fraksi; ?>" />
                             </div>
                         </div>
                         <div class="col-lg-4">
@@ -168,15 +168,34 @@
 </div>
 <script>
     $(document).ready(function() {
+
         // Menambahkan field baru
         $('#add-field').click(function() {
-            var field = "<tr id=\"row[]\"><td><select name=\"id_user[]\" class=\"form-control\"><option value=\"\">--Pilih--</option></select></td><td class=\"text-center\"><button class=\"btn btn-sm btn-danger remove-field \"><i class=\"fa fa-trash \"></i></button></td ></tr>";
+            var field = "<tr id=\"row[]\"><td><select class=\"form-control\" name=\"id_ta\" id=\"id_ta\" required><option value=\"\">--Pilih--</option></select></td><td class=\"text-center\"><button class=\"btn btn-sm btn-danger remove-field \"><i class=\"fa fa-trash \"></i> </button></td></tr>";
             $('#dynamic-fields').append(field);
+            getComboTa();
         });
 
         // Menghapus field
         $('#dynamic-fields').on('click', '.remove-field', function() {
             $(this).parent().parent().remove();
         });
+
     });
+
+    function getComboTa() {
+        $.ajax({
+            url: "<?php echo site_url('kunker/getArrTa'); ?>",
+            dataType: 'json',
+            type: 'GET',
+            data: {
+                id_ta: "<?= $this->session->userdata('id_user') ?>"
+            },
+            success: function(res) {
+                $.each(res, function(i, v) {
+                    $("#id_ta").append("<option value='" + v.id_user + "'>" + v.fullname + "</option>");
+                });
+            }
+        })
+    }
 </script>
