@@ -31,7 +31,7 @@
             <div class="panel-body">
                 <div class="row" style="margin-bottom: 10px">
                     <div class="col-md-8">
-                        <?php echo anchor(site_url('kunker/create'), 'Tambah Data', 'class="btn btn-flat btn-success"'); ?>
+                        <?php echo anchor(site_url('kunker/create'), 'Tambah Permohonan', 'class="btn btn-flat btn-success"'); ?>
                     </div>
 
 
