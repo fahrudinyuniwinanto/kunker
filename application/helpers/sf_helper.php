@@ -1,7 +1,8 @@
 <?php
 
-function assets($file=''){
-  return base_url('assets/'.$file);
+function assets($file = '')
+{
+    return base_url('assets/' . $file);
 }
 
 function is_logged()
@@ -66,6 +67,19 @@ function get_combo($tbl, $id, $nm, $add_opt = [])
 
     $ci = &get_instance();
     $data = $ci->db->get($tbl)->result_array();
+    $res = [];
+    $res = $add_opt;
+    foreach ($data as $v) {
+        $res[$v[$id]] = $v[$nm];
+    }
+    return $res;
+}
+
+function get_combo_where($tbl, $id, $nm, $add_opt = [], $where = [])
+{
+
+    $ci = &get_instance();
+    $data = $ci->db->get_where($tbl, $where)->result_array();
     $res = [];
     $res = $add_opt;
     foreach ($data as $v) {
@@ -149,7 +163,8 @@ function layout($l = 'back')
     }
 }
 
-function getSession(){
+function getSession()
+{
     $ci = &get_instance();
     return $ci->session->userdata('id_user');
 }

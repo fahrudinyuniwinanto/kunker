@@ -16,7 +16,7 @@ class Fraksi extends CI_Controller
     {
         $q = urldecode($this->input->get('q', TRUE));
         $start = intval($this->input->get('start'));
-        
+
         if ($q <> '') {
             $config['base_url'] = base_url() . 'fraksi/index.html?q=' . urlencode($q);
             $config['first_url'] = base_url() . 'fraksi/index.html?q=' . urlencode($q);
@@ -49,7 +49,7 @@ class Fraksi extends CI_Controller
         $q = urldecode($this->input->get('q', TRUE));
         $start = intval($this->input->get('start'));
         $idhtml = $this->input->get('idhtml');
-        
+
         if ($q <> '') {
             $config['base_url'] = base_url() . 'fraksi/index.html?q=' . urlencode($q);
             $config['first_url'] = base_url() . 'fraksi/index.html?q=' . urlencode($q);
@@ -78,36 +78,38 @@ class Fraksi extends CI_Controller
         ob_end_clean();
     }
 
-    public function read($id) 
+    public function read($id)
     {
-        
+
         $row = $this->Fraksi_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'id_fraksi' => $row->id_fraksi,
-		'nama_fraksi' => $row->nama_fraksi,'content' => 'backend/fraksi/fraksi_read',
-	    );
+                'id_fraksi' => $row->id_fraksi,
+                'nama_fraksi' => $row->nama_fraksi, 'content' => 'backend/fraksi/fraksi_read',
+            );
             $this->load->view(
-            layout(), $data);
+                layout(),
+                $data
+            );
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('fraksi'));
         }
     }
 
-    public function create() 
+    public function create()
     {
         $data = array(
             'button' => 'Create',
             'action' => site_url('fraksi/create_action'),
-	    'id_fraksi' => set_value('id_fraksi'),
-	    'nama_fraksi' => set_value('nama_fraksi'),
-	    'content' => 'backend/fraksi/fraksi_form',
-	);
+            'id_fraksi' => set_value('id_fraksi'),
+            'nama_fraksi' => set_value('nama_fraksi'),
+            'content' => 'backend/fraksi/fraksi_form',
+        );
         $this->load->view(layout(), $data);
     }
-    
-    public function create_action() 
+
+    public function create_action()
     {
         $this->_rules();
 
@@ -115,16 +117,16 @@ class Fraksi extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'nama_fraksi' => $this->input->post('nama_fraksi',TRUE),
-	    );
+                'nama_fraksi' => $this->input->post('nama_fraksi', TRUE),
+            );
 
             $this->Fraksi_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('fraksi'));
         }
     }
-    
-    public function update($id) 
+
+    public function update($id)
     {
         $row = $this->Fraksi_model->get_by_id($id);
 
@@ -132,18 +134,18 @@ class Fraksi extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('fraksi/update_action'),
-		'id_fraksi' => set_value('id_fraksi', $row->id_fraksi),
-		'nama_fraksi' => set_value('nama_fraksi', $row->nama_fraksi),
-	    'content' => 'backend/fraksi/fraksi_form',
-	    );
+                'id_fraksi' => set_value('id_fraksi', $row->id_fraksi),
+                'nama_fraksi' => set_value('nama_fraksi', $row->nama_fraksi),
+                'content' => 'backend/fraksi/fraksi_form',
+            );
             $this->load->view(layout(), $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('fraksi'));
         }
     }
-    
-    public function update_action() 
+
+    public function update_action()
     {
         $this->_rules();
 
@@ -151,16 +153,16 @@ class Fraksi extends CI_Controller
             $this->update($this->input->post('id_fraksi', TRUE));
         } else {
             $data = array(
-		'nama_fraksi' => $this->input->post('nama_fraksi',TRUE),
-	    );
+                'nama_fraksi' => $this->input->post('nama_fraksi', TRUE),
+            );
 
             $this->Fraksi_model->update($this->input->post('id_fraksi', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('fraksi'));
         }
     }
-    
-    public function delete($id) 
+
+    public function delete($id)
     {
         $row = $this->Fraksi_model->get_by_id($id);
 
@@ -174,12 +176,12 @@ class Fraksi extends CI_Controller
         }
     }
 
-    public function _rules() 
+    public function _rules()
     {
-	$this->form_validation->set_rules('nama_fraksi', 'nama fraksi', 'trim|required');
+        $this->form_validation->set_rules('nama_fraksi', 'nama fraksi', 'trim|required');
 
-	$this->form_validation->set_rules('id_fraksi', 'id_fraksi', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+        $this->form_validation->set_rules('id_fraksi', 'id_fraksi', 'trim');
+        $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
     public function excel()
@@ -204,27 +206,20 @@ class Fraksi extends CI_Controller
 
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
-	xlsWriteLabel($tablehead, $kolomhead++, "Nama Fraksi");
+        xlsWriteLabel($tablehead, $kolomhead++, "Nama Fraksi");
 
-	foreach ($this->Fraksi_model->get_all() as $data) {
+        foreach ($this->Fraksi_model->get_all() as $data) {
             $kolombody = 0;
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->nama_fraksi);
+            xlsWriteLabel($tablebody, $kolombody++, $data->nama_fraksi);
 
-	    $tablebody++;
+            $tablebody++;
             $nourut++;
         }
 
         xlsEOF();
         exit();
     }
-
 }
-
-/* End of file Fraksi.php */
-/* Location: ./application/controllers/Fraksi.php */
-/* Please DO NOT modify this information : */
-/* Generated by Harviacode Codeigniter CRUD Generator 2023-06-09 13:59:09 */
-/* http://harviacode.com */

@@ -16,7 +16,7 @@ class Jenis_kunjungan extends CI_Controller
     {
         $q = urldecode($this->input->get('q', TRUE));
         $start = intval($this->input->get('start'));
-        
+
         if ($q <> '') {
             $config['base_url'] = base_url() . 'jenis_kunjungan/index.html?q=' . urlencode($q);
             $config['first_url'] = base_url() . 'jenis_kunjungan/index.html?q=' . urlencode($q);
@@ -49,7 +49,7 @@ class Jenis_kunjungan extends CI_Controller
         $q = urldecode($this->input->get('q', TRUE));
         $start = intval($this->input->get('start'));
         $idhtml = $this->input->get('idhtml');
-        
+
         if ($q <> '') {
             $config['base_url'] = base_url() . 'jenis_kunjungan/index.html?q=' . urlencode($q);
             $config['first_url'] = base_url() . 'jenis_kunjungan/index.html?q=' . urlencode($q);
@@ -78,40 +78,42 @@ class Jenis_kunjungan extends CI_Controller
         ob_end_clean();
     }
 
-    public function read($id) 
+    public function read($id)
     {
-        
+
         $row = $this->Jenis_kunjungan_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'id_jenis_kunjungan' => $row->id_jenis_kunjungan,
-		'nama_kunker' => $row->nama_kunker,
-		'maksimal_kunjungan' => $row->maksimal_kunjungan,
-		'jumlah_hari' => $row->jumlah_hari,'content' => 'backend/jenis_kunjungan/jenis_kunjungan_read',
-	    );
+                'id_jenis_kunjungan' => $row->id_jenis_kunjungan,
+                'nama_kunker' => $row->nama_kunker,
+                'maksimal_kunjungan' => $row->maksimal_kunjungan,
+                'jumlah_hari' => $row->jumlah_hari, 'content' => 'backend/jenis_kunjungan/jenis_kunjungan_read',
+            );
             $this->load->view(
-            layout(), $data);
+                layout(),
+                $data
+            );
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('jenis_kunjungan'));
         }
     }
 
-    public function create() 
+    public function create()
     {
         $data = array(
             'button' => 'Create',
             'action' => site_url('jenis_kunjungan/create_action'),
-	    'id_jenis_kunjungan' => set_value('id_jenis_kunjungan'),
-	    'nama_kunker' => set_value('nama_kunker'),
-	    'maksimal_kunjungan' => set_value('maksimal_kunjungan'),
-	    'jumlah_hari' => set_value('jumlah_hari'),
-	    'content' => 'backend/jenis_kunjungan/jenis_kunjungan_form',
-	);
+            'id_jenis_kunjungan' => set_value('id_jenis_kunjungan'),
+            'nama_kunker' => set_value('nama_kunker'),
+            'maksimal_kunjungan' => set_value('maksimal_kunjungan'),
+            'jumlah_hari' => set_value('jumlah_hari'),
+            'content' => 'backend/jenis_kunjungan/jenis_kunjungan_form',
+        );
         $this->load->view(layout(), $data);
     }
-    
-    public function create_action() 
+
+    public function create_action()
     {
         $this->_rules();
 
@@ -119,18 +121,18 @@ class Jenis_kunjungan extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'nama_kunker' => $this->input->post('nama_kunker',TRUE),
-		'maksimal_kunjungan' => $this->input->post('maksimal_kunjungan',TRUE),
-		'jumlah_hari' => $this->input->post('jumlah_hari',TRUE),
-	    );
+                'nama_kunker' => $this->input->post('nama_kunker', TRUE),
+                'maksimal_kunjungan' => $this->input->post('maksimal_kunjungan', TRUE),
+                'jumlah_hari' => $this->input->post('jumlah_hari', TRUE),
+            );
 
             $this->Jenis_kunjungan_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('jenis_kunjungan'));
         }
     }
-    
-    public function update($id) 
+
+    public function update($id)
     {
         $row = $this->Jenis_kunjungan_model->get_by_id($id);
 
@@ -138,20 +140,20 @@ class Jenis_kunjungan extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('jenis_kunjungan/update_action'),
-		'id_jenis_kunjungan' => set_value('id_jenis_kunjungan', $row->id_jenis_kunjungan),
-		'nama_kunker' => set_value('nama_kunker', $row->nama_kunker),
-		'maksimal_kunjungan' => set_value('maksimal_kunjungan', $row->maksimal_kunjungan),
-		'jumlah_hari' => set_value('jumlah_hari', $row->jumlah_hari),
-	    'content' => 'backend/jenis_kunjungan/jenis_kunjungan_form',
-	    );
+                'id_jenis_kunjungan' => set_value('id_jenis_kunjungan', $row->id_jenis_kunjungan),
+                'nama_kunker' => set_value('nama_kunker', $row->nama_kunker),
+                'maksimal_kunjungan' => set_value('maksimal_kunjungan', $row->maksimal_kunjungan),
+                'jumlah_hari' => set_value('jumlah_hari', $row->jumlah_hari),
+                'content' => 'backend/jenis_kunjungan/jenis_kunjungan_form',
+            );
             $this->load->view(layout(), $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('jenis_kunjungan'));
         }
     }
-    
-    public function update_action() 
+
+    public function update_action()
     {
         $this->_rules();
 
@@ -159,18 +161,18 @@ class Jenis_kunjungan extends CI_Controller
             $this->update($this->input->post('id_jenis_kunjungan', TRUE));
         } else {
             $data = array(
-		'nama_kunker' => $this->input->post('nama_kunker',TRUE),
-		'maksimal_kunjungan' => $this->input->post('maksimal_kunjungan',TRUE),
-		'jumlah_hari' => $this->input->post('jumlah_hari',TRUE),
-	    );
+                'nama_kunker' => $this->input->post('nama_kunker', TRUE),
+                'maksimal_kunjungan' => $this->input->post('maksimal_kunjungan', TRUE),
+                'jumlah_hari' => $this->input->post('jumlah_hari', TRUE),
+            );
 
             $this->Jenis_kunjungan_model->update($this->input->post('id_jenis_kunjungan', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('jenis_kunjungan'));
         }
     }
-    
-    public function delete($id) 
+
+    public function delete($id)
     {
         $row = $this->Jenis_kunjungan_model->get_by_id($id);
 
@@ -184,14 +186,14 @@ class Jenis_kunjungan extends CI_Controller
         }
     }
 
-    public function _rules() 
+    public function _rules()
     {
-	$this->form_validation->set_rules('nama_kunker', 'nama kunker', 'trim|required');
-	$this->form_validation->set_rules('maksimal_kunjungan', 'maksimal kunjungan', 'trim|required');
-	$this->form_validation->set_rules('jumlah_hari', 'jumlah hari', 'trim|required');
+        $this->form_validation->set_rules('nama_kunker', 'nama kunker', 'trim|required');
+        $this->form_validation->set_rules('maksimal_kunjungan', 'maksimal kunjungan', 'trim|required');
+        $this->form_validation->set_rules('jumlah_hari', 'jumlah hari', 'trim|required');
 
-	$this->form_validation->set_rules('id_jenis_kunjungan', 'id_jenis_kunjungan', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+        $this->form_validation->set_rules('id_jenis_kunjungan', 'id_jenis_kunjungan', 'trim');
+        $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
     public function excel()
@@ -216,31 +218,24 @@ class Jenis_kunjungan extends CI_Controller
 
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
-	xlsWriteLabel($tablehead, $kolomhead++, "Nama Kunker");
-	xlsWriteLabel($tablehead, $kolomhead++, "Maksimal Kunjungan");
-	xlsWriteLabel($tablehead, $kolomhead++, "Jumlah Hari");
+        xlsWriteLabel($tablehead, $kolomhead++, "Nama Kunker");
+        xlsWriteLabel($tablehead, $kolomhead++, "Maksimal Kunjungan");
+        xlsWriteLabel($tablehead, $kolomhead++, "Jumlah Hari");
 
-	foreach ($this->Jenis_kunjungan_model->get_all() as $data) {
+        foreach ($this->Jenis_kunjungan_model->get_all() as $data) {
             $kolombody = 0;
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->nama_kunker);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->maksimal_kunjungan);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->jumlah_hari);
+            xlsWriteLabel($tablebody, $kolombody++, $data->nama_kunker);
+            xlsWriteNumber($tablebody, $kolombody++, $data->maksimal_kunjungan);
+            xlsWriteNumber($tablebody, $kolombody++, $data->jumlah_hari);
 
-	    $tablebody++;
+            $tablebody++;
             $nourut++;
         }
 
         xlsEOF();
         exit();
     }
-
 }
-
-/* End of file Jenis_kunjungan.php */
-/* Location: ./application/controllers/Jenis_kunjungan.php */
-/* Please DO NOT modify this information : */
-/* Generated by Harviacode Codeigniter CRUD Generator 2023-06-09 13:59:18 */
-/* http://harviacode.com */

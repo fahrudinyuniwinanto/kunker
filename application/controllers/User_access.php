@@ -8,7 +8,7 @@ class User_access extends CI_Controller
     function __construct()
     {
         parent::__construct();
-         if ($this->session->userdata('logged')!=TRUE){
+        if ($this->session->userdata('logged') != TRUE) {
             redirect(site_url('Auth'));
         }
         $this->load->model('User_access_model');
@@ -20,7 +20,7 @@ class User_access extends CI_Controller
     {
         $q = urldecode($this->input->get('q', TRUE));
         $start = intval($this->input->get('start'));
-        
+
         if ($q <> '') {
             $config['base_url'] = base_url() . 'user_access/index.html?q=' . urlencode($q);
             $config['first_url'] = base_url() . 'user_access/index.html?q=' . urlencode($q);
@@ -52,7 +52,7 @@ class User_access extends CI_Controller
     {
         $q = urldecode($this->input->get('q', TRUE));
         $start = intval($this->input->get('start'));
-        
+
         if ($q <> '') {
             $config['base_url'] = base_url() . 'user_access/index.html?q=' . urlencode($q);
             $config['first_url'] = base_url() . 'user_access/index.html?q=' . urlencode($q);
@@ -80,43 +80,45 @@ class User_access extends CI_Controller
         $this->load->view(layout(), $data);
     }
 
-    public function read($id) 
+    public function read($id)
     {
         $row = $this->User_access_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'id' => $row->id,
-		'id_group' => $row->id_group,
-		'kd_access' => $row->kd_access,
-		'nm_access' => $row->nm_access,
-		'is_allow' => $row->is_allow,
-		'note' => $row->note,'content' => 'backend/user_access/user_access_read',
-	    );
+                'id' => $row->id,
+                'id_group' => $row->id_group,
+                'kd_access' => $row->kd_access,
+                'nm_access' => $row->nm_access,
+                'is_allow' => $row->is_allow,
+                'note' => $row->note, 'content' => 'backend/user_access/user_access_read',
+            );
             $this->load->view(
-            layout(), $data);
+                layout(),
+                $data
+            );
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('user_access'));
         }
     }
 
-    public function create() 
+    public function create()
     {
         $data = array(
             'button' => 'Create',
             'action' => site_url('user_access/create_action'),
-	    'id' => set_value('id'),
-	    'id_group' => set_value('id_group'),
-	    'kd_access' => set_value('kd_access'),
-	    'nm_access' => set_value('nm_access'),
-	    'is_allow' => set_value('is_allow'),
-	    'note' => set_value('note'),
-	    'content' => 'backend/user_access/user_access_form',
-	);
+            'id' => set_value('id'),
+            'id_group' => set_value('id_group'),
+            'kd_access' => set_value('kd_access'),
+            'nm_access' => set_value('nm_access'),
+            'is_allow' => set_value('is_allow'),
+            'note' => set_value('note'),
+            'content' => 'backend/user_access/user_access_form',
+        );
         $this->load->view(layout(), $data);
     }
-    
-    public function create_action() 
+
+    public function create_action()
     {
         $this->_rules();
 
@@ -124,20 +126,20 @@ class User_access extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'id_group' => $this->input->post('id_group',TRUE),
-		'kd_access' => $this->input->post('kd_access',TRUE),
-		'nm_access' => $this->input->post('nm_access',TRUE),
-		'is_allow' => $this->input->post('is_allow',TRUE),
-		'note' => $this->input->post('note',TRUE),
-	    );
+                'id_group' => $this->input->post('id_group', TRUE),
+                'kd_access' => $this->input->post('kd_access', TRUE),
+                'nm_access' => $this->input->post('nm_access', TRUE),
+                'is_allow' => $this->input->post('is_allow', TRUE),
+                'note' => $this->input->post('note', TRUE),
+            );
 
             $this->User_access_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('user_access'));
         }
     }
-    
-    public function update($id) 
+
+    public function update($id)
     {
         $row = $this->User_access_model->get_by_id($id);
 
@@ -145,22 +147,22 @@ class User_access extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('user_access/update_action'),
-		'id' => set_value('id', $row->id),
-		'id_group' => set_value('id_group', $row->id_group),
-		'kd_access' => set_value('kd_access', $row->kd_access),
-		'nm_access' => set_value('nm_access', $row->nm_access),
-		'is_allow' => set_value('is_allow', $row->is_allow),
-		'note' => set_value('note', $row->note),
-	    'content' => 'backend/user_access/user_access_form',
-	    );
+                'id' => set_value('id', $row->id),
+                'id_group' => set_value('id_group', $row->id_group),
+                'kd_access' => set_value('kd_access', $row->kd_access),
+                'nm_access' => set_value('nm_access', $row->nm_access),
+                'is_allow' => set_value('is_allow', $row->is_allow),
+                'note' => set_value('note', $row->note),
+                'content' => 'backend/user_access/user_access_form',
+            );
             $this->load->view(layout(), $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('user_access'));
         }
     }
-    
-    public function update_action() 
+
+    public function update_action()
     {
         $this->_rules();
 
@@ -168,21 +170,21 @@ class User_access extends CI_Controller
             $this->update($this->input->post('id', TRUE));
         } else {
             $data = array(
-		'id_group' => $this->input->post('id_group',TRUE),
-		'kd_access' => $this->input->post('kd_access',TRUE),
-		'nm_access' => $this->input->post('nm_access',TRUE),
-		'is_allow' => $this->input->post('is_allow',TRUE),
-		'note' => $this->input->post('note',TRUE),
-	    );
+                'id_group' => $this->input->post('id_group', TRUE),
+                'kd_access' => $this->input->post('kd_access', TRUE),
+                'nm_access' => $this->input->post('nm_access', TRUE),
+                'is_allow' => $this->input->post('is_allow', TRUE),
+                'note' => $this->input->post('note', TRUE),
+            );
 
             $this->User_access_model->update($this->input->post('id', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('user_access'));
         }
     }
-    
+
     //pelajari aktifkan akses aksess
-    public function aktifkan() 
+    public function aktifkan()
     {
         // print_r($_POST);die();
         $isradiocheck = $this->input->post('ischeck', TRUE);
@@ -192,31 +194,29 @@ class User_access extends CI_Controller
         $kdmasteraccess = $this->input->post('kdmasteraccess', TRUE);
         $idgroup = $this->input->post('idgroup', TRUE);
         $idmenu = $this->input->post('idmenu', TRUE);
-        
+
 
         //cek jika user akses sudah ada dan id group dan kode akses bernilai true maka
-        if ($this->User_access_model->existing($idgroup,$kdmasteraccess)) {
-// die($isradiocheck);
+        if ($this->User_access_model->existing($idgroup, $kdmasteraccess)) {
+            // die($isradiocheck);
 
             // jika iya tampilkan id dari user akses dimana kd_akses adalah value kdmaster akses diatas dan id grup sesuai dengan id group diatas
             $iduseraccess = $this->db->query("select id from user_access where kd_access=$kdmasteraccess and id_group=$idgroup")->row()->id;
             //die($iduseraccess);
             $data = array(
-                'is_allow'=>$isradiocheck,
-                'id_menu' =>$idmenu
-        );
+                'is_allow' => $isradiocheck,
+                'id_menu' => $idmenu
+            );
             //lalu update is_allow menjadi true
             $this->User_access_model->update($iduseraccess, $data);
 
-        //jika belum ada maka insert data kedalam user akses berdasar id group,kd_akses dan kode master akses
-        }else{
-            $this->User_access_model->insert(array('id_group'=>$idgroup,'kd_access'=>$kdmasteraccess,'is_allow'=>1,'id_menu'=>$idmenu));
+            //jika belum ada maka insert data kedalam user akses berdasar id group,kd_akses dan kode master akses
+        } else {
+            $this->User_access_model->insert(array('id_group' => $idgroup, 'kd_access' => $kdmasteraccess, 'is_allow' => 1, 'id_menu' => $idmenu));
         }
-           
-        
     }
-    
-    public function delete($id) 
+
+    public function delete($id)
     {
         $row = $this->User_access_model->get_by_id($id);
 
@@ -230,16 +230,16 @@ class User_access extends CI_Controller
         }
     }
 
-    public function _rules() 
+    public function _rules()
     {
-	$this->form_validation->set_rules('id_group', 'id group', 'trim|required');
-	$this->form_validation->set_rules('kd_access', 'kd access', 'trim|required');
-	$this->form_validation->set_rules('nm_access', 'nm access', 'trim|required');
-	$this->form_validation->set_rules('is_allow', 'is allow', 'trim|required');
-	$this->form_validation->set_rules('note', 'note', 'trim');
+        $this->form_validation->set_rules('id_group', 'id group', 'trim|required');
+        $this->form_validation->set_rules('kd_access', 'kd access', 'trim|required');
+        $this->form_validation->set_rules('nm_access', 'nm access', 'trim|required');
+        $this->form_validation->set_rules('is_allow', 'is allow', 'trim|required');
+        $this->form_validation->set_rules('note', 'note', 'trim');
 
-	$this->form_validation->set_rules('id', 'id', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+        $this->form_validation->set_rules('id', 'id', 'trim');
+        $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
     public function excel()
@@ -264,35 +264,28 @@ class User_access extends CI_Controller
 
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
-	xlsWriteLabel($tablehead, $kolomhead++, "Id Group");
-	xlsWriteLabel($tablehead, $kolomhead++, "Kd Access");
-	xlsWriteLabel($tablehead, $kolomhead++, "Nm Access");
-	xlsWriteLabel($tablehead, $kolomhead++, "Is Allow");
-	xlsWriteLabel($tablehead, $kolomhead++, "Note");
+        xlsWriteLabel($tablehead, $kolomhead++, "Id Group");
+        xlsWriteLabel($tablehead, $kolomhead++, "Kd Access");
+        xlsWriteLabel($tablehead, $kolomhead++, "Nm Access");
+        xlsWriteLabel($tablehead, $kolomhead++, "Is Allow");
+        xlsWriteLabel($tablehead, $kolomhead++, "Note");
 
-	foreach ($this->User_access_model->get_all() as $data) {
+        foreach ($this->User_access_model->get_all() as $data) {
             $kolombody = 0;
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->id_group);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->kd_access);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->nm_access);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->is_allow);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->note);
+            xlsWriteNumber($tablebody, $kolombody++, $data->id_group);
+            xlsWriteLabel($tablebody, $kolombody++, $data->kd_access);
+            xlsWriteLabel($tablebody, $kolombody++, $data->nm_access);
+            xlsWriteNumber($tablebody, $kolombody++, $data->is_allow);
+            xlsWriteLabel($tablebody, $kolombody++, $data->note);
 
-	    $tablebody++;
+            $tablebody++;
             $nourut++;
         }
 
         xlsEOF();
         exit();
     }
-
 }
-
-/* End of file User_access.php */
-/* Location: ./application/controllers/User_access.php */
-/* Please DO NOT modify this information : */
-/* Generated by Harviacode Codeigniter CRUD Generator 2018-08-20 10:09:30 */
-/* http://harviacode.com */

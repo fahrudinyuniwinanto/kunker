@@ -77,9 +77,9 @@
                                     ?>
                                 <tr>
                                     <td width="80px"><?php echo ++$start ?></td>
-                                    <td><?php echo $kunker->nama_jenis_kunjungan ?></td>
+                                    <td><?php echo $kunker->nama_kunker ?></td>
                                     <td><?php echo $kunker->nama_fraksi ?></td>
-                                    <td><?php echo $kunker->nama_anggota_fraksi ?></td>
+                                    <td><?php echo $kunker->fullname ?></td>
                                     <td><?php echo $kunker->tingkat_keamanan ?></td>
                                     <!-- <td><?php echo $kunker->nomor_surat ?></td>
                                     <td><?php echo $kunker->tanggal_surat ?></td>

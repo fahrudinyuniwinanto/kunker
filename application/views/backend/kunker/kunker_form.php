@@ -29,15 +29,12 @@
                 </div>
             </div>
             <form action="<?php echo $action; ?>" method="post">
-
                 <div class="panel-body">
-
-
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="mb-3">
                                 <label class="form-label" for="int">Fraksi <?php echo form_error('id_fraksi') ?></label>
-                                <?= form_dropdown('fraksi', get_combo('fraksi', 'id_fraksi', 'nama_fraksi', ['' => "--Pilih--"]), $id_fraksi, ['class' => 'form-control']) ?>
+                                <?= form_dropdown('id_fraksi', get_combo('fraksi', 'id_fraksi', 'nama_fraksi', ['' => "--Pilih--"]), $id_fraksi, ['class' => 'form-control']) ?>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="int">Anggota Fraksi <?php echo form_error('id_anggota_fraksi') ?></label>
@@ -45,7 +42,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="int">Jenis Kunjungan <?php echo form_error('id_jenis_kunjungan') ?></label>
-                                <?= form_dropdown('jenis_kunjungan', get_combo('jenis_kunjungan', 'id_jenis_kunjungan', 'nama_kunker', ['' => "--Pilih--"]), $id_jenis_kunjungan, ['class' => 'form-control']) ?>
+                                <?= form_dropdown('id_jenis_kunjungan', get_combo('jenis_kunjungan', 'id_jenis_kunjungan', 'nama_kunker', ['' => "--Pilih--"]), $id_jenis_kunjungan, ['class' => 'form-control']) ?>
                             </div>
 
                             <div class="row">
