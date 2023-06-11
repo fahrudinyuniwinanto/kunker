@@ -26,12 +26,12 @@
                 <div class="table-responsive">
                     <table class="table">
                         <tr>
-                            <td width="50%">Nama Tenaga Ahli</td>
-                            <td><?php echo $fullname; ?></td>
+                            <td width="50%">Nomor Anggota Fraksi</td>
+                            <td><?php echo $no_anggota; ?></td>
                         </tr>
                         <tr>
                             <td>Nama Anggota Fraksi</td>
-                            <td><?php echo $id_anggota_fraksi; ?></td>
+                            <td><?php echo $fullname; ?></td>
                         </tr>
                         <tr>
                             <td>Nama Fraksi</td>
@@ -39,7 +39,7 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td><a href="<?php echo site_url('ta') ?>" class="btn btn-flat btn-danger">Cancel</a></td>
+                            <td><a href="<?php echo site_url('anggota_fraksi') ?>" class="btn btn-flat btn-danger">Cancel</a></td>
                         </tr>
                     </table>
                 </div>

@@ -126,6 +126,58 @@ class Users_model extends CI_Model
         $this->db->limit($limit, $start);
         return $this->db->get($this->table . " aa")->result();
     }
+
+    // get total rows
+    function total_rows_anggota_fraksi($q = NULL)
+    {
+        $this->db->join('user_group as bb', 'aa.id_group=bb.id', 'left');
+        $this->db->group_start();
+        $this->db->like('aa.id_user', $q);
+        $this->db->or_like('aa.fullname', $q);
+        $this->db->or_like('aa.username', $q);
+        $this->db->or_like('aa.password', $q);
+        $this->db->or_like('aa.email', $q);
+        $this->db->or_like('aa.id_group', $q);
+        $this->db->or_like('aa.foto', $q);
+        $this->db->or_like('aa.telp', $q);
+        $this->db->or_like('aa.note', $q);
+        $this->db->or_like('aa.created_by', $q);
+        $this->db->or_like('aa.updated_by', $q);
+        $this->db->or_like('aa.created_at', $q);
+        $this->db->or_like('aa.updated_at', $q);
+        $this->db->or_like('aa.note_1', $q);
+        $this->db->group_end();
+        $this->db->where('id_parent', '0');
+        $this->db->from($this->table . " aa");
+        return $this->db->count_all_results();
+    }
+
+    // get data with limit and search
+    function get_limit_data_anggota_fraksi($limit, $start = 0, $q = NULL)
+    {
+        $this->db->join('user_group as bb', 'aa.id_group=bb.id', 'left');
+        $this->db->order_by("aa." . $this->id, "aa." . $this->order);
+        $this->db->group_start();
+        $this->db->like('aa.id_user', $q);
+        $this->db->or_like('aa.fullname', $q);
+        $this->db->or_like('aa.username', $q);
+        $this->db->or_like('aa.password', $q);
+        $this->db->or_like('aa.email', $q);
+        $this->db->or_like('aa.id_group', $q);
+        $this->db->or_like('aa.foto', $q);
+        $this->db->or_like('aa.telp', $q);
+        $this->db->or_like('aa.note', $q);
+        $this->db->or_like('aa.created_by', $q);
+        $this->db->or_like('aa.updated_by', $q);
+        $this->db->or_like('aa.created_at', $q);
+        $this->db->or_like('aa.updated_at', $q);
+        $this->db->or_like('aa.note_1', $q);
+        $this->db->group_end();
+        $this->db->where('id_parent', '0');
+        $this->db->limit($limit, $start);
+        return $this->db->get($this->table . " aa")->result();
+    }
+
     //fungsi untuk setjoin 
     function set_join($data)
     {

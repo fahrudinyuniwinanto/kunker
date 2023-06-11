@@ -24,6 +24,10 @@
             <form action="<?php echo $action; ?>" method="post">
                 <div class="panel-body">
                     <div class="mb-3">
+                        <label for="varchar" class="form-label">Nomor Anggota Fraksi <?php echo form_error('no_anggota') ?></label>
+                        <input type="text" class="form-control" name="no_anggota" id="no_anggota" placeholder="Nomor Anggota Fraksi" value="<?php echo $no_anggota; ?>" />
+                    </div>
+                    <div class="mb-3">
                         <label for="varchar" class="form-label">Nama Anggota Fraksi <?php echo form_error('fullname') ?></label>
                         <input type="text" class="form-control" name="fullname" id="fullname" placeholder="Nama" value="<?php echo $fullname; ?>" />
                     </div>
@@ -34,7 +38,7 @@
                     <input type="hidden" name="id_user" value="<?php echo $id_user; ?>" />
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
                     <button type="submit" class="btn btn-success"><?php echo $button ?></button>
-                    <a href="<?php echo site_url('ta') ?>" class="btn btn-default">Cancel</a>
+                    <a href="<?php echo site_url('anggota_fraksi') ?>" class="btn btn-default">Cancel</a>
                 </div>
             </form>
         </div>

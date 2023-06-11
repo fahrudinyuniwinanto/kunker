@@ -61,8 +61,8 @@ class Ta extends CI_Controller
 
         $config['per_page'] = 10;
         $config['page_query_string'] = TRUE;
-        $config['total_rows'] = $this->Users_model->total_rows($q);
-        $users = $this->Users_model->get_limit_data($config['per_page'], $start, $q);
+        $config['total_rows'] = $this->Users_model->total_rows_ta($q);
+        $users = $this->Users_model->get_limit_data_ta($config['per_page'], $start, $q);
 
 
         $data = array(
@@ -151,6 +151,7 @@ class Ta extends CI_Controller
                 'fullname' => $this->input->post('fullname', TRUE),
                 'id_parent' => $this->input->post('id_anggota_fraksi', TRUE),
                 'id_fraksi' => $this->db->get_where('users', ['id_user' => $this->input->post('id_anggota_fraksi', TRUE)])->row()->id_fraksi,
+                'id_group' => 0,
                 'created_by' => $this->session->userdata('id_user'),
                 'created_at' => date("Y-m-d H:i:s"),
             );
@@ -167,7 +168,7 @@ class Ta extends CI_Controller
 
         if ($row) {
             $data = array(
-                'button' => 'Update',
+                'button' => 'Edit',
                 'action' => site_url('ta/update_action'),
                 'id_user' => set_value('id_user', $row->id_user),
                 'fullname' => set_value('fullname', $row->fullname),
@@ -205,6 +206,7 @@ class Ta extends CI_Controller
                 'fullname' => $this->input->post('fullname', TRUE),
                 'id_parent' => $this->input->post('id_anggota_fraksi', TRUE),
                 'id_fraksi' => $this->db->get_where('users', ['id_user' => $this->input->post('id_anggota_fraksi', TRUE)])->row()->id_fraksi,
+                'id_group' => 0,
                 'updated_by' => $this->session->userdata('id_user'),
                 'updated_at' => date("Y-m-d H:i:s"),
             );
@@ -234,6 +236,7 @@ class Ta extends CI_Controller
     public function _rules()
     {
         $this->form_validation->set_rules('fullname', 'fullname', 'trim|required');
+        $this->form_validation->set_rules('id_anggota_fraksi', 'id anggota fraksi', 'trim|required');
         $this->form_validation->set_rules('id_parent', 'id parent', 'trim');
         $this->form_validation->set_rules('id_fraksi', 'id fraksi', 'trim');
 

@@ -33,7 +33,7 @@
                 <div class="row" style="margin-bottom: 10px">
                     <div class="col-md-8">
                         <?php
-                        echo anchor(site_url('anggota_fraksi/create'), 'Tambah Anggota cx', 'class="btn btn-flat btn-success"');
+                        echo anchor(site_url('anggota_fraksi/create'), 'Tambah Anggota Fraksi', 'class="btn btn-flat btn-success"');
                         ?>
                     </div>
 
