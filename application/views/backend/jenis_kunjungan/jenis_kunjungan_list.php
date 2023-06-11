@@ -69,7 +69,7 @@
                                     ?>
                                 <tr>
                                     <td width="80px"><?php echo ++$start ?></td>
-                                    <td><strong><?php echo $jenis_kunjungan->nama_jenis_kunjungan ?></strong></td>
+                                    <td><strong><?php echo $jenis_kunjungan->nama_kunker ?></strong></td>
                                     <td><?php echo $jenis_kunjungan->maksimal_kunjungan ?> kali pertahun</td>
                                     <td><?php echo $jenis_kunjungan->jumlah_hari ?> kali perkunjungan</td>
                                     <td style="text-align:center" width="200px">
