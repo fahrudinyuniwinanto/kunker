@@ -166,6 +166,8 @@ class Kunker extends CI_Controller
 				'id_jenis_kunjungan' => $this->input->post('id_jenis_kunjungan', TRUE),
 				'nomor_surat' => $this->input->post('nomor_surat', TRUE),
 				'tanggal_surat' => $this->input->post('tanggal_surat', TRUE),
+				'tgl_berangkat' => $this->input->post('tgl_berangkat', TRUE),
+				'tgl_kembali' => $this->input->post('tgl_kembali', TRUE),
 				'perihal_surat' => $this->input->post('perihal_surat', TRUE),
 				'lampiran_surat' => $this->input->post('lampiran_surat', TRUE),
 				'tingkat_keamanan' => $this->input->post('tingkat_keamanan', TRUE),
@@ -298,8 +300,11 @@ class Kunker extends CI_Controller
 		$this->form_validation->set_rules('id_jenis_kunjungan', 'id jenis kunjungan', 'trim|required');
 		$this->form_validation->set_rules('nomor_surat', 'nomor surat', 'trim|required');
 		$this->form_validation->set_rules('tanggal_surat', 'tanggal surat', 'trim|required');
+		$this->form_validation->set_rules('tgl_berangkat', 'tgl berangkat', 'trim|required');
+		$this->form_validation->set_rules('tgl_kembali', 'tgl kembali', 'trim|required');
 		$this->form_validation->set_rules('perihal_surat', 'perihal surat', 'trim|required');
 		$this->form_validation->set_rules('lampiran_surat', 'lampiran surat', 'trim|required');
+		$this->form_validation->set_rules('jumlah_hari', 'jumlah hari', 'trim|required');
 		$this->form_validation->set_rules('tingkat_keamanan', 'tingkat keamanan', 'trim|required');
 		$this->form_validation->set_rules('id_fraksi', 'id fraksi', 'trim|required');
 		$this->form_validation->set_rules('id_anggota_fraksi', 'id anggota fraksi', 'trim|required');

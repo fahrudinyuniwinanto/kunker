@@ -57,7 +57,7 @@
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="mb-3">
-                                        <label class="form-label" for="int">Jumlah Hari <?php echo form_error('id_anggota_fraksi') ?></label>
+                                        <label class="form-label" for="int">Jumlah Hari <?php echo form_error('jumlah_hari') ?></label>
                                         <input type="text" class="form-control numeric" name="jumlah_hari" id="jumlah_hari" placeholder="" value="<?php echo $jumlah_hari; ?>" />
                                     </div>
                                 </div>
