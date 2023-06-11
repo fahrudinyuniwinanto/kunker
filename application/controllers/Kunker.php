@@ -120,6 +120,7 @@ class Kunker extends CI_Controller
 
 	public function create()
 	{
+		$data_user = $this->db->get_where('users', ['id_parent' => $this->session->userdata('id_user')])->result();
 		$data = array(
 			'button' => 'Ajukan',
 			'action' => site_url('kunker/create_action'),
@@ -127,6 +128,8 @@ class Kunker extends CI_Controller
 			'id_jenis_kunjungan' => set_value('id_jenis_kunjungan'),
 			'nomor_surat' => set_value('nomor_surat'),
 			'jumlah_hari' => set_value('jumlah_hari'),
+			'tgl_berangkat' => set_value('tgl_berangkat'),
+			'tgl_kembali' => set_value('tgl_kembali'),
 			'tanggal_surat' => set_value('tanggal_surat'),
 			'perihal_surat' => set_value('perihal_surat'),
 			'lampiran_surat' => set_value('lampiran_surat'),
@@ -146,6 +149,7 @@ class Kunker extends CI_Controller
 			'created_by' => set_value('created_by'),
 			'disposisi_by' => set_value('disposisi_by'),
 			'diposisi_note' => set_value('diposisi_note'),
+			'data_user' => $data_user,
 			'content' => 'backend/kunker/kunker_form',
 		);
 		$this->load->view(layout(), $data);

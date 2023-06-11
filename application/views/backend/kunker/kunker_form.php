@@ -62,6 +62,20 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="varchar">Tgl. Berangkat <?php echo form_error('tgl_berangkat') ?></label>
+                                        <input type="date" class="form-control" name="tgl_berangkat" id="tgl_berangkat" placeholder="" value="<?php echo $tgl_berangkat; ?>" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="int">Tgl. Kembali <?php echo form_error('tgl_kembali') ?></label>
+                                        <input type="date" class="form-control" name="tgl_kembali" id="tgl_kembali" placeholder="" value="<?php echo $tgl_kembali; ?>" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="row">
@@ -168,12 +182,14 @@
 </div>
 <script>
     $(document).ready(function() {
-
+        var j = 0;
         // Menambahkan field baru
         $('#add-field').click(function() {
-            var field = "<tr id=\"row[]\"><td><select class=\"form-control\" name=\"id_ta\" id=\"id_ta\" required><option value=\"\">--Pilih--</option></select></td><td class=\"text-center\"><button class=\"btn btn-sm btn-danger remove-field \"><i class=\"fa fa-trash \"></i> </button></td></tr>";
+
+            var field = "<tr id='row[]'><td><select class='form-control' name='id_ta[]' id='id_ta" + j + "' required><option value=''>--Pilih--</option></select></td><td class='text-center'><button class='btn btn-sm btn-danger remove-field'><i class='fa fa-trash '></i> </button></td></tr>";
             $('#dynamic-fields').append(field);
-            getComboTa();
+            getComboTa(j);
+            j++;
         });
 
         // Menghapus field
@@ -183,7 +199,8 @@
 
     });
 
-    function getComboTa() {
+    function getComboTa(j) {
+
         $.ajax({
             url: "<?php echo site_url('kunker/getArrTa'); ?>",
             dataType: 'json',
@@ -193,7 +210,7 @@
             },
             success: function(res) {
                 $.each(res, function(i, v) {
-                    $("#id_ta").append("<option value='" + v.id_user + "'>" + v.fullname + "</option>");
+                    $("#id_ta" + j).append("<option value='" + v.id_user + "'>" + v.fullname + "</option>");
                 });
             }
         })
