@@ -37,13 +37,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="int" class="form-label">Level Akses<?php echo form_error('id_group') ?></label>
-                        <select class="form-control" name="id_group" id="id_group" placeholder="User Group" value="<?php echo $id_group; ?>" data-bs-live-search="true" required>
-                            <?php foreach (get_combo('user_group', 'id', 'group_name', ['' => '--Pilih Data--']) as $k => $v) { ?>
-                                <option value="<?= $k ?>" <?php if ($k == $id_group) {
-                                                                    echo 'selected';
-                                                                }; ?>><?= $v ?></option>
-                            <?php } ?>
-                        </select>
+                        <?= form_dropdown('id_group', get_combo_where('user_group', 'id', 'group_name', ['' => "--Pilih--"], ['id !=' => '1']), $id_group, ['class' => 'form-control']) ?>
+
                         <!-- <div class="input-group">
                             <input type="hidden" name="id_group" id="id_group" value="<?php echo $id_group; ?>" />
                             <input type="text" class="form-control" name="nm_id_group" id="nm_id_group" placeholder="User Group" value="<?php echo $nm_id_group; ?>" readonly />

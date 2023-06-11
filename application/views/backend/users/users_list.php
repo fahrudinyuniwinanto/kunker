@@ -33,8 +33,8 @@
                 <div class="row" style="margin-bottom: 10px">
                     <div class="col-md-8">
                         <?php
-                        if (allow([1])) {
-                            echo anchor(site_url('users/create'), 'Create', 'class="btn btn-flat btn-success"');
+                        if (allow([1, 2])) {
+                            echo anchor(site_url('users/create'), 'Tambah Pengguna', 'class="btn btn-flat btn-success"');
                         } ?>
 
                     </div>
