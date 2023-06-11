@@ -76,33 +76,63 @@
                     <tbody><?php
                             foreach ($users_data as $users) {
                                 if ($this->session->userdata('level') <= $users->id_group) {
-                                    ?>
-                                <tr>
-                                    <td width="80px"><?php echo ++$start ?></td>
-                                    <td><?php echo $users->fullname ?></td>
-                                    <td><?php echo $users->username ?></td>
-                                    <td><?php echo $users->email ?></td>
-                                    <td><?php echo $users->group_name ?></td>
-                                    <td style="text-align:center" width="200px">
-                                        <?php
-                                                echo anchor(site_url('users/read/' . $users->id_user), '<i class="fa fa-eye"></i>', 'class="btn btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="Lihat"');
-                                                if ($this->session->userdata('level') == $users->id_group) {
-                                                    echo ' | ';
-                                                    echo anchor(site_url('users/update/' . $users->id_user), '<i class="fa fa-edit"></i>', 'class="btn btn-xs btn-warning" data-toggle="tooltip" data-placement="top" title="Edit"');
-                                                    echo ' | ';
-                                                    echo anchor(site_url('users/ubah_password/' . $users->id_user), '<i class="fa fa-edit"></i>', 'class="btn btn-xs btn-info" data-toggle="tooltip" data-placement="top" title="Ubah Password"');
+                                    if ($this->session->userdata('level') == 3) {
+                                        if ($this->session->userdata('id_user') == $users->id_user) {
+                                            ?>
+                                        <tr>
+                                            <td width="80px"><?php echo ++$start ?></td>
+                                            <td><?php echo $users->fullname ?></td>
+                                            <td><?php echo $users->username ?></td>
+                                            <td><?php echo $users->email ?></td>
+                                            <td><?php echo $users->group_name ?></td>
+                                            <td style="text-align:center" width="200px">
+                                                <?php
+                                                                echo anchor(site_url('users/read/' . $users->id_user), '<i class="fa fa-eye"></i>', 'class="btn btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="Lihat"');
+                                                                if ($this->session->userdata('level') == $users->id_group) {
+                                                                    echo ' | ';
+                                                                    echo anchor(site_url('users/update/' . $users->id_user), '<i class="fa fa-edit"></i>', 'class="btn btn-xs btn-warning" data-toggle="tooltip" data-placement="top" title="Edit"');
+                                                                    echo ' | ';
+                                                                    echo anchor(site_url('users/ubah_password/' . $users->id_user), '<i class="fa fa-edit"></i>', 'class="btn btn-xs btn-info" data-toggle="tooltip" data-placement="top" title="Ubah Password"');
+                                                                }
+                                                                if (allow([1, 2])) {
+                                                                    echo ' | ';
+                                                                    echo anchor(site_url('users/reset_password/' . $users->id_user), '<i class="fa fa-sync"></i>', 'class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Reset Password" title="Hapus" onclick="javascript: return confirm(\'Yakin mereset password user ini?\')"');
+                                                                    echo ' | ';
+                                                                    echo anchor(site_url('users/delete/' . $users->id_user), '<i class="fa fa-trash"></i>', 'class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus" onclick="javascript: return confirm(\'Yakin hapus data?\')"');
+                                                                }
+                                                                ?>
+                                            </td>
+                                        </tr>
+                                    <?php
                                                 }
-                                                if (allow([1])) {
-                                                    echo ' | ';
-                                                    echo anchor(site_url('users/reset_password/' . $users->id_user), '<i class="fa fa-sync"></i>', 'class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Reset Password" title="Hapus" onclick="javascript: return confirm(\'Yakin mereset password user ini?\')"');
-                                                    echo ' | ';
-                                                    echo anchor(site_url('users/delete/' . $users->id_user), '<i class="fa fa-trash"></i>', 'class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus" onclick="javascript: return confirm(\'Yakin hapus data?\')"');
-                                                }
-                                                ?>
-                                    </td>
-                                </tr>
+                                            } else { ?>
+                                    <tr>
+                                        <td width="80px"><?php echo ++$start ?></td>
+                                        <td><?php echo $users->fullname ?></td>
+                                        <td><?php echo $users->username ?></td>
+                                        <td><?php echo $users->email ?></td>
+                                        <td><?php echo $users->group_name ?></td>
+                                        <td style="text-align:center" width="200px">
+                                            <?php
+                                                        echo anchor(site_url('users/read/' . $users->id_user), '<i class="fa fa-eye"></i>', 'class="btn btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="Lihat"');
+                                                        if ($this->session->userdata('level') == $users->id_group) {
+                                                            echo ' | ';
+                                                            echo anchor(site_url('users/update/' . $users->id_user), '<i class="fa fa-edit"></i>', 'class="btn btn-xs btn-warning" data-toggle="tooltip" data-placement="top" title="Edit"');
+                                                            echo ' | ';
+                                                            echo anchor(site_url('users/ubah_password/' . $users->id_user), '<i class="fa fa-edit"></i>', 'class="btn btn-xs btn-info" data-toggle="tooltip" data-placement="top" title="Ubah Password"');
+                                                        }
+                                                        if (allow([1, 2])) {
+                                                            echo ' | ';
+                                                            echo anchor(site_url('users/reset_password/' . $users->id_user), '<i class="fa fa-sync"></i>', 'class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Reset Password" title="Hapus" onclick="javascript: return confirm(\'Yakin mereset password user ini?\')"');
+                                                            echo ' | ';
+                                                            echo anchor(site_url('users/delete/' . $users->id_user), '<i class="fa fa-trash"></i>', 'class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus" onclick="javascript: return confirm(\'Yakin hapus data?\')"');
+                                                        }
+                                                        ?>
+                                        </td>
+                                    </tr>
 
                         <?php
+                                }
                             }
                         }
                         ?>
