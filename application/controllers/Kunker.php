@@ -120,7 +120,6 @@ class Kunker extends CI_Controller
 
 	public function create()
 	{
-		$data_user = $this->db->get_where('users', ['id_parent' => $this->session->userdata('id_user')])->result();
 		$data = array(
 			'button' => 'Ajukan',
 			'action' => site_url('kunker/create_action'),
@@ -128,8 +127,6 @@ class Kunker extends CI_Controller
 			'id_jenis_kunjungan' => set_value('id_jenis_kunjungan'),
 			'nomor_surat' => set_value('nomor_surat'),
 			'jumlah_hari' => set_value('jumlah_hari'),
-			'tgl_berangkat' => set_value('tgl_berangkat'),
-			'tgl_kembali' => set_value('tgl_kembali'),
 			'tanggal_surat' => set_value('tanggal_surat'),
 			'perihal_surat' => set_value('perihal_surat'),
 			'lampiran_surat' => set_value('lampiran_surat'),
@@ -149,7 +146,6 @@ class Kunker extends CI_Controller
 			'created_by' => set_value('created_by'),
 			'disposisi_by' => set_value('disposisi_by'),
 			'diposisi_note' => set_value('diposisi_note'),
-			'data_user' => $data_user,
 			'content' => 'backend/kunker/kunker_form',
 		);
 		$this->load->view(layout(), $data);
@@ -166,8 +162,6 @@ class Kunker extends CI_Controller
 				'id_jenis_kunjungan' => $this->input->post('id_jenis_kunjungan', TRUE),
 				'nomor_surat' => $this->input->post('nomor_surat', TRUE),
 				'tanggal_surat' => $this->input->post('tanggal_surat', TRUE),
-				'tgl_berangkat' => $this->input->post('tgl_berangkat', TRUE),
-				'tgl_kembali' => $this->input->post('tgl_kembali', TRUE),
 				'perihal_surat' => $this->input->post('perihal_surat', TRUE),
 				'lampiran_surat' => $this->input->post('lampiran_surat', TRUE),
 				'tingkat_keamanan' => $this->input->post('tingkat_keamanan', TRUE),
@@ -284,6 +278,26 @@ class Kunker extends CI_Controller
 		}
 	}
 
+	public function verify($id)
+	{
+
+		$row = $this->Kunker_model->get_by_id($id);
+		if ($row) {
+			$data = $row;
+			$data->content='backend/kunker/kunker_verify';
+			
+			
+			// wfDebug($data);
+			$this->load->view(
+				layout(),
+				$data
+			);
+		} else {
+			$this->session->set_flashdata('message', 'Record Not Found');
+			redirect(site_url('kunker'));
+		}
+	}
+
 	public function getArrTa()
 	{
 		$search = $this->input->get('q');
@@ -300,11 +314,8 @@ class Kunker extends CI_Controller
 		$this->form_validation->set_rules('id_jenis_kunjungan', 'id jenis kunjungan', 'trim|required');
 		$this->form_validation->set_rules('nomor_surat', 'nomor surat', 'trim|required');
 		$this->form_validation->set_rules('tanggal_surat', 'tanggal surat', 'trim|required');
-		$this->form_validation->set_rules('tgl_berangkat', 'tgl berangkat', 'trim|required');
-		$this->form_validation->set_rules('tgl_kembali', 'tgl kembali', 'trim|required');
 		$this->form_validation->set_rules('perihal_surat', 'perihal surat', 'trim|required');
 		$this->form_validation->set_rules('lampiran_surat', 'lampiran surat', 'trim|required');
-		$this->form_validation->set_rules('jumlah_hari', 'jumlah hari', 'trim|required');
 		$this->form_validation->set_rules('tingkat_keamanan', 'tingkat keamanan', 'trim|required');
 		$this->form_validation->set_rules('id_fraksi', 'id fraksi', 'trim|required');
 		$this->form_validation->set_rules('id_anggota_fraksi', 'id anggota fraksi', 'trim|required');

@@ -25,9 +25,9 @@ class Kunker_model extends CI_Model
     // get data by id
     function get_by_id($id)
     {
-        $this->db->join('fraksi bb', 'bb.id_fraksi=aa.id_fraksi');
-        $this->db->join('jenis_kunjungan cc', 'cc.id_jenis_kunjungan=aa.id_jenis_kunjungan');
-        $this->db->join('users dd', 'dd.id_user=aa.id_anggota_fraksi');
+        $this->db->join('fraksi bb', 'bb.id_fraksi=aa.id_fraksi','left');
+        $this->db->join('jenis_kunjungan cc', 'cc.id_jenis_kunjungan=aa.id_jenis_kunjungan','left');
+        $this->db->join('users dd', 'dd.id_user=aa.id_anggota_fraksi','left');
         $this->db->where('aa.' . $this->id, $id);
         return $this->db->get($this->table . ' aa')->row();
     }

@@ -82,11 +82,11 @@
                                     <td><?php echo $kunker->fullname ?></td>
                                     <td><?php echo $kunker->tingkat_keamanan ?></td>
                                     <!-- <td><?php echo $kunker->nomor_surat ?></td>
-                                    <td><?php echo $kunker->tanggal_surat ?></td>
-                                    <td><?php echo $kunker->perihal_surat ?></td> -->
+                                    <td><?php echo @$kunker->tanggal_surat ?></td>
+                                    <td><?php echo @$kunker->perihal_surat ?></td> -->
                                     <!-- <td><?php echo $kunker->nama_daerah_tujuan ?></td> -->
-                                    <td><?php echo $kunker->created_at ?></td>
-                                    <td><?php echo $kunker->status_disposisi ?></td>
+                                    <td><?php echo @$kunker->created_at ?></td>
+                                    <td><?php echo @$kunker->status_disposisi ?></td>
                                     <td style="text-align:center" width="200px">
                                         <?php
                                             echo anchor(site_url('kunker/read/' . $kunker->id_kunker), '<i class="fa fa-eye"></i>', 'class="btn btn-xs btn-success"');
