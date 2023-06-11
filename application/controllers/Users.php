@@ -123,7 +123,7 @@ class Users extends CI_Controller
     public function create()
     {
         $data = array(
-            'button' => 'Create',
+            'button' => 'Tambah',
             'action' => site_url('users/create_action'),
             'id_user' => set_value('id_user'),
             'fullname' => set_value('fullname'),
@@ -180,7 +180,7 @@ class Users extends CI_Controller
 
         if ($row) {
             $data = array(
-                'button' => 'Update',
+                'button' => 'Edit',
                 'action' => site_url('users/update_action'),
                 'id_user' => set_value('id_user', $row->id_user),
                 'fullname' => set_value('fullname', $row->fullname),
@@ -240,7 +240,7 @@ class Users extends CI_Controller
         if ($row) {
 
             $data = array(
-                'button' => 'Update',
+                'button' => 'Edit Password',
                 'action' => site_url('users/ubah_password_action'),
                 'id_user' => set_value('id_user', $row->id_user),
                 'old_password' => set_value('old_password'),
@@ -291,16 +291,22 @@ class Users extends CI_Controller
     {
 
         $row = $this->Users_model->get_by_id($id);
-        $data = array(
-            'password' => md5($row->username . '123'),
-        );
+        if ($row->id_group == 3) {
+            $data = array(
+                'password' => md5($row->no_anggota),
+            );
+        } else {
+            $data = array(
+                'password' => md5($row->username . '123'),
+            );
+        }
 
         if ($row) {
             $this->Users_model->update($id, $data);
             $this->session->set_flashdata('message', 'Password berhasil direset');
             redirect(site_url('users'));
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('message', 'Data Tidak Ditemukan');
             redirect(site_url('users'));
         }
     }
