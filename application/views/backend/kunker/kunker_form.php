@@ -35,28 +35,28 @@
                         <div class="col-lg-4">
                             <div class="mb-3">
                                 <label class="form-label" for="int">Fraksi <?php echo form_error('id_fraksi') ?></label>
-                                <?= form_dropdown('id_fraksi', get_combo('fraksi', 'id_fraksi', 'nama_fraksi', ['' => "--Pilih--"]), $id_fraksi, ['class' => 'form-control']) ?>
+                                <?= form_dropdown('id_fraksi', get_combo('fraksi', 'id_fraksi', 'nama_fraksi', ['' => "--Pilih--"]), $id_fraksi, ['class' => 'form-control', 'required' => TRUE]) ?>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="int">Anggota Fraksi <?php echo form_error('id_anggota_fraksi') ?></label>
-                                <?= form_dropdown('id_anggota_fraksi', get_combo('users', 'id_user', 'fullname', ['' => "--Pilih--"]), $id_anggota_fraksi, ['class' => 'form-control']) ?>
+                                <?= form_dropdown('id_anggota_fraksi', get_combo('users', 'id_user', 'fullname', ['' => "--Pilih--"]), $id_anggota_fraksi, ['class' => 'form-control', 'required' => TRUE]) ?>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="int">Jenis Kunjungan <?php echo form_error('id_jenis_kunjungan') ?></label>
-                                <?= form_dropdown('id_jenis_kunjungan', get_combo('jenis_kunjungan', 'id_jenis_kunjungan', 'nama_kunker', ['' => "--Pilih--"]), $id_jenis_kunjungan, ['class' => 'form-control']) ?>
+                                <?= form_dropdown('id_jenis_kunjungan', get_combo('jenis_kunjungan', 'id_jenis_kunjungan', 'nama_kunker', ['' => "--Pilih--"]), $id_jenis_kunjungan, ['class' => 'form-control', 'id' => 'id_jenis_kunjungan', 'required' => TRUE]) ?>
                             </div>
 
                             <div class="row">
                                 <div class="col-lg-9">
                                     <div class="mb-3">
                                         <label class="form-label" for="varchar">Tujuan <?php echo form_error('nama_daerah_tujuan') ?></label>
-                                        <input type="text" class="form-control" name="nama_daerah_tujuan" id="nama_daerah_tujuan" placeholder="Isikan Daerah Tujuan" value="<?php echo $nama_daerah_tujuan; ?>" />
+                                        <input type="text" class="form-control" name="nama_daerah_tujuan" id="nama_daerah_tujuan" placeholder="Isikan Daerah Tujuan" value="<?php echo $nama_daerah_tujuan; ?>" required />
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="mb-3">
                                         <label class="form-label" for="int">Jumlah Hari <?php echo form_error('jumlah_hari') ?></label>
-                                        <input type="text" class="form-control numeric" name="jumlah_hari" id="jumlah_hari" placeholder="" value="<?php echo $jumlah_hari; ?>" />
+                                        <input type="text" class="form-control numeric" name="jumlah_hari" id="jumlah_hari" placeholder="" value="<?php echo $jumlah_hari; ?>" readonly />
                                     </div>
                                 </div>
                             </div>
@@ -64,13 +64,13 @@
                                 <div class="col-lg-6">
                                     <div class="mb-3">
                                         <label class="form-label" for="varchar">Tgl. Berangkat <?php echo form_error('tgl_berangkat') ?></label>
-                                        <input type="date" class="form-control" name="tgl_berangkat" id="tgl_berangkat" placeholder="" value="<?php echo $tgl_berangkat; ?>" />
+                                        <input type="date" class="form-control" min="<?= date('Y-m-d') ?>" name="tgl_berangkat" id="tgl_berangkat" placeholder="" value="<?php echo $tgl_berangkat; ?>" required />
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="mb-3">
                                         <label class="form-label" for="int">Tgl. Kembali <?php echo form_error('tgl_kembali') ?></label>
-                                        <input type="date" class="form-control" name="tgl_kembali" id="tgl_kembali" placeholder="" value="<?php echo $tgl_kembali; ?>" />
+                                        <input type="date" class="form-control" name="tgl_kembali" id="tgl_kembali" placeholder="" value="<?php echo $tgl_kembali; ?>" required />
                                     </div>
                                 </div>
                             </div>
@@ -80,13 +80,13 @@
                                 <div class="col-lg-8">
                                     <div class="mb-3">
                                         <label class="form-label" for="varchar">Nomor<?php echo form_error('nomor_surat') ?></label>
-                                        <input type="text" class="form-control" name="nomor_surat" id="nomor_surat" placeholder="Nomor Surat" value="<?php echo $nomor_surat; ?>" />
+                                        <input type="text" class="form-control" name="nomor_surat" id="nomor_surat" placeholder="Nomor Surat" value="<?php echo $nomor_surat; ?>" required />
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="mb-3">
                                         <label class="form-label" for="varchar">Tingkat Keamanan <?php echo form_error('tingkat_keamanan') ?></label>
-                                        <?= form_dropdown('tingkat_keamanan', ['' => "--Pilih--", 'Biasa' => "Biasa", 'Segera' => "Segera"], $tingkat_keamanan, ['class' => 'form-control']) ?>
+                                        <?= form_dropdown('tingkat_keamanan', ['' => "--Pilih--", 'Biasa' => "Biasa", 'Segera' => "Segera"], $tingkat_keamanan, ['class' => 'form-control', 'required' => TRUE]) ?>
                                     </div>
                                 </div>
                             </div>
@@ -94,20 +94,20 @@
                                 <div class="col-lg-8">
                                     <div class="mb-3">
                                         <label class="form-label" for="date">Tanggal<?php echo form_error('tanggal_surat') ?></label>
-                                        <input type="date" class="form-control" name="tanggal_surat" id="tanggal_surat" placeholder="Tanggal Surat" value="<?php echo $tanggal_surat; ?>" />
+                                        <input type="date" class="form-control" name="tanggal_surat" id="tanggal_surat" placeholder="Tanggal Surat" value="<?php echo $tanggal_surat; ?>" required />
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="mb-3">
                                         <label class="form-label" for="varchar">Lampiran<?php echo form_error('lampiran_surat') ?></label>
-                                        <input type="text" class="form-control" name="lampiran_surat" id="lampiran_surat" placeholder="Cth: 3 berkas" value="<?php echo $lampiran_surat; ?>" />
+                                        <input type="text" class="form-control" name="lampiran_surat" id="lampiran_surat" placeholder="Cth: 3 berkas" value="<?php echo $lampiran_surat; ?>" required />
                                     </div>
                                 </div>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label" for="varchar">Perihal<?php echo form_error('perihal_surat') ?></label>
-                                <textarea type="text" class="form-control" name="perihal_surat" id="perihal_surat" placeholder="Perihal Surat"><?php echo $perihal_surat; ?></textarea>
+                                <textarea type="text" class="form-control" name="perihal_surat" id="perihal_surat" placeholder="Perihal Surat" required><?php echo $perihal_surat; ?></textarea>
                             </div>
                             <!-- <div class="mb-3">
                                 <label class="form-label" for="int">Id Kunker Ta <?php echo form_error('id_kunker_ta') ?></label>
@@ -115,7 +115,7 @@
                             </div> -->
                             <div class="mb-3">
                                 <label class="form-label" for="varchar">File Surat Permohonan <?php echo form_error('file_surat') ?></label>
-                                <input type="file" class="form-control" name="file_surat" id="file_surat" placeholder="File Surat" value="<?php echo $file_surat; ?>" accept="application/pdf" />
+                                <input type="file" class="form-control" name="file_surat" id="file_surat" placeholder="File Surat" value="<?php echo $file_surat; ?>" accept="application/pdf" required />
                             </div>
                         </div>
 
@@ -195,7 +195,50 @@
             $(this).parent().parent().remove();
         });
 
+        get_maks_hari();
+        //console.log(maksimal_hari);
+        jumlah_hari();
+
+
+
+
     });
+
+    //hitung tanggal otomatis dan validas maks hari kunjungan
+    function jumlah_hari() {
+        //hitung tanggal otomatis
+        $('#tgl_berangkat, #tgl_kembali').change(function() {
+            var tgl_berangkat = new Date($('#tgl_berangkat').val());
+            //maksimal_hari = get_maks_hari();
+            //tambah attr pada tanggal kembali (min=tgl_berangkat)
+            $('#tgl_kembali').attr('min', tgl_berangkat.toISOString().split('T')[0]);
+
+            //$('#tgl_kembali').attr('max', maks_kembali.toISOString().split('T')[0]);
+
+            var tgl_kembali = new Date($('#tgl_kembali').val());
+
+            var selisihHari = Math.floor((tgl_kembali - tgl_berangkat) / (1000 * 60 * 60 * 24));
+
+            $('#jumlah_hari').val(selisihHari);
+        });
+    };
+
+    function get_maks_hari() {
+        $('#id_jenis_kunjungan').change(function() {
+            var id_jen_kunjungan = $('#id_jenis_kunjungan').val();
+            $.ajax({
+                url: "<?php echo site_url('kunker/get_maks_hari'); ?>",
+                dataType: 'json',
+                type: 'GET',
+                data: {
+                    id_jenis_kunjungan: id_jen_kunjungan
+                },
+                success: function(res) {
+                    return res.jumlah_hari;
+                }
+            });
+        });
+    }
 
     function getComboTa(j) {
 
