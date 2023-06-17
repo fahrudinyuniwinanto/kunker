@@ -25,9 +25,9 @@ class Kunker_model extends CI_Model
     // get data by id
     function get_by_id($id)
     {
-        $this->db->join('fraksi bb', 'bb.id_fraksi=aa.id_fraksi','left');
-        $this->db->join('jenis_kunjungan cc', 'cc.id_jenis_kunjungan=aa.id_jenis_kunjungan','left');
-        $this->db->join('users dd', 'dd.id_user=aa.id_anggota_fraksi','left');
+        $this->db->join('fraksi bb', 'bb.id_fraksi=aa.id_fraksi', 'left');
+        $this->db->join('jenis_kunjungan cc', 'cc.id_jenis_kunjungan=aa.id_jenis_kunjungan', 'left');
+        $this->db->join('users dd', 'dd.id_user=aa.id_anggota_fraksi', 'left');
         $this->db->where('aa.' . $this->id, $id);
         return $this->db->get($this->table . ' aa')->row();
     }
@@ -40,6 +40,7 @@ class Kunker_model extends CI_Model
         $this->db->join('users dd', 'dd.id_user=aa.id_anggota_fraksi');
 
         $this->db->like('id_kunker', $q);
+        $this->db->group_start();
         $this->db->or_like('aa.id_jenis_kunjungan', $q);
         $this->db->or_like('aa.nomor_surat', $q);
         $this->db->or_like('aa.tanggal_surat', $q);
@@ -61,6 +62,10 @@ class Kunker_model extends CI_Model
         $this->db->or_like('aa.created_by', $q);
         $this->db->or_like('aa.disposisi_by', $q);
         $this->db->or_like('aa.diposisi_note', $q);
+        $this->db->group_end();
+        if ($this->session->userdata('level') > 2) {
+            $this->db->where('aa.id_anggota_fraksi', $this->session->userdata('id_user'));
+        }
         $this->db->from($this->table . ' aa');
         return $this->db->count_all_results();
     }
@@ -72,6 +77,7 @@ class Kunker_model extends CI_Model
         $this->db->join('jenis_kunjungan cc', 'cc.id_jenis_kunjungan=aa.id_jenis_kunjungan');
         $this->db->join('users dd', 'dd.id_user=aa.id_anggota_fraksi');
         $this->db->order_by($this->id, $this->order);
+        $this->db->group_start();
         $this->db->like('id_kunker', $q);
         $this->db->or_like('aa.id_jenis_kunjungan', $q);
         $this->db->or_like('aa.nomor_surat', $q);
@@ -94,6 +100,10 @@ class Kunker_model extends CI_Model
         $this->db->or_like('aa.created_by', $q);
         $this->db->or_like('aa.disposisi_by', $q);
         $this->db->or_like('aa.diposisi_note', $q);
+        $this->db->group_end();
+        if ($this->session->userdata('level') > 2) {
+            $this->db->where('aa.id_anggota_fraksi', $this->session->userdata('id_user'));
+        }
         $this->db->limit($limit, $start);
         return $this->db->get($this->table . ' aa')->result();
     }

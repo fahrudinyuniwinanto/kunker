@@ -9,6 +9,8 @@ class Backend extends CI_Controller
         is_logged();
         $this->load->model('Users_model');
         $this->load->model('Sy_menu_model');
+
+        $this->db->query("SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
     }
 
     public function index()

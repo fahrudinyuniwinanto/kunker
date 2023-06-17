@@ -10,6 +10,7 @@ class Kunker extends CI_Controller
 		parent::__construct();
 		is_logged();
 		$this->load->model('Kunker_model');
+		$this->load->model('Kunker_ta_model');
 		$this->load->library('form_validation');
 	}
 
@@ -138,6 +139,8 @@ class Kunker extends CI_Controller
 			'file_surat' => set_value('file_surat'),
 			'file_nodin' => set_value('file_nodin'),
 			'pemberi_disposisi' => set_value('pemberi_disposisi'),
+			'tgl_berangkat' => set_value('tgl_berangkat'),
+			'tgl_kembali' => set_value('tgl_kembali'),
 			'isi_disposisi' => set_value('isi_disposisi'),
 			'tujuan_disposisi' => set_value('tujuan_disposisi'),
 			'status_disposisi' => set_value('status_disposisi'),
@@ -158,33 +161,51 @@ class Kunker extends CI_Controller
 		if ($this->form_validation->run() == FALSE) {
 			$this->create();
 		} else {
-			$data = array(
-				'id_jenis_kunjungan' => $this->input->post('id_jenis_kunjungan', TRUE),
-				'nomor_surat' => $this->input->post('nomor_surat', TRUE),
-				'tanggal_surat' => $this->input->post('tanggal_surat', TRUE),
-				'perihal_surat' => $this->input->post('perihal_surat', TRUE),
-				'lampiran_surat' => $this->input->post('lampiran_surat', TRUE),
-				'tingkat_keamanan' => $this->input->post('tingkat_keamanan', TRUE),
-				'id_fraksi' => $this->input->post('id_fraksi', TRUE),
-				'id_anggota_fraksi' => $this->input->post('id_anggota_fraksi', TRUE),
-				'id_kunker_ta' => $this->input->post('id_kunker_ta', TRUE),
-				'nama_daerah_tujuan' => $this->input->post('nama_daerah_tujuan', TRUE),
-				'file_surat' => sf_upload('dok_permohonan', 'assets/dok_permohonan', 'pdf', 2048, 'file_surat'),
-				//'file_nodin' => $this->input->post('file_nodin', TRUE),
-				//'pemberi_disposisi' => $this->input->post('pemberi_disposisi', TRUE),
-				//'isi_disposisi' => $this->input->post('isi_disposisi', TRUE),
-				//'tujuan_disposisi' => $this->input->post('tujuan_disposisi', TRUE),
-				//'status_disposisi' => $this->input->post('status_disposisi', TRUE),
-				'created_at' => date('Y-m-d H:i:s'),
-				// 'disposisi_at' => $this->input->post('disposisi_at', TRUE),
-				// 'created_by' => $this->session->userdata('id_user'),
-				// 'disposisi_by' => $this->input->post('disposisi_by', TRUE),
-				// 'diposisi_note' => $this->input->post('diposisi_note', TRUE),
-			);
 
-			$this->Kunker_model->insert($data);
-			$this->session->set_flashdata('message', 'Create Record Success');
-			redirect(site_url('kunker'));
+			//validasi ajuan kunjungan kerja
+			//ambil data jenis kunjungan => maksimal kunjungan
+			$jenis_kunjungan = $this->db->get_where('jenis_kunjungan', ['id_jenis_kunjungan' => $this->input->post('id_jenis_kunjungan', TRUE)])->row();
+			//count jumlah kunjungan di table kunker berdasar id jenis kunjungan
+			$jumlah_kunjungan = $this->db->get_where('kunker', ['id_jenis_kunjungan' => $this->input->post('id_jenis_kunjungan', TRUE)])->num_rows();
+			//jika jumlah kunjungan >= maksimal kunjungan-> tolak jika tidak -> lanjutkan input
+			if ($jumlah_kunjungan >= $jenis_kunjungan->maksimal_kunjungan) {
+
+				$this->session->set_flashdata('error_message', 'Quota kunjungan untuk jenis kunjungan ' . $jenis_kunjungan->nama_kunker . ' tersebut sudah penuh. Maksimal adalah ' . $jenis_kunjungan->maksimal_kunjungan . ' kunjungan.');
+				redirect(site_url('kunker/create'));
+			} else {
+
+				$data = array(
+					'id_jenis_kunjungan' => $this->input->post('id_jenis_kunjungan', TRUE),
+					'nomor_surat' => $this->input->post('nomor_surat', TRUE),
+					'tanggal_surat' => $this->input->post('tanggal_surat', TRUE),
+					'tgl_berangkat' => $this->input->post('tgl_berangkat', TRUE),
+					'tgl_kembali' => $this->input->post('tgl_kembali', TRUE),
+					'perihal_surat' => $this->input->post('perihal_surat', TRUE),
+					'lampiran_surat' => $this->input->post('lampiran_surat', TRUE),
+					'tingkat_keamanan' => $this->input->post('tingkat_keamanan', TRUE),
+					'id_fraksi' => $this->input->post('id_fraksi', TRUE),
+					'id_anggota_fraksi' => $this->input->post('id_anggota_fraksi', TRUE),
+					'id_kunker_ta' => $this->input->post('id_kunker_ta', TRUE),
+					'nama_daerah_tujuan' => $this->input->post('nama_daerah_tujuan', TRUE),
+					'file_surat' => sf_upload('dok_permohonan', 'assets/dok_permohonan', 'pdf', 2048, 'file_surat'),
+					'created_at' => date('Y-m-d H:i:s'),
+				);
+				//input ke kunker;
+				$this->Kunker_model->insert($data);
+				$insert_id = $this->db->insert_id();
+				$arr_ta = $this->input->post('id_ta', TRUE);
+				foreach ($arr_ta as $v) {
+					$data = array(
+						'id_kunker' => $insert_id,
+						'id_ta' => $v,
+					);
+					//input ke kunker_ta;
+					$this->Kunker_ta_model->insert($data);
+				}
+
+				$this->session->set_flashdata('message', 'Data Kunjungan Berhasil Diajukan');
+				redirect(site_url('kunker'));
+			}
 		}
 	}
 
@@ -210,6 +231,8 @@ class Kunker extends CI_Controller
 				'file_surat' => set_value('file_surat', $row->file_surat),
 				'file_nodin' => set_value('file_nodin', $row->file_nodin),
 				'pemberi_disposisi' => set_value('pemberi_disposisi', $row->pemberi_disposisi),
+				'tgl_berangkat' => set_value('tgl_berangkat', $row->tgl_berangkat),
+				'tgl_kembali' => set_value('tgl_kembali', $row->tgl_kembali),
 				'isi_disposisi' => set_value('isi_disposisi', $row->isi_disposisi),
 				'tujuan_disposisi' => set_value('tujuan_disposisi', $row->tujuan_disposisi),
 				'status_disposisi' => set_value('status_disposisi', $row->status_disposisi),
@@ -284,9 +307,9 @@ class Kunker extends CI_Controller
 		$row = $this->Kunker_model->get_by_id($id);
 		if ($row) {
 			$data = $row;
-			$data->content='backend/kunker/kunker_verify';
-			
-			
+			$data->content = 'backend/kunker/kunker_verify';
+
+
 			// wfDebug($data);
 			$this->load->view(
 				layout(),

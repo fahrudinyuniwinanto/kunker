@@ -86,14 +86,27 @@
                                     <td><?php echo @$kunker->perihal_surat ?></td> -->
                                     <!-- <td><?php echo $kunker->nama_daerah_tujuan ?></td> -->
                                     <td><?php echo @$kunker->created_at ?></td>
-                                    <td><?php echo @$kunker->status_disposisi ?></td>
+                                    <td class="text-center"><?php
+                                                                if ($kunker->status_disposisi == 0) {
+                                                                    echo '<label class="badge bg-warning">PENDING</label>';
+                                                                }
+                                                                if ($kunker->status_disposisi == 1) {
+                                                                    echo '<label class="badge bg-success">DISETUJUI</label>';
+                                                                }
+                                                                if ($kunker->status_disposisi == 2) {
+                                                                    echo '<label class="badge bg-danger">DITOLAK</label>';
+                                                                }
+                                                                ?></td>
                                     <td style="text-align:center" width="200px">
                                         <?php
                                             echo anchor(site_url('kunker/read/' . $kunker->id_kunker), '<i class="fa fa-eye"></i>', 'class="btn btn-xs btn-success"');
-                                            echo ' | ';
-                                            echo anchor(site_url('kunker/update/' . $kunker->id_kunker), '<i class="fa fa-edit"></i>', 'class="btn btn-xs btn-warning"');
-                                            echo ' | ';
-                                            echo anchor(site_url('kunker/delete/' . $kunker->id_kunker), '<i class="fa fa-trash"></i>', 'class="btn btn-xs btn-danger" onclick="javascript: return confirm(\'Yakin hapus data?\')"');
+
+                                            // echo anchor(site_url('kunker/update/' . $kunker->id_kunker), '<i class="fa fa-edit"></i>', 'class="btn btn-xs btn-warning"');
+                                            // echo ' | ';
+                                            if (is_allow('HAPUS_KUNKER')) {
+                                                echo ' | ';
+                                                echo anchor(site_url('kunker/delete/' . $kunker->id_kunker), '<i class="fa fa-trash"></i>', 'class="btn btn-xs btn-danger" onclick="javascript: return confirm(\'Yakin hapus data?\')"');
+                                            }
                                             ?>
                                     </td>
                                 </tr>

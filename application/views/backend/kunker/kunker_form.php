@@ -8,9 +8,9 @@
 </ol>
 <h1 class="page-header">Kunker <small></small></h1>
 
-<?php if ($this->session->userdata('message') != '') { ?>
+<?php if ($this->session->userdata('error_message') != '') { ?>
     <div class="alert alert-danger alert-dismissible fade show">
-        <strong><?= $this->session->userdata('message') ?> </strong>
+        <strong><?= $this->session->userdata('error_message') ?> </strong>
         <a class="alert-link" href="#"></a>
         <button type="button" class="btn-close" data-bs-dismiss="alert"></span>
     </div>
@@ -21,6 +21,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h2 class="panel-title" style="margin-top:0px"><?php echo $button ?> Kunker </h2>
+
                 <div class="panel-heading-btn">
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a>
@@ -28,7 +29,7 @@
                     <!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a> -->
                 </div>
             </div>
-            <form action="<?php echo $action; ?>" method="post">
+            <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-4">
