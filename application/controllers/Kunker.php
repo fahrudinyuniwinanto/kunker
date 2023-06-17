@@ -330,6 +330,11 @@ class Kunker extends CI_Controller
 		}
 	}
 
+	public function verify_action(){
+		$this->db->update('kunker', array('status' => 1), array('id_kunker' => $this->input->post('id_kunker')));
+		json_encode(array('status' => 1));
+	}
+
 	public function getArrTa()
 	{
 		$search = $this->input->get('q');
