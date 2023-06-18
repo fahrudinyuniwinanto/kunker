@@ -330,9 +330,26 @@ class Kunker extends CI_Controller
 		}
 	}
 
-	public function verify_action(){
-		$this->db->update('kunker', array('status' => 1), array('id_kunker' => $this->input->post('id_kunker')));
-		json_encode(array('status' => 1));
+	public function verify_action()
+	{
+		$status = $this->input->post('status', TRUE);
+		$save = $this->db->update('kunker', array('status_disposisi' => $status), array('id_kunker' => $this->input->post('id_kunker')));
+		if ($save) {
+			if ($status == 1) {
+				$res['msg'] = "Pengajuan SPPD berhasil diverifikasi";
+				$res['title'] = "Berhasil";
+				$res['icon'] = 'success';
+			} else {
+				$res['msg'] = "Pengajuan SPPD ditolak";
+				$res['title'] = "Ditolak";
+				$res['icon'] = 'success';
+			}
+		}else{
+			$res['msg'] = "Pengajuan SPPD gagal diverifikasi";
+			$res['title'] = "Error";
+				$res['icon'] = 'error';
+		}
+		echo json_encode($res);
 	}
 
 	public function getArrTa()

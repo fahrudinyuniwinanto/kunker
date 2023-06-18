@@ -4,7 +4,7 @@
 </ol>
 <!-- END breadcrumb -->
 <!-- BEGIN page-header -->
-<h1 class="page-header hidden-print">Permohonan SPPD <small></small></h1>
+<h1 class="page-header hidden-print">Permohonan SPPD <small>Tentang <?php echo $perihal_surat; ?></small></h1>
 <!-- END page-header -->
 <!-- BEGIN invoice -->
 <div class="invoice">
@@ -12,9 +12,9 @@
 	<div class="invoice-company">
 		<span class="float-end hidden-print">
 			<a href="javascript:;" class="btn btn-sm btn-white mb-10px"><i class="fa fa-file-pdf t-plus-1 text-danger fa-fw fa-lg"></i> Lihat Surat</a>
-			<a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-white mb-10px"><i class="fa fa-print t-plus-1 fa-fw fa-lg"></i> Cetak Nodin</a>
+			<a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-white mb-10px"><i class="fa fa-print t-plus-1 fa-fw fa-lg"></i> Cetak Disposisi</a>
 		</span>
-		SPPD tentang <?php echo $perihal_surat; ?>
+		&nbsp;Status: <?=$status_disposisi==1?'<span class="text-success"><i class="fa fa-check-square"></i> Diverifikasi</span>':($status_disposisi==2?'<span class="text-danger"><i class="fa fa-times"></i> Ditolak</span>':($status_disposisi==0?'<span class="text-warning"><i class="fa fa-clock"></i> Menunggu Verifikasi</span>':''))?>
 	</div>
 	<!-- END invoice-company -->
 	<!-- BEGIN invoice-header -->
@@ -116,8 +116,13 @@
 		<p class="text-center">
 
 			<a href="<?= base_url() ?>kunker" class="btn btn-sm btn-info mb-10px"><i class="fa fa-arrow-left t-plus-1 fa-fw fa-lg"></i> Kembali</a>
+			<?php if(!in_array($status_disposisi, [1,2])): ?>
 			<a href="#" onclick="confirm('1')" class="btn btn-sm btn-success mb-10px"><i class="fa fa-check-circle t-plus-1 fa-fw fa-lg"></i> Verifikasi</a>
 			<a href="#" onclick="confirm('2')" class="btn btn-sm btn-danger mb-10px"><i class="fa fa-times-circle t-plus-1 fa-fw fa-lg"></i> Tolak</a>
+			<?php elseif(in_array($status_disposisi, [1,2])): ?>
+				<a href="#" class="btn btn-sm btn-disabled mb-10px">Tidak dapat merubah status</a>
+
+				<?php endif ?>
 		</p>
 
 	</div>
@@ -147,11 +152,12 @@
 					url: '<?= base_url() ?>kunker/verify_action',	
 					type: 'POST',
 					data: {
-						status: status
+						status: status,
+						id_kunker: <?= @$id_kunker ?>,
 					},
 					dataType: 'json',
 					success: function(data) {
-						swal('Berhasil', 'Aksi Berhasil', 'success');
+						swal(data.title, data.msg, data.icon);
 					}
 				})
 			} else {
