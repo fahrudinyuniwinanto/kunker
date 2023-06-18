@@ -76,7 +76,7 @@
                         <tbody><?php
                                 foreach ($kunker_data as $kunker) {
                                     ?>
-                                <tr>
+                                <tr class="<?=$kunker->status_disposisi=='1'?'bg-success':($kunker->status_disposisi=='2'?'bg-danger':'')?>">
                                     <td width="80px"><?php echo ++$start ?></td>
                                     <td><?php echo $kunker->nama_kunker ?></td>
                                     <td><strong><?php echo $kunker->nama_fraksi ?></strong></td>

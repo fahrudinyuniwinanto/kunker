@@ -11,8 +11,9 @@
 	<!-- BEGIN invoice-company -->
 	<div class="invoice-company">
 		<span class="float-end hidden-print">
+			<a href="<?=base_url()?>kunker" class="btn btn-sm btn-white mb-10px"><i class="fa fa-arrow-circle-left t-plus-1 text-danger fa-fw fa-lg"></i>Kembali</a>
 			<a target="_blank" href="<?=base_url()?>assets/dok_permohonan/<?=@$file_surat?>" class="btn btn-sm btn-white mb-10px"><i class="fa fa-file-pdf t-plus-1 text-danger fa-fw fa-lg"></i> Lihat Surat <i>(<?=@$file_surat?>)</i></a>
-			<a href="<?=base_url()?>kunker/disposisi/<?=$id_kunker?>" target="_blank" class="btn btn-sm btn-white mb-10px"><i class="fa fa-print t-plus-1 fa-fw fa-lg"></i> Cetak Disposisi</a>
+			<a href="<?=base_url()?>kunker/disposisi/<?=$id_kunker?>" target="_blank" class="btn btn-sm btn-white mb-10px"><i class="fa fa-print t-plus-1 fa-fw text-danger fa-lg"></i> Cetak Disposisi</a>
 		</span>
 		&nbsp;Status: <?= $status_disposisi == 1 ? '<span class="text-success"><i class="fa fa-check-square"></i> Diverifikasi</span>' : ($status_disposisi == 2 ? '<span class="text-danger"><i class="fa fa-times"></i> Ditolak</span>' : ($status_disposisi == 0 ? '<span class="text-warning"><i class="fa fa-clock"></i> Menunggu Verifikasi</span>' : '')) ?>
 	</div>
@@ -107,7 +108,7 @@
 		</div>
 		<div class="col-md-4">
 			<strong><i class="fa fa-fw fa-lg fa-edit"></i> Catatan disposisi</strong>
-			<textarea style="width: 400px;" name="diposisi_note" id="diposisi_note" class="form-control mb-10px" placeholder="Catatan Disposisi..." rows="2" <?= @in_array($status_disposisi, [1, 2]) ? "readonly" : '' ?>><?= $diposisi_note ?></textarea>
+			<textarea style="width: 400px;" name="diposisi_note" id="diposisi_note" class="form-control mb-10px" required placeholder="Catatan Disposisi..." rows="2" <?= @in_array($status_disposisi, [1, 2]) ? "readonly" : '' ?>><?= $diposisi_note ?></textarea>
 		</div>
 		</div>
 	</div>
@@ -138,6 +139,9 @@
 	});
 
 	function confirm(status) {
+		// if($("#diposisi_note").html() == null) {
+		// 	swal('','Catatan Disposisi tidak boleh kosong','warning');
+		// }
 		console.log('x');
 		var msgstatus = status == '1' ? 'terima' : (status == '2' ? 'tolak' : '');
 		swal({
