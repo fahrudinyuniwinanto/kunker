@@ -69,6 +69,7 @@
                                 <!-- <th class="text-center">Tujuan</th> -->
                                 <th class="text-center">Tgl. Dibuat</th>
                                 <th class="text-center">Status</th>
+                                <th class="text-center">Keterangan Disposisi</th>
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
@@ -78,8 +79,8 @@
                                 <tr>
                                     <td width="80px"><?php echo ++$start ?></td>
                                     <td><?php echo $kunker->nama_kunker ?></td>
-                                    <td><?php echo $kunker->nama_fraksi ?></td>
-                                    <td><?php echo $kunker->fullname ?></td>
+                                    <td><strong><?php echo $kunker->nama_fraksi ?></strong></td>
+                                    <td><strong><?php echo $kunker->fullname ?></strong></td>
                                     <td><?php echo $kunker->tingkat_keamanan ?></td>
                                     <!-- <td><?php echo $kunker->nomor_surat ?></td>
                                     <td><?php echo @$kunker->tanggal_surat ?></td>
@@ -97,11 +98,12 @@
                                                                     echo '<label class="badge bg-danger">DITOLAK</label>';
                                                                 }
                                                                 ?></td>
+                                                                <td><?=@$diposisi_note?></td>
                                     <td style="text-align:center" width="200px">
                                         <?php
-                                            echo anchor(site_url('kunker/read/' . $kunker->id_kunker), '<i class="fa fa-eye"></i>', 'class="btn btn-xs btn-success"');
+                                            echo anchor(site_url('kunker/read/' . $kunker->id_kunker), '<i class="fa fa-eye"></i>', 'class="btn btn-xs btn-success" title="Detail Data"');
                                             echo ' | ';
-                                            echo anchor(site_url('kunker/verify/' . $kunker->id_kunker), '<i class="fa fa-check-circle"></i>', 'class="btn btn-xs btn-info"');
+                                            echo anchor(site_url('kunker/verify/' . $kunker->id_kunker), '<i class="fa fa-check-circle"></i>', 'class="btn btn-xs btn-info" title="Verifikasi Data"');
 
                                             // echo anchor(site_url('kunker/update/' . $kunker->id_kunker), '<i class="fa fa-edit"></i>', 'class="btn btn-xs btn-warning"');
                                             // echo ' | ';

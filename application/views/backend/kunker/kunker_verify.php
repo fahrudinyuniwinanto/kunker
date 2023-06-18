@@ -11,10 +11,10 @@
 	<!-- BEGIN invoice-company -->
 	<div class="invoice-company">
 		<span class="float-end hidden-print">
-			<a href="javascript:;" class="btn btn-sm btn-white mb-10px"><i class="fa fa-file-pdf t-plus-1 text-danger fa-fw fa-lg"></i> Lihat Surat</a>
+			<a target="_blank" href="<?=base_url()?>assets/dok_permohonan/<?=@$file_surat?>" class="btn btn-sm btn-white mb-10px"><i class="fa fa-file-pdf t-plus-1 text-danger fa-fw fa-lg"></i> Lihat Surat</a>
 			<a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-white mb-10px"><i class="fa fa-print t-plus-1 fa-fw fa-lg"></i> Cetak Disposisi</a>
 		</span>
-		&nbsp;Status: <?=$status_disposisi==1?'<span class="text-success"><i class="fa fa-check-square"></i> Diverifikasi</span>':($status_disposisi==2?'<span class="text-danger"><i class="fa fa-times"></i> Ditolak</span>':($status_disposisi==0?'<span class="text-warning"><i class="fa fa-clock"></i> Menunggu Verifikasi</span>':''))?>
+		&nbsp;Status: <?= $status_disposisi == 1 ? '<span class="text-success"><i class="fa fa-check-square"></i> Diverifikasi</span>' : ($status_disposisi == 2 ? '<span class="text-danger"><i class="fa fa-times"></i> Ditolak</span>' : ($status_disposisi == 0 ? '<span class="text-warning"><i class="fa fa-clock"></i> Menunggu Verifikasi</span>' : '')) ?>
 	</div>
 	<!-- END invoice-company -->
 	<!-- BEGIN invoice-header -->
@@ -23,8 +23,8 @@
 			<small>Pemohon</small>
 			<address class="mt-5px mb-5px">
 				<strong class="text-dark"><?= @$nama_fraksi ?></strong><br />
+				<strong><?= @$this->db->get_where('users', ['id_user' => $id_anggota_fraksi])->row()->fullname ?></strong><br>
 				Jenis: <?= $nama_kunker ?><br />
-				Fax: (123) 456-7890
 			</address>
 		</div>
 		<div class="invoice-to">
@@ -100,29 +100,33 @@
 	<!-- END invoice-content -->
 	<!-- BEGIN invoice-note -->
 	<div class="invoice-note">
-		* Maksimal kunjungan <?= $maksimal_kunjungan ?> kali dalam setahun<br />
-		* Maksimal <?= @$maksimal_hari ?> hari dalam sekali kunjungan<br />
+		<div class="row">
+		<div class="col-md-8">
+			* Maksimal kunjungan <strong><?= $maksimal_kunjungan ?> kali</strong> dalam setahun<br />
+			* Maksimal <strong><?= @$maksimal_hari ?> hari</strong> dalam sekali kunjungan<
+		</div>
+		<div class="col-md-4">
+			<strong><i class="fa fa-fw fa-lg fa-edit"></i> Catatan disposisi</strong>
+			<textarea style="width: 400px;" name="diposisi_note" id="diposisi_note" class="form-control mb-10px" placeholder="Catatan Disposisi..." rows="2" <?= @in_array($status_disposisi, [1, 2]) ? "readonly" : '' ?>><?= $diposisi_note ?></textarea>
+		</div>
+		</div>
 	</div>
 	<!-- END invoice-note -->
 	<!-- BEGIN invoice-footer -->
 	<div class="invoice-footer">
 		<p class="text-center mb-5px fw-bold">
 			VERIFIKATOR
-			<span class="me-10px"><i class="fa fa-fw fa-lg fa-user"></i> mr.xxx</span>
-			<span class="me-10px"><i class="fa fa-fw fa-lg fa-phone-volume"></i> T:016-18192302</span>
-			<span class="me-10px"><i class="fa fa-fw fa-lg fa-envelope"></i> rtiemps@gmail.com</span>
+			<span class="me-10px"><i class="fa fa-fw fa-lg fa-user"></i><?= @$this->db->get_where('users', ['id_user' => $disposisi_by])->row()->fullname ?></span>
+			<span class="me-10px"><i class="fa fa-fw fa-lg fa-clock"></i><?= @date_format(date_create($disposisi_at), "d-m-Y H:i") ?></span>
 		</p>
-
-		<p class="text-center">
-
+		<p class="text-center fw-bold">
 			<a href="<?= base_url() ?>kunker" class="btn btn-sm btn-info mb-10px"><i class="fa fa-arrow-left t-plus-1 fa-fw fa-lg"></i> Kembali</a>
-			<?php if(!in_array($status_disposisi, [1,2])): ?>
-			<a href="#" onclick="confirm('1')" class="btn btn-sm btn-success mb-10px"><i class="fa fa-check-circle t-plus-1 fa-fw fa-lg"></i> Verifikasi</a>
-			<a href="#" onclick="confirm('2')" class="btn btn-sm btn-danger mb-10px"><i class="fa fa-times-circle t-plus-1 fa-fw fa-lg"></i> Tolak</a>
-			<?php elseif(in_array($status_disposisi, [1,2])): ?>
+			<?php if (!in_array($status_disposisi, [1, 2])) : ?>
+				<a href="#" onclick="confirm('1')" class="btn btn-sm btn-success mb-10px"><i class="fa fa-check-circle t-plus-1 fa-fw fa-lg"></i> Verifikasi</a>
+				<a href="#" onclick="confirm('2')" class="btn btn-sm btn-danger mb-10px"><i class="fa fa-times-circle t-plus-1 fa-fw fa-lg"></i> Tolak</a>
+			<?php elseif (in_array($status_disposisi, [1, 2])) : ?>
 				<a href="#" class="btn btn-sm btn-disabled mb-10px">Tidak dapat merubah status</a>
-
-				<?php endif ?>
+			<?php endif ?>
 		</p>
 
 	</div>
@@ -137,27 +141,38 @@
 		console.log('x');
 		var msgstatus = status == '1' ? 'terima' : (status == '2' ? 'tolak' : '');
 		swal({
-			title: 'Yakin '+ msgstatus+' Permohonan SPPD?',
+			title: 'Yakin ' + msgstatus + ' Permohonan SPPD?',
 			text: 'Setelah verifikasi, Anda tidak dapat merubah status lagi!',
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: status == '1' ? '#3085d6' : '#ff5b57',
 			cancelButtonColor: '#d33',
-			confirmButtonText: 'Ya, ' + msgstatus,
+			confirmButtonText: 'Ya, ' + msgstatus+"!",
 			cancelButtonText: 'Batal',
 			closeOnConfirm: false
 		}, function(isConfirmed) {
 			if (isConfirmed) {
 				$.ajax({
-					url: '<?= base_url() ?>kunker/verify_action',	
+					url: '<?= base_url() ?>kunker/verify_action',
 					type: 'POST',
 					data: {
 						status: status,
 						id_kunker: <?= @$id_kunker ?>,
+						diposisi_note: $("#diposisi_note").val(),
 					},
 					dataType: 'json',
 					success: function(data) {
-						swal(data.title, data.msg, data.icon);
+						swal({
+							title: data.title,
+							text: data.msg + "<br><img src='https://cdn-icons-png.flaticon.com/512/5290/5290058.png' style='width:40%'>",
+							html: true,
+							customClass: '',
+						}, function(result) {
+							console.log(result);
+							if (result) {
+								location.reload();
+							}
+						});
 					}
 				})
 			} else {

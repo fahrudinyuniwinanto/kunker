@@ -333,7 +333,13 @@ class Kunker extends CI_Controller
 	public function verify_action()
 	{
 		$status = $this->input->post('status', TRUE);
-		$save = $this->db->update('kunker', array('status_disposisi' => $status), array('id_kunker' => $this->input->post('id_kunker')));
+		$note = $this->input->post('diposisi_note', TRUE);
+		$save = $this->db->update('kunker',[
+			'status_disposisi' => $status,
+			'diposisi_note' => $note,
+			'disposisi_at' => date("Y-m-d H:i:s"),
+			'disposisi_by' => getSession('fullname')
+		], array('id_kunker' => $this->input->post('id_kunker')));
 		if ($save) {
 			if ($status == 1) {
 				$res['msg'] = "Pengajuan SPPD berhasil diverifikasi";
@@ -344,10 +350,10 @@ class Kunker extends CI_Controller
 				$res['title'] = "Ditolak";
 				$res['icon'] = 'success';
 			}
-		}else{
+		} else {
 			$res['msg'] = "Pengajuan SPPD gagal diverifikasi";
 			$res['title'] = "Error";
-				$res['icon'] = 'error';
+			$res['icon'] = 'error';
 		}
 		echo json_encode($res);
 	}

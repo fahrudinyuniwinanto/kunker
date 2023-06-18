@@ -75,9 +75,9 @@
                                 ?>
                             <tr>
                                 <td width="80px"><?php echo ++$start ?></td>
-                                <td><?php echo $users->fullname ?></td>
-                                <td><?php echo $this->db->get_where('users', ['id_user' => $users->id_parent])->row()->fullname ?></td>
-                                <td><?php echo $this->db->get_where('fraksi', ['id_fraksi' => $users->id_fraksi])->row()->nama_fraksi ?></td>
+                                <td><?php echo @$users->fullname ?></td>
+                                <td><strong><?php echo @$this->db->get_where('users', ['id_user' => $users->id_parent])->row()->fullname ?></strong></td>
+                                <td><?php echo @$this->db->get_where('fraksi', ['id_fraksi' => $users->id_fraksi])->row()->nama_fraksi ?></td>
                                 <td style="text-align:center" width="200px">
                                     <?php
                                         echo anchor(site_url('ta/read/' . $users->id_user), '<i class="fa fa-eye"></i>', 'class="btn btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="Lihat"');
