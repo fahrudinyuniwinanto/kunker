@@ -358,6 +358,14 @@ class Kunker extends CI_Controller
 		echo json_encode($res);
 	}
 
+	public function disposisi($id){
+		$data=[
+			'v' => $this->Kunker_model->get_by_id($id),
+			'content'=>'backend/kunker/kunker_disposisi'
+		];
+		$this->load->view($data['content'],$data);
+	}
+
 	public function getArrTa()
 	{
 		$search = $this->input->get('q');
