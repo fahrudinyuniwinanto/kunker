@@ -62,7 +62,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php foreach ($ta = $this->db->get_where('users', [])->result() as $k => $v) : ?>
+					<?php foreach ($ta = $this->db->get_where('users', "id_user IN (SELECT id_ta from kunker_ta where id_kunker='$id_kunker' )")->result() as $k => $v) : ?>
 						<tr>
 							<td><?= $k + 1 ?></td>
 							<td>
