@@ -75,7 +75,7 @@
                                 ?>
                             <tr>
                                 <td width="80px"><?php echo ++$start ?></td>
-                                <td><?php echo @$users->no_anggota ?></td>
+                                <td><strong><?php echo @$users->no_anggota ?></strong></td>
                                 <td><strong><?php echo @$users->fullname ?></strong></td>
                                 <td><?php echo @$this->db->get_where('fraksi', ['id_fraksi' => $users->id_fraksi])->row()->nama_fraksi ?></td>
                                 <td style="text-align:center" width="200px">
