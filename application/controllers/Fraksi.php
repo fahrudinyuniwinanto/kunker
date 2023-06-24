@@ -100,7 +100,7 @@ class Fraksi extends CI_Controller
     public function create()
     {
         $data = array(
-            'button' => 'Create',
+            'button' => 'Tambah',
             'action' => site_url('fraksi/create_action'),
             'id_fraksi' => set_value('id_fraksi'),
             'nama_fraksi' => set_value('nama_fraksi'),
@@ -132,7 +132,7 @@ class Fraksi extends CI_Controller
 
         if ($row) {
             $data = array(
-                'button' => 'Update',
+                'button' => 'Edit',
                 'action' => site_url('fraksi/update_action'),
                 'id_fraksi' => set_value('id_fraksi', $row->id_fraksi),
                 'nama_fraksi' => set_value('nama_fraksi', $row->nama_fraksi),

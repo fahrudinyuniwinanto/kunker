@@ -130,6 +130,8 @@ class Ta extends CI_Controller
             'foto' => set_value('foto'),
             'telp' => set_value('telp'),
             'note' => set_value('note'),
+            'status' => set_value('status'),
+            'nik' => set_value('nik'),
             'created_by' => set_value('created_by'),
             'updated_by' => set_value('updated_by'),
             'created_at' => set_value('created_at'),
@@ -152,6 +154,8 @@ class Ta extends CI_Controller
                 'id_parent' => $this->input->post('id_anggota_fraksi', TRUE),
                 'id_fraksi' => $this->db->get_where('users', ['id_user' => $this->input->post('id_anggota_fraksi', TRUE)])->row()->id_fraksi,
                 'id_group' => 0,
+                'status' => $this->input->post('status', TRUE),
+                'nik' => $this->input->post('nik', TRUE),
                 'created_by' => $this->session->userdata('id_user'),
                 'created_at' => date("Y-m-d H:i:s"),
             );
@@ -182,6 +186,8 @@ class Ta extends CI_Controller
                 'foto' => set_value('foto', $row->foto),
                 'telp' => set_value('telp', $row->telp),
                 'note' => set_value('note', $row->note),
+                'nik' => set_value('nik', $row->nik),
+                'status' => set_value('status', $row->status),
                 'created_by' => set_value('created_by', $row->created_by),
                 'updated_by' => set_value('updated_by', $row->updated_by),
                 'created_at' => set_value('created_at', $row->created_at),
@@ -207,6 +213,8 @@ class Ta extends CI_Controller
                 'id_parent' => $this->input->post('id_anggota_fraksi', TRUE),
                 'id_fraksi' => $this->db->get_where('users', ['id_user' => $this->input->post('id_anggota_fraksi', TRUE)])->row()->id_fraksi,
                 'id_group' => 0,
+                'status' => $this->input->post('status', TRUE),
+                'nik' => $this->input->post('nik', TRUE),
                 'updated_by' => $this->session->userdata('id_user'),
                 'updated_at' => date("Y-m-d H:i:s"),
             );
@@ -236,9 +244,11 @@ class Ta extends CI_Controller
     public function _rules()
     {
         $this->form_validation->set_rules('fullname', 'fullname', 'trim|required');
+        $this->form_validation->set_rules('nik', 'nik', 'trim|required');
         $this->form_validation->set_rules('id_anggota_fraksi', 'id anggota fraksi', 'trim|required');
         $this->form_validation->set_rules('id_parent', 'id parent', 'trim');
         $this->form_validation->set_rules('id_fraksi', 'id fraksi', 'trim');
+        $this->form_validation->set_rules('status', 'status', 'trim|required');
 
         $this->form_validation->set_rules('id_user', 'id_user', 'trim');
         $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');

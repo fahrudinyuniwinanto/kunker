@@ -31,7 +31,10 @@
             <div class="panel-body">
                 <div class="row" style="margin-bottom: 10px">
                     <div class="col-md-8">
-                        <?php echo anchor(site_url('kunker/create'), 'Tambah Permohonan', 'class="btn btn-flat btn-success"'); ?>
+                        <?php
+                        if (is_allow('TAMBAH_KUNKER')) {
+                            echo anchor(site_url('kunker/create'), 'Tambah Permohonan', 'class="btn btn-flat btn-success"');
+                        } ?>
                     </div>
 
 
@@ -62,11 +65,6 @@
                                 <th class="text-center">Fraksi</th>
                                 <th class="text-center">Nama Anggota</th>
                                 <th class="text-center">Tingkat Keamanan</th>
-                                <!-- <th class="text-center">Nomor Surat</th> -->
-                                <!-- <th class="text-center">Tanggal Surat</th>
-                                <th class="text-center">Perihal Surat</th>
-                                <th class="text-center">Lampiran Surat</th> -->
-                                <!-- <th class="text-center">Tujuan</th> -->
                                 <th class="text-center">Tgl. Dibuat</th>
                                 <th class="text-center">Status</th>
                                 <th class="text-center">Keterangan Disposisi</th>
@@ -76,16 +74,14 @@
                         <tbody><?php
                                 foreach ($kunker_data as $kunker) {
                                     ?>
-                                <tr class="<?=$kunker->status_disposisi=='1'?'bg-success':($kunker->status_disposisi=='2'?'bg-danger':'')?>">
-                                    <td width="80px"><?php echo ++$start ?></td>
-                                    <td><?php echo $kunker->nama_kunker ?></td>
+                                <tr class="<?= $kunker->status_disposisi == '1' ? 'bg-success' : ($kunker->status_disposisi == '2' ? 'bg-danger' : '') ?>">
+                                    <td width="50px"><?php echo ++$start ?></td>
+                                    <td>
+                                        <?php echo $kunker->nama_kunker ?>
+                                    </td>
                                     <td><strong><?php echo $kunker->nama_fraksi ?></strong></td>
                                     <td><strong><?php echo $kunker->fullname ?></strong></td>
                                     <td><?php echo $kunker->tingkat_keamanan ?></td>
-                                    <!-- <td><?php echo $kunker->nomor_surat ?></td>
-                                    <td><?php echo @$kunker->tanggal_surat ?></td>
-                                    <td><?php echo @$kunker->perihal_surat ?></td> -->
-                                    <!-- <td><?php echo $kunker->nama_daerah_tujuan ?></td> -->
                                     <td><?php echo @$kunker->created_at ?></td>
                                     <td class="text-center"><?php
                                                                 if ($kunker->status_disposisi == 0) {
@@ -98,18 +94,24 @@
                                                                     echo '<label class="badge bg-danger">DITOLAK</label>';
                                                                 }
                                                                 ?></td>
-                                                                <td><?=@$diposisi_note?></td>
-                                    <td style="text-align:center" width="200px">
+                                    <td><?= @$diposisi_note ?></td>
+                                    <td style="text-align:center" width="150px">
                                         <?php
-                                            echo anchor(site_url('kunker/read/' . $kunker->id_kunker), '<i class="fa fa-eye"></i>', 'class="btn btn-xs btn-success" title="Detail Data"');
-                                            echo ' | ';
-                                            echo anchor(site_url('kunker/verify/' . $kunker->id_kunker), '<i class="fa fa-check-circle"></i>', 'class="btn btn-xs btn-info" title="Verifikasi Data"');
-
+                                            if (is_allow('DETAIL_KUNKER')) {
+                                                echo anchor(site_url('kunker/read/' . $kunker->id_kunker), '<i class="fa fa-eye"></i>', 'class="btn btn-xs btn-success" title="Detail Data"');
+                                            }
+                                            if (is_allow('VERIFIKASI_KUNKER')) {
+                                                echo ' &nbsp ';
+                                                echo anchor(site_url('kunker/verify/' . $kunker->id_kunker), '<i class="fa fa-check-circle"></i>', 'class="btn btn-xs btn-info" title="Verifikasi Data"');
+                                            }
                                             // echo anchor(site_url('kunker/update/' . $kunker->id_kunker), '<i class="fa fa-edit"></i>', 'class="btn btn-xs btn-warning"');
                                             // echo ' | ';
                                             if (is_allow('HAPUS_KUNKER')) {
-                                                echo ' | ';
-                                                echo anchor(site_url('kunker/delete/' . $kunker->id_kunker), '<i class="fa fa-trash"></i>', 'class="btn btn-xs btn-danger" onclick="javascript: return confirm(\'Yakin hapus data?\')"');
+                                                //bisa dihapus selama status masih pending
+                                                if ($kunker->status_disposisi == 0) {
+                                                    echo ' &nbsp ';
+                                                    echo anchor(site_url('kunker/delete/' . $kunker->id_kunker), '<i class="fa fa-trash"></i>', 'class="btn btn-xs btn-danger" onclick="javascript: return confirm(\'Yakin hapus data?\')"');
+                                                }
                                             }
                                             ?>
                                     </td>

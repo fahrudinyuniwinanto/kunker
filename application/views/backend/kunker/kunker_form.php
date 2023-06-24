@@ -38,19 +38,30 @@
                                 <?= form_dropdown('id_fraksi', get_combo('fraksi', 'id_fraksi', 'nama_fraksi', ['' => "--Pilih--"]), $id_fraksi, ['class' => 'form-control', 'required' => TRUE]) ?>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="int">Anggota Fraksi <?php echo form_error('id_anggota_fraksi') ?></label>
+                                <label class="form-label" for="int">Nomor Anggota <?php echo form_error('no_anggota') ?></label>
+                                <input type="text" class="form-control" name="no_anggota" id="no_anggota" placeholder="" value="<?php echo $no_anggota; ?>" readonly />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="int">Nama Anggota <?php echo form_error('id_anggota_fraksi') ?></label>
                                 <?= form_dropdown('id_anggota_fraksi', get_combo('users', 'id_user', 'fullname', ['' => "--Pilih--"]), $id_anggota_fraksi, ['class' => 'form-control', 'required' => TRUE]) ?>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="int">Jenis Kunjungan <?php echo form_error('id_jenis_kunjungan') ?></label>
                                 <?= form_dropdown('id_jenis_kunjungan', get_combo('jenis_kunjungan', 'id_jenis_kunjungan', 'nama_kunker', ['' => "--Pilih--"]), $id_jenis_kunjungan, ['class' => 'form-control', 'id' => 'id_jenis_kunjungan', 'required' => TRUE]) ?>
                             </div>
-
+                            <!-- <div class="mb-3">
+                                <label class="form-label" for="int">Note </label>
+                                <div class="alert alert-warning">
+                                    dsaasdsad
+                                    dasdsadsad
+                                    dsadsa
+                                </div>
+                            </div> -->
                             <div class="row">
                                 <div class="col-lg-9">
                                     <div class="mb-3">
-                                        <label class="form-label" for="varchar">Tujuan <?php echo form_error('nama_daerah_tujuan') ?></label>
-                                        <input type="text" class="form-control" name="nama_daerah_tujuan" id="nama_daerah_tujuan" placeholder="Isikan Daerah Tujuan" value="<?php echo $nama_daerah_tujuan; ?>" required />
+                                        <label class="form-label" for="varchar">Daerah Pemilihan <?php echo form_error('nama_daerah_tujuan') ?></label>
+                                        <input type="text" class="form-control" name="nama_daerah_tujuan" id="nama_daerah_tujuan" placeholder="Isikan Daerah Pemilihan" value="<?php echo $nama_daerah_tujuan; ?>" required />
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
@@ -79,7 +90,7 @@
                             <div class="row">
                                 <div class="col-lg-8">
                                     <div class="mb-3">
-                                        <label class="form-label" for="varchar">Nomor<?php echo form_error('nomor_surat') ?></label>
+                                        <label class="form-label" for="varchar">Nomor Surat<?php echo form_error('nomor_surat') ?></label>
                                         <input type="text" class="form-control" name="nomor_surat" id="nomor_surat" placeholder="Nomor Surat" value="<?php echo $nomor_surat; ?>" required />
                                     </div>
                                 </div>
@@ -93,7 +104,7 @@
                             <div class="row">
                                 <div class="col-lg-8">
                                     <div class="mb-3">
-                                        <label class="form-label" for="date">Tanggal<?php echo form_error('tanggal_surat') ?></label>
+                                        <label class="form-label" for="date">Tanggal Surat<?php echo form_error('tanggal_surat') ?></label>
                                         <input type="date" class="form-control" name="tanggal_surat" id="tanggal_surat" placeholder="Tanggal Surat" value="<?php echo $tanggal_surat; ?>" required />
                                     </div>
                                 </div>
@@ -134,6 +145,7 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <button class="btn btn-warning" id="add-field" onclick="event.preventDefault()">Tambah TAA</button>
                         </div>
 
                         <!-- <div class="col-lg-4">
@@ -169,7 +181,6 @@
                     <input type="hidden" name="id_kunker" value="<?php echo $id_kunker; ?>" />
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
                     <button type="submit" class="btn btn-flat btn-success"><?php echo $button ?></button>
-                    <button class="btn btn-warning" id="add-field" onclick="event.preventDefault()">Tambah Anggota</button>
                     <a href="<?php echo site_url('kunker') ?>" class="btn btn-flat btn-default">Cancel</a>
                 </div>
 
@@ -184,7 +195,7 @@
         // Menambahkan field baru
         $('#add-field').click(function() {
 
-            var field = "<tr id='row[]'><td><select class='form-control' name='id_ta[]' id='id_ta" + j + "' required><option value=''>--Pilih--</option></select></td><td class='text-center'><button class='btn btn-sm btn-danger remove-field'><i class='fa fa-trash '></i> </button></td></tr>";
+            var field = "<tr id='row[]'><td><select class='form-control' name='id_ta[]' id='id_ta" + j + "' required><option value=''>--Pilih--</option></select></td><td class='text-center' width='50px'><button class='btn btn-sm btn-danger remove-field'><i class='fa fa-trash '></i> </button></td></tr>";
             $('#dynamic-fields').append(field);
             getComboTa(j);
             j++;
@@ -217,7 +228,7 @@
 
             var tgl_kembali = new Date($('#tgl_kembali').val());
 
-            var selisihHari = Math.floor((tgl_kembali - tgl_berangkat) / (1000 * 60 * 60 * 24));
+            var selisihHari = Math.floor((tgl_kembali - tgl_berangkat) / (1000 * 60 * 60 * 24)) + 1;
 
             $('#jumlah_hari').val(selisihHari);
         });

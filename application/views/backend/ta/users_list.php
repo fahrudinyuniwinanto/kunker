@@ -33,7 +33,7 @@
                 <div class="row" style="margin-bottom: 10px">
                     <div class="col-md-8">
                         <?php
-                        echo anchor(site_url('ta/create'), 'Tambah TA', 'class="btn btn-flat btn-success"');
+                        echo anchor(site_url('ta/create'), 'Tambah Tenaga Ahli', 'class="btn btn-flat btn-success"');
                         ?>
                     </div>
 
@@ -64,9 +64,11 @@
                     <thead class="thead-light">
                         <tr>
                             <th class="text-center">No</th>
+                            <th class="text-center">NIK</th>
                             <th class="text-center">Nama Tenaga Ahli</th>
-                            <th class="text-center">Nama Anggota Fraksi</th>
+                            <th class="text-center">Nama Anggota</th>
                             <th class="text-center">Nama Fraksi</th>
+                            <th class="text-center">Status</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -74,11 +76,18 @@
                             foreach ($users_data as $users) {
                                 ?>
                             <tr>
-                                <td width="80px"><?php echo ++$start ?></td>
+                                <td width="50px"><?php echo ++$start ?></td>
+                                <td><strong><?php echo @$users->nik ?></strong></td>
                                 <td><strong><?php echo @$users->fullname ?></strong></td>
                                 <td><?php echo @$this->db->get_where('users', ['id_user' => $users->id_parent])->row()->fullname ?></td>
                                 <td><?php echo @$this->db->get_where('fraksi', ['id_fraksi' => $users->id_fraksi])->row()->nama_fraksi ?></td>
-                                <td style="text-align:center" width="200px">
+                                <td style="text-align:center"><?php if ($users->status == 1) {
+                                                                        echo "<label class='badge bg-green'>AKTIF</label>";
+                                                                    } else {
+                                                                        echo "<label class='badge bg-danger'>NON AKTIF</label>";
+                                                                    } ?>
+                                </td>
+                                <td style="text-align:center" width="150px">
                                     <?php
                                         echo anchor(site_url('ta/read/' . $users->id_user), '<i class="fa fa-eye"></i>', 'class="btn btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="Lihat"');
                                         echo ' | ';

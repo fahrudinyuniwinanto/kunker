@@ -102,7 +102,7 @@ class Jenis_kunjungan extends CI_Controller
     public function create()
     {
         $data = array(
-            'button' => 'Create',
+            'button' => 'Tambah',
             'action' => site_url('jenis_kunjungan/create_action'),
             'id_jenis_kunjungan' => set_value('id_jenis_kunjungan'),
             'nama_kunker' => set_value('nama_kunker'),
@@ -138,7 +138,7 @@ class Jenis_kunjungan extends CI_Controller
 
         if ($row) {
             $data = array(
-                'button' => 'Update',
+                'button' => 'Edit',
                 'action' => site_url('jenis_kunjungan/update_action'),
                 'id_jenis_kunjungan' => set_value('id_jenis_kunjungan', $row->id_jenis_kunjungan),
                 'nama_kunker' => set_value('nama_kunker', $row->nama_kunker),

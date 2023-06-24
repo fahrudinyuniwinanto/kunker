@@ -20,7 +20,7 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h2 class="panel-title"><b>List Anggota Fraksi</b></h2>
+                <h2 class="panel-title"><b>List Anggota</b></h2>
 
                 <div class="panel-heading-btn">
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
@@ -33,7 +33,7 @@
                 <div class="row" style="margin-bottom: 10px">
                     <div class="col-md-8">
                         <?php
-                        echo anchor(site_url('anggota_fraksi/create'), 'Tambah Anggota Fraksi', 'class="btn btn-flat btn-success"');
+                        echo anchor(site_url('anggota_fraksi/create'), 'Tambah Anggota', 'class="btn btn-flat btn-success"');
                         ?>
                     </div>
 
@@ -65,8 +65,9 @@
                         <tr>
                             <th class="text-center">No</th>
                             <th class="text-center">Nomor Anggota</th>
-                            <th class="text-center">Nama Anggota Fraksi</th>
+                            <th class="text-center">Nama Anggota</th>
                             <th class="text-center">Nama Fraksi</th>
+                            <th class="text-center">Status</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -74,11 +75,17 @@
                             foreach ($users_data as $users) {
                                 ?>
                             <tr>
-                                <td width="80px"><?php echo ++$start ?></td>
+                                <td width="50px"><?php echo ++$start ?></td>
                                 <td><strong><?php echo @$users->no_anggota ?></strong></td>
                                 <td><strong><?php echo @$users->fullname ?></strong></td>
                                 <td><?php echo @$this->db->get_where('fraksi', ['id_fraksi' => $users->id_fraksi])->row()->nama_fraksi ?></td>
-                                <td style="text-align:center" width="200px">
+                                <td style="text-align:center"><?php if ($users->status == 1) {
+                                                                        echo "<label class='badge bg-green'>AKTIF</label>";
+                                                                    } else {
+                                                                        echo "<label class='badge bg-danger'>NON AKTIF</label>";
+                                                                    } ?>
+                                </td>
+                                <td style="text-align:center" width="150px">
                                     <?php
                                         echo anchor(site_url('anggota_fraksi/read/' . $users->id_user), '<i class="fa fa-eye"></i>', 'class="btn btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="Lihat"');
                                         echo ' | ';

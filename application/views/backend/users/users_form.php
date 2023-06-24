@@ -9,7 +9,7 @@
 
 <h1 class="page-header">Users <small></small></h1>
 <div class="row" style="height: 100%">
-    <div class="col-lg-12">
+    <div class="col-lg-4">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h2 class="panel-title" style="margin-top:0px"><?php echo $button ?> Users </h2>

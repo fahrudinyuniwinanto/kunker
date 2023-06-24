@@ -123,7 +123,7 @@ class Kunker extends CI_Controller
 	public function create()
 	{
 		$data = array(
-			'button' => 'Ajukan',
+			'button' => 'Ajukan Permohonan',
 			'action' => site_url('kunker/create_action'),
 			'id_kunker' => set_value('id_kunker'),
 			'id_jenis_kunjungan' => set_value('id_jenis_kunjungan'),
@@ -134,6 +134,7 @@ class Kunker extends CI_Controller
 			'lampiran_surat' => set_value('lampiran_surat'),
 			'tingkat_keamanan' => set_value('tingkat_keamanan'),
 			'id_fraksi' => set_value('id_fraksi', $this->session->userdata('id_fraksi')),
+			'no_anggota' => set_value('no_anggota', $this->session->userdata('no_anggota')),
 			'id_anggota_fraksi' => set_value('id_anggota_fraksi', $this->session->userdata('id_user')),
 			'id_kunker_ta' => set_value('id_kunker_ta'),
 			'nama_daerah_tujuan' => set_value('nama_daerah_tujuan'),
@@ -334,7 +335,7 @@ class Kunker extends CI_Controller
 	{
 		$status = $this->input->post('status', TRUE);
 		$note = $this->input->post('diposisi_note', TRUE);
-		$save = $this->db->update('kunker',[
+		$save = $this->db->update('kunker', [
 			'status_disposisi' => $status,
 			'diposisi_note' => $note,
 			'disposisi_at' => date("Y-m-d H:i:s"),
@@ -358,12 +359,13 @@ class Kunker extends CI_Controller
 		echo json_encode($res);
 	}
 
-	public function disposisi($id){
-		$data=[
+	public function disposisi($id)
+	{
+		$data = [
 			'v' => $this->Kunker_model->get_by_id($id),
-			'content'=>'backend/kunker/kunker_disposisi'
+			'content' => 'backend/kunker/kunker_disposisi'
 		];
-		$this->load->view($data['content'],$data);
+		$this->load->view($data['content'], $data);
 	}
 
 	public function getArrTa()
@@ -373,6 +375,7 @@ class Kunker extends CI_Controller
 		$this->db->select('id_user, fullname');
 		$this->db->like('fullname', $search);
 		$this->db->where('id_parent', $id_ta);
+		$this->db->where('status', '1');
 		$q = $this->db->get('users')->result();
 		echo json_encode($q);
 	}

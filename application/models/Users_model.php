@@ -148,6 +148,7 @@ class Users_model extends CI_Model
         $this->db->or_like('aa.note_1', $q);
         $this->db->group_end();
         $this->db->where('id_parent', '0');
+        $this->db->where('id_group', '3');
         $this->db->from($this->table . " aa");
         return $this->db->count_all_results();
     }
@@ -174,6 +175,7 @@ class Users_model extends CI_Model
         $this->db->or_like('aa.note_1', $q);
         $this->db->group_end();
         $this->db->where('id_parent', '0');
+        $this->db->where('id_group', '3');
         $this->db->limit($limit, $start);
         return $this->db->get($this->table . " aa")->result();
     }

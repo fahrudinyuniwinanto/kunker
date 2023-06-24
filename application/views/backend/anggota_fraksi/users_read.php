@@ -7,12 +7,12 @@
                                         } ?></li>
 </ol>
 
-<h1 class="page-header">Users <small></small></h1>
+<h1 class="page-header">Anggota <small></small></h1>
 <div class="row">
     <div class="col-lg-4">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h2 style="margin-top:0px" class="panel-title">Detail User</h2>
+                <h2 style="margin-top:0px" class="panel-title">Detail Anggota</h2>
                 <div class="panel-heading-btn">
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a>
@@ -26,11 +26,11 @@
                 <div class="table-responsive">
                     <table class="table">
                         <tr>
-                            <td width="50%">Nomor Anggota Fraksi</td>
+                            <td width="50%">Nomor Anggota</td>
                             <td><?php echo $no_anggota; ?></td>
                         </tr>
                         <tr>
-                            <td>Nama Anggota Fraksi</td>
+                            <td>Nama Anggota</td>
                             <td><?php echo $fullname; ?></td>
                         </tr>
                         <tr>

@@ -131,6 +131,7 @@ class Anggota_fraksi extends CI_Controller
             'foto' => set_value('foto'),
             'telp' => set_value('telp'),
             'note' => set_value('note'),
+            'status' => set_value('status'),
             'created_by' => set_value('created_by'),
             'updated_by' => set_value('updated_by'),
             'created_at' => set_value('created_at'),
@@ -188,6 +189,7 @@ class Anggota_fraksi extends CI_Controller
                 'foto' => set_value('foto', $row->foto),
                 'telp' => set_value('telp', $row->telp),
                 'note' => set_value('note', $row->note),
+                'status' => set_value('status', $row->status),
                 'created_by' => set_value('created_by', $row->created_by),
                 'updated_by' => set_value('updated_by', $row->updated_by),
                 'created_at' => set_value('created_at', $row->created_at),
@@ -212,11 +214,8 @@ class Anggota_fraksi extends CI_Controller
 
                 'no_anggota' => $this->input->post('no_anggota', TRUE),
                 'fullname' => $this->input->post('fullname', TRUE),
-                'username' => $this->input->post('no_anggota', TRUE),
-                'password' => md5($this->input->post('no_anggota')),
                 'id_fraksi' => $this->input->post('id_fraksi', TRUE),
-                'id_parent' => 0,
-                'id_group' => 3, //hak akses anggota dewan
+                'status' => $this->input->post('status', TRUE),
                 'updated_by' => $this->session->userdata('id_user'),
                 'updated_at' => date("Y-m-d H:i:s"),
             );
@@ -249,6 +248,7 @@ class Anggota_fraksi extends CI_Controller
         $this->form_validation->set_rules('no_anggota', 'no anggota', 'trim|required');
         $this->form_validation->set_rules('id_parent', 'id parent', 'trim');
         $this->form_validation->set_rules('id_fraksi', 'id fraksi', 'trim|required');
+        $this->form_validation->set_rules('status', 'status', 'trim');
 
         $this->form_validation->set_rules('id_user', 'id_user', 'trim');
         $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');

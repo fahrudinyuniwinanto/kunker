@@ -31,7 +31,7 @@
             <div class="panel-body">
                 <div class="row" style="margin-bottom: 10px">
                     <div class="col-md-8">
-                        <?php echo anchor(site_url('jenis_kunjungan/create'), 'Tambah Data', 'class="btn btn-flat btn-success"'); ?>
+                        <?php echo anchor(site_url('jenis_kunjungan/create'), 'Tambah Jenis Kunjungan', 'class="btn btn-flat btn-success"'); ?>
                     </div>
 
 
@@ -68,11 +68,11 @@
                                 foreach ($jenis_kunjungan_data as $jenis_kunjungan) {
                                     ?>
                                 <tr>
-                                    <td width="80px"><?php echo ++$start ?></td>
+                                    <td width="50px"><?php echo ++$start ?></td>
                                     <td><strong><?php echo $jenis_kunjungan->nama_kunker ?></strong></td>
-                                    <td><?php echo $jenis_kunjungan->maksimal_kunjungan ?> kali pertahun</td>
-                                    <td><?php echo $jenis_kunjungan->jumlah_hari ?> kali perkunjungan</td>
-                                    <td style="text-align:center" width="200px">
+                                    <td width="200px"><?php echo $jenis_kunjungan->maksimal_kunjungan ?> kali pertahun</td>
+                                    <td width="200px"><?php echo $jenis_kunjungan->jumlah_hari ?> hari perkunjungan</td>
+                                    <td style="text-align:center" width="150px">
                                         <?php
                                             echo anchor(site_url('jenis_kunjungan/read/' . $jenis_kunjungan->id_jenis_kunjungan), '<i class="fa fa-eye"></i>', 'class="btn btn-xs btn-success"');
                                             echo ' | ';

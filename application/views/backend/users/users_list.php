@@ -8,7 +8,7 @@
 </ol>
 
 
-<h1 class="page-header">Users <small></small></h1>
+<h1 class="page-header">Pengguna <small></small></h1>
 <?php if ($this->session->userdata('message') != '') { ?>
     <div class="alert alert-success alert-dismissible fade show">
         <strong><?= $this->session->userdata('message') ?> </strong>
@@ -20,7 +20,7 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h2 class="panel-title"><b>List Users</b></h2>
+                <h2 class="panel-title"><b>List Pengguna</b></h2>
 
                 <div class="panel-heading-btn">
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
@@ -55,7 +55,7 @@
                                     <?php
                                         }
                                         ?>
-                                    <button class="btn btn-success" type="submit">Search</button>
+                                    <button class="btn btn-success" type="submit">Cari</button>
 
                                 </div>
                             </form>
@@ -80,7 +80,7 @@
                                         if ($this->session->userdata('id_user') == $users->id_user) {
                                             ?>
                                         <tr>
-                                            <td width="80px"><?php echo ++$start ?></td>
+                                            <td width="50px"><?php echo ++$start ?></td>
                                             <td><?php echo $users->fullname ?></td>
                                             <td><?php echo $users->username ?></td>
                                             <td><?php echo $users->email ?></td>
