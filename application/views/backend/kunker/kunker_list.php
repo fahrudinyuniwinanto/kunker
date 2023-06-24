@@ -76,7 +76,7 @@
                         <tbody><?php
                                 foreach ($kunker_data as $kunker) {
                                     ?>
-                                <tr class="<?=$kunker->status_disposisi=='1'?'bg-success':($kunker->status_disposisi=='2'?'bg-danger':'')?>">
+                                <tr class="<?= $kunker->status_disposisi == '1' ? 'bg-success' : ($kunker->status_disposisi == '2' ? 'bg-danger' : '') ?>">
                                     <td width="80px"><?php echo ++$start ?></td>
                                     <td><?php echo $kunker->nama_kunker ?></td>
                                     <td><strong><?php echo $kunker->nama_fraksi ?></strong></td>
@@ -98,13 +98,14 @@
                                                                     echo '<label class="badge bg-danger">DITOLAK</label>';
                                                                 }
                                                                 ?></td>
-                                                                <td><?=@$diposisi_note?></td>
+                                    <td><?= @$diposisi_note ?></td>
                                     <td style="text-align:center" width="200px">
                                         <?php
                                             echo anchor(site_url('kunker/read/' . $kunker->id_kunker), '<i class="fa fa-eye"></i>', 'class="btn btn-xs btn-success" title="Detail Data"');
-                                            echo ' | ';
-                                            echo anchor(site_url('kunker/verify/' . $kunker->id_kunker), '<i class="fa fa-check-circle"></i>', 'class="btn btn-xs btn-info" title="Verifikasi Data"');
-
+                                            if (is_allow('VERIFY_KUNKER')) {
+                                                echo ' | ';
+                                                echo anchor(site_url('kunker/verify/' . $kunker->id_kunker), '<i class="fa fa-check-circle"></i>', 'class="btn btn-xs btn-info" title="Verifikasi Data"');
+                                            }
                                             // echo anchor(site_url('kunker/update/' . $kunker->id_kunker), '<i class="fa fa-edit"></i>', 'class="btn btn-xs btn-warning"');
                                             // echo ' | ';
                                             if (is_allow('HAPUS_KUNKER')) {

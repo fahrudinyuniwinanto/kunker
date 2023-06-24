@@ -130,9 +130,9 @@
                                         </tr>
                                     </thead>
                                     <tbody id="dynamic-fields">
-
                                     </tbody>
                                 </table>
+                                <button class="btn btn-warning" id="add-field" onclick="event.preventDefault()">Tambah Anggota</button>
                             </div>
                         </div>
 
@@ -169,7 +169,6 @@
                     <input type="hidden" name="id_kunker" value="<?php echo $id_kunker; ?>" />
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
                     <button type="submit" class="btn btn-flat btn-success"><?php echo $button ?></button>
-                    <button class="btn btn-warning" id="add-field" onclick="event.preventDefault()">Tambah Anggota</button>
                     <a href="<?php echo site_url('kunker') ?>" class="btn btn-flat btn-default">Cancel</a>
                 </div>
 
