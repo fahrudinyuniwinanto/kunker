@@ -65,7 +65,7 @@ class Auth extends CI_Controller
                     'id_user'       => $row->id_user,
                     'no_anggota'     => $row->no_anggota,
                     'id_group'      => $row->id_group,
-                    'id_desa'       => $row->id_desa,
+                    'id_desa'       => @$row->id_desa,
                     'username'      => $row->username,
                     'fullname'      => $row->fullname,
                     'id_fraksi'     => $row->id_fraksi,

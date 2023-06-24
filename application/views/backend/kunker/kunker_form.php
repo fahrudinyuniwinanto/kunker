@@ -141,9 +141,9 @@
                                         </tr>
                                     </thead>
                                     <tbody id="dynamic-fields">
-
                                     </tbody>
                                 </table>
+                                <button class="btn btn-warning" id="add-field" onclick="event.preventDefault()">Tambah Anggota</button>
                             </div>
                             <button class="btn btn-warning" id="add-field" onclick="event.preventDefault()">Tambah TAA</button>
                         </div>
