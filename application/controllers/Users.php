@@ -42,7 +42,8 @@ class Users extends CI_Controller
 
         $this->load->library('pagination');
         $this->pagination->initialize($config);
-
+        // print_r($users);
+        //die();
         $data = array(
             'users_data' => $users,
             'q' => $q,
@@ -297,7 +298,7 @@ class Users extends CI_Controller
             );
         } else {
             $data = array(
-                'password' => md5($row->username . '123'),
+                'password' => md5('123456'),
             );
         }
 

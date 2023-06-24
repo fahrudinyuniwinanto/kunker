@@ -145,7 +145,6 @@
                                 </table>
                                 <button class="btn btn-warning" id="add-field" onclick="event.preventDefault()">Tambah Anggota</button>
                             </div>
-                            <button class="btn btn-warning" id="add-field" onclick="event.preventDefault()">Tambah TAA</button>
                         </div>
 
                         <!-- <div class="col-lg-4">

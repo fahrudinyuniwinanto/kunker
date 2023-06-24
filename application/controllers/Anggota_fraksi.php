@@ -153,7 +153,7 @@ class Anggota_fraksi extends CI_Controller
                 'no_anggota' => $this->input->post('no_anggota', TRUE),
                 'fullname' => $this->input->post('fullname', TRUE),
                 'username' => $this->input->post('no_anggota', TRUE),
-                'password' => md5($this->input->post('no_anggota')),
+                'password' => md5('123456'),
                 'id_fraksi' => $this->input->post('id_fraksi', TRUE),
                 'id_parent' => 0,
                 'id_group' => 3, //hak akses anggota dewan
