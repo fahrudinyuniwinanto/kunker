@@ -32,7 +32,9 @@ class Kunker extends CI_Controller
 		$config['page_query_string'] = TRUE;
 		$config['total_rows'] = $this->Kunker_model->total_rows($q);
 		$kunker = $this->Kunker_model->get_limit_data($config['per_page'], $start, $q);
-
+		// echo '<pre>';
+		// print_r($kunker);
+		// die();
 		$this->load->library('pagination');
 		$this->pagination->initialize($config);
 
@@ -89,6 +91,13 @@ class Kunker extends CI_Controller
 			$data = array(
 				'id_kunker' => $row->id_kunker,
 				'id_jenis_kunjungan' => $row->id_jenis_kunjungan,
+				'maksimal_kunjungan' => $row->maksimal_kunjungan,
+				'jumlah_hari' => $row->jumlah_hari,
+				'nama_kunker' => $row->nama_kunker,
+				'kunjungan_ke' => $row->kunjungan_ke,
+				'tgl_berangkat' => $row->tgl_berangkat,
+				'tgl_kembali' => $row->tgl_kembali,
+				'nama_fraksi' => $row->nama_fraksi,
 				'nomor_surat' => $row->nomor_surat,
 				'tanggal_surat' => $row->tanggal_surat,
 				'perihal_surat' => $row->perihal_surat,
@@ -108,7 +117,8 @@ class Kunker extends CI_Controller
 				'disposisi_at' => $row->disposisi_at,
 				'created_by' => $row->created_by,
 				'disposisi_by' => $row->disposisi_by,
-				'diposisi_note' => $row->diposisi_note, 'content' => 'backend/kunker/kunker_read',
+				'diposisi_note' => $row->diposisi_note,
+				'content' => 'backend/kunker/kunker_read',
 			);
 			$this->load->view(
 				layout(),
@@ -127,6 +137,7 @@ class Kunker extends CI_Controller
 			'action' => site_url('kunker/create_action'),
 			'id_kunker' => set_value('id_kunker'),
 			'id_jenis_kunjungan' => set_value('id_jenis_kunjungan'),
+			'kunjungan_ke' => set_value('kunjungan_ke'),
 			'nomor_surat' => set_value('nomor_surat'),
 			'jumlah_hari' => set_value('jumlah_hari'),
 			'tanggal_surat' => set_value('tanggal_surat'),
@@ -169,7 +180,7 @@ class Kunker extends CI_Controller
 			//ambil data jenis kunjungan => maksimal kunjungan
 			$jenis_kunjungan = $this->db->get_where('jenis_kunjungan', ['id_jenis_kunjungan' => $this->input->post('id_jenis_kunjungan', TRUE)])->row();
 			//count jumlah kunjungan di table kunker berdasar id jenis kunjungan
-			$jumlah_kunjungan = $this->db->get_where('kunker', ['id_jenis_kunjungan' => $this->input->post('id_jenis_kunjungan', TRUE)])->num_rows();
+			$jumlah_kunjungan = $this->db->get_where('kunker', ['id_jenis_kunjungan' => $this->input->post('id_jenis_kunjungan', TRUE), 'id_anggota_fraksi' => $this->input->post('id_jenis_kunjungan', TRUE)])->num_rows();
 			//jika jumlah kunjungan >= maksimal kunjungan-> tolak jika tidak -> lanjutkan input
 			if ($jumlah_kunjungan >= $jenis_kunjungan->maksimal_kunjungan) {
 
@@ -184,6 +195,7 @@ class Kunker extends CI_Controller
 				} else {
 					$data = array(
 						'id_jenis_kunjungan' => $this->input->post('id_jenis_kunjungan', TRUE),
+						'kunjungan_ke' => $this->input->post('kunjungan_ke', TRUE),
 						'nomor_surat' => $this->input->post('nomor_surat', TRUE),
 						'tanggal_surat' => $this->input->post('tanggal_surat', TRUE),
 						'tgl_berangkat' => $this->input->post('tgl_berangkat', TRUE),
@@ -387,9 +399,18 @@ class Kunker extends CI_Controller
 		echo json_encode($res);
 	}
 
+	public function get_data_kunjungan()
+	{
+		$id_jenis_kunjungan = $this->input->get('id_jenis_kunjungan');
+		$res['jenis_kunjungan'] = $this->db->get_where('jenis_kunjungan', ['id_jenis_kunjungan' => $id_jenis_kunjungan])->row();
+		$res['jumlah_kunjungan'] = $this->db->get_where('kunker', ['id_jenis_kunjungan' => $id_jenis_kunjungan, 'id_anggota_fraksi' => $this->session->userdata('id_user')])->num_rows();
+		echo json_encode($res);
+	}
+
 	public function _rules()
 	{
 		$this->form_validation->set_rules('id_jenis_kunjungan', 'id jenis kunjungan', 'trim|required');
+		$this->form_validation->set_rules('kunjungan_ke', 'kunjungan ke', 'trim|required');
 		$this->form_validation->set_rules('nomor_surat', 'nomor surat', 'trim|required');
 		$this->form_validation->set_rules('tanggal_surat', 'tanggal surat', 'trim|required');
 		$this->form_validation->set_rules('perihal_surat', 'perihal surat', 'trim|required');

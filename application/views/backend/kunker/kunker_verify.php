@@ -104,7 +104,7 @@
 		<div class="row">
 		<div class="col-md-8">
 			* Maksimal kunjungan <strong><?= $maksimal_kunjungan ?> kali</strong> dalam setahun<br />
-			* Maksimal <strong><?= @$maksimal_hari ?> hari</strong> dalam sekali kunjungan<
+			* Maksimal <strong><?= @$maksimal_hari ?> hari</strong> dalam sekali kunjungan
 		</div>
 		<div class="col-md-4">
 			<strong><i class="fa fa-fw fa-lg fa-edit"></i> Catatan disposisi</strong>

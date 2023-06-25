@@ -73,6 +73,7 @@ class Kunker_model extends CI_Model
     // get data with limit and search
     function get_limit_data($limit, $start = 0, $q = NULL)
     {
+        $this->db->select('aa.*,bb.*,cc.*,dd.*, aa.created_at as tgl_dibuat');
         $this->db->join('fraksi bb', 'bb.id_fraksi=aa.id_fraksi');
         $this->db->join('jenis_kunjungan cc', 'cc.id_jenis_kunjungan=aa.id_jenis_kunjungan');
         $this->db->join('users dd', 'dd.id_user=aa.id_anggota_fraksi');

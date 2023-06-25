@@ -11,7 +11,7 @@ class Backend extends CI_Controller
         $this->load->model('Sy_menu_model');
         $this->load->model('Kunker_model');
 
-        //$this->db->query("SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+        $this->db->query("SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
     }
 
     public function index()
@@ -21,14 +21,15 @@ class Backend extends CI_Controller
 
             'content' => 'backend/dashboard',
             'kunker_data' => $this->Kunker_model->get_limit_data(20, 0, ""),
-            'start'=>0
+            'start' => 0
         );
 
         $this->load->view(layout(), $data);
     }
 
-    public function lap_kunker(){
-        $data=[
+    public function lap_kunker()
+    {
+        $data = [
             'content' => 'backend/laporan/lap_kunker',
             'kunker_data' => $this->db->get_where('kunker', [])->result(),
         ];
@@ -36,14 +37,15 @@ class Backend extends CI_Controller
         $this->load->view(layout(), $data);
     }
 
-    public function prin_kunker(){
-        $mulai = $this->input->post('tanggal_mulai',TRUE);
-        $selesai = $this->input->post('tanggal_selesai',TRUE);
-        $data=[
+    public function prin_kunker()
+    {
+        $mulai = $this->input->post('tanggal_mulai', TRUE);
+        $selesai = $this->input->post('tanggal_selesai', TRUE);
+        $data = [
             'kunker_data' => $this->db->query("SELECT id_fraksi, COUNT(id_anggota_fraksi) as jml_anggota
             FROM kunker WHERE tgl_berangkat BETWEEN '$mulai' AND '$selesai' group by id_fraksi")->result(),
-            'mulai' => date_format(date_create($mulai),"d-m-Y"),
-            'selesai' => date_format(date_create($selesai),"d-m-Y"),
+            'mulai' => date_format(date_create($mulai), "d-m-Y"),
+            'selesai' => date_format(date_create($selesai), "d-m-Y"),
         ];
 
         $this->load->view("backend/laporan/prin_kunker", $data);

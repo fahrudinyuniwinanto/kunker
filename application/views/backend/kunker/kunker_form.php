@@ -35,7 +35,7 @@
                         <div class="col-lg-4">
                             <div class="mb-3">
                                 <label class="form-label" for="int">Fraksi <?php echo form_error('id_fraksi') ?></label>
-                                <?= form_dropdown('id_fraksi', get_combo('fraksi', 'id_fraksi', 'nama_fraksi', ['' => "--Pilih--"]), $id_fraksi, ['class' => 'form-control', 'required' => TRUE]) ?>
+                                <?= form_dropdown('id_fraksi', get_combo_where('fraksi', 'id_fraksi', 'nama_fraksi', [], ['id_fraksi' => $this->session->userdata('id_fraksi')]), $id_fraksi, ['class' => 'form-control', 'required' => TRUE]) ?>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="int">Nomor Anggota <?php echo form_error('no_anggota') ?></label>
@@ -43,20 +43,28 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="int">Nama Anggota <?php echo form_error('id_anggota_fraksi') ?></label>
-                                <?= form_dropdown('id_anggota_fraksi', get_combo('users', 'id_user', 'fullname', ['' => "--Pilih--"]), $id_anggota_fraksi, ['class' => 'form-control', 'required' => TRUE]) ?>
+                                <?= form_dropdown('id_anggota_fraksi', get_combo_where('users', 'id_user', 'fullname', [], ['id_user' => $this->session->userdata('id_user')]), $id_anggota_fraksi, ['class' => 'form-control', 'required' => TRUE]) ?>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="int">Jenis Kunjungan <?php echo form_error('id_jenis_kunjungan') ?></label>
-                                <?= form_dropdown('id_jenis_kunjungan', get_combo('jenis_kunjungan', 'id_jenis_kunjungan', 'nama_kunker', ['' => "--Pilih--"]), $id_jenis_kunjungan, ['class' => 'form-control', 'id' => 'id_jenis_kunjungan', 'required' => TRUE]) ?>
+                                <label class="badge bg-green jenis_kunjungan" for="int"><i>Kunjungan Ke-<b><span id="kunjungan_ke2"></span></b></i> </label>
+                                <input type="hidden" class="form-control" name="kunjungan_ke" id="kunjungan_ke" placeholder="" value="<?php echo $kunjungan_ke; ?>" readonly />
+                                <input type="hidden" class="form-control" name="maksimal_hari" id="maksimal_hari" placeholder="" value="" readonly />
+                                <?= form_dropdown('id_jenis_kunjungan', get_combo('jenis_kunjungan', 'id_jenis_kunjungan', 'nama_kunker', ['' => "--Pilih--"]), $id_jenis_kunjungan, ['class' => 'form-control', 'id' => 'id_jenis_kunjungan', 'required' => TRUE]) ?><br />
+                                <label class="badge bg-red jenis_kunjungan" for="int"><i>Sisa Kuota Kunjungan adalah <b><span id="sisa_hari"></span> Kali</b></i> </label>
                             </div>
-                            <!-- <div class="mb-3">
-                                <label class="form-label" for="int">Note </label>
+                            <div class="mb-3 jenis_kunjungan">
+                                <label class="form-label" for="int"><i>Keterangan</i> </label>
                                 <div class="alert alert-warning">
-                                    dsaasdsad
-                                    dasdsadsad
-                                    dsadsa
+
+                                    * Maksimal kunjungan <strong><span id="maks_kunjungan"></span> kali</strong> dalam setahun<br />
+                                    * Maksimal <strong> <span id="maks_hari"></span>hari</strong> dalam sekali kunjungan
+
                                 </div>
-                            </div> -->
+                            </div>
+
+                        </div>
+                        <div class="col-lg-4">
                             <div class="row">
                                 <div class="col-lg-9">
                                     <div class="mb-3">
@@ -85,8 +93,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4">
                             <div class="row">
                                 <div class="col-lg-8">
                                     <div class="mb-3">
@@ -190,6 +196,10 @@
 </div>
 <script>
     $(document).ready(function() {
+        $(".jenis_kunjungan").hide();
+        $("#nama_daerah_tujuan").attr('readonly', true);
+        $("#tgl_berangkat").attr('readonly', true);
+        $("#tgl_kembali").attr('readonly', true);
         var j = 0;
         // Menambahkan field baru
         $('#add-field').click(function() {
@@ -205,13 +215,10 @@
             $(this).parent().parent().remove();
         });
 
-        get_maks_hari();
+        //get_maks_hari();
         //console.log(maksimal_hari);
+        get_data_kunjungan()
         jumlah_hari();
-
-
-
-
     });
 
     //hitung tanggal otomatis dan validas maks hari kunjungan
@@ -219,11 +226,16 @@
         //hitung tanggal otomatis
         $('#tgl_berangkat, #tgl_kembali').change(function() {
             var tgl_berangkat = new Date($('#tgl_berangkat').val());
-            //maksimal_hari = get_maks_hari();
+            var maksimal_hari = $("#maksimal_hari").val();
+            var initialDate = tgl_berangkat.toISOString().split('T')[0];
+            var updatedDate = new Date(initialDate);
+            updatedDate.setDate(updatedDate.getDate() + parseInt(maksimal_hari) - 1);
+            var updatedDateString = updatedDate.toISOString().split('T')[0];
             //tambah attr pada tanggal kembali (min=tgl_berangkat)
-            $('#tgl_kembali').attr('min', tgl_berangkat.toISOString().split('T')[0]);
-
-            //$('#tgl_kembali').attr('max', maks_kembali.toISOString().split('T')[0]);
+            $('#tgl_kembali').attr('min', initialDate);
+            $('#tgl_kembali').attr('max', updatedDateString);
+            $("#tgl_kembali").removeAttr('readonly');
+            //$("#tgl_kembali").val('');
 
             var tgl_kembali = new Date($('#tgl_kembali').val());
 
@@ -245,6 +257,35 @@
                 },
                 success: function(res) {
                     return res.jumlah_hari;
+                }
+            });
+        });
+    }
+
+    function get_data_kunjungan() {
+        $('#id_jenis_kunjungan').change(function() {
+            var id_jen_kunjungan = $('#id_jenis_kunjungan').val();
+            $("#nama_daerah_tujuan").val('');
+            $("#jumlah_hari").val('');
+            $("#tgl_berangkat").val('');
+            $("#tgl_kembali").val('');
+            $.ajax({
+                url: "<?php echo site_url('kunker/get_data_kunjungan'); ?>",
+                dataType: 'json',
+                type: 'GET',
+                data: {
+                    id_jenis_kunjungan: id_jen_kunjungan
+                },
+                success: function(res) {
+                    $("#kunjungan_ke").val(res.jumlah_kunjungan + 1);
+                    $("#kunjungan_ke2").text(res.jumlah_kunjungan + 1);
+                    $("#sisa_hari").text(res.jenis_kunjungan.maksimal_kunjungan - (res.jumlah_kunjungan));
+                    $("#maks_kunjungan").text(res.jenis_kunjungan.maksimal_kunjungan);
+                    $("#maks_hari").text(res.jenis_kunjungan.jumlah_hari);
+                    $("#maksimal_hari").val(res.jenis_kunjungan.jumlah_hari);
+                    $(".jenis_kunjungan").show();
+                    $("#nama_daerah_tujuan").removeAttr('readonly');
+                    $("#tgl_berangkat").removeAttr('readonly');
                 }
             });
         });

@@ -77,12 +77,13 @@
                                 <tr class="<?= $kunker->status_disposisi == '1' ? 'bg-success' : ($kunker->status_disposisi == '2' ? 'bg-danger' : '') ?>">
                                     <td width="50px"><?php echo ++$start ?></td>
                                     <td>
-                                        <?php echo $kunker->nama_kunker ?>
+                                        <?php echo $kunker->nama_kunker ?><br>
+                                        <?= '<label class="badge bg-green">Kunjungan Ke-' . $kunker->kunjungan_ke . '</label>' ?>
                                     </td>
                                     <td><strong><?php echo $kunker->nama_fraksi ?></strong></td>
                                     <td><strong><?php echo $kunker->fullname ?></strong></td>
                                     <td><?php echo $kunker->tingkat_keamanan ?></td>
-                                    <td><?php echo @$kunker->created_at ?></td>
+                                    <td><?php echo $kunker->tgl_dibuat ?></td>
                                     <td class="text-center"><?php
                                                                 if ($kunker->status_disposisi == 0) {
                                                                     echo '<label class="badge bg-warning">PENDING</label>';
