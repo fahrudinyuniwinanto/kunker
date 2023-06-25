@@ -37,12 +37,11 @@ class Backend extends CI_Controller
         $this->load->view(layout(), $data);
     }
 
-    public function prin_kunker()
-    {
-        $mulai = $this->input->post('tanggal_mulai', TRUE);
-        $selesai = $this->input->post('tanggal_selesai', TRUE);
-        $data = [
-            'kunker_data' => $this->db->query("SELECT id_fraksi, COUNT(id_anggota_fraksi) as jml_anggota
+    public function prin_kunker(){
+        $mulai = $this->input->post('tanggal_mulai',TRUE);
+        $selesai = $this->input->post('tanggal_selesai',TRUE);
+        $data=[
+            'kunker_data' => $this->db->query("SELECT id_fraksi, COUNT(*) as jml_kunjungan
             FROM kunker WHERE tgl_berangkat BETWEEN '$mulai' AND '$selesai' group by id_fraksi")->result(),
             'mulai' => date_format(date_create($mulai), "d-m-Y"),
             'selesai' => date_format(date_create($selesai), "d-m-Y"),

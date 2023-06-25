@@ -34,13 +34,13 @@
             <tr>
                 <td>No</td>
                 <td>Fraksi</td>
-                <td>Jumlah Anggota</td>
+                <td>Jumlah Kunjungan</td>
             </tr>
-            <?php foreach ($kunker_data as $K => $v) : ?>
+            <?php foreach ($kunker_data as $k => $v) : ?>
 			<tr>
 				<td><?=$k+1?></td>
-				<td><?=$this->db->get_where('fraksi', ['id' => $v->id_fraksi])->row('nama_fraksi')?></td>
-				<td><?= $v->jml_anggota ?></td>
+				<td><?=$this->db->get_where('fraksi', ['id_fraksi' => $v->id_fraksi])->row('nama_fraksi')?></td>
+				<td><?= $v->jml_kunjungan ?></td>
 			</tr>
             <?php endforeach ?>
 		</table>
