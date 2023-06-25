@@ -76,8 +76,8 @@
                                     ?>
                                 <tr class="<?= $kunker->status_disposisi == '1' ? 'bg-success' : ($kunker->status_disposisi == '2' ? 'bg-danger' : '') ?>">
                                     <td width="50px"><?php echo ++$start ?></td>
-                                    <td>
-                                        <?php echo $kunker->nama_kunker ?><br>
+                                    <td><strong>
+                                            <?php echo $kunker->nama_kunker ?></strong><br>
                                         <?= '<label class="badge bg-green">Kunjungan Ke-' . $kunker->kunjungan_ke . '</label>' ?>
                                     </td>
                                     <td><strong><?php echo $kunker->nama_fraksi ?></strong></td>

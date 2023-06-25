@@ -65,7 +65,7 @@
 
                         </div>
                         <div class="col-lg-4">
-                            <div class="row">
+                            <div class="row jenis_kunjungan">
                                 <div class="col-lg-9">
                                     <div class="mb-3">
                                         <label class="form-label" for="varchar">Daerah Pemilihan <?php echo form_error('nama_daerah_tujuan') ?></label>
@@ -79,9 +79,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row jenis_kunjungan">
                                 <div class="col-lg-6">
-                                    <div class="mb-3">
+                                    <div class="mb-3 ">
                                         <label class="form-label" for="varchar">Tgl. Berangkat <?php echo form_error('tgl_berangkat') ?></label>
                                         <input type="date" class="form-control" min="<?= date('Y-m-d') ?>" name="tgl_berangkat" id="tgl_berangkat" placeholder="" value="<?php echo $tgl_berangkat; ?>" required />
                                     </div>
