@@ -20,7 +20,7 @@
     <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h2 class="panel-title" style="margin-top:0px">Pilih Rentang Tanggal Laporan </h2>
+                <h2 class="panel-title" style="margin-top:0px">Pilih laporan yang akan dicetak </h2>
 
                 <div class="panel-heading-btn">
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
@@ -29,35 +29,39 @@
                     <!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a> -->
                 </div>
             </div>
-            <form action="<?=base_url()?>backend/prin_kunker" method="post" enctype="multipart/form-data">
+            <form action="<?= base_url() ?>backend/prin_kunker" method="post" enctype="multipart/form-data">
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-8">
                             <!-- <div class="mb-3">
                                 <label class="form-label" for="int">Tanggal Mulai <?php echo form_error('tanggal_mulai') ?></label>
-                                <input type="text" class="form-control date" name="tanggal_mulai" id="tanggal_mulai" placeholder="Tanggal Mulai" value="<?php echo date('Y-m-')."01" ?>" />
+                                <input type="text" class="form-control date" name="tanggal_mulai" id="tanggal_mulai" placeholder="Tanggal Mulai" value="<?php echo date('Y-m-') . "01" ?>" />
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="int">Tanggal Selesai <?php echo form_error('tanggal_selesai') ?></label>
                                 <input type="text" class="form-control date" name="tanggal_selesai" id="tanggal_selesai" placeholder="Tanggal Selesai" value="<?php echo date('Y-m-d') ?>" />
                             </div> -->
                             <div class="mb-3">
+                                    <label class="form-label" for="int"><input type="radio" name="jenis_laporan" value="fraksi" required /> Laporan Perfraksi </label> | 
+                                    <label class="form-label" for="int"><input type="radio" name="jenis_laporan" value="anggota" required /> Laporan Peranggota Fraksi </label>
+                            </div>
+                            <div class="mb-3">
                                 <label class="form-label" for="int">Jenis Kunjungan <?php echo form_error('jenis_kunjungan') ?></label>
-                                <?=form_dropdown('jenis_kunjungan', get_combo('jenis_kunjungan','id_jenis_kunjungan',  'nama_kunker',[''=>'Pilih ...']), '', 'class="form-control" id="jenis_kunjungan"');?>
+                                <?= form_dropdown('jenis_kunjungan', get_combo('jenis_kunjungan', 'id_jenis_kunjungan',  'nama_kunker', ['' => 'Pilih ...']), '', 'class="form-control" id="jenis_kunjungan"'); ?>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="int">Tahun <?php echo form_error('tahun') ?></label>
-                                <input type="text" class="form-control date-y" name="tahun" id="tahun" placeholder="Tahun Kunjungan" value="<?php echo date('Y')?>" />
+                                <input type="text" class="form-control date-y" name="tahun" id="tahun" placeholder="Tahun Kunjungan" value="<?php echo date('Y') ?>" />
                             </div>
-                            
+
                             <div class="mb-3">
-                            <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
-                    <button type="submit" class="btn btn-flat btn-success">Tampilkan</button>
-                    
-                    <a href="<?php echo site_url('kunker') ?>" class="btn btn-flat btn-default">Cancel</a>
+                                <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
+                                <button type="submit" class="btn btn-flat btn-success">Tampilkan</button>
+
+                                <a href="<?php echo site_url('kunker') ?>" class="btn btn-flat btn-default">Cancel</a>
                             </div>
+                        </div>
                     </div>
-                </div>
             </form>
         </div>
     </div>
