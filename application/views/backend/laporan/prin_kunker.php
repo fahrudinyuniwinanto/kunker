@@ -26,10 +26,10 @@
 <body>
 	<div class="paper container">
 		<h5 class="text-center">SEKRETARIAT JENDERAL<br>
-			DEWAN REPUBLIK INDONESIA<br><br>
+			DEWAN REPUBLIK INDONESIA<br>
 			DEPUTI BIDANG ADMINISTRASI<br><br>
-			DISPOSISI KUNJUNGAN KERJA KUNDAPIL<br><br>
-        Ditampilkan <?=$mulai?> s/d <?=$selesai?></h5>
+			LAPORAN <?=$this->db->get_where('jenis_kunjungan', ['id_jenis_kunjungan' => $jenis_kunjungan])->row('nama_kunker')?><br><br>
+        TAHUN <?=$tahun?></h5>
 		<table width="100%" border="1">
             <tr>
                 <td>No</td>

@@ -78,7 +78,7 @@
                                     <td width="50px"><?php echo ++$start ?></td>
                                     <td><strong>
                                             <?php echo $kunker->nama_kunker ?></strong><br>
-                                        <?= '<label class="badge bg-green">Kunjungan Ke-' . $kunker->kunjungan_ke . '</label>' ?>
+                                        <?= '<label class="badge bg-green">Kunjungan Ke-' . @$kunker->kunjungan_ke . '</label>' ?>
                                     </td>
                                     <td><strong><?php echo $kunker->nama_fraksi ?></strong></td>
                                     <td><strong><?php echo $kunker->fullname ?></strong></td>

@@ -38,13 +38,13 @@ class Backend extends CI_Controller
     }
 
     public function prin_kunker(){
-        $mulai = $this->input->post('tanggal_mulai',TRUE);
-        $selesai = $this->input->post('tanggal_selesai',TRUE);
+        $jenis_kunjungan = $this->input->post('jenis_kunjungan',TRUE);
+        $tahun = $this->input->post('tahun',TRUE);
         $data=[
-            'kunker_data' => $this->db->query("SELECT id_fraksi, COUNT(*) as jml_kunjungan
-            FROM kunker WHERE tgl_berangkat BETWEEN '$mulai' AND '$selesai' group by id_fraksi")->result(),
-            'mulai' => date_format(date_create($mulai), "d-m-Y"),
-            'selesai' => date_format(date_create($selesai), "d-m-Y"),
+            'kunker_data' => $this->db->query("SELECT aa.id_fraksi, COUNT(bb.id_fraksi) as jml_kunjungan
+            FROM fraksi as aa left join kunker as bb on aa.id_fraksi=bb.id_fraksi WHERE YEAR(bb.tgl_berangkat) = '$tahun' and bb.id_jenis_kunjungan = '$jenis_kunjungan' group by bb.id_fraksi")->result(),
+            'tahun' => $tahun,
+            'jenis_kunjungan' => $jenis_kunjungan,
         ];
 
         $this->load->view("backend/laporan/prin_kunker", $data);

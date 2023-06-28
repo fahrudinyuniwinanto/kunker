@@ -33,14 +33,23 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-8">
-                            <div class="mb-3">
+                            <!-- <div class="mb-3">
                                 <label class="form-label" for="int">Tanggal Mulai <?php echo form_error('tanggal_mulai') ?></label>
                                 <input type="text" class="form-control date" name="tanggal_mulai" id="tanggal_mulai" placeholder="Tanggal Mulai" value="<?php echo date('Y-m-')."01" ?>" />
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="int">Tanggal Selesai <?php echo form_error('tanggal_selesai') ?></label>
                                 <input type="text" class="form-control date" name="tanggal_selesai" id="tanggal_selesai" placeholder="Tanggal Selesai" value="<?php echo date('Y-m-d') ?>" />
+                            </div> -->
+                            <div class="mb-3">
+                                <label class="form-label" for="int">Jenis Kunjungan <?php echo form_error('jenis_kunjungan') ?></label>
+                                <?=form_dropdown('jenis_kunjungan', get_combo('jenis_kunjungan','id_jenis_kunjungan',  'nama_kunker',[''=>'Pilih ...']), '', 'class="form-control" id="jenis_kunjungan"');?>
                             </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="int">Tahun <?php echo form_error('tahun') ?></label>
+                                <input type="text" class="form-control date-y" name="tahun" id="tahun" placeholder="Tahun Kunjungan" value="<?php echo date('Y')?>" />
+                            </div>
+                            
                             <div class="mb-3">
                             <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
                     <button type="submit" class="btn btn-flat btn-success">Tampilkan</button>
