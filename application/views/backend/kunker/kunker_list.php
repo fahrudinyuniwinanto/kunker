@@ -105,14 +105,12 @@
                                                 echo ' &nbsp ';
                                                 echo anchor(site_url('kunker/verify/' . $kunker->id_kunker), '<i class="fa fa-check-circle"></i>', 'class="btn btn-xs btn-info" title="Verifikasi Data"');
                                             }
-                                            // echo anchor(site_url('kunker/update/' . $kunker->id_kunker), '<i class="fa fa-edit"></i>', 'class="btn btn-xs btn-warning"');
-                                            // echo ' | ';
                                             if (is_allow('HAPUS_KUNKER')) {
-                                                //bisa dihapus selama status masih pending
-                                                if ($kunker->status_disposisi == 0) {
-                                                    echo ' &nbsp ';
-                                                    echo anchor(site_url('kunker/delete/' . $kunker->id_kunker), '<i class="fa fa-trash"></i>', 'class="btn btn-xs btn-danger" onclick="javascript: return confirm(\'Yakin hapus data?\')"');
-                                                }
+                                                //bisa dihapus selama status masih pending dan ditolak
+                                                if ($kunker->status_disposisi == 0 | $kunker->status_disposisi == 2) {
+                                                    echo ' &nbsp '; ?>
+                                                <a href="#" class="btn btn-xs btn-danger" onclick="delete_confirm('<?= site_url('kunker/delete/' . $kunker->id_kunker) ?>')"><i class="fa fa-trash"></i></a>
+                                        <?php }
                                             }
                                             ?>
                                     </td>
@@ -137,3 +135,35 @@
         </div>
     </div>
 </div>
+<script>
+    function delete_confirm(link) {
+        swal({
+            title: 'Yakin Hapus ini ?',
+            text: 'Setelah dihapus, data tidak dapat dikembalikan !',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Batal',
+            closeOnConfirm: false
+        }, function(isConfirmed) {
+            if (isConfirmed) {
+                window.location.href = link;
+                swal({
+                    title: "Permohonan Berhasil Dihapus",
+                    text: "<br><img src='https://cdn-icons-png.flaticon.com/512/5290/5290058.png' style='width:40%'>",
+                    html: true,
+                    customClass: '',
+                }, function(result) {
+                    if (result) {
+                        location.reload();
+                    }
+                });
+            } else {
+                swal('Dibatalkan', 'Aksi dibatalkan', 'error');
+            }
+        });
+
+    };
+</script>

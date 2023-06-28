@@ -29,7 +29,7 @@
                     <!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a> -->
                 </div>
             </div>
-            <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
+            <form id="myForm" action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-4">
@@ -51,7 +51,7 @@
                                 <input type="hidden" class="form-control" name="kunjungan_ke" id="kunjungan_ke" placeholder="" value="<?php echo $kunjungan_ke; ?>" readonly />
                                 <input type="hidden" class="form-control" name="maksimal_hari" id="maksimal_hari" placeholder="" value="" readonly />
                                 <?= form_dropdown('id_jenis_kunjungan', get_combo('jenis_kunjungan', 'id_jenis_kunjungan', 'nama_kunker', ['' => "--Pilih--"]), $id_jenis_kunjungan, ['class' => 'form-control', 'id' => 'id_jenis_kunjungan', 'required' => TRUE]) ?><br />
-                                <label class="badge bg-red jenis_kunjungan" for="int"><i>Sisa Kuota Kunjungan adalah <b><span id="sisa_hari"></span> Kali</b></i> </label>
+                                <label class="badge bg-red jenis_kunjungan" for="int"><i>Sisa Kuota Kunjungan adalah <b><span id="sisa_kunjungan"></span> Kali</b></i> </label>
                             </div>
                             <div class="mb-3 jenis_kunjungan">
                                 <label class="form-label" for="int"><i>Keterangan</i> </label>
@@ -201,6 +201,42 @@
         $("#tgl_berangkat").attr('readonly', true);
         $("#tgl_kembali").attr('readonly', true);
         var j = 0;
+
+        $('form').submit(function(e) {
+            e.preventDefault();
+            swal({
+                title: 'Yakin mengajukan Permohonan ini ?',
+                text: 'Setelah diajukan, Anda tidak dapat merubah data ajuan !',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Batal',
+                closeOnConfirm: false
+            }, function(isConfirmed) {
+                if (isConfirmed) {
+                    $('form').submit();
+                    swal({
+                        title: "Permohonan Berhasil Diajukan",
+                        text: "<br><img src='https://cdn-icons-png.flaticon.com/512/5290/5290058.png' style='width:40%'>",
+                        html: true,
+                        customClass: '',
+                    }, function(result) {
+                        console.log(result);
+                        if (result) {
+                            location.reload();
+                        }
+                    });
+                } else {
+                    swal('Dibatalkan', 'Aksi dibatalkan', 'error');
+                }
+            });
+
+            // swal('Apakah Anda sudah yakin ?', 'Pastikan data sudah benar!. Data tidak dapat diubah setelah Anda ajukan.', 'warning');
+
+        });
+
         // Menambahkan field baru
         $('#add-field').click(function() {
 
@@ -277,15 +313,21 @@
                     id_jenis_kunjungan: id_jen_kunjungan
                 },
                 success: function(res) {
-                    $("#kunjungan_ke").val(res.jumlah_kunjungan + 1);
-                    $("#kunjungan_ke2").text(res.jumlah_kunjungan + 1);
-                    $("#sisa_hari").text(res.jenis_kunjungan.maksimal_kunjungan - (res.jumlah_kunjungan));
-                    $("#maks_kunjungan").text(res.jenis_kunjungan.maksimal_kunjungan);
-                    $("#maks_hari").text(res.jenis_kunjungan.jumlah_hari);
-                    $("#maksimal_hari").val(res.jenis_kunjungan.jumlah_hari);
-                    $(".jenis_kunjungan").show();
-                    $("#nama_daerah_tujuan").removeAttr('readonly');
-                    $("#tgl_berangkat").removeAttr('readonly');
+                    if (res.jenis_kunjungan.maksimal_kunjungan - (res.jumlah_kunjungan) <= 0) {
+
+                        swal('Kuota Kunjungan Sudah Habis', 'Silahkan Pilih Jenis Kunjungan Lainnya', 'error');
+                    } else {
+
+                        $("#kunjungan_ke").val(res.jumlah_kunjungan + 1);
+                        $("#kunjungan_ke2").text(res.jumlah_kunjungan + 1);
+                        $("#sisa_kunjungan").text(res.jenis_kunjungan.maksimal_kunjungan - (res.jumlah_kunjungan));
+                        $("#maks_kunjungan").text(res.jenis_kunjungan.maksimal_kunjungan);
+                        $("#maks_hari").text(res.jenis_kunjungan.jumlah_hari);
+                        $("#maksimal_hari").val(res.jenis_kunjungan.jumlah_hari);
+                        $(".jenis_kunjungan").show();
+                        $("#nama_daerah_tujuan").removeAttr('readonly');
+                        $("#tgl_berangkat").removeAttr('readonly');
+                    }
                 }
             });
         });
