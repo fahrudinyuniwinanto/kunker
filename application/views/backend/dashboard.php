@@ -77,30 +77,6 @@
                 </div>
             </div>
             <div class="panel-body">
-                <div class="row hide" style="margin-bottom: 10px">
-                    <div class="col-md-8">
-                        <?php echo anchor(site_url('kunker/create'), 'Tambah Permohonan', 'class="btn btn-flat btn-success"'); ?>
-                    </div>
-
-
-                    <div class="col-md-1 text-right">
-                    </div>
-                    <div class="col-md-3 text-right">
-                        <form action="<?php echo site_url('kunker/index'); ?>" class="form-inline" method="get">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="q" value="<?php echo @$q; ?>">
-                                <?php
-                                if (@$q <> '') {
-                                    ?>
-                                    <a href="<?php echo site_url('kunker'); ?>" class="btn btn-flat btn-default">Reset</a>
-                                <?php
-                                }
-                                ?>
-                                <button class="btn btn-flat btn-success" type="submit">Cari</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover table-condensed" style="margin-bottom: 10px">
                         <thead class="thead-light">
@@ -110,30 +86,21 @@
                                 <th class="text-center">Fraksi</th>
                                 <th class="text-center">Nama Anggota</th>
                                 <th class="text-center">Tingkat Keamanan</th>
-                                <!-- <th class="text-center">Nomor Surat</th> -->
-                                <!-- <th class="text-center">Tanggal Surat</th>
-                                <th class="text-center">Perihal Surat</th>
-                                <th class="text-center">Lampiran Surat</th> -->
-                                <!-- <th class="text-center">Tujuan</th> -->
                                 <th class="text-center">Tgl. Dibuat</th>
                                 <th class="text-center">Status</th>
-                                <th class="text-center">Keterangan Disposisi</th>
+                                <!-- <th class="text-center">Keterangan Disposisi</th> -->
                             </tr>
                         </thead>
                         <tbody><?php
                                 foreach ($kunker_data as $kunker) {
                                     ?>
-                                <tr class="<?=$kunker->status_disposisi=='1'?'bg-success':($kunker->status_disposisi=='2'?'bg-danger':'')?>">
-                                    <td width="80px"><?php echo ++$start ?></td>
-                                    <td><?php echo $kunker->nama_kunker ?></td>
-                                    <td><strong><?php echo $kunker->nama_fraksi ?></strong></td>
+                                <tr class="<?= $kunker->status_disposisi == '1' ? 'bg-success' : ($kunker->status_disposisi == '2' ? 'bg-danger' : '') ?>">
+                                    <td width="50px"><?php echo ++$start ?></td>
+                                    <td width="300px"><?php echo $kunker->nama_kunker ?></td>
+                                    <td width="250px"><strong><?php echo $kunker->nama_fraksi ?></strong></td>
                                     <td><strong><?php echo $kunker->fullname ?></strong></td>
-                                    <td><?php echo $kunker->tingkat_keamanan ?></td>
-                                    <!-- <td><?php echo $kunker->nomor_surat ?></td>
-                                    <td><?php echo @$kunker->tanggal_surat ?></td>
-                                    <td><?php echo @$kunker->perihal_surat ?></td> -->
-                                    <!-- <td><?php echo $kunker->nama_daerah_tujuan ?></td> -->
-                                    <td><?php echo @$kunker->created_at ?></td>
+                                    <td width="150px"><?php echo $kunker->tingkat_keamanan ?></td>
+                                    <td><?php echo @$kunker->tgl_dibuat ?></td>
                                     <td class="text-center"><?php
                                                                 if ($kunker->status_disposisi == 0) {
                                                                     echo '<label class="badge bg-warning">PENDING</label>';
@@ -145,8 +112,8 @@
                                                                     echo '<label class="badge bg-danger">DITOLAK</label>';
                                                                 }
                                                                 ?></td>
-                                                                <td><?=@$diposisi_note?></td>
-                                 
+                                    <!-- <td><?= @$diposisi_note ?></td> -->
+
                                 </tr>
 
                             <?php
@@ -161,7 +128,7 @@
                         <?php echo anchor(site_url('kunker/excel'), 'Excel', 'class="btn btn-flat btn-success"'); ?>
                     </div>
                     <div class="col-md-6 text-right">
-                        
+
                     </div>
                 </div>
             </div>

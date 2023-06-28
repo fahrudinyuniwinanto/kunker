@@ -403,7 +403,7 @@ class Kunker extends CI_Controller
 	{
 		$id_jenis_kunjungan = $this->input->get('id_jenis_kunjungan');
 		$res['jenis_kunjungan'] = $this->db->get_where('jenis_kunjungan', ['id_jenis_kunjungan' => $id_jenis_kunjungan])->row();
-		$res['jumlah_kunjungan'] = $this->db->get_where('kunker', ['id_jenis_kunjungan' => $id_jenis_kunjungan, 'id_anggota_fraksi' => $this->session->userdata('id_user')])->num_rows();
+		$res['jumlah_kunjungan'] = $this->db->get_where('kunker', ['id_jenis_kunjungan' => $id_jenis_kunjungan, 'id_anggota_fraksi' => $this->session->userdata('id_user'), 'YEAR(tgl_berangkat)' => date('Y')])->num_rows();
 		echo json_encode($res);
 	}
 
