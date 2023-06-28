@@ -180,7 +180,7 @@ class Kunker extends CI_Controller
 			//ambil data jenis kunjungan => maksimal kunjungan
 			$jenis_kunjungan = $this->db->get_where('jenis_kunjungan', ['id_jenis_kunjungan' => $this->input->post('id_jenis_kunjungan', TRUE)])->row();
 			//count jumlah kunjungan di table kunker berdasar id jenis kunjungan
-			$jumlah_kunjungan = $this->db->get_where('kunker', ['id_jenis_kunjungan' => $this->input->post('id_jenis_kunjungan', TRUE), 'id_anggota_fraksi' => $this->input->post('id_jenis_kunjungan', TRUE)])->num_rows();
+			$jumlah_kunjungan = $this->db->get_where('kunker', ['id_jenis_kunjungan' => $this->input->post('id_jenis_kunjungan', TRUE), 'id_anggota_fraksi' => $this->input->post('id_jenis_kunjungan', TRUE), 'YEAR(tgl_berangkat)' => YEAR($this->input->post('tgl_berangkat', TRUE))])->num_rows();
 			//jika jumlah kunjungan >= maksimal kunjungan-> tolak jika tidak -> lanjutkan input
 			if ($jumlah_kunjungan >= $jenis_kunjungan->maksimal_kunjungan) {
 

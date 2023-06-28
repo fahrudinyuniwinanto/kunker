@@ -13,7 +13,7 @@
     <meta content="" name="author" />
 
     <!-- Favicon -->
-    <link rel="icon" href="<?= base_url() ?>assets/img/temanggung.png">
+    <link rel="icon" href="<?= base_url() ?>assets/img/dpr.png">
 
 
     <!-- Color Admin Frontend -->
@@ -35,9 +35,9 @@
             <div class="container">
 
                 <a href="index.html" class="navbar-brand">
-                    <img src="<?= base_url() ?>assets/img/temanggung.png" style ="width: 10%; height: 60px;"/>
+                    <img src="<?= base_url() ?>assets/img/temanggung.png" style="width: 10%; height: 60px;" />
                     <span class="brand-text">
-                        <span class="text-primary">   <?= data_app() ?></span>
+                        <span class="text-primary"> <?= data_app() ?></span>
                     </span>
                 </a>
 
@@ -51,11 +51,11 @@
 
                 <div class="collapse navbar-collapse" id="header-navbar">
                     <ul class="nav navbar-nav navbar-end">
-                        
+
                         <li class="nav-item"><a class="nav-link active" href="#about" data-click="scroll-to-target">HOME</a></li>
                         <li class="nav-item"><a class="nav-link" href="#team" data-click="scroll-to-target">LAYANAN KAMI</a></li>
                         <li class="nav-item"><a class="nav-link" href="#footer" data-click="scroll-to-target">TENTANG KAMI</a></li>
-                        
+
                     </ul>
                 </div>
 

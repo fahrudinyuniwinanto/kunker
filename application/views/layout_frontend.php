@@ -13,7 +13,7 @@
 	<meta content="" name="author" />
 
 	<!-- Favicon -->
-	<link rel="icon" href="<?= base_url() ?>assets/img/temanggung.png">
+	<link rel="icon" href="<?= base_url() ?>assets/img/dpr.png">
 
 	<!-- START Color Admin -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
