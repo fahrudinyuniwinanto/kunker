@@ -29,7 +29,7 @@
                     <!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a> -->
                 </div>
             </div>
-            <form action="<?= base_url() ?>backend/prin_kunker" method="post" enctype="multipart/form-data">
+            <form action="<?= base_url() ?>backend/prin_kunker" method="post" target="_blank">
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-8">
@@ -42,12 +42,12 @@
                                 <input type="text" class="form-control date" name="tanggal_selesai" id="tanggal_selesai" placeholder="Tanggal Selesai" value="<?php echo date('Y-m-d') ?>" />
                             </div> -->
                             <div class="mb-3">
-                                    <label class="form-label" for="int"><input type="radio" name="jenis_laporan" value="fraksi" required /> Laporan Perfraksi </label> | 
-                                    <label class="form-label" for="int"><input type="radio" name="jenis_laporan" value="anggota" required /> Laporan Peranggota Fraksi </label>
+                                <label class="form-label" for="int"><input type="radio" name="jenis_laporan" value="fraksi" required /> Laporan Perfraksi </label> <strong><i>atau</i></strong>
+                                <label class="form-label" for="int"><input type="radio" name="jenis_laporan" value="anggota" required /> Laporan Peranggota Fraksi </label>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="int">Jenis Kunjungan <?php echo form_error('jenis_kunjungan') ?></label>
-                                <?= form_dropdown('jenis_kunjungan', get_combo('jenis_kunjungan', 'id_jenis_kunjungan',  'nama_kunker', ['' => 'Pilih ...']), '', 'class="form-control" id="jenis_kunjungan"'); ?>
+                                <?= form_dropdown('jenis_kunjungan', get_combo('jenis_kunjungan', 'id_jenis_kunjungan',  'nama_kunker', ['' => 'Pilih ...']), '', 'class="form-control" id="jenis_kunjungan" required'); ?>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="int">Tahun <?php echo form_error('tahun') ?></label>

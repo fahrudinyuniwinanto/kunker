@@ -63,7 +63,7 @@ class Backend extends CI_Controller
         $data = [
             'kunker_data' => $this->db->query($q)->result(),
             'tahun' => $tahun,
-            'jenis_kunjungan' => $jenis_kunjungan,
+            'data_jenis_kunjungan' => $this->db->get_where('jenis_kunjungan',['id_jenis_kunjungan' => $jenis_kunjungan])->row(),
         ];
         $this->load->view($content, $data);
     }

@@ -28,19 +28,23 @@
 		<h5 class="text-center">SEKRETARIAT JENDERAL<br>
 			DEWAN REPUBLIK INDONESIA<br>
 			DEPUTI BIDANG ADMINISTRASI<br><br>
-			LAPORAN <?=$this->db->get_where('jenis_kunjungan', ['id_jenis_kunjungan' => $jenis_kunjungan])->row('nama_kunker')?><br><br>
+			<strong>LAPORAN <?=$data_jenis_kunjungan->nama_kunker?></strong><br><br>
         TAHUN <?=$tahun?></h5>
+		<p><i>*Maksimal Jumlah Kunjungan: <?=$data_jenis_kunjungan->maksimal_kunjungan?> kali</i></p>
 		<table width="100%" border="1">
             <tr>
                 <td>No</td>
                 <td>Fraksi</td>
                 <td>Jumlah Kunjungan</td>
+                <td>Sisa Kunjungan</td>
             </tr>
-            <?php foreach ($kunker_data as $k => $v) : ?>
+            <?php foreach ($kunker_data as $k => $v) :
+				$sisa=$data_jenis_kunjungan->maksimal_kunjungan-$v->jml_kunjungan; ?>
 			<tr>
 				<td><?=$k+1?></td>
 				<td><?=$this->db->get_where('fraksi', ['id_fraksi' => $v->id_fraksi])->row('nama_fraksi')?></td>
 				<td><?= $v->jml_kunjungan ?></td>
+				<td><?=$sisa==0?'Habis':$sisa?></td>
 			</tr>
             <?php endforeach ?>
 		</table>
