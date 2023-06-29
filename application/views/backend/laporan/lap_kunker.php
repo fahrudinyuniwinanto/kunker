@@ -41,9 +41,9 @@
                                 <label class="form-label" for="int">Tanggal Selesai <?php echo form_error('tanggal_selesai') ?></label>
                                 <input type="text" class="form-control date" name="tanggal_selesai" id="tanggal_selesai" placeholder="Tanggal Selesai" value="<?php echo date('Y-m-d') ?>" />
                             </div> -->
-                            <div class="mb-3">
-                                <label class="form-label" for="int"><input type="radio" name="jenis_laporan" value="fraksi" required /> Laporan Perfraksi </label> <strong><i>atau</i></strong>
-                                <label class="form-label" for="int"><input type="radio" name="jenis_laporan" value="anggota" required /> Laporan Peranggota Fraksi </label>
+                            <div class="mb-3 form-check">
+                                <input class="form-check-input" type="radio" name="jenis_laporan" value="fraksi" required /> <label class="form-label form-check-label">Laporan Perfraksi </label> <br>
+                                <input class="form-check-input" type="radio" name="jenis_laporan" value="anggota" required /> <label class="form-label form-check-label">Laporan Peranggota Fraksi </label>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="int">Jenis Kunjungan <?php echo form_error('jenis_kunjungan') ?></label>
