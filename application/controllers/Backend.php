@@ -50,21 +50,37 @@ class Backend extends CI_Controller
                 FROM fraksi as aa left join kunker as bb on aa.id_fraksi=bb.id_fraksi 
                 WHERE YEAR(bb.tgl_berangkat) = '$tahun' and bb.id_jenis_kunjungan = '$jenis_kunjungan' group by bb.id_fraksi";
                 $content = "backend/laporan/prin_fraksi_kunker";
+                $arrLabel=[];
+                $arrData=[];
+                foreach ($this->db->query($q)->result() as $k => $v) {
+                    $arrLabel[] = $this->db->get_where('fraksi',['id_fraksi' => $v->id_fraksi])->row('nama_fraksi');
+                    $arrData[] = $v->jml_kunjungan;
+                }
                 break;
                 case 'anggota':
                     $q = "SELECT aa.id_user, aa.id_fraksi, COUNT(aa.id_user) as jml_kunjungan
                 FROM users as aa left join kunker as bb on aa.id_user=bb.id_anggota_fraksi 
                 WHERE aa.id_group = '3' and YEAR(bb.tgl_berangkat) = '$tahun' and bb.id_jenis_kunjungan = '$jenis_kunjungan' group by aa.id_user";
+                $arrLabel=[];
+                $arrData=[];
+                foreach ($this->db->query($q)->result() as $k => $v) {
+                    $arrLabel[] = $this->db->get_where('users',['id_user' => $v->id_user])->row('fullname');
+                    $arrData[] = $v->jml_kunjungan;
+                }
                 $content = "backend/laporan/prin_anggota_kunker";
                 break;
             default:
                 break;
         }
+
         $data = [
             'kunker_data' => $this->db->query($q)->result(),
             'tahun' => $tahun,
             'data_jenis_kunjungan' => $this->db->get_where('jenis_kunjungan',['id_jenis_kunjungan' => $jenis_kunjungan])->row(),
+            'arrLabel'=>$arrLabel,
+            'arrData'=>$arrData,
+            'content'=>$content,
         ];
-        $this->load->view($content, $data);
+        $this->load->view("layout_print", $data);
     }
 }

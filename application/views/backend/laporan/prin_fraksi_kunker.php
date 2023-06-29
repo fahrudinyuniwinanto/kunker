@@ -48,9 +48,37 @@
 			</tr>
             <?php endforeach ?>
 		</table>
+		<br>
+		<div width="100%">
+			<canvas id="chart-fraksi" width="100%" ></canvas>
+		</div>
 	</div>
 </body>
 <script>
-		window.print();
+	window.print();
+	const ctx = document.getElementById('chart-fraksi');
+
+	new Chart(ctx, {
+		type: 'bar',
+		data: {
+			labels: <?= json_encode($arrLabel) ?>,
+			datasets: [{
+				label: 'Fraksi vs Jumlah Kunjungan',
+				data: <?= json_encode($arrData) ?>,
+				borderWidth: 4
+			}]
+		},
+		options: {
+			scales: {
+				y: {
+					ticks: {
+						precision: 0
+					},
+					beginAtZero: true
+				}
+			}
+		}
+	});
 </script>
+
 </html>

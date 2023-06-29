@@ -28,33 +28,61 @@
 		<h5 class="text-center">SEKRETARIAT JENDERAL<br>
 			DEWAN REPUBLIK INDONESIA<br>
 			DEPUTI BIDANG ADMINISTRASI<br><br>
-			<strong>LAPORAN <?=$data_jenis_kunjungan->nama_kunker?></strong><br>
+			<strong>LAPORAN <?= $data_jenis_kunjungan->nama_kunker ?></strong><br>
 			<br>
-        TAHUN <?=$tahun?></h5>
-		<p><i>*Maksimal Jumlah Kunjungan: <?=$data_jenis_kunjungan->maksimal_kunjungan?> kali</i></p>
+			TAHUN <?= $tahun ?></h5>
+		<p><i>*Maksimal Jumlah Kunjungan: <?= $data_jenis_kunjungan->maksimal_kunjungan ?> kali</i></p>
 		<table width="100%" border="1">
-            <tr>
-                <td>No</td>
-                <td>Anggota</td>
-                <td>Fraksi</td>
-                <td>Jumlah Kunjungan</td>
-                <td>Sisa Kunjungan</td>
-            </tr>
-            <?php foreach ($kunker_data as $k => $v) : 
-				$sisa=$data_jenis_kunjungan->maksimal_kunjungan-$v->jml_kunjungan;
-				?>
 			<tr>
-				<td><?=$k+1?></td>
-				<td><?=$this->db->get_where('users', ['id_user' => $v->id_user])->row('fullname')?></td>
-				<td><?=$this->db->get_where('fraksi', ['id_fraksi' => $v->id_fraksi])->row('nama_fraksi')?></td>
-				<td><?= $v->jml_kunjungan ?></td>
-				<td><?=$sisa==0?'Habis':$sisa?></td>
+				<td>No</td>
+				<td>Anggota</td>
+				<td>Fraksi</td>
+				<td>Jumlah Kunjungan</td>
+				<td>Sisa Kunjungan</td>
 			</tr>
-            <?php endforeach ?>
+			<?php foreach ($kunker_data as $k => $v) :
+				$sisa = $data_jenis_kunjungan->maksimal_kunjungan - $v->jml_kunjungan;
+				?>
+				<tr>
+					<td><?= $k + 1 ?></td>
+					<td><?= $this->db->get_where('users', ['id_user' => $v->id_user])->row('fullname') ?></td>
+					<td><?= $this->db->get_where('fraksi', ['id_fraksi' => $v->id_fraksi])->row('nama_fraksi') ?></td>
+					<td><?= $v->jml_kunjungan ?></td>
+					<td><?= $sisa == 0 ? 'Habis' : $sisa ?></td>
+				</tr>
+			<?php endforeach ?>
 		</table>
+		<br>
+		<div width="100%">
+			<canvas id="chart-anggota" width="100%" ></canvas>
+		</div>
 	</div>
 </body>
 <script>
-		window.print();
+	window.print();
+	const ctx = document.getElementById('chart-anggota');
+
+	new Chart(ctx, {
+		type: 'bar',
+		data: {
+			labels: <?= json_encode($arrLabel) ?>,
+			datasets: [{
+				label: 'Anggota vs Jumlah Kunjungan',
+				data: <?= json_encode($arrData) ?>,
+				borderWidth: 4
+			}]
+		},
+		options: {
+			scales: {
+				y: {
+					ticks: {
+						precision: 0
+					},
+					beginAtZero: true
+				}
+			}
+		}
+	});
 </script>
+
 </html>
