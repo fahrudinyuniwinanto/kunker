@@ -1,4 +1,4 @@
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="<?=base_url()?>assets/js/chartjs/chart.js"></script>
 <?php $this->load->view($content)?>
 
 
