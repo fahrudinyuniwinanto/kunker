@@ -1,439 +1,292 @@
-<div id="home" class="content has-bg home">
-    <div class="container" data-animation="true" data-animation-type="animate__fadeInRight">
-    </div>
-    <div id="map" style="width: 100%"></div> 
+<!DOCTYPE html>
+<html lang="en">
 
-</div>
+<head>
+	<meta charset="utf-8" />
+	<title><?= data_app() ?></title>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+	<!-- Favicon -->
+	<link rel="icon" href="<?= base_url() ?>assets/img/dpr.png">
 
-<div id="action-box" class="content has-bg" data-scrollview="true">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+	<link href="<?= base_url() ?>assets/css/corporate/vendor.min.css" rel="stylesheet" />
+	<link href="<?= base_url() ?>assets/css/corporate/app.min.css" rel="stylesheet" />
 
-            <div class="content-bg" style="background-image: url(<?= base_url() ?>assets/vendor/coloradmin/assets/frontend/assets/img/bg/bg-action.jpg)" data-paroller-factor="0.5" data-paroller-factor-md="0.01" data-paroller-factor-xs="0.01">
-            </div>
+</head>
+
+<body>
 
+	<div id="page-loader" class="fade show">
+		<span class="spinner"></span>
+	</div>
 
-            <div class="container" data-animation="true" data-animation-type="animate__fadeInRight">
 
-                <div class="row action-box">
+	<div id="page-container">
 
-                    <div class="col-lg-9">
-                        <div class="icon-large text-primary">
-                            <i class="fa fa-globe"></i>
-                        </div>
-                        <h3><?= data_app('APP_NAME') ?></h3>
-                        <p>
-                            <?= data_app('APP_DESC') ?>
-                        </p>
-                    </div>
+		<div class="header header-float">
+			<div class="container d-flex">
+				<div class="header-logo">
+					<a href="<?= base_url() ?>" class="logo-link">
 
+						<img alt="image" src="<?= base_url() ?>assets/img/dpr.png" style="width: 40px;" />&nbsp&nbsp<b><?= data_app('APP_NAME') ?></b> <small><?= date('Y') ?></small>
+					</a>
+				</div>
+				<div class="header-nav">
+					<div class="container">
+						<div class="header-nav-item">
+							<a href="<?= base_url('Frontend') ?>" class="header-nav-link">Home</a>
+						</div>
+						<div class="header-nav-item">
+							<a href="<?= base_url('Frontend/') ?>#tentang_kami" class="header-nav-link">Tentang Kami</a>
+						</div>
+						<div class="header-nav-item">
+							<a href="<?= base_url('Frontend/') ?>#kontak" class="header-nav-link">Kontak</a>
+						</div>
+					</div>
+				</div>
+				<div class="header-btn">
+					<a href="<?= base_url('Frontend/login') ?>" class="btn btn-primary fw-bold rounded-pill">Login </a>
+				</div>
+				<button class="header-mobile-nav-toggler" type="button" data-toggle="header-mobile-nav">
+					<span class="header-mobile-nav-toggler-icon"></span>
+				</button>
+			</div>
+		</div>
 
-                    <div class="col-lg-3">
-                        <a href="#" class="btn btn-outline-white btn-theme btn-block"><i class="fa fa-location-arrow"></i> Peta Data</a>
-                    </div>
 
-                </div>
+		<div class="section section-hero">
 
-            </div>
+			<div class="section-bg with-cover" style="background-image: url(<?= base_url() ?>assets/img/corporate/img-1.jpg);"></div>
+			<div class="section-bg bg-gray-800-transparent-5"></div>
 
-        </div>
 
+			<div class="container position-relative">
 
-<div id="milestone" class="content bg-black-darker has-bg" data-scrollview="true">
+				<div class="section-hero-content">
 
-    <div class="content-bg" style="background-image: url(../assets/img/bg/bg-milestone.jpg)" data-paroller="true" data-paroller-factor="0.5" data-paroller-factor-md="0.01" data-paroller-factor-xs="0.01"></div>
+					<div class="row">
 
+						<div class="col-lg-8 col-lg-10">
 
-    <div class="container">
+							<h1 class="hero-title mb-3 mt-5 pt-md-5">
+								<img alt="image" src="<?= base_url() ?>assets/img/dpr.png" style="width: 80px;" />
+								<?= data_app('APP_NAME') ?>
+							</h1>
+							<div class="fs-18px text-white-transparent-8">
 
-        <div class="row">
+								<?= data_app('APP_LONG_NAME') ?>
+							</div>
 
-            <div class="col-lg-3 milestone-col">
-                <div class="milestone">
-                    <div class="number" data-animation="true" data-animation-type="number" data-final-number="1292">1,292</div>
-                    <div class="title">Themes & Template</div>
-                </div>
-            </div>
 
+							<a href="#" class="hero-btn fw-bold mb-n5">
+								<?= data_app('APP_INSTANSI') ?>
+							</a><br />
+							<a href="#" class="hero-btn fw-bold mb-n5">
+								<?= data_app('OPD_ADDR') ?>
+							</a>
+						</div>
 
-            <div class="col-lg-3 milestone-col">
-                <div class="milestone">
-                    <div class="number" data-animation="true" data-animation-type="number" data-final-number="9039">9,039</div>
-                    <div class="title">Registered Members</div>
-                </div>
-            </div>
+					</div>
 
+				</div>
 
-            <div class="col-lg-3 milestone-col">
-                <div class="milestone">
-                    <div class="number" data-animation="true" data-animation-type="number" data-final-number="89291">89,291</div>
-                    <div class="title">Items Sold</div>
-                </div>
-            </div>
+			</div>
 
+		</div>
 
-            <div class="col-lg-3 milestone-col">
-                <div class="milestone">
-                    <div class="number" data-animation="true" data-animation-type="number" data-final-number="129">129</div>
-                    <div class="title">Theme Authors</div>
-                </div>
-            </div>
 
-        </div>
+		<div class="section" id="tentang_kami">
 
-    </div>
+			<div class="container">
 
-</div>
+				<div class="pt-lg-5 pb-lg-3 text-center">
+					<div class="display-6 fw-bolder mb-3 d-flex align-items-center justify-content-center">
+						Tentang Kami
+					</div>
+					<p class="fs-18px mb-5">We build technologies that help people create their own applications, <span class="d-none d-lg-inline"><br /></span>speed up development speed, save times and grow their businesses.</p>
+					<div class="mb-2 fw-bold text-gray-500">built on top of</div>
+					<div class="text-gray-500 text-center mb-5">
+						<i class="fab fa-bootstrap fa-2x fa-fw"></i>
+						<i class="fab fa-node-js fa-2x  fa-fw"></i>
+						<i class="fab fa-vuejs fa-2x  fa-fw"></i>
+						<i class="fab fa-angular fa-2x  fa-fw"></i>
+						<i class="fab fa-react fa-2x  fa-fw"></i>
+					</div>
+				</div>
 
 
-<div id="team" class="content" data-scrollview="true">
+				<h4 class="section-subtitle">Top Stories</h4>
 
-    <div class="container">
-        <h2 class="content-title">LAYANAN KAMI</h2>
-        <div class="row">
-            <?php
-            foreach ($layanan_kami_data as $layanan_kami)
-            {
-                ?>
-
-
-                <div class="col-lg-3">
-                    <div class="team">
-                        <div class="image" data-animation="true" data-animation-type="animate__flipInX">
-                            <img src="../assets/img/user/user-1.jpg" alt="Ryan Teller" />
-                        </div>
-                        <div class="info">
-                            <h3 class="name"><?php echo $layanan_kami->label ?></h3>
-                            <div class="title text-primary"><?php echo $layanan_kami->note ?></div>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <?php
-            }
-            ?>
-        </div>
-
-    </div>
-
-</div>
-
-
-
-
-
-<div id="footer" class="footer">
-    <div class="container">
-        <div class="footer-brand">
-            <img src="<?= base_url() ?>assets/img/temanggung.png" style ="width: 4%; height: 60px;"/></br>
-            <?= data_app('RIGHT_FOOTER') ?>
-            <p>
-                <?= data_app('LEFT_FOOTER') ?> <br />
-            </p>
-        </div>
-        
-        <p class="social-list">
-            <a href="#"><i class="fab fa-facebook-f fa-fw"></i></a>
-            <a href="#"><i class="fab fa-instagram fa-fw"></i></a>
-            <a href="#"><i class="fab fa-twitter fa-fw"></i></a>
-            <a href="#"><i class="fab fa-google-plus-g fa-fw"></i></a>
-            <a href="#"><i class="fab fa-dribbble fa-fw"></i></a>
-        </p>
-    </div>
-</div>
-
-<!-- Custom Theme Style -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
-    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
-    crossorigin=""/>
-    <link rel="stylesheet" href="<?=base_url()?>assets/js/leaflet-panel-layers-master/src/leaflet-panel-layers.css" />
-    <style type="text/css">
-        #map { height: 100vh; }
-        .icon {
-      display: inline-block;
-      margin: 2px;
-      height: 16px;
-      width: 16px;
-      background-color: #ccc;
-      }
-      .icon-bar {
-        background: url('assets/js/leaflet-panel-layers-master/examples/images/icons/bar.png') center center no-repeat;
-    }
-    .leaflet-tooltip.no-background{
-      background: transparent;
-      border:0;
-      box-shadow: none;
-      color: #fff;
-      font-weight: bold;
-      text-shadow: 1px 1px 1px #000,-1px 1px 1px #000,1px -1px 1px #000,-1px -1px 1px #000;
-    }
-    .leaflet-popup{
-      width: 500px;
-
-    }
-    .leaflet-popup-content{
-      width: 500px;
-      
-
-    }
-
-    </style>
-    <link rel="stylesheet" type="text/css" href="<?=base_url('assets/js/leaflet-search/dist/leaflet-search.min.css')?>">
-    <style type="text/css">
-        
-        .search-tip b {
-            display: inline-block;
-            clear: left;
-            float: right;
-            padding: 0 4px;
-            margin-left: 4px;
-        }
-
-        .Banjir.search-tip b,
-        .Banjir.leaflet-marker-icon {
-            background: #f66
-        }
-    </style>
-<!-- Make sure you put this AFTER Leaflet's CSS -->
-    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
-   crossorigin=""></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHqhgVQmhdp3XAJ91LHRdXJ3YOjP1V2Gs" async defer></script>
-    <script src="<?= base_url() ?>assets/js/leaflet-panel-layers-master/src/leaflet-panel-layers.js"></script>
-    <script src="<?= base_url() ?>assets/js/leaflet.ajax.js"></script>
-    <script src="<?= base_url() ?>assets/js/Leaflet.GoogleMutant.js"></script>
-    <script src="<?= base_url() ?>assets/js/leaflet-search/dist/leaflet-search.src.js"></script>
-    <script src="<?= base_url() ?>api/data/kecamatan"></script>
-    <script src="<?= base_url() ?>api/data/desa"></script>
-    <script src="<?= base_url() ?>api/data/das_statistik/varpoint"></script>                
-    <script type="text/javascript">
-        var map = L.map('map').setView([-7.3186046, 110.1597487], 11);
-    
-    var Layer=L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        maxZoom: 18,
-        id: 'mapbox.streets',
-        //create token
-        // accessToken: 'pk.eyJ1IjoiYW5uZXNuIiwiYSI6ImNsMWtiZGE1eTE1Mm4zb281c3V6czJzemkifQ.II-xBTXfprjvBSNAWUjZNg'
-        // dari contoh aplikasi
-        accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw'
-    });
-
-    var layersKecamatan=[];
-    var layersDesa=[];
-
-    var roadMutant = L.gridLayer.googleMutant({
-            maxZoom: 24,
-            type:'roadmap'
-    });
-
-    
-    map.addLayer(L.gridLayer.googleMutant({
-                maxZoom: 30,
-                type:'satellite'
-            }));
-    //map.addLayer(Layer);
-
-    // map.on('zoomend', function() {
-    // if (map.getZoom() <= 11){
-    //         map.addLayer(L.gridLayer.googleMutant({
-    //             maxZoom: 30,
-    //             type:'satellite'
-    //         }));
-    //         map.addLayer(layersKecamatan);
-    //         map.removeLayer(layersDesa);
-            
-
-    // }
-    //  if (map.getZoom() > 11){
-
-    //         map.addLayer(layersDesa);
-            
-
-    // }
-    
-    // });
-
-    // master_data
-    
-    var layersMasterData=L.geoJSON(das_statistik, {
-        pointToLayer: function (feature, latlng) {
-            // console.log(feature)
-            return L.marker(latlng, {
-                icon : new L.icon({
-                        iconUrl: feature.properties.icon,
-                        iconSize: [38, 45]
-                        })
-            });
-        },
-        onEachFeature: function(feature,layer){
-             if (feature.properties && feature.properties.name) {
-                layer.bindPopup(feature.properties.popUp);
-            }
-        }
-    }).addTo(map);
-    
-    // akhir masterdata
-    
-    // pengaturan legend
-
-    function iconByName(name) {
-        return '<i class="icon" style="background-color:'+name+';border-radius:10%"></i>';
-    }
-
-
-    function iconByImage(image) {
-        return '<img src="'+image+'" style="width:16px">';
-    }
-
-
-   var baseLayers = [
-        {
-            name: "OpenStreetMap",
-            layer: Layer
-        },
-        {   
-            name: "OpenCycleMap",
-            layer: L.tileLayer('http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png')
-        },
-        {
-            name: "Outdoors",
-            layer: L.tileLayer('http://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png')
-        },
-        {
-            name:'Satelite Google',
-            layer : L.gridLayer.googleMutant({
-                maxZoom: 24,
-                type:'satellite'
-            })
-        },
-        {
-            name: "Roadmap Google",
-            layer: roadMutant
-        }
-    ];
-
-
-    
-    // pengaturan untuk layer kecamatan
-    function getColorKecamatan(id_kecamatan){
-        for(i=0;i<dataKecamatan.length;i++){
-            var data=dataKecamatan[i];
-            if(data.id_kecamatan==id_kecamatan){
-                return data.geo_color;
-            }
-        }
-    }
-
-    function popUpkec(f,l){
-        var html='';
-        if (f.properties){
-            
-            l.bindTooltip(f.properties['NK'],{
-                permanent:true,
-                direction:"center",
-                className:"no-background"
-            });
-        }
-    }
-    
-        
-        for(i=0;i<dataKecamatan.length;i++){
-            // console.log('load kecamatan');
-            var data=dataKecamatan[i];
-            var layer={
-                name: data.nama_kecamatan,
-                icon: iconByName(data.geo_color),
-                layer: new L.GeoJSON.AJAX(["<?=base_url('assets/geojson/kecamatan')?>/"+data.geo_file],
-                    {
-                        onEachFeature:popUpkec,
-                        style: function(feature){
-                            var id_kecamatan=feature.properties.id_kecamatan;
-                            return {
-                                "color": getColorKecamatan(id_kecamatan),
-                                "weight": 1,
-                                "opacity": 1
-                            }
-
-                        },
-                    }).addTo(map)
-                }
-            layersKecamatan.push(layer);
-        }
-
-    //pengaturan untuk layer desa
-    // function getColorDesa(id_desa){
-    //     for(i=0;i<dataDesa.length;i++){
-    //         var data=dataDesa[i];
-    //         if(data.id_desa==id_desa){
-    //             return data.geo_color;
-    //         }
-    //     }
-    // }
-    // function popUp(f,l){
-    //     var html='';
-    //     if (f.properties){
-    //         l.bindPopup(html);
-    //         l.bindTooltip(f.properties['ND'],{
-    //             permanent:true,
-    //             direction:"center",
-    //             className:"no-background"
-    //         })
-    //         ;
-    //     }
-    // }
-
-    // for(i=0;i<dataDesa.length;i++){
-    //     // console.log('load kecamatan');
-    //     var data=dataDesa[i];
-    //     var layer={
-    //         name: data.nama_desa,
-    //         icon: iconByName(data.geo_color),
-    //         layer: new L.GeoJSON.AJAX(["<?=base_url('assets/geojson/desa')?>/"+data.id_kecamatan+'/'+data.geo_file],
-    //             {
-    //                 onEachFeature:popUp,
-    //                 style: function(feature){
-    //                     var id_desa=feature.properties.id_desa;
-    //                     return {
-    //                         "color": getColorDesa(id_desa),
-    //                         "weight": 1,
-    //                         "opacity": 1
-    //                     }
-
-    //                 },
-    //             }).addTo(map)
-    //         }
-    //     layersDesa.push(layer);
-    // }
-
-
-    
-    var overLayers = [
-
-    {
-        group: "Data Statistik",
-        layers: [{
-                    name: "Data Statistik",
-                    icon: iconByImage("<?=assets('marker/marker.png')?>"),
-                    layer: layersMasterData
-            }]
-     },
-    
-    // {
-    //     group: "Kecamatan",
-    //     layers: layersKecamatan
-    // },
-    // {
-    //     group: "Desa",
-    //     layers: layersDesa
-    // }
-    ];
-
-    var panelLayers = new L.Control.PanelLayers(baseLayers, overLayers,{
-        collapsibleGroups: true
-    });
-
-    map.addControl(panelLayers);
-    
-    
-
-   </script>
+
+				<div class="row gx-lg-5">
+
+					<div class="col-lg-4">
+
+						<div class="news">
+							<div class="news-media">
+								<div class="news-media-img" style="background-image: url(<?= base_url() ?>assets/img/corporate/img-2.jpg);"></div>
+							</div>
+							<div class="news-content">
+								<div class="news-label"><span class="">Web Development</span></div>
+								<h2 class="news-title">Accelerate development without extra added costs</h2>
+								<p class="news-date">December 9, 2021</p>
+							</div>
+						</div>
+
+
+						<div class="news">
+							<div class="news-media">
+								<div class="news-media-img" style="background-image: url(<?= base_url() ?>assets/img/corporate/img-3.jpg);"></div>
+							</div>
+							<div class="news-content">
+								<div class="news-label"><span class="bg-indigo-200 text-indigo-800">Native Apps</span></div>
+								<h2 class="news-title">Multiple frontend framework fit your needs</h2>
+								<p class="news-date">December 10, 2021</p>
+							</div>
+						</div>
+
+					</div>
+
+
+					<div class="col-lg-8">
+
+						<div class="news">
+							<div class="news-media">
+								<div class="news-media-img news-media-img-lg" style="background-image: url(<?= base_url() ?>assets/img/corporate/img-4.jpg);"></div>
+							</div>
+							<div class="news-content">
+								<div class="news-label"><span class="bg-primary-200 text-primary-800">SEO Ranking</span></div>
+								<h2 class="news-title">Boost your web traffic with smart routing and seo optimised html code.</h2>
+								<p class="news-date">December 20, 2021</p>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+
+		<div class="section bg-light" id="kontak">
+
+			<div class="container">
+
+				<div class="row align-items-center">
+
+					<div class="col-lg-6 pe-lg-4 mb-5 mb-lg-0">
+						<div class="section-subtitle">Kontak</div>
+						<div class="section-title"><?= data_app('APP_INSTANSI') ?></div>
+						<div class="section-desc">
+							<?= data_app('OPD_ADDR') ?>
+						</div>
+						<a href="#" class="section-btn"></i> <?= data_app('APP_TELP') ?></a>
+					</div>
+
+
+					<div class="col-lg-6 ps-lg-4">
+						<div class="section-media"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1983.2071801571467!2d106.79743649839482!3d-6.208951499999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f153a35426ef%3A0xf69c935a828d0d3d!2sGedung%20DPR%2FMPR%20RI!5e0!3m2!1sid!2sid!4v1688218927941!5m2!1sid!2sid" width="700" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="footer">
+			<div class="container">
+				<div class="row gx-5">
+					<div class="col-lg-3 mb-4 mb-lg-0">
+						<img alt="image" src="<?= base_url() ?>assets/img/dpr.png" style="width: 40px;" />
+
+						<div class="footer-logo">
+							<span class="footer-logo-text"><?= data_app('APP_NAME') ?> <small><?= date('Y') ?></small></span>
+						</div>
+						<p class="footer-desc">
+							<?= data_app('APP_LONG_NAME') ?><br />
+							<?= data_app('APP_INSTANSI') ?><br />
+							<?= data_app('OPD_ADDR') ?>
+						</p>
+					</div>
+					<div class="col-lg-3 mb-4 mb-lg-0">
+						<h4 class="footer-title">Menu</h4>
+						<ul class="footer-link-list">
+							<li><a href="<?= base_url('Frontend') ?>">Home</a></li>
+							<li><a href="<?= base_url('Frontend/') ?>#tentang_kami">Tentang Kami</a></li>
+							<li><a href="<?= base_url('Frontend/') ?>#kontak">Kontak</a></li>
+							<li><a href="<?= base_url('Frontend/login') ?>">Login</a></li>
+						</ul>
+					</div>
+					<div class="col-lg-3 mb-4 mb-lg-0">
+						<h4 class="footer-title">Link Terkait</h4>
+						<ul class="footer-link-list">
+							<li><a href="https://www.dpr.go.id/">DPR RI</a></li>
+							<li><a href="https://www.mpr.go.id/">MPR RI</a></li>
+						</ul>
+					</div>
+					<div class="col-lg-3 mb-4 mb-lg-0">
+						<h4 class="footer-title">Help Center</h4>
+						<ul class="footer-link-list">
+							<li><a href="#"><?= data_app('APP_TELP') ?></a></li>
+							<li><a href="#"><?= data_app('APP_WA') ?></a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="footer-copyright">
+					<div class="row">
+						<div class="col-lg-6 text-center text-lg-start mb-3 mb-lg-0">
+							<div class="footer-copyright-text">&copy; <?= date('Y') . ' ' . data_app('LEFT_FOOTER') ?></div>
+						</div>
+						<div class="col-lg-6 text-center text-lg-end">
+							<!-- <span class="dropdown me-4">
+								<a href="#" class="footer-copyright-link dropdown-toggle" data-bs-toggle="dropdown">United States (English)</a>
+								<ul class="dropdown-menu">
+									<li><a href="#" class="dropdown-item">United States (English)</a></li>
+									<li><a href="#" class="dropdown-item">China (简体中文)</a></li>
+									<li><a href="#" class="dropdown-item">Brazil (Português)</a></li>
+									<li><a href="#" class="dropdown-item">Germany (Deutsch)</a></li>
+									<li><a href="#" class="dropdown-item">France (Français)</a></li>
+									<li><a href="#" class="dropdown-item">Japan (日本語)</a></li>
+									<li><a href="#" class="dropdown-item">Korea (한국어)</a></li>
+									<li><a href="#" class="dropdown-item">Latin America (Español)</a></li>
+									<li><a href="#" class="dropdown-item">Spain (Español)</a></li>
+								</ul>
+							</span> -->
+							<!-- <a href="#" class="footer-copyright-link">Sitemap</a> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+	<script src="<?= base_url() ?>assets/js/corporate/vendor.min.js" type="c6d7af6df102fb05e4839bbe-text/javascript"></script>
+	<script src="<?= base_url() ?>assets/js/corporate/app.min.js" type="c6d7af6df102fb05e4839bbe-text/javascript"></script>
+	<script type="c6d7af6df102fb05e4839bbe-text/javascript">
+		(function(i, s, o, g, r, a, m) {
+			i['GoogleAnalyticsObject'] = r;
+			i[r] = i[r] || function() {
+				(i[r].q = i[r].q || []).push(arguments)
+			}, i[r].l = 1 * new Date();
+			a = s.createElement(o),
+				m = s.getElementsByTagName(o)[0];
+			a.async = 1;
+			a.src = g;
+			m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'UA-53034621-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="c6d7af6df102fb05e4839bbe-|49" defer=""></script>
+	<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"rayId":"66b21f7c2ffe370a","version":"2021.6.0","r":1,"token":"4db8c6ef997743fda032d4f73cfeff63","si":10}'></script>
+</body>
+
+</html>
