@@ -16,6 +16,14 @@ class Frontend extends CI_Controller
     {
 
         $data = array(
+            'content' => 'frontend/home.php',
+        );
+        $this->load->view('frontend/home2');
+    }
+    public function login()
+    {
+
+        $data = array(
             'content' => 'frontend/login.php',
         );
         $this->load->view('layout_frontend', $data);
