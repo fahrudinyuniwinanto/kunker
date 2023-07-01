@@ -36,16 +36,13 @@
 				<div class="header-nav">
 					<div class="container">
 						<div class="header-nav-item">
-							<a href="about.html" class="header-nav-link">Home</a>
+							<a href="<?= base_url('Frontend') ?>" class="header-nav-link">Home</a>
 						</div>
 						<div class="header-nav-item">
-							<a href="products.html" class="header-nav-link">Rekap Permohonan</a>
+							<a href="<?= base_url('Frontend/') ?>#tentang_kami" class="header-nav-link">Tentang Kami</a>
 						</div>
 						<div class="header-nav-item">
-							<a href="careers.html" class="header-nav-link">Tentang Kami</a>
-						</div>
-						<div class="header-nav-item">
-							<a href="contact_us.html" class="header-nav-link">Kontak</a>
+							<a href="<?= base_url('Frontend/') ?>#kontak" class="header-nav-link">Kontak</a>
 						</div>
 					</div>
 				</div>
@@ -74,11 +71,12 @@
 						<div class="col-lg-8 col-lg-10">
 
 							<h1 class="hero-title mb-3 mt-5 pt-md-5">
-								<?= data_app('APP_LONG_NAME') ?>
+								<img alt="image" src="<?= base_url() ?>assets/img/dpr.png" style="width: 80px;" />
+								<?= data_app('APP_NAME') ?>
 							</h1>
 							<div class="fs-18px text-white-transparent-8">
 
-								<?= data_app('APP_NAME') ?>
+								<?= data_app('APP_LONG_NAME') ?>
 							</div>
 
 
@@ -105,7 +103,7 @@
 
 				<div class="pt-lg-5 pb-lg-3 text-center">
 					<div class="display-6 fw-bolder mb-3 d-flex align-items-center justify-content-center">
-						Our missions
+						Tentang Kami
 					</div>
 					<p class="fs-18px mb-5">We build technologies that help people create their own applications, <span class="d-none d-lg-inline"><br /></span>speed up development speed, save times and grow their businesses.</p>
 					<div class="mb-2 fw-bold text-gray-500">built on top of</div>
@@ -181,19 +179,17 @@
 				<div class="row align-items-center">
 
 					<div class="col-lg-6 pe-lg-4 mb-5 mb-lg-0">
-						<div class="section-subtitle">Our Platform</div>
-						<div class="section-title">Stunning cross-platform template</div>
+						<div class="section-subtitle">Kontak</div>
+						<div class="section-title"><?= data_app('APP_INSTANSI') ?></div>
 						<div class="section-desc">
-							Our suite of developer-friendly products and services help you build, secure, and deliver enterprise-grade apps in less time — for any platform.
+							<?= data_app('OPD_ADDR') ?>
 						</div>
-						<a href="#" class="section-btn"><i class="fa fa-arrow-right"></i> Learn More</a>
+						<a href="#" class="section-btn"></i> <?= data_app('APP_TELP') ?></a>
 					</div>
 
 
 					<div class="col-lg-6 ps-lg-4">
-						<div class="section-media">
-							<img src="<?= base_url() ?>assets/img/corporate/img-5.jpg" alt="" class="mw-100" />
-						</div>
+						<div class="section-media"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1983.2071801571467!2d106.79743649839482!3d-6.208951499999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f153a35426ef%3A0xf69c935a828d0d3d!2sGedung%20DPR%2FMPR%20RI!5e0!3m2!1sid!2sid!4v1688218927941!5m2!1sid!2sid" width="700" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
 					</div>
 
 				</div>
@@ -206,55 +202,38 @@
 			<div class="container">
 				<div class="row gx-5">
 					<div class="col-lg-3 mb-4 mb-lg-0">
+						<img alt="image" src="<?= base_url() ?>assets/img/dpr.png" style="width: 40px;" />
+
 						<div class="footer-logo">
-							<span class="footer-logo-text">ColorAdmin <small>CORPORATE</small></span>
+							<span class="footer-logo-text"><?= data_app('APP_NAME') ?> <small><?= date('Y') ?></small></span>
 						</div>
 						<p class="footer-desc">
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in orci felis. Phasellus id urna nunc. Nulla sed nibh at libero tincidunt scelerisque sed porttitor lectus.
+							<?= data_app('APP_LONG_NAME') ?><br />
+							<?= data_app('APP_INSTANSI') ?><br />
+							<?= data_app('OPD_ADDR') ?>
 						</p>
-						<h4 class="footer-title">Follow Us</h4>
-						<div class="footer-media-list">
-							<a href="#" class="me-1"><i class="fab fa-lg fa-facebook fa-fw"></i></a>
-							<a href="#" class="me-2"><i class="fab fa-lg fa-instagram fa-fw"></i></a>
-							<a href="#" class="me-2"><i class="fab fa-lg fa-twitter fa-fw"></i></a>
-							<a href="#" class="me-2"><i class="fab fa-lg fa-youtube fa-fw"></i></a>
-							<a href="#" class="me-2"><i class="fab fa-lg fa-linkedin fa-fw"></i></a>
-						</div>
 					</div>
 					<div class="col-lg-3 mb-4 mb-lg-0">
-						<h4 class="footer-title">Company</h4>
+						<h4 class="footer-title">Menu</h4>
 						<ul class="footer-link-list">
-							<li><a href="#">Newsroom</a></li>
-							<li><a href="#">Company Info</a></li>
-							<li><a href="#">Careers</a></li>
-							<li><a href="#">For Investors</a></li>
-							<li><a href="#">Brand Resources</a></li>
-						</ul>
-						<hr class="my-4 text-gray-600" />
-						<h4 class="footer-title">Policies</h4>
-						<ul class="footer-link-list">
-							<li><a href="#">Community Standards</a></li>
-							<li><a href="#">Data Policy</a></li>
-							<li><a href="#">Cookie Policy</a></li>
-							<li><a href="#">Terms of Service</a></li>
+							<li><a href="<?= base_url('Frontend') ?>">Home</a></li>
+							<li><a href="<?= base_url('Frontend/') ?>#tentang_kami">Tentang Kami</a></li>
+							<li><a href="<?= base_url('Frontend/') ?>#kontak">Kontak</a></li>
+							<li><a href="<?= base_url('Frontend/login') ?>">Login</a></li>
 						</ul>
 					</div>
 					<div class="col-lg-3 mb-4 mb-lg-0">
-						<h4 class="footer-title">Our Store</h4>
+						<h4 class="footer-title">Link Terkait</h4>
 						<ul class="footer-link-list">
-							<li><a href="#">Shop Online</a></li>
-							<li><a href="#">Store App</a></li>
-							<li><a href="#">Recycling Programme</a></li>
-							<li><a href="#">Order Status</a></li>
-							<li><a href="#">Shopping Help</a></li>
+							<li><a href="https://www.dpr.go.id/">DPR RI</a></li>
+							<li><a href="https://www.mpr.go.id/">MPR RI</a></li>
 						</ul>
 					</div>
 					<div class="col-lg-3 mb-4 mb-lg-0">
 						<h4 class="footer-title">Help Center</h4>
 						<ul class="footer-link-list">
-							<li><a href="#">Contact Form</a></li>
-							<li><a href="#">Live Chat Support</a></li>
-							<li><a href="#">Portal Help Center</a></li>
+							<li><a href="#"><?= data_app('APP_TELP') ?></a></li>
+							<li><a href="#"><?= data_app('APP_WA') ?></a></li>
 						</ul>
 					</div>
 				</div>
