@@ -231,9 +231,16 @@ class Ta extends CI_Controller
         $row = $this->Users_model->get_by_id($id);
 
         if ($row) {
-            $this->Users_model->delete($id);
-            $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('ta'));
+            if ($this->session->userdata('id_group') == 1) {
+                $this->Users_model->delete($id);
+                $this->session->set_flashdata('message', 'Delete Record Success');
+                redirect(site_url('ta'));
+            } else {
+
+                $this->Users_model->update($id, ['isactive' => 0]);
+                $this->session->set_flashdata('message', 'Data Berhasil Dihapus');
+                redirect(site_url('ta'));
+            }
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('ta'));

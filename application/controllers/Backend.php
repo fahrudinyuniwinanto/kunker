@@ -16,11 +16,14 @@ class Backend extends CI_Controller
 
     public function index()
     {
-
         $data = array(
 
             'content' => 'backend/dashboard',
             'kunker_data' => $this->Kunker_model->get_limit_data(20, 0, ""),
+            'permohonan_masuk' => $this->db->get('kunker')->num_rows(),
+            'permohonan_pending' => $this->db->get_where('kunker', ['status_disposisi' => 0, 'YEAR(created_at)' => date('Y')])->num_rows(),
+            'permohonan_disetujui' => $this->db->get_where('kunker', ['status_disposisi' => 1, 'YEAR(created_at)' => date('Y')])->num_rows(),
+            'permohonan_ditolak' => $this->db->get_where('kunker', ['status_disposisi' => 2, 'YEAR(created_at)' => date('Y')])->num_rows(),
             'start' => 0
         );
 
@@ -50,21 +53,21 @@ class Backend extends CI_Controller
                 FROM fraksi as aa left join kunker as bb on aa.id_fraksi=bb.id_fraksi 
                 WHERE YEAR(bb.tgl_berangkat) = '$tahun' and bb.id_jenis_kunjungan = '$jenis_kunjungan' group by bb.id_fraksi";
                 $content = "backend/laporan/prin_fraksi_kunker";
-                $arrLabel=[];
-                $arrData=[];
+                $arrLabel = [];
+                $arrData = [];
                 foreach ($this->db->query($q)->result() as $k => $v) {
-                    $arrLabel[] = $this->db->get_where('fraksi',['id_fraksi' => $v->id_fraksi])->row('nama_fraksi');
+                    $arrLabel[] = $this->db->get_where('fraksi', ['id_fraksi' => $v->id_fraksi])->row('nama_fraksi');
                     $arrData[] = $v->jml_kunjungan;
                 }
                 break;
-                case 'anggota':
-                    $q = "SELECT aa.id_user, aa.id_fraksi, COUNT(aa.id_user) as jml_kunjungan
+            case 'anggota':
+                $q = "SELECT aa.id_user, aa.id_fraksi, COUNT(aa.id_user) as jml_kunjungan
                 FROM users as aa left join kunker as bb on aa.id_user=bb.id_anggota_fraksi 
                 WHERE aa.id_group = '3' and YEAR(bb.tgl_berangkat) = '$tahun' and bb.id_jenis_kunjungan = '$jenis_kunjungan' group by aa.id_user";
-                $arrLabel=[];
-                $arrData=[];
+                $arrLabel = [];
+                $arrData = [];
                 foreach ($this->db->query($q)->result() as $k => $v) {
-                    $arrLabel[] = $this->db->get_where('users',['id_user' => $v->id_user])->row('fullname');
+                    $arrLabel[] = $this->db->get_where('users', ['id_user' => $v->id_user])->row('fullname');
                     $arrData[] = $v->jml_kunjungan;
                 }
                 $content = "backend/laporan/prin_anggota_kunker";
@@ -76,10 +79,10 @@ class Backend extends CI_Controller
         $data = [
             'kunker_data' => $this->db->query($q)->result(),
             'tahun' => $tahun,
-            'data_jenis_kunjungan' => $this->db->get_where('jenis_kunjungan',['id_jenis_kunjungan' => $jenis_kunjungan])->row(),
-            'arrLabel'=>$arrLabel,
-            'arrData'=>$arrData,
-            'content'=>$content,
+            'data_jenis_kunjungan' => $this->db->get_where('jenis_kunjungan', ['id_jenis_kunjungan' => $jenis_kunjungan])->row(),
+            'arrLabel' => $arrLabel,
+            'arrData' => $arrData,
+            'content' => $content,
         ];
         $this->load->view("layout_print", $data);
     }

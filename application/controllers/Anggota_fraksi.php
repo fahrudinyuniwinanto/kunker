@@ -232,9 +232,16 @@ class Anggota_fraksi extends CI_Controller
         $row = $this->Users_model->get_by_id($id);
 
         if ($row) {
-            $this->Users_model->delete($id);
-            $this->session->set_flashdata('message', 'Data Berhasil Dihapus');
-            redirect(site_url('anggota_fraksi'));
+            if ($this->session->userdata('id_group') == 1) {
+                $this->Users_model->delete($id);
+                $this->session->set_flashdata('message', 'Delete Record Success');
+                redirect(site_url('anggota_fraksi'));
+            } else {
+
+                $this->Users_model->update($id, ['isactive' => 0]);
+                $this->session->set_flashdata('message', 'Data Berhasil Dihapus');
+                redirect(site_url('anggota_fraksi'));
+            }
         } else {
             $this->session->set_flashdata('message', 'Data Tidak Ditemukan');
             redirect(site_url('anggota_fraksi'));

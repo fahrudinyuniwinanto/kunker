@@ -177,9 +177,16 @@ class Jenis_kunjungan extends CI_Controller
         $row = $this->Jenis_kunjungan_model->get_by_id($id);
 
         if ($row) {
-            $this->Jenis_kunjungan_model->delete($id);
-            $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('jenis_kunjungan'));
+            if ($this->session->userdata('id_group') == 1) {
+                $this->Janis_kunjungan_model->delete($id);
+                $this->session->set_flashdata('message', 'Delete Record Success');
+                redirect(site_url('jenis_kunjungan'));
+            } else {
+
+                $this->Janis_kunjungan_model->update($id, ['isactive' => 0]);
+                $this->session->set_flashdata('message', 'Data Berhasil Dihapus');
+                redirect(site_url('jenis_kunjungan'));
+            }
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('jenis_kunjungan'));

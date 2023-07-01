@@ -13,27 +13,15 @@
             <div class="stats-icon"><i class="fa fa-envelope"></i></div>
             <div class="stats-info">
                 <h4>Total Permohonan</h4>
-                <p>10</p>
+                <p><?= $permohonan_masuk ?></p>
             </div>
             <div class="stats-link">
-                <a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+                <a href="<?= site_url('kunker') ?>">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
             </div>
         </div>
     </div>
 
 
-    <div class="col-xl-3 col-md-6">
-        <div class="widget widget-stats bg-info">
-            <div class="stats-icon"><i class="fa fa-arrow-alt-circle-down"></i></div>
-            <div class="stats-info">
-                <h4>Permohonan Masuk</h4>
-                <p>10</p>
-            </div>
-            <div class="stats-link">
-                <a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
-            </div>
-        </div>
-    </div>
 
 
     <div class="col-xl-3 col-md-6">
@@ -41,10 +29,23 @@
             <div class="stats-icon"><i class="fa fa-clock"></i></div>
             <div class="stats-info">
                 <h4>Permohonan Pending</h4>
-                <p>10</p>
+                <p><?= $permohonan_pending ?></p>
             </div>
             <div class="stats-link">
-                <a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+                <a href="<?= site_url('kunker') ?>">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="widget widget-stats bg-info">
+            <div class="stats-icon"><i class="fa fa-check-circle"></i></div>
+            <div class="stats-info">
+                <h4>Permohonan Disetujui</h4>
+                <p><?= $permohonan_disetujui ?></p>
+            </div>
+            <div class="stats-link">
+                <a href="<?= site_url('kunker') ?>">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
             </div>
         </div>
     </div>
@@ -52,13 +53,13 @@
 
     <div class="col-xl-3 col-md-6">
         <div class="widget widget-stats bg-red">
-            <div class="stats-icon"><i class="fa fa-check"></i></div>
+            <div class="stats-icon"><i class="fa fa-times-circle"></i></div>
             <div class="stats-info">
-                <h4>Permohonan Disetujui</h4>
-                <p>5</p>
+                <h4>Permohonan Ditolak</h4>
+                <p><?= $permohonan_ditolak ?></p>
             </div>
             <div class="stats-link">
-                <a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+                <a href="<?= site_url('kunker') ?>">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
             </div>
         </div>
     </div>

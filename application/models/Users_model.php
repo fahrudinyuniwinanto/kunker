@@ -58,6 +58,7 @@ class Users_model extends CI_Model
             $this->db->where('aa.id_group >=', $this->session->userdata('id_group'));
             $this->db->where('aa.id_group !=', 4);
         }
+        $this->db->where('isactive', 1);
         $this->db->from($this->table . " aa");
         return $this->db->count_all_results();
     }
@@ -90,6 +91,7 @@ class Users_model extends CI_Model
             $this->db->where('aa.id_group >=', $this->session->userdata('id_group'));
             $this->db->where('aa.id_group !=', 4);
         }
+        $this->db->where('isactive', 1);
         $this->db->limit($limit, $start);
         return $this->db->get($this->table . " aa")->result();
     }

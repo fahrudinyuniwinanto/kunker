@@ -88,7 +88,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <a href="#" class="btn btn-flat btn-success">Total Record : <?php echo $total_rows ?></a>
-                        <?php echo anchor(site_url('fraksi/excel'), 'Excel', 'class="btn btn-flat btn-success"'); ?>
+                        <!-- <?php echo anchor(site_url('fraksi/excel'), 'Excel', 'class="btn btn-flat btn-success"'); ?> -->
                     </div>
                     <div class="col-md-6 text-right">
                         <?php echo $pagination ?>
