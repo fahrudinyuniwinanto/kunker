@@ -212,6 +212,15 @@
 							<?= data_app('APP_INSTANSI') ?><br />
 							<?= data_app('OPD_ADDR') ?>
 						</p>
+
+						<h4 class="footer-title">Follow Us</h4>
+						<div class="footer-media-list">
+							<a href="#" class="me-1"><i class="fab fa-lg fa-facebook fa-fw"></i></a>
+							<a href="#" class="me-2"><i class="fab fa-lg fa-instagram fa-fw"></i></a>
+							<a href="#" class="me-2"><i class="fab fa-lg fa-twitter fa-fw"></i></a>
+							<a href="#" class="me-2"><i class="fab fa-lg fa-youtube fa-fw"></i></a>
+							<a href="#" class="me-2"><i class="fab fa-lg fa-linkedin fa-fw"></i></a>
+						</div>
 					</div>
 					<div class="col-lg-3 mb-4 mb-lg-0">
 						<h4 class="footer-title">Menu</h4>
@@ -243,21 +252,6 @@
 							<div class="footer-copyright-text">&copy; <?= date('Y') . ' ' . data_app('LEFT_FOOTER') ?></div>
 						</div>
 						<div class="col-lg-6 text-center text-lg-end">
-							<!-- <span class="dropdown me-4">
-								<a href="#" class="footer-copyright-link dropdown-toggle" data-bs-toggle="dropdown">United States (English)</a>
-								<ul class="dropdown-menu">
-									<li><a href="#" class="dropdown-item">United States (English)</a></li>
-									<li><a href="#" class="dropdown-item">China (简体中文)</a></li>
-									<li><a href="#" class="dropdown-item">Brazil (Português)</a></li>
-									<li><a href="#" class="dropdown-item">Germany (Deutsch)</a></li>
-									<li><a href="#" class="dropdown-item">France (Français)</a></li>
-									<li><a href="#" class="dropdown-item">Japan (日本語)</a></li>
-									<li><a href="#" class="dropdown-item">Korea (한국어)</a></li>
-									<li><a href="#" class="dropdown-item">Latin America (Español)</a></li>
-									<li><a href="#" class="dropdown-item">Spain (Español)</a></li>
-								</ul>
-							</span> -->
-							<!-- <a href="#" class="footer-copyright-link">Sitemap</a> -->
 						</div>
 					</div>
 				</div>

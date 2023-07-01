@@ -122,7 +122,7 @@
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end me-1">
-                            <a href="javascript:;" class="dropdown-item">Edit Profile</a>
+                            <a href="<?= base_url('users/update/' . $this->session->userdata('id_user')) ?>" class="dropdown-item">Edit Profile</a>
                             <a href="javascript:;" class="dropdown-item"><span class="badge bg-danger float-end rounded-pill">2</span> <?= $this->session->userdata('email') ?></a>
                             <a href="javascript:;" class="dropdown-item"><?= $this->session->userdata('telp') ?></a>
                             <div class="dropdown-divider"></div>

@@ -37,7 +37,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="int" class="form-label">Level Akses<?php echo form_error('id_group') ?></label>
-                        <?= form_dropdown('id_group', get_combo_where('user_group', 'id', 'group_name', ['' => "--Pilih--"], ['id !=' => '1']), $id_group, ['class' => 'form-control']) ?>
+                        <?= form_dropdown('id_group', get_combo_where('user_group', 'id', 'group_name', ['' => "--Pilih--"], ['id !=' => '1', 'id >=' => $this->session->userdata('id_group')]), $id_group, ['class' => 'form-control']) ?>
 
                         <!-- <div class="input-group">
                             <input type="hidden" name="id_group" id="id_group" value="<?php echo $id_group; ?>" />
