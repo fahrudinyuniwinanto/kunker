@@ -32,9 +32,7 @@ class Kunker extends CI_Controller
 		$config['page_query_string'] = TRUE;
 		$config['total_rows'] = $this->Kunker_model->total_rows($q);
 		$kunker = $this->Kunker_model->get_limit_data($config['per_page'], $start, $q);
-		// echo '<pre>';
-		// print_r($kunker);
-		// die();
+
 		$this->load->library('pagination');
 		$this->pagination->initialize($config);
 
@@ -352,7 +350,7 @@ class Kunker extends CI_Controller
 		if ($row) {
 			$data = $row;
 			$data->content = 'backend/kunker/kunker_verify';
-			$data->arr_tujuan_disposisi = get_combo('karo', 'id_karo', 'karo', [''=>'Pilih karo ...']);
+			$data->arr_tujuan_disposisi = get_combo('karo', 'id_karo', 'karo', ['' => 'Pilih karo ...']);
 
 
 			// wfDebug($data);

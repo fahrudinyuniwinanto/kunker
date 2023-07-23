@@ -39,7 +39,7 @@
 							<a href="<?= base_url('Frontend') ?>" class="header-nav-link">Home</a>
 						</div>
 						<div class="header-nav-item">
-							<a href="<?= base_url('Frontend/') ?>#tentang_kami" class="header-nav-link">Tentang Kami</a>
+							<a href="<?= base_url('Frontend/') ?>#permohonan" class="header-nav-link">Permohonan Terbaru</a>
 						</div>
 						<div class="header-nav-item">
 							<a href="<?= base_url('Frontend/') ?>#kontak" class="header-nav-link">Kontak</a>
@@ -97,75 +97,64 @@
 		</div>
 
 
-		<div class="section" id="tentang_kami">
+		<div class="section" id="permohonan">
 
 			<div class="container">
 
 				<div class="pt-lg-5 pb-lg-3 text-center">
 					<div class="display-6 fw-bolder mb-3 d-flex align-items-center justify-content-center">
-						Tentang Kami
+						Permohonan Terbaru
 					</div>
-					<p class="fs-18px mb-5">We build technologies that help people create their own applications, <span class="d-none d-lg-inline"><br /></span>speed up development speed, save times and grow their businesses.</p>
-					<div class="mb-2 fw-bold text-gray-500">built on top of</div>
-					<div class="text-gray-500 text-center mb-5">
-						<i class="fab fa-bootstrap fa-2x fa-fw"></i>
-						<i class="fab fa-node-js fa-2x  fa-fw"></i>
-						<i class="fab fa-vuejs fa-2x  fa-fw"></i>
-						<i class="fab fa-angular fa-2x  fa-fw"></i>
-						<i class="fab fa-react fa-2x  fa-fw"></i>
-					</div>
+					<p class="fs-18px mb-5">Berikut adalah data permohonan kunjungan kerja terbaru per tanggal <?= tanggal_indo(date('Y-m-d')) ?></p>
+
 				</div>
 
 
-				<h4 class="section-subtitle">Top Stories</h4>
 
+				<div class="table-responsive">
+					<table class="table table-bordered table-hover table-condensed" style="margin-bottom: 10px">
+						<thead class="thead-light">
+							<tr>
+								<th class="text-center">No</th>
+								<th class="text-center">Jenis Kunjungan</th>
+								<th class="text-center">Fraksi</th>
+								<th class="text-center">Nama Anggota</th>
+								<th class="text-center">Tgl. Dibuat</th>
+								<th class="text-center">Status</th>
+							</tr>
+						</thead>
+						<tbody><?php
+								foreach ($kunker_data as $kunker) {
+									?>
+								<tr>
+									<td width="50px"><?php echo ++$start ?></td>
+									<td><strong>
+											<?php echo $kunker->nama_kunker ?></strong><br>
+										<?= '<label class="badge bg-green">Kunjungan Ke-' . @$kunker->kunjungan_ke . '</label>' ?>
+									</td>
+									<td><strong><?php echo $kunker->nama_fraksi ?></strong></td>
+									<td><strong><?php echo $kunker->fullname ?></strong></td>
+									<td><?php echo $kunker->tgl_dibuat ?></td>
+									<td class="text-center"><?php
+																if ($kunker->status_disposisi == 0) {
+																	echo '<label class="badge bg-warning">PENDING</label>';
+																}
+																if ($kunker->status_disposisi == 1) {
+																	echo '<label class="badge bg-success">DISETUJUI</label>';
+																}
+																if ($kunker->status_disposisi == 2) {
+																	echo '<label class="badge bg-danger">DITOLAK</label>';
+																}
+																?></td>
+								</tr>
 
-				<div class="row gx-lg-5">
-
-					<div class="col-lg-4">
-
-						<div class="news">
-							<div class="news-media">
-								<div class="news-media-img" style="background-image: url(<?= base_url() ?>assets/img/corporate/img-2.jpg);"></div>
-							</div>
-							<div class="news-content">
-								<div class="news-label"><span class="">Web Development</span></div>
-								<h2 class="news-title">Accelerate development without extra added costs</h2>
-								<p class="news-date">December 9, 2021</p>
-							</div>
-						</div>
-
-
-						<div class="news">
-							<div class="news-media">
-								<div class="news-media-img" style="background-image: url(<?= base_url() ?>assets/img/corporate/img-3.jpg);"></div>
-							</div>
-							<div class="news-content">
-								<div class="news-label"><span class="bg-indigo-200 text-indigo-800">Native Apps</span></div>
-								<h2 class="news-title">Multiple frontend framework fit your needs</h2>
-								<p class="news-date">December 10, 2021</p>
-							</div>
-						</div>
-
-					</div>
-
-
-					<div class="col-lg-8">
-
-						<div class="news">
-							<div class="news-media">
-								<div class="news-media-img news-media-img-lg" style="background-image: url(<?= base_url() ?>assets/img/corporate/img-4.jpg);"></div>
-							</div>
-							<div class="news-content">
-								<div class="news-label"><span class="bg-primary-200 text-primary-800">SEO Ranking</span></div>
-								<h2 class="news-title">Boost your web traffic with smart routing and seo optimised html code.</h2>
-								<p class="news-date">December 20, 2021</p>
-							</div>
-						</div>
-
-					</div>
-
+							<?php
+							}
+							?>
+						</tbody>
+					</table>
 				</div>
+
 
 			</div>
 
