@@ -88,7 +88,8 @@
 					</div>
 					<div class="sub-price">
 						<small>PULANG</small>
-						<span class="text-dark"><?= @date('d-m-Y', strtotime($tgl_berangkat . ' + ' . $jumlah_hari . ' day')) ?></span>
+						<?php $jumlah_hari_min1=$jumlah_hari-1; ?>
+						<span class="text-dark"><?= @date('d-m-Y', strtotime($tgl_berangkat . ' + ' . $jumlah_hari_min1 . ' day')) ?></span>
 					</div>
 				</div>
 			</div>
