@@ -87,12 +87,13 @@ class Kunker extends CI_Controller
 	{
 
 		$row = $this->Kunker_model->get_by_id($id);
+
 		if ($row) {
 			$data = array(
 				'id_kunker' => $row->id_kunker,
 				'id_jenis_kunjungan' => $row->id_jenis_kunjungan,
 				'maksimal_kunjungan' => $row->maksimal_kunjungan,
-				'jumlah_hari' => $row->jumlah_hari,
+				'jumlah_hari' => $row->jumlah_hari_kunjungan,
 				'nama_kunker' => $row->nama_kunker,
 				'kunjungan_ke' => $row->kunjungan_ke,
 				'tgl_berangkat' => $row->tgl_berangkat,
@@ -330,7 +331,7 @@ class Kunker extends CI_Controller
 		if ($row) {
 			$data = $row;
 			$data->content = 'backend/kunker/kunker_verify';
-			$data->arr_tujuan_disposisi = get_combo_where('users', 'id_user', 'fullname', [],['id_group' => 3]);
+			$data->arr_tujuan_disposisi = get_combo_where('users', 'id_user', 'fullname', [], ['id_group' => 3]);
 
 
 			// wfDebug($data);
