@@ -47,6 +47,7 @@
             </div>
         </div>
     </div>
+    <?php $jumlah_hari_min1 = $jumlah_hari - 1; ?>
     <!-- END invoice-header -->
     <!-- BEGIN invoice-content -->
     <div class="invoice-content">
@@ -88,7 +89,7 @@
                     </div>
                     <div class="sub-price">
                         <small>PULANG</small>
-                        <span class="text-dark"><?= @date('d-m-Y', strtotime($tgl_berangkat . ' + ' . $jumlah_hari . ' day')) ?></span>
+                        <span class="text-dark"><?= @date_format(date_create($tgl_kembali), 'd-m-Y') ?></span>
                     </div>
                 </div>
             </div>
