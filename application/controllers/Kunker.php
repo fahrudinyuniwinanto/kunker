@@ -330,7 +330,7 @@ class Kunker extends CI_Controller
 		if ($row) {
 			$data = $row;
 			$data->content = 'backend/kunker/kunker_verify';
-			$data->arr_tujuan_disposisi = get_combo_where('users', 'id_user', 'fullname', [],['id_group' => 3]);
+			$data->arr_tujuan_disposisi = get_combo('karo', 'id_karo', 'karo', [''=>'Pilih karo ...']);
 
 
 			// wfDebug($data);

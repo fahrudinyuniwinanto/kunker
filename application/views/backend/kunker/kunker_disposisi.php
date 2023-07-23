@@ -10,7 +10,7 @@
 		.paper>*,
 		td {
 			font-family: Arial, Helvetica, sans-serif;
-			font-size: 16px;
+			font-size: 14px;
 		}
 
 		table,
@@ -65,26 +65,12 @@
 			<tr>
 				<td colspan="6">Diteruskan kepada</td>
 			</tr>
+			<?php foreach($this->db->get_where('karo',[])->result() as $v2): ?>
 			<tr>
-				<td colspan="3">&#9634 <label>Karo Organisasi dan Perencanaan</label></td>
+				<td colspan="3"><?=$v->tujuan_disposisi==$v2->id_karo?'&#9745;':'&#9634;'?> <label><?=$v2->karo?></label></td>
 				<td colspan="3"></td>
 			</tr>
-			<tr>
-				<td colspan="3">&#9634 <label> Karo Sumber Daya Manusia Aparatur</label></td>
-				<td colspan="3"></td>
-			</tr>
-			<tr>
-				<td colspan="3">&#9634 <label> Karo Keuangan</label></td>
-				<td colspan="3"></td>
-			</tr>
-			<tr>
-				<td colspan="3">&#9634 <label> Karo Pengelolaan Bangunan dan Wisma</label></td>
-				<td colspan="3"></td>
-			</tr>
-			<tr>
-				<td colspan="3">&#9634 <label> Karo Umum</label></td>
-				<td colspan="3"></td>
-			</tr>
+			<?php endforeach; ?>
 			<tr>
 				<td colspan="4">Disposisi / Catatan : <br>
 					Untuk di proses sesuai ketentuan yang berlaku atas nama :</td>
