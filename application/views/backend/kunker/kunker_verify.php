@@ -110,11 +110,12 @@
 				* Maksimal <strong><?= @$maksimal_hari ?> hari</strong> dalam sekali kunjungan
 			</div>
 			<div class="col-md-4">
-				<strong><i class="fa fa-fw fa-lg fa-forward"></i> Tujuan Disposisi</strong>
-				<?=form_dropdown('tujuan_disposisi', $arr_tujuan_disposisi, $tujuan_disposisi,['class'=>'form-control mb-10px','id'=>'tujuan_disposisi'])?>
+				
 			</div>
 			<div class="col-md-4">
-				<strong><i class="fa fa-fw fa-lg fa-edit"></i> Disposisi</strong>
+			<strong><i class="fa fa-fw fa-lg fa-forward"></i> Tujuan Disposisi</strong>
+				<?=form_dropdown('tujuan_disposisi', $arr_tujuan_disposisi, $tujuan_disposisi,['class'=>'form-control mb-10px','id'=>'tujuan_disposisi'])?>
+				<strong><i class="fa fa-fw fa-lg fa-edit"></i> Catatan Disposisi</strong>
 				<p><input type='checkbox' id='disposisi_check' name='disposisi_check' <?= ($diposisi_note == "") ? 'checked' : '' ?> /> <label for="disposisi_check">Mohon untuk ditindaklanjuti sesuai dengan ketentuan yang berlaku
 					</label>'</p>
 				<textarea style="width: 400px;" name="diposisi_note" id="diposisi_note" class="form-control mb-10px" required placeholder="Catatan Disposisi..." rows="2" <?= ($diposisi_note == "") ? 'readonly' : '' ?>><?= $diposisi_note ?></textarea>
