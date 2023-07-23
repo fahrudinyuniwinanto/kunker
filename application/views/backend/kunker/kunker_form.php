@@ -196,6 +196,7 @@
 </div>
 <script>
     $(document).ready(function() {
+        $("#id_jenis_kunjungan").val('');
         $(".jenis_kunjungan").hide();
         $("#nama_daerah_tujuan").attr('readonly', true);
         $("#tgl_berangkat").attr('readonly', true);
