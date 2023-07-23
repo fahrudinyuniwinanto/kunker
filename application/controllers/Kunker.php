@@ -194,39 +194,53 @@ class Kunker extends CI_Controller
 					$this->session->set_flashdata('error_message', 'Jumlah maksimal hari pada jenis kunjungan ' . $jenis_kunjungan->nama_kunker . '  adalah ' . $jenis_kunjungan->jumlah_hari . ' hari.');
 					$this->create();
 				} else {
-					$data = array(
-						'id_jenis_kunjungan' => $this->input->post('id_jenis_kunjungan', TRUE),
-						'kunjungan_ke' => $this->input->post('kunjungan_ke', TRUE),
-						'nomor_surat' => $this->input->post('nomor_surat', TRUE),
-						'tanggal_surat' => $this->input->post('tanggal_surat', TRUE),
-						'tgl_berangkat' => $this->input->post('tgl_berangkat', TRUE),
-						'tgl_kembali' => $this->input->post('tgl_kembali', TRUE),
-						'jumlah_hari' => $this->input->post('jumlah_hari', TRUE),
-						'perihal_surat' => $this->input->post('perihal_surat', TRUE),
-						'lampiran_surat' => $this->input->post('lampiran_surat', TRUE),
-						'tingkat_keamanan' => $this->input->post('tingkat_keamanan', TRUE),
-						'id_fraksi' => $this->input->post('id_fraksi', TRUE),
-						'id_anggota_fraksi' => $this->input->post('id_anggota_fraksi', TRUE),
-						'id_kunker_ta' => $this->input->post('id_kunker_ta', TRUE),
-						'nama_daerah_tujuan' => $this->input->post('nama_daerah_tujuan', TRUE),
-						'file_surat' => sf_upload('dok_permohonan', 'assets/dok_permohonan', 'pdf', 2048, 'file_surat'),
-						'created_at' => date('Y-m-d H:i:s'),
-					);
-					//input ke kunker;
-					$this->Kunker_model->insert($data);
-					$insert_id = $this->db->insert_id();
-					$arr_ta = $this->input->post('id_ta', TRUE);
-					foreach ($arr_ta as $v) {
-						$data = array(
-							'id_kunker' => $insert_id,
-							'id_ta' => $v,
-						);
-						//input ke kunker_ta;
-						$this->Kunker_ta_model->insert($data);
-					}
+					//cek apakah rentang waktu yang dinnputkan bentrok dengan kunjungan lain atau tidak
 
-					$this->session->set_flashdata('message', 'Data Kunjungan Berhasil Diajukan');
-					redirect(site_url('kunker'));
+					$id_anggota_fraksi = $this->input->post('id_anggota_fraksi', TRUE);
+					$tgl_berangkat = $this->input->post('tgl_berangkat', TRUE);
+					$tgl_kembali = $this->input->post('tgl_kembali', TRUE);
+					$sql = "SELECT * FROM kunker WHERE id_anggota_fraksi='$id_anggota_fraksi' AND (tgl_berangkat BETWEEN '$tgl_berangkat' AND '$tgl_kembali' OR tgl_kembali BETWEEN '$tgl_berangkat' AND '$tgl_kembali')";
+					$cek_tgl = $this->db->query($sql)->num_rows();
+
+					if ($cek_tgl != 0) {
+
+						$this->session->set_flashdata('error_message', '<h4>Sudah ada kunjungan pada tanggal tersebut. Silahkan cek kembali permohonan Anda.</h4>');
+						$this->create();
+					} else {
+						$data = array(
+							'id_jenis_kunjungan' => $this->input->post('id_jenis_kunjungan', TRUE),
+							'kunjungan_ke' => $this->input->post('kunjungan_ke', TRUE),
+							'nomor_surat' => $this->input->post('nomor_surat', TRUE),
+							'tanggal_surat' => $this->input->post('tanggal_surat', TRUE),
+							'tgl_berangkat' => $this->input->post('tgl_berangkat', TRUE),
+							'tgl_kembali' => $this->input->post('tgl_kembali', TRUE),
+							'jumlah_hari' => $this->input->post('jumlah_hari', TRUE),
+							'perihal_surat' => $this->input->post('perihal_surat', TRUE),
+							'lampiran_surat' => $this->input->post('lampiran_surat', TRUE),
+							'tingkat_keamanan' => $this->input->post('tingkat_keamanan', TRUE),
+							'id_fraksi' => $this->input->post('id_fraksi', TRUE),
+							'id_anggota_fraksi' => $this->input->post('id_anggota_fraksi', TRUE),
+							'id_kunker_ta' => $this->input->post('id_kunker_ta', TRUE),
+							'nama_daerah_tujuan' => $this->input->post('nama_daerah_tujuan', TRUE),
+							'file_surat' => sf_upload('dok_permohonan', 'assets/dok_permohonan', 'pdf', 2048, 'file_surat'),
+							'created_at' => date('Y-m-d H:i:s'),
+						);
+						//input ke kunker;
+						$this->Kunker_model->insert($data);
+						$insert_id = $this->db->insert_id();
+						$arr_ta = $this->input->post('id_ta', TRUE);
+						foreach ($arr_ta as $v) {
+							$data = array(
+								'id_kunker' => $insert_id,
+								'id_ta' => $v,
+							);
+							//input ke kunker_ta;
+							$this->Kunker_ta_model->insert($data);
+						}
+
+						$this->session->set_flashdata('message', 'Data Kunjungan Berhasil Diajukan');
+						redirect(site_url('kunker'));
+					}
 				}
 			}
 		}
@@ -322,6 +336,13 @@ class Kunker extends CI_Controller
 			$this->session->set_flashdata('message', 'Record Not Found');
 			redirect(site_url('kunker'));
 		}
+	}
+
+	public function cek_tanggal()
+	{
+
+		$sql = "SELECT * FROM kunker WHERE id_anggota_fraksi='$id_anggota_fraksi' AND (tgl_berangkat BETWEEN '$tgl_berangkat' AND '$tgl_kembali' OR tgl_kembali BETWEEN '$tgl_berangkat' AND '$tgl_kembali')";
+		$cek_tgl = $this->db->query($sql)->num_rows();
 	}
 
 	public function verify($id)
