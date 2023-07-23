@@ -37,12 +37,14 @@
 
 			</address>
 		</div>
+		
+		<?php $jumlah_hari_min1=$jumlah_hari-1; ?>
 		<div class="invoice-date">
 			<small>Tujuan</small>
 			<div class="date text-dark mt-5px"><?= @$nama_daerah_tujuan ?></div>
 			<div class="invoice-detail">
 				Berangkat Pada: <?= @date('d-m-Y', strtotime($tgl_berangkat)) ?><br />
-				Kembali Pada: <?= @date('d-m-Y', strtotime($tgl_berangkat . ' + ' . $jumlah_hari . ' day')) ?><br />
+				Kembali Pada: <?= @date('d-m-Y', strtotime($tgl_berangkat . ' + ' . $jumlah_hari_min1 . ' day')) ?><br />
 				Jumlah Hari: <?= @$jumlah_hari ?> hari<br />
 			</div>
 		</div>
@@ -88,7 +90,6 @@
 					</div>
 					<div class="sub-price">
 						<small>PULANG</small>
-						<?php $jumlah_hari_min1=$jumlah_hari-1; ?>
 						<span class="text-dark"><?= @date('d-m-Y', strtotime($tgl_berangkat . ' + ' . $jumlah_hari_min1 . ' day')) ?></span>
 					</div>
 				</div>
