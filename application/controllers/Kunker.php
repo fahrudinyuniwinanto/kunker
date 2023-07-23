@@ -351,6 +351,7 @@ class Kunker extends CI_Controller
 		$save = $this->db->update('kunker', [
 			'status_disposisi' => $status,
 			'diposisi_note' => $note,
+			'tujuan_disposisi' => $this->input->post('tujuan_disposisi'),
 			'disposisi_at' => date("Y-m-d H:i:s"),
 			'disposisi_by' => getSession('fullname')
 		], array('id_kunker' => $this->input->post('id_kunker')));

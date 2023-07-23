@@ -111,7 +111,7 @@
 			</div>
 			<div class="col-md-4">
 				<strong><i class="fa fa-fw fa-lg fa-forward"></i> Tujuan Disposisi</strong>
-				<?=form_dropdown('tujuan_disposisi', $arr_tujuan_disposisi, $tujuan_disposisi,['class'=>'form-control mb-10px'])?>
+				<?=form_dropdown('tujuan_disposisi', $arr_tujuan_disposisi, $tujuan_disposisi,['class'=>'form-control mb-10px','id'=>'tujuan_disposisi'])?>
 			</div>
 			<div class="col-md-4">
 				<strong><i class="fa fa-fw fa-lg fa-edit"></i> Disposisi</strong>
