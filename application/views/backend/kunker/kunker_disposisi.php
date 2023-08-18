@@ -73,7 +73,6 @@
 			<?php endforeach; ?>
 			<tr>
 				<td colspan="4">Disposisi / Catatan : <br>
-<<<<<<< HEAD
 					<?=$v->diposisi_note?><br>
 					<br>
 					<br>
@@ -86,11 +85,6 @@
 				Tanggal terima surat: <?=date_format(date_create($v->tanggal_surat),'m-d-Y')?>
 					<br>
 					<img src="<?=base_url()?>/assets/img/qrcode.jpg" style="width:80px; height:80px; border:1px;">
-=======
-					Untuk di proses sesuai ketentuan yang berlaku atas nama :</td>
-				<td colspan="2">Paraf,
-					<br><br><br><br><br><br><br><br><br><br><br>
->>>>>>> parent of b5e462f (lembar disposisi (kurang qrcode dan unit pemberi dispo))
 				</td>
 			</tr>
 		</table>
