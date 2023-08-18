@@ -65,7 +65,7 @@
 
                         </div>
                         <div class="col-lg-4">
-                            <div class="row jenis_kunjungan">
+                            <div class="row dapil_hari">
                                 <div class="col-lg-9">
                                     <div class="mb-3">
                                         <label class="form-label" for="varchar">Daerah Pemilihan <?php echo form_error('nama_daerah_tujuan') ?></label>
@@ -83,7 +83,7 @@
                                 <div class="col-lg-6">
                                     <div class="mb-3 ">
                                         <label class="form-label" for="varchar">Tgl. Berangkat <?php echo form_error('tgl_berangkat') ?></label>
-                                        <input type="date" class="form-control" min="<?= date('Y-m-d') ?>" name="tgl_berangkat" id="tgl_berangkat" placeholder="" value="<?php echo $tgl_berangkat; ?>" required />
+                                        <input type="date" class="form-control" name="tgl_berangkat" id="tgl_berangkat" placeholder="" value="<?php echo $tgl_berangkat; ?>" required />
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -138,18 +138,41 @@
 
                         <div class="col-lg-4">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-hover table-condensed" style="margin-bottom: 10px">
+                                <!--<table class="table table-bordered table-hover table-condensed" style="margin-bottom: 10px">
                                     <thead class="thead-light">
                                         <tr>
-                                            <!-- <th class="text-center">No</th> -->
-                                            <th class="text-center">Nama Anggota (TA)</th>
+                                            <!-- <th class="text-center">No</th> --
+                                            <th class="text-center">Nama Tenaga Ahli Anggota (TAA)</th>
                                             <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="dynamic-fields">
                                     </tbody>
+                                </table>-->
+                                <table class="table table-bordered table-hover table-condensed" style="margin-bottom: 10px">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th class="text-center">No</th>
+                                            <th class="text-center">Nama Tenaga Ahli Anggota (TAA)</th>
+                                            <th class="text-center">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $start = 1;
+                                        foreach ($data_ta as $k => $v) { ?>
+                                            <tr>
+                                                <td><?= $start++ ?></td>
+                                                <td><?= $v->fullname ?></td>
+                                                <td class="text-center">
+                                                    <input type="checkbox" name="id_ta[]" value="<?= $v->id_user ?>" />
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
+                                    </tbody>
                                 </table>
-                                <button class="btn btn-warning" id="add-field" onclick="event.preventDefault()">Tambah Anggota</button>
+                                <i>Centang jika diikutkan.</i>
+                                <!-- <button class="btn btn-warning" id="add-field" onclick="event.preventDefault()">Tambah Anggota</button> -->
                             </div>
                         </div>
 
@@ -198,6 +221,7 @@
     $(document).ready(function() {
         $("#id_jenis_kunjungan").val('');
         $(".jenis_kunjungan").hide();
+        $(".dapil_hari").hide();
         $("#nama_daerah_tujuan").attr('readonly', true);
         $("#tgl_berangkat").attr('readonly', true);
         $("#tgl_kembali").attr('readonly', true);
@@ -318,7 +342,6 @@
 
                         swal('Kuota Kunjungan Sudah Habis', 'Silahkan Pilih Jenis Kunjungan Lainnya', 'error');
                     } else {
-
                         $("#kunjungan_ke").val(res.jumlah_kunjungan + 1);
                         $("#kunjungan_ke2").text(res.jumlah_kunjungan + 1);
                         $("#sisa_kunjungan").text(res.jenis_kunjungan.maksimal_kunjungan - (res.jumlah_kunjungan));
@@ -326,6 +349,42 @@
                         $("#maks_hari").text(res.jenis_kunjungan.jumlah_hari);
                         $("#maksimal_hari").val(res.jenis_kunjungan.jumlah_hari);
                         $(".jenis_kunjungan").show();
+                        if (res.jenis_kunjungan.id_jenis_kunjungan != 6) {
+                            $(".dapil_hari").show();
+                        } else {
+                            $(".dapil_hari").hide();
+                        }
+                        if (res.jenis_kunjungan.id_jenis_kunjungan == 1) {
+                            // Fungsi untuk mendapatkan hari berikutnya yang merupakan hari Jumat
+                            function getNextFriday(date) {
+                                var nextDay = new Date(date);
+                                nextDay.setDate(date.getDate() + (5 + 7 - date.getDay()) % 7);
+                                return nextDay;
+                            }
+
+                            // Fungsi untuk mendapatkan hari berikutnya yang merupakan hari Minggu
+                            function getNextSunday(date) {
+                                var nextDay = new Date(date);
+                                nextDay.setDate(date.getDate() + (7 - date.getDay()) % 7);
+                                return nextDay;
+                            }
+
+                            // Mendapatkan tanggal hari ini
+                            var currentDate = new Date();
+
+                            // Mendapatkan tanggal berikutnya yang merupakan hari Jumat dan Minggu
+                            var nextFriday = getNextFriday(currentDate);
+                            var nextSunday = getNextSunday(currentDate);
+
+                            // Ubah format tanggal menjadi YYYY-MM-DD
+                            var nextFridayStr = nextFriday.toISOString().split('T')[0];
+                            var nextSundayStr = nextSunday.toISOString().split('T')[0];
+
+                            // Terapkan tanggal minimal dan maksimal pada input
+                            $('tgl_berangkat').attr('min', nextFridayStr);
+                            $('tgl_berangkat').attr('max', nextSundayStr);
+
+                        }
                         $("#nama_daerah_tujuan").removeAttr('readonly');
                         $("#tgl_berangkat").removeAttr('readonly');
                     }

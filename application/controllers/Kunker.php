@@ -161,6 +161,7 @@ class Kunker extends CI_Controller
 			'created_by' => set_value('created_by'),
 			'disposisi_by' => set_value('disposisi_by'),
 			'diposisi_note' => set_value('diposisi_note'),
+			'data_ta' => $this->db->select('id_user, fullname')->where('id_parent', $this->session->userdata('id_user'))->where('status', '1')->get('users')->result(),
 			'content' => 'backend/kunker/kunker_form',
 		);
 		$this->load->view(layout(), $data);
@@ -227,6 +228,8 @@ class Kunker extends CI_Controller
 						$this->Kunker_model->insert($data);
 						$insert_id = $this->db->insert_id();
 						$arr_ta = $this->input->post('id_ta', TRUE);
+						//print_r($arr_ta);
+						//die('sasa');
 						foreach ($arr_ta as $v) {
 							$data = array(
 								'id_kunker' => $insert_id,
