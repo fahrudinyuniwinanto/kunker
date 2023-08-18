@@ -51,7 +51,7 @@ class Backend extends CI_Controller
             case 'fraksi':
                 $q = "SELECT aa.id_fraksi, COUNT(bb.id_fraksi) as jml_kunjungan
                 FROM fraksi as aa left join kunker as bb on aa.id_fraksi=bb.id_fraksi 
-                WHERE YEAR(bb.tgl_berangkat) = '$tahun' and bb.id_jenis_kunjungan = '$jenis_kunjungan' group by bb.id_fraksi";
+                WHERE aa.id_fraksi='".getSession('id_fraksi')."' and YEAR(bb.tgl_berangkat) = '$tahun' and bb.id_jenis_kunjungan = '$jenis_kunjungan' group by bb.id_fraksi";
                 $content = "backend/laporan/prin_fraksi_kunker";
                 $arrLabel = [];
                 $arrData = [];
@@ -63,7 +63,7 @@ class Backend extends CI_Controller
             case 'anggota':
                 $q = "SELECT aa.id_user, aa.id_fraksi, COUNT(aa.id_user) as jml_kunjungan
                 FROM users as aa left join kunker as bb on aa.id_user=bb.id_anggota_fraksi 
-                WHERE aa.id_group = '3' and YEAR(bb.tgl_berangkat) = '$tahun' and bb.id_jenis_kunjungan = '$jenis_kunjungan' group by aa.id_user";
+                WHERE aa.id_fraksi='".getSession('id_fraksi')."' and aa.id_group = '3' and YEAR(bb.tgl_berangkat) = '$tahun' and bb.id_jenis_kunjungan = '$jenis_kunjungan' group by aa.id_user";
                 $arrLabel = [];
                 $arrData = [];
                 foreach ($this->db->query($q)->result() as $k => $v) {

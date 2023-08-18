@@ -33,7 +33,7 @@
 			<tr>
 				<td>Nomor Registrasi</td>
 				<td>:</td>
-				<td><?= $v->nomor_surat ?></td>
+				<td><?= $v->nomor_surat.'/'.$v->id_jenis_kunjungan.'/KU.04/'.date_format(date_create($v->tanggal_surat),'m').'/'.date_format(date_create($v->tanggal_surat),'Y') ?></td>
 				<td>Tingkat Keamanan</td>
 				<td>:</td>
 				<td><?= $v->tingkat_keamanan ?></td>
@@ -60,7 +60,7 @@
 				<td><?= $v->lampiran_surat ?> lembar</td>
 				<td>Unit Kerja Pemberi Disposisi</td>
 				<td>:</td>
-				<td></td>
+				<td>Deputi Bidang Administrasi</td>
 			</tr>
 			<tr>
 				<td colspan="6">Diteruskan kepada</td>
@@ -73,9 +73,24 @@
 			<?php endforeach; ?>
 			<tr>
 				<td colspan="4">Disposisi / Catatan : <br>
+<<<<<<< HEAD
+					<?=$v->diposisi_note?><br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br><br>
+					AM: <?=date_format(date_create($v->tanggal_surat),'m-d-Y')?>
+				</td>
+				<td colspan="2">Paraf,<br>
+				Tanggal terima surat: <?=date_format(date_create($v->tanggal_surat),'m-d-Y')?>
+					<br>
+					<img src="<?=base_url()?>/assets/img/qrcode.jpg" style="width:80px; height:80px; border:1px;">
+=======
 					Untuk di proses sesuai ketentuan yang berlaku atas nama :</td>
 				<td colspan="2">Paraf,
 					<br><br><br><br><br><br><br><br><br><br><br>
+>>>>>>> parent of b5e462f (lembar disposisi (kurang qrcode dan unit pemberi dispo))
 				</td>
 			</tr>
 		</table>

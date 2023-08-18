@@ -151,9 +151,12 @@
 	});
 
 	function confirm(status) {
-		// if($("#diposisi_note").html() == null) {
-		// 	swal('','Catatan Disposisi tidak boleh kosong','warning');
-		// }
+		if($("#tujuan_disposisi").val() == "") {
+			console.log($("#tujuan_disposisi").val()+'aa');
+			swal('Tujuan disposisi kosong','Silakan isi tujuan disposisi dahulu','warning');
+			return false;
+		}
+		console.log($("#tujuan_disposisi").val()+'bb');
 		console.log('x');
 		var msgstatus = status == '1' ? 'terima' : (status == '2' ? 'tolak' : '');
 		swal({

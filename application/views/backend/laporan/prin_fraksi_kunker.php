@@ -20,7 +20,7 @@
 			border-collapse: collapse;
 		}
 	</style>
-	<title>Document</title>
+	<title>Laporan Fraksi</title>
 </head>
 
 <body>

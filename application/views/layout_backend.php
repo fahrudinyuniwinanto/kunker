@@ -90,21 +90,28 @@
                     <div class="navbar-item dropdown">
                         <a href="#" data-bs-toggle="dropdown" class="navbar-link dropdown-toggle icon">
                             <i class="fa fa-bell"></i>
-                            <span class="badge">5</span>
+                            <?php $notif = $this->db->get_where("kunker",['tujuan_disposisi'=>getSession('id_user')]);
+                                $arrNotif = $notif->result();
+                                $numNotif = count($arrNotif);
+                                ?>
+                            <span class="badge"><?=$numNotif?></span>
                         </a>
                         <div class="dropdown-menu media-list dropdown-menu-end">
-                            <div class="dropdown-header">NOTIFICATIONS (5)</div>
-                            <a href="javascript:;" class="dropdown-item media">
+                            
+                                <div class="dropdown-header">Notifikasi (<?=$numNotif?>)</div>
+                            <?php foreach ($arrNotif as $k => $v) : ?>
+                            <a href="<?=base_url()?>kunker/verify/<?=$v->id_kunker?>" class="dropdown-item media">
                                 <div class="media-left">
-                                    <i class="fa fa-inbox media-object bg-gray-500"></i>
+                                    <i class="fa fa-plane media-object bg-gray-500"></i>
                                 </div>
                                 <div class="media-body">
-                                    <h6 class="media-heading">Disposisi dari Mr. X <i class="fa fa-exclamation-circle text-danger"></i></h6>
-                                    <div class="text-muted fs-10px">3 minutes ago</div>
+                                    <h6 class="media-heading">Disposisi dari <?=$this->db->get_where('users',['id_user'=>$v->disposisi_by])->row()->fullname?> <i class="fa fa-exclamation-circle text-danger"></i></h6>
+                                    <div class="text-muted fs-10px">Pada <?=tanggal_indo(date_format(date_create($v->disposisi_at),'Y-m-d'))?><br> <?=$this->db->get_where('jenis_kunjungan',['id_jenis_kunjungan'=>$v->id_jenis_kunjungan])->row()->nama_kunker?></div>
                                 </div>
                             </a>
+                            <?php endforeach ?>
                             <div class="dropdown-footer text-center">
-                                <a href="javascript:;" class="text-decoration-none">View more</a>
+                                <a href="<?=base_url()?>/kunker" class="text-decoration-none">Lihat Selengkapnya...</a>
                             </div>
                         </div>
                     </div>
