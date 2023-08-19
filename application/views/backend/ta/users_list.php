@@ -41,7 +41,7 @@
                     </div>
                     <div class="col-md-3 text-right">
                         <?php
-                        if (allow([1])) { ?>
+                        if (allow([1, 2])) { ?>
                             <form action="<?php echo site_url('ta/index'); ?>" class="form-inline" method="get">
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
@@ -65,7 +65,7 @@
                         <tr>
                             <th class="text-center">No</th>
                             <th class="text-center">NIK</th>
-                            <th class="text-center">Nama Tenaga Ahli</th>
+                            <th class="text-center">Nama Tenaga Ahli Anggota (TAA)</th>
                             <th class="text-center">Nama Anggota</th>
                             <th class="text-center">Nama Fraksi</th>
                             <th class="text-center">Status</th>
