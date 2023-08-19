@@ -100,8 +100,12 @@ class Users_model extends CI_Model
     function total_rows_ta($q = NULL)
     {
         $this->db->join('user_group as bb', 'aa.id_group=bb.id', 'left');
+        $this->db->join('fraksi as cc', 'cc.id_fraksi=aa.id_fraksi', 'left');
         $this->db->group_start();
         $this->db->like('aa.id_user', $q);
+        $this->db->or_like('cc.nama_fraksi', $q);
+        // $this->db->or_like('aa.no_anggota', $q);
+        $this->db->or_like('aa.nik', $q);
         $this->db->or_like('aa.fullname', $q);
         $this->db->or_like('aa.username', $q);
         $this->db->or_like('aa.password', $q);
@@ -125,9 +129,13 @@ class Users_model extends CI_Model
     function get_limit_data_ta($limit, $start = 0, $q = NULL)
     {
         $this->db->join('user_group as bb', 'aa.id_group=bb.id', 'left');
+        $this->db->join('fraksi as cc', 'cc.id_fraksi=aa.id_fraksi', 'left');
         $this->db->order_by("aa." . $this->id, "aa." . $this->order);
         $this->db->group_start();
         $this->db->like('aa.id_user', $q);
+        $this->db->or_like('cc.nama_fraksi', $q);
+        // $this->db->or_like('aa.no_anggota', $q);
+        $this->db->or_like('aa.nik', $q);
         $this->db->or_like('aa.fullname', $q);
         $this->db->or_like('aa.username', $q);
         $this->db->or_like('aa.password', $q);
@@ -151,8 +159,12 @@ class Users_model extends CI_Model
     function total_rows_anggota_fraksi($q = NULL)
     {
         $this->db->join('user_group as bb', 'aa.id_group=bb.id', 'left');
+        $this->db->join('fraksi as cc', 'cc.id_fraksi=aa.id_fraksi', 'left');
         $this->db->group_start();
         $this->db->like('aa.id_user', $q);
+        $this->db->or_like('cc.nama_fraksi', $q);
+        $this->db->or_like('aa.no_anggota', $q);
+        // $this->db->or_like('aa.nik', $q);
         $this->db->or_like('aa.fullname', $q);
         $this->db->or_like('aa.username', $q);
         $this->db->or_like('aa.password', $q);
@@ -177,9 +189,13 @@ class Users_model extends CI_Model
     function get_limit_data_anggota_fraksi($limit, $start = 0, $q = NULL)
     {
         $this->db->join('user_group as bb', 'aa.id_group=bb.id', 'left');
+        $this->db->join('fraksi as cc', 'cc.id_fraksi=aa.id_fraksi', 'left');
         $this->db->order_by("aa." . $this->id, "aa." . $this->order);
         $this->db->group_start();
         $this->db->like('aa.id_user', $q);
+        $this->db->or_like('cc.nama_fraksi', $q);
+        $this->db->or_like('aa.no_anggota', $q);
+        // $this->db->or_like('aa.nik', $q);
         $this->db->or_like('aa.fullname', $q);
         $this->db->or_like('aa.username', $q);
         $this->db->or_like('aa.password', $q);
