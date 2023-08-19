@@ -22,8 +22,8 @@ class Kunker extends CI_Controller
 		$start = intval($this->input->get('start'));
 
 		if ($q <> '') {
-			$config['base_url'] = base_url() . 'kunker/index.html?q=' . urlencode($q);
-			$config['first_url'] = base_url() . 'kunker/index.html?q=' . urlencode($q);
+			$config['base_url'] = base_url() . 'kunker/index.html?q=' . urlencode($q) . '&s=' . urlencode($s);
+			$config['first_url'] = base_url() . 'kunker/index.html?q=' . urlencode($q) . '&s=' . urlencode($s);
 		} else {
 			$config['base_url'] = base_url() . 'kunker/index.html';
 			$config['first_url'] = base_url() . 'kunker/index.html';

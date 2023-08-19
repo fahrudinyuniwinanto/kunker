@@ -32,7 +32,7 @@
                 <p><?= $permohonan_pending ?></p>
             </div>
             <div class="stats-link">
-                <a href="<?= site_url('kunker') ?>">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+                <a href="<?= site_url('kunker') . '?s=0' ?>">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
             </div>
         </div>
     </div>
@@ -45,7 +45,7 @@
                 <p><?= $permohonan_disetujui ?></p>
             </div>
             <div class="stats-link">
-                <a href="<?= site_url('kunker') ?>">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+                <a href="<?= site_url('kunker') . '?s=1' ?>">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
             </div>
         </div>
     </div>
@@ -59,7 +59,7 @@
                 <p><?= $permohonan_ditolak ?></p>
             </div>
             <div class="stats-link">
-                <a href="<?= site_url('kunker') ?>">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+                <a href="<?= site_url('kunker') . '?s=2' ?>">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
             </div>
         </div>
     </div>
