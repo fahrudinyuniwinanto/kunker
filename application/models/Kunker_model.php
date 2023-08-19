@@ -34,7 +34,7 @@ class Kunker_model extends CI_Model
     }
 
     // get total rows
-    function total_rows($q = NULL)
+    function total_rows($q = NULL, $status = NULL)
     {
         $this->db->select('aa.*,bb.*,cc.*,dd.*, aa.created_at as tgl_dibuat');
         $this->db->join('fraksi bb', 'bb.id_fraksi=aa.id_fraksi');
@@ -71,12 +71,15 @@ class Kunker_model extends CI_Model
         if ($this->session->userdata('level') > 2) {
             $this->db->where('aa.id_anggota_fraksi', $this->session->userdata('id_user'));
         }
+        if ($status !== NULL) {
+            $this->db->where('aa.status_disposisi', $status);
+        }
         $this->db->from($this->table . ' aa');
         return $this->db->count_all_results();
     }
 
     // get data with limit and search
-    function get_limit_data($limit, $start = 0, $q = NULL)
+    function get_limit_data($limit, $start = 0, $q = NULL, $status = NULL)
     {
         $this->db->select('aa.*,bb.*,cc.*,dd.*, aa.created_at as tgl_dibuat');
         $this->db->join('fraksi bb', 'bb.id_fraksi=aa.id_fraksi');
@@ -113,6 +116,9 @@ class Kunker_model extends CI_Model
         $this->db->group_end();
         if ($this->session->userdata('level') > 2) {
             $this->db->where('aa.id_anggota_fraksi', $this->session->userdata('id_user'));
+        }
+        if ($status !== "") {
+            $this->db->where('aa.status_disposisi', $status);
         }
         $this->db->limit($limit, $start);
         return $this->db->get($this->table . ' aa')->result();

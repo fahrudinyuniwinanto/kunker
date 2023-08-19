@@ -18,6 +18,7 @@ class Kunker extends CI_Controller
 	public function index()
 	{
 		$q = urldecode($this->input->get('q', TRUE));
+		$status = urldecode($this->input->get('s', TRUE));
 		$start = intval($this->input->get('start'));
 
 		if ($q <> '') {
@@ -27,11 +28,10 @@ class Kunker extends CI_Controller
 			$config['base_url'] = base_url() . 'kunker/index.html';
 			$config['first_url'] = base_url() . 'kunker/index.html';
 		}
-
 		$config['per_page'] = 10;
 		$config['page_query_string'] = TRUE;
-		$config['total_rows'] = $this->Kunker_model->total_rows($q);
-		$kunker = $this->Kunker_model->get_limit_data($config['per_page'], $start, $q);
+		$config['total_rows'] = $this->Kunker_model->total_rows($q, $status);
+		$kunker = $this->Kunker_model->get_limit_data($config['per_page'], $start, $q, $status);
 
 		$this->load->library('pagination');
 		$this->pagination->initialize($config);
@@ -39,6 +39,7 @@ class Kunker extends CI_Controller
 		$data = array(
 			'kunker_data' => $kunker,
 			'q' => $q,
+			's' => $status,
 			'pagination' => $this->pagination->create_links(),
 			'total_rows' => $config['total_rows'],
 			'start' => $start,

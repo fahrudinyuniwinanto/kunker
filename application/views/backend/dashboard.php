@@ -80,21 +80,25 @@
             <div class="panel-body">
 
                 <div class="row" style="margin-bottom: 10px">
+
                     <div class="col-md-8">
-                        <?php
-                        if (is_allow('TAMBAH_KUNKER')) {
-                            echo anchor(site_url('kunker/create'), 'Tambah Permohonan', 'class="btn btn-flat btn-success"');
-                        } ?>
                     </div>
 
-                    <div class="col-md-1 text-right">
-                    </div>
-                    <div class="col-md-3 text-right">
+                    <div class="col-md-4 text-right">
                         <form action="<?php echo site_url('backend/index'); ?>" class="form-inline" method="get">
+
+
                             <div class="input-group">
+                                <select type="text" class="form-control col-md-1" name="s" value="<?php echo $s; ?>">
+                                    <option value="">--Pilih Status--</option>
+                                    <option value="0">PENDING</option>
+                                    <option value="1">DISETUJUI</option>
+                                    <option value="2">DITOLAK</option>
+                                </select>
                                 <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
+
                                 <?php
-                                if ($q <> '') {
+                                if ($q <> '' | $s <> '') {
                                     ?>
                                     <a href="<?php echo site_url('backend'); ?>" class="btn btn-flat btn-default">Reset</a>
                                 <?php
