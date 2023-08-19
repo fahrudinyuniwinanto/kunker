@@ -78,6 +78,33 @@
                 </div>
             </div>
             <div class="panel-body">
+
+                <div class="row" style="margin-bottom: 10px">
+                    <div class="col-md-8">
+                        <?php
+                        if (is_allow('TAMBAH_KUNKER')) {
+                            echo anchor(site_url('kunker/create'), 'Tambah Permohonan', 'class="btn btn-flat btn-success"');
+                        } ?>
+                    </div>
+
+                    <div class="col-md-1 text-right">
+                    </div>
+                    <div class="col-md-3 text-right">
+                        <form action="<?php echo site_url('backend/index'); ?>" class="form-inline" method="get">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
+                                <?php
+                                if ($q <> '') {
+                                    ?>
+                                    <a href="<?php echo site_url('backend'); ?>" class="btn btn-flat btn-default">Reset</a>
+                                <?php
+                                }
+                                ?>
+                                <button class="btn btn-flat btn-success" type="submit">Cari</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover table-condensed" style="margin-bottom: 10px">
                         <thead class="thead-light">

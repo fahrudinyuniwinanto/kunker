@@ -36,19 +36,23 @@ class Kunker_model extends CI_Model
     // get total rows
     function total_rows($q = NULL)
     {
+        $this->db->select('aa.*,bb.*,cc.*,dd.*, aa.created_at as tgl_dibuat');
         $this->db->join('fraksi bb', 'bb.id_fraksi=aa.id_fraksi');
         $this->db->join('jenis_kunjungan cc', 'cc.id_jenis_kunjungan=aa.id_jenis_kunjungan');
         $this->db->join('users dd', 'dd.id_user=aa.id_anggota_fraksi');
-
-        $this->db->like('id_kunker', $q);
         $this->db->group_start();
+        $this->db->like('id_kunker', $q);
         $this->db->or_like('aa.id_jenis_kunjungan', $q);
+        $this->db->or_like('cc.nama_kunker', $q);
+        $this->db->or_like('dd.no_anggota', $q);
+        $this->db->or_like('dd.fullname', $q);
         $this->db->or_like('aa.nomor_surat', $q);
         $this->db->or_like('aa.tanggal_surat', $q);
         $this->db->or_like('aa.perihal_surat', $q);
         $this->db->or_like('aa.lampiran_surat', $q);
         $this->db->or_like('aa.tingkat_keamanan', $q);
         $this->db->or_like('aa.id_fraksi', $q);
+        $this->db->or_like('bb.nama_fraksi', $q);
         $this->db->or_like('aa.id_anggota_fraksi', $q);
         $this->db->or_like('aa.id_kunker_ta', $q);
         $this->db->or_like('aa.nama_daerah_tujuan', $q);
@@ -82,12 +86,16 @@ class Kunker_model extends CI_Model
         $this->db->group_start();
         $this->db->like('id_kunker', $q);
         $this->db->or_like('aa.id_jenis_kunjungan', $q);
+        $this->db->or_like('cc.nama_kunker', $q);
+        $this->db->or_like('dd.no_anggota', $q);
+        $this->db->or_like('dd.fullname', $q);
         $this->db->or_like('aa.nomor_surat', $q);
         $this->db->or_like('aa.tanggal_surat', $q);
         $this->db->or_like('aa.perihal_surat', $q);
         $this->db->or_like('aa.lampiran_surat', $q);
         $this->db->or_like('aa.tingkat_keamanan', $q);
         $this->db->or_like('aa.id_fraksi', $q);
+        $this->db->or_like('bb.nama_fraksi', $q);
         $this->db->or_like('aa.id_anggota_fraksi', $q);
         $this->db->or_like('aa.id_kunker_ta', $q);
         $this->db->or_like('aa.nama_daerah_tujuan', $q);

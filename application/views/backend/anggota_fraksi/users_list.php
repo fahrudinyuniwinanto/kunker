@@ -49,7 +49,7 @@
                                     <?php
                                         if ($q <> '') {
                                             ?>
-                                        <a href="<?php echo site_url('anggota_raksi'); ?>" class="btn btn-default">Reset</a>
+                                        <a href="<?php echo site_url('anggota_fraksi'); ?>" class="btn btn-default">Reset</a>
                                     <?php
                                         }
                                         ?>
