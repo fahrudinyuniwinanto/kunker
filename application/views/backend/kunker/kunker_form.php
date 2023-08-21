@@ -286,12 +286,48 @@
     function jumlah_hari() {
         //hitung tanggal otomatis
         $('#tgl_berangkat, #tgl_kembali').change(function() {
+            var id_jenis_kunjungan = $('#id_jenis_kunjungan').val();
             var tgl_berangkat = new Date($('#tgl_berangkat').val());
             var maksimal_hari = $("#maksimal_hari").val();
             var initialDate = tgl_berangkat.toISOString().split('T')[0];
             var updatedDate = new Date(initialDate);
             updatedDate.setDate(updatedDate.getDate() + parseInt(maksimal_hari) - 1);
             var updatedDateString = updatedDate.toISOString().split('T')[0];
+            var day = tgl_berangkat.getDay();
+            if (id_jenis_kunjungan == 1) {
+                //jika senin
+                if (day == 1) {
+                    swal('Gagal', 'Tanggal Kunjungan Daerah Pilihan harus pada Hari Jumat/Sabtu/Minggu.', 'error');
+                    $("#tgl_berangkat").val("");
+                    $("#tgl_kembali").val("");
+                    $("#jumlah_hari").val("");
+                }
+                //jika selasa
+                if (day == 2) {
+
+                    swal('Gagal', 'Tanggal Kunjungan Daerah Pilihan harus pada Hari Jumat/Sabtu/Minggu.', 'error');
+                    $("#tgl_berangkat").val("");
+                    $("#tgl_kembali").val("");
+                    $("#jumlah_hari").val("");
+                }
+                //jika rabu
+                if (day == 3) {
+
+                    swal('Gagal', 'Tanggal Kunjungan Daerah Pilihan harus pada Hari Jumat/Sabtu/Minggu.', 'error');
+                    $("#tgl_berangkat").val("");
+                    $("#tgl_kembali").val("");
+                    $("#jumlah_hari").val("");
+                }
+                //jika kamis
+                if (day == 4) {
+
+                    swal('Gagal', 'Tanggal Kunjungan Daerah Pilihan harus pada Hari Jumat/Sabtu/Minggu.', 'error');
+                    $("#tgl_berangkat").val("");
+                    $("#tgl_kembali").val("");
+                    $("#jumlah_hari").val("");
+                }
+            }
+
             //tambah attr pada tanggal kembali (min=tgl_berangkat)
             $('#tgl_kembali').attr('min', initialDate);
             $('#tgl_kembali').attr('max', updatedDateString);
@@ -354,37 +390,7 @@
                         } else {
                             $(".dapil_hari").hide();
                         }
-                        if (res.jenis_kunjungan.id_jenis_kunjungan == 1) {
-                            // Fungsi untuk mendapatkan hari berikutnya yang merupakan hari Jumat
-                            function getNextFriday(date) {
-                                var nextDay = new Date(date);
-                                nextDay.setDate(date.getDate() + (5 + 7 - date.getDay()) % 7);
-                                return nextDay;
-                            }
 
-                            // Fungsi untuk mendapatkan hari berikutnya yang merupakan hari Minggu
-                            function getNextSunday(date) {
-                                var nextDay = new Date(date);
-                                nextDay.setDate(date.getDate() + (7 - date.getDay()) % 7);
-                                return nextDay;
-                            }
-
-                            // Mendapatkan tanggal hari ini
-                            var currentDate = new Date();
-
-                            // Mendapatkan tanggal berikutnya yang merupakan hari Jumat dan Minggu
-                            var nextFriday = getNextFriday(currentDate);
-                            var nextSunday = getNextSunday(currentDate);
-
-                            // Ubah format tanggal menjadi YYYY-MM-DD
-                            var nextFridayStr = nextFriday.toISOString().split('T')[0];
-                            var nextSundayStr = nextSunday.toISOString().split('T')[0];
-
-                            // Terapkan tanggal minimal dan maksimal pada input
-                            $('tgl_berangkat').attr('min', nextFridayStr);
-                            $('tgl_berangkat').attr('max', nextSundayStr);
-
-                        }
                         $("#nama_daerah_tujuan").removeAttr('readonly');
                         $("#tgl_berangkat").removeAttr('readonly');
                     }
