@@ -445,7 +445,7 @@ class Kunker extends CI_Controller
 		$this->form_validation->set_rules('id_fraksi', 'id fraksi', 'trim|required');
 		$this->form_validation->set_rules('id_anggota_fraksi', 'id anggota fraksi', 'trim|required');
 		$this->form_validation->set_rules('id_kunker_ta', 'id kunker ta', 'trim');
-		$this->form_validation->set_rules('nama_daerah_tujuan', 'nama daerah tujuan', 'trim|required');
+		$this->form_validation->set_rules('nama_daerah_tujuan', 'nama daerah tujuan', 'trim');
 		$this->form_validation->set_rules('file_surat', 'file surat', 'trim');
 		$this->form_validation->set_rules('file_nodin', 'file nodin', 'trim');
 		$this->form_validation->set_rules('pemberi_disposisi', 'pemberi disposisi', 'trim');

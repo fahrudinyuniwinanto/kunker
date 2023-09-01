@@ -389,6 +389,10 @@
                             $(".dapil_hari").show();
                         } else {
                             $(".dapil_hari").hide();
+                            $(".jenis_kunjungan").hide();
+                            $("#nama_daerah_tujuan").removeAttr('required');
+                            $("#tgl_berangkat").removeAttr('required');
+                            $("#tgl_kembali").removeAttr('required');
                         }
 
                         $("#nama_daerah_tujuan").removeAttr('readonly');
