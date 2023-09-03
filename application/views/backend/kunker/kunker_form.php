@@ -137,7 +137,7 @@
                         </div>
 
                         <div class="col-lg-4">
-                            <div class="table-responsive">
+                            <div class="table-responsive" id="tabel-TAA">
                                 <!--<table class="table table-bordered table-hover table-condensed" style="margin-bottom: 10px">
                                     <thead class="thead-light">
                                         <tr>
@@ -397,7 +397,9 @@
                         $(".jenis_kunjungan").show();
                         if (res.jenis_kunjungan.id_jenis_kunjungan != 6) {
                             $(".dapil_hari").show();
+                            $("#tabel-TAA").show();
                         } else {
+                            $("#tabel-TAA").hide();
                             $(".dapil_hari").hide();
                             $(".jenis_kunjungan").hide();
                             $("#nama_daerah_tujuan").removeAttr('required');
