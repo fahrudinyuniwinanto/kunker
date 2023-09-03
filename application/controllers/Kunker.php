@@ -280,8 +280,21 @@ class Kunker extends CI_Controller
 				'created_by' => set_value('created_by', $row->created_by),
 				'disposisi_by' => set_value('disposisi_by', $row->disposisi_by),
 				'diposisi_note' => set_value('diposisi_note', $row->diposisi_note),
+
+				'id_fraksi' => set_value('id_fraksi', $this->session->userdata('id_fraksi')),
+				'no_anggota' => set_value('no_anggota', $this->session->userdata('no_anggota')),
+				'id_anggota_fraksi' => set_value('id_anggota_fraksi', $this->session->userdata('id_user')),
+				'kunjungan_ke' => set_value('kunjungan_ke'),
+				'id_kunker_ta' => set_value('id_kunker_ta'),
+				'jumlah_hari' => set_value('jumlah_hari', 3),
+				'data_ta' => $this->db->select('id_user, fullname')->where('id_parent', $this->session->userdata('id_user'))->where('status', '1')->get('users')->result(),
+
+
 				'content' => 'backend/kunker/kunker_form',
 			);
+			//echo '<pre>';
+			//print_r($data);
+			//die();
 			$this->load->view(layout(), $data);
 		} else {
 			$this->session->set_flashdata('message', 'Record Not Found');

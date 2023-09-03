@@ -219,12 +219,22 @@
 </div>
 <script>
     $(document).ready(function() {
-        $("#id_jenis_kunjungan").val('');
-        $(".jenis_kunjungan").hide();
-        $(".dapil_hari").hide();
-        $("#nama_daerah_tujuan").attr('readonly', true);
-        $("#tgl_berangkat").attr('readonly', true);
-        $("#tgl_kembali").attr('readonly', true);
+        <?php if ($this->uri->segment(2) == 'update') { ?>
+
+            // $("#id_jenis_kunjungan").val('');
+            $(".jenis_kunjungan").show();
+            $(".dapil_hari").show();
+
+        <?php } ?>
+
+        <?php if ($this->uri->segment(2) == 'create') { ?>
+            $("#id_jenis_kunjungan").val('');
+            $(".jenis_kunjungan").hide();
+            $(".dapil_hari").hide();
+            $("#nama_daerah_tujuan").attr('readonly', true);
+            $("#tgl_berangkat").attr('readonly', true);
+            $("#tgl_kembali").attr('readonly', true);
+        <?php } ?>
         var j = 0;
 
         $('form').submit(function(e) {

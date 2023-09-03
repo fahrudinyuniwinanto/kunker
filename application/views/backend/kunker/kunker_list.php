@@ -108,6 +108,12 @@
                                             if (is_allow('DETAIL_KUNKER')) {
                                                 echo anchor(site_url('kunker/read/' . $kunker->id_kunker), '<i class="fa fa-eye"></i>', 'class="btn btn-xs btn-success" title="Detail Data"');
                                             }
+                                            if (is_allow('EDIT_KUNKER')) {
+                                                if ($kunker->status_disposisi == 2) {
+                                                    echo ' &nbsp ';
+                                                    echo anchor(site_url('kunker/update/' . $kunker->id_kunker), '<i class="fa fa-edit"></i>', 'class="btn btn-xs btn-warning" title="Ubah Data"');
+                                                }
+                                            }
                                             if (is_allow('VERIFIKASI_KUNKER')) {
                                                 echo ' &nbsp ';
                                                 echo anchor(site_url('kunker/verify/' . $kunker->id_kunker), '<i class="fa fa-check-circle"></i>', 'class="btn btn-xs btn-info" title="Verifikasi Data"');
