@@ -71,7 +71,7 @@ class Kunker_model extends CI_Model
         if ($this->session->userdata('level') > 2) {
             $this->db->where('aa.id_anggota_fraksi', $this->session->userdata('id_user'));
         }
-        if ($status !== NULL) {
+        if ($status !== "") {
             $this->db->where('aa.status_disposisi', $status);
         }
         $this->db->from($this->table . ' aa');
