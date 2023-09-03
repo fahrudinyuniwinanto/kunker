@@ -65,105 +65,107 @@
     </div>
 
 </div>
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h2 class="panel-title"><b>Data Permohonan Kunjungan Kerja Terbaru</b></h2>
-                <div class="panel-heading-btn">
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse"><i class="fa fa-minus"></i></a>
-                    <!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a> -->
-                </div>
-            </div>
-            <div class="panel-body">
-
-                <div class="row" style="margin-bottom: 10px">
-
-                    <div class="col-md-8">
-                    </div>
-
-                    <div class="col-md-4 text-right">
-                        <form action="<?php echo site_url('backend/index'); ?>" class="form-inline" method="get">
-
-
-                            <div class="input-group">
-                                <select type="text" class="form-control col-md-1" name="s" value="<?php echo $s; ?>">
-                                    <option value="">--Pilih Status--</option>
-                                    <option value="0">PENDING</option>
-                                    <option value="1">DISETUJUI</option>
-                                    <option value="2">DITOLAK</option>
-                                </select>
-                                <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
-
-                                <?php
-                                if ($q <> '' | $s <> '') {
-                                    ?>
-                                    <a href="<?php echo site_url('backend'); ?>" class="btn btn-flat btn-default">Reset</a>
-                                <?php
-                                }
-                                ?>
-                                <button class="btn btn-flat btn-success" type="submit">Cari</button>
-                            </div>
-                        </form>
+<?php if ($this->session->userdata('level') <= 2) { ?>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title"><b>Data Permohonan Kunjungan Kerja Terbaru</b></h2>
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse"><i class="fa fa-minus"></i></a>
+                        <!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a> -->
                     </div>
                 </div>
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover table-condensed" style="margin-bottom: 10px">
-                        <thead class="thead-light">
-                            <tr>
-                                <th class="text-center">No</th>
-                                <th class="text-center">Jenis Kunjungan</th>
-                                <th class="text-center">Fraksi</th>
-                                <th class="text-center">Nama Anggota</th>
-                                <th class="text-center">Tingkat Keamanan</th>
-                                <th class="text-center">Tgl. Dibuat</th>
-                                <th class="text-center">Status</th>
-                                <!-- <th class="text-center">Keterangan Disposisi</th> -->
-                            </tr>
-                        </thead>
-                        <tbody><?php
-                                foreach ($kunker_data as $kunker) {
-                                    ?>
-                                <tr class="<?= $kunker->status_disposisi == '1' ? 'bg-success' : ($kunker->status_disposisi == '2' ? 'bg-danger' : '') ?>">
-                                    <td width="50px"><?php echo ++$start ?></td>
-                                    <td width="300px"><?php echo $kunker->nama_kunker ?></td>
-                                    <td width="250px"><strong><?php echo $kunker->nama_fraksi ?></strong></td>
-                                    <td><strong><?php echo $kunker->fullname ?></strong></td>
-                                    <td width="150px"><?php echo $kunker->tingkat_keamanan ?></td>
-                                    <td><?php echo @$kunker->tgl_dibuat ?></td>
-                                    <td class="text-center"><?php
-                                                                if ($kunker->status_disposisi == 0) {
-                                                                    echo '<label class="badge bg-warning">PENDING</label>';
-                                                                }
-                                                                if ($kunker->status_disposisi == 1) {
-                                                                    echo '<label class="badge bg-success">DISETUJUI</label>';
-                                                                }
-                                                                if ($kunker->status_disposisi == 2) {
-                                                                    echo '<label class="badge bg-danger">DITOLAK</label>';
-                                                                }
-                                                                ?></td>
-                                    <!-- <td><?= @$diposisi_note ?></td> -->
+                <div class="panel-body">
 
+                    <div class="row" style="margin-bottom: 10px">
+
+                        <div class="col-md-8">
+                        </div>
+
+                        <div class="col-md-4 text-right">
+                            <form action="<?php echo site_url('backend/index'); ?>" class="form-inline" method="get">
+
+
+                                <div class="input-group">
+                                    <select type="text" class="form-control col-md-1" name="s" value="<?php echo $s; ?>">
+                                        <option value="">--Pilih Status--</option>
+                                        <option value="0">PENDING</option>
+                                        <option value="1">DISETUJUI</option>
+                                        <option value="2">DITOLAK</option>
+                                    </select>
+                                    <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
+
+                                    <?php
+                                        if ($q <> '' | $s <> '') {
+                                            ?>
+                                        <a href="<?php echo site_url('backend'); ?>" class="btn btn-flat btn-default">Reset</a>
+                                    <?php
+                                        }
+                                        ?>
+                                    <button class="btn btn-flat btn-success" type="submit">Cari</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover table-condensed" style="margin-bottom: 10px">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Jenis Kunjungan</th>
+                                    <th class="text-center">Fraksi</th>
+                                    <th class="text-center">Nama Anggota</th>
+                                    <th class="text-center">Tingkat Keamanan</th>
+                                    <th class="text-center">Tgl. Dibuat</th>
+                                    <th class="text-center">Status</th>
+                                    <!-- <th class="text-center">Keterangan Disposisi</th> -->
                                 </tr>
+                            </thead>
+                            <tbody><?php
+                                        foreach ($kunker_data as $kunker) {
+                                            ?>
+                                    <tr class="<?= $kunker->status_disposisi == '1' ? 'bg-success' : ($kunker->status_disposisi == '2' ? 'bg-danger' : '') ?>">
+                                        <td width="50px"><?php echo ++$start ?></td>
+                                        <td width="300px"><?php echo $kunker->nama_kunker ?></td>
+                                        <td width="250px"><strong><?php echo $kunker->nama_fraksi ?></strong></td>
+                                        <td><strong><?php echo $kunker->fullname ?></strong></td>
+                                        <td width="150px"><?php echo $kunker->tingkat_keamanan ?></td>
+                                        <td><?php echo @$kunker->tgl_dibuat ?></td>
+                                        <td class="text-center"><?php
+                                                                        if ($kunker->status_disposisi == 0) {
+                                                                            echo '<label class="badge bg-warning">PENDING</label>';
+                                                                        }
+                                                                        if ($kunker->status_disposisi == 1) {
+                                                                            echo '<label class="badge bg-success">DISETUJUI</label>';
+                                                                        }
+                                                                        if ($kunker->status_disposisi == 2) {
+                                                                            echo '<label class="badge bg-danger">DITOLAK</label>';
+                                                                        }
+                                                                        ?></td>
+                                        <!-- <td><?= @$diposisi_note ?></td> -->
 
-                            <?php
-                            }
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="row hide">
-                    <div class="col-md-6">
-                        <a href="#" class="btn btn-flat btn-success">Total Record : <?php echo @$total_rows ?></a>
-                        <?php echo anchor(site_url('kunker/excel'), 'Excel', 'class="btn btn-flat btn-success"'); ?>
+                                    </tr>
+
+                                <?php
+                                    }
+                                    ?>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="col-md-6 text-right">
+                    <div class="row hide">
+                        <div class="col-md-6">
+                            <a href="#" class="btn btn-flat btn-success">Total Record : <?php echo @$total_rows ?></a>
+                            <?php echo anchor(site_url('kunker/excel'), 'Excel', 'class="btn btn-flat btn-success"'); ?>
+                        </div>
+                        <div class="col-md-6 text-right">
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+<?php } ?>
