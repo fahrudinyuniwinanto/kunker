@@ -12,8 +12,11 @@
     <div class="invoice-company">
         <span class="float-end hidden-print">
             <a href="<?= base_url() ?>kunker" class="btn btn-sm btn-white mb-10px"><i class="fa fa-arrow-circle-left t-plus-1 text-danger fa-fw fa-lg"></i>Kembali</a>
-            <?php if ($status_disposisi == 2) { ?>
+            <?php if ($status_disposisi == 2 and $this->session->userdata('level') == 3) { ?>
                 <a href="<?= base_url() ?>kunker/update/<?= $id_kunker ?>" class="btn btn-sm btn-white mb-10px"><i class="fa fa-edit t-plus-1 text-warning fa-fw fa-lg"></i>Ubah</a>
+            <?php } ?>
+            <?php if ($status_disposisi == 1) { ?>
+                <a href="<?= base_url() ?>kunker/disposisi/<?= $id_kunker ?>" target="_blank" class="btn btn-sm btn-white mb-10px"><i class="fa fa-print t-plus-1 fa-fw text-danger fa-lg"></i> Cetak Disposisi</a>
             <?php } ?>
             <a target="_blank" href="<?= base_url() ?>assets/dok_permohonan/<?= @$file_surat ?>" class="btn btn-sm btn-white mb-10px"><i class="fa fa-file-pdf t-plus-1 text-danger fa-fw fa-lg"></i> Lihat Surat <i>(<?= @$file_surat ?>)</i></a>
         </span>
