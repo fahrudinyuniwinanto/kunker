@@ -110,8 +110,11 @@ $CI->load->model('User_access_model');
                             <span class='numrows-notif'>0</span>)
                         </div>
                         <?php
-                        $arrNotif = $this->db->get_where('kunker', ['status_notifikasi' => 1,'status_disposisi'=>0])->result();
-                        if(getSession('id_group')!=2){
+                        if(getSession('id_group')==2){//tu
+                            $arrNotif = $this->db->get_where('kunker', ['notif_admintu' => 1,'status_disposisi'=>0])->result();
+                        }else if(getSession('id_group')==3){//ta
+                            $arrNotif = $this->db->get_where('kunker', ['notif_adminta' => 1,'id_anggota_fraksi'=>getSession('no_anggota')])->result();
+                        }else{
                             $arrNotif=[];
                         }
                         foreach ($arrNotif as $k => $v): ?>
@@ -121,7 +124,7 @@ $CI->load->model('User_access_model');
                                 </div>
                                 <div class="media-body">
                                     <h6 class="media-heading">Disposisi dari
-                                        <?= $this->db->get_where('users', ['id_user' => $v->disposisi_by])->row()->fullname ?>
+                                        <?= @$this->db->get_where('users', ['id_user' => $v->disposisi_by?$v->id_anggota_fraksi:''])->row()->fullname ?>
                                         <i class="fa fa-exclamation-circle text-danger"></i>
                                     </h6>
                                     <div class="text-muted fs-10px">Pada

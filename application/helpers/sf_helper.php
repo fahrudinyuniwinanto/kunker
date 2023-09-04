@@ -163,10 +163,10 @@ function layout($l = 'back')
     }
 }
 
-function getSession()
+function getSession($key='id_user')
 {
     $ci = &get_instance();
-    return $ci->session->userdata('id_user');
+    return $ci->session->userdata($key);
 }
 
 

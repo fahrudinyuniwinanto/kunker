@@ -50,12 +50,21 @@ class Kunker extends CI_Controller
 
 	public function cekNotifikasi()
 	{
-		$numrows = $this->db->get_where('kunker', ['status_notifikasi' => 1, 'status_disposisi' => 0])->num_rows();
-		if (getSession('id_group') != 2) {
+		// wfDebug($_SESSION);
+		$taOrTu = getSession('id_group');
+		// die($taOrTu);
+		if($taOrTu == 3){//ta
+			$numrows = $this->db->get_where('kunker', ['id_anggota_fraksi'=>getSession('no_anggota'),'notif_adminta' => 1])->num_rows();
+		}else if($taOrTu == 2){//tu
+			$numrows = $this->db->get_where('kunker', ['status_disposisi' => 0, 'notif_admintu' => 1])->num_rows();
+		}else{
 			$numrows = 0;
 		}
+		// die($this->db->last_query());
 		echo json_encode(['numrows' => $numrows]);
+		
 	}
+
 
 	public function lookup()
 	{
@@ -233,7 +242,8 @@ class Kunker extends CI_Controller
 							'nama_daerah_tujuan' => $this->input->post('nama_daerah_tujuan', TRUE),
 							'file_surat' => sf_upload('dok_permohonan', 'assets/dok_permohonan', 'pdf', 2048, 'file_surat'),
 							'created_at' => date('Y-m-d H:i:s'),
-							'status_notifikasi' => 1
+							'notif_admintu' => 1,
+							'notif_adminta' => 0
 						);
 						//input ke kunker;
 						$this->Kunker_model->insert($data);
@@ -375,8 +385,10 @@ class Kunker extends CI_Controller
 
 		$row = $this->Kunker_model->get_by_id($id);
 		if ($row) {
-
-			$this->db->where(['id_kunker' => $id])->update('kunker', ['status_notifikasi' => 0]);
+			$fieldNotif = getSession('id_group')==2 ? 'notif_admintu' : (getSession('id_group')==3 ? 'notif_adminta' : '');
+			if($fieldNotif!=""){
+				$this->db->where(['id_kunker' => $id])->update('kunker', [$fieldNotif => 0]);
+			}
 			$data = $row;
 			$data->content = 'backend/kunker/kunker_verify';
 			$data->arr_tujuan_disposisi = get_combo('karo', 'id_karo', 'karo', ['' => 'Pilih karo ...']);
@@ -398,6 +410,8 @@ class Kunker extends CI_Controller
 		$status = $this->input->post('status', TRUE);
 		$note = $this->input->post('diposisi_note', TRUE);
 		$save = $this->db->update('kunker', [
+			'notif_adminta'=>1,
+			'notif_admintu'=>0,
 			'status_disposisi' => $status,
 			'diposisi_note' => $note,
 			'tujuan_disposisi' => $this->input->post('tujuan_disposisi'),
