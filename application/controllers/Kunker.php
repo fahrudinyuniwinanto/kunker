@@ -48,6 +48,15 @@ class Kunker extends CI_Controller
 		$this->load->view(layout(), $data);
 	}
 
+	public function cekNotifikasi()
+	{
+		$numrows = $this->db->get_where('kunker', ['status_notifikasi' => 1, 'status_disposisi' => 0])->num_rows();
+		if (getSession('id_group') != 2) {
+			$numrows = 0;
+		}
+		echo json_encode(['numrows' => $numrows]);
+	}
+
 	public function lookup()
 	{
 		$q = urldecode($this->input->get('q', TRUE));
@@ -86,7 +95,7 @@ class Kunker extends CI_Controller
 	{
 
 		$row = $this->Kunker_model->get_by_id($id);
-
+		$this->db->where(['id_kunker' => $id])->update('kunker', ['status_notifikasi' => 0]);
 		if ($row) {
 			$data = array(
 				'id_kunker' => $row->id_kunker,
@@ -224,6 +233,7 @@ class Kunker extends CI_Controller
 							'nama_daerah_tujuan' => $this->input->post('nama_daerah_tujuan', TRUE),
 							'file_surat' => sf_upload('dok_permohonan', 'assets/dok_permohonan', 'pdf', 2048, 'file_surat'),
 							'created_at' => date('Y-m-d H:i:s'),
+							'status_notifikasi' => 1
 						);
 						//input ke kunker;
 						$this->Kunker_model->insert($data);
@@ -365,6 +375,8 @@ class Kunker extends CI_Controller
 
 		$row = $this->Kunker_model->get_by_id($id);
 		if ($row) {
+
+			$this->db->where(['id_kunker' => $id])->update('kunker', ['status_notifikasi' => 0]);
 			$data = $row;
 			$data->content = 'backend/kunker/kunker_verify';
 			$data->arr_tujuan_disposisi = get_combo('karo', 'id_karo', 'karo', ['' => 'Pilih karo ...']);

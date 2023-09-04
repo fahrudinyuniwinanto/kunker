@@ -52,7 +52,7 @@
 				<td><?= $v->nomor_surat ?></td>
 				<td>Asal Surat</td>
 				<td>:</td>
-				<td><?= $v->nama_fraksi ?></td>
+				<td><?= $v->pemberi_disposisi ?></td>
 			</tr>
 			<tr>
 				<td>Lampiran</td>
@@ -61,6 +61,12 @@
 				<td>Unit Kerja Pemberi Disposisi</td>
 				<td>:</td>
 				<td>Deputi Bidang Administrasi</td>
+			</tr>
+			<tr>
+				<td>Perihal</td>
+				<td>:</td>
+				<td><?= $v->perihal_surat ?></td>
+				<td colspan="3"></td>
 			</tr>
 			<tr>
 				<td colspan="6">Diteruskan kepada</td>

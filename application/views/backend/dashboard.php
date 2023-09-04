@@ -78,7 +78,48 @@
                         <!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a> -->
                     </div>
                 </div>
+<<<<<<< Updated upstream
                 <div class="panel-body">
+=======
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-condensed" style="margin-bottom: 10px">
+                        <thead class="thead-light">
+                            <tr>
+                                <th class="text-center">No</th>
+                                <th class="text-center">Jenis Kunjungan</th>
+                                <th class="text-center">Fraksi</th>
+                                <th class="text-center">No. Anggota</th>
+                                <th class="text-center">Nama Anggota</th>
+                                <th class="text-center">Tingkat Keamanan</th>
+                                <th class="text-center">Tgl. Dibuat</th>
+                                <th class="text-center">Status</th>
+                                <!-- <th class="text-center">Keterangan Disposisi</th> -->
+                            </tr>
+                        </thead>
+                        <tbody><?php
+                                foreach ($kunker_data as $kunker) {
+                                    ?>
+                                <tr class="<?= $kunker->status_disposisi == '1' ? 'bg-success' : ($kunker->status_disposisi == '2' ? 'bg-danger' : '') ?>">
+                                    <td width="50px"><?php echo ++$start ?></td>
+                                    <td width="300px"><?php echo $kunker->nama_kunker ?></td>
+                                    <td width="250px"><strong><?php echo $kunker->nama_fraksi ?></strong></td>
+                                    <td><strong><?php echo $kunker->no_anggota ?></strong></td>
+                                    <td><strong><?php echo $kunker->fullname ?></strong></td>
+                                    <td width="150px"><?php echo $kunker->tingkat_keamanan ?></td>
+                                    <td><?php echo @$kunker->tgl_dibuat ?></td>
+                                    <td class="text-center"><?php
+                                                                if ($kunker->status_disposisi == 0) {
+                                                                    echo '<label class="badge bg-warning">PENDING</label>';
+                                                                }
+                                                                if ($kunker->status_disposisi == 1) {
+                                                                    echo '<label class="badge bg-success">DISETUJUI</label>';
+                                                                }
+                                                                if ($kunker->status_disposisi == 2) {
+                                                                    echo '<label class="badge bg-danger">DITOLAK</label>';
+                                                                }
+                                                                ?></td>
+                                    <!-- <td><?= @$diposisi_note ?></td> -->
+>>>>>>> Stashed changes
 
                     <div class="row" style="margin-bottom: 10px">
 
