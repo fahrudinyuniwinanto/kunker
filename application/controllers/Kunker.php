@@ -53,16 +53,15 @@ class Kunker extends CI_Controller
 		// wfDebug($_SESSION);
 		$taOrTu = getSession('id_group');
 		// die($taOrTu);
-		if($taOrTu == 3){//ta
-			$numrows = $this->db->get_where('kunker', ['id_anggota_fraksi'=>getSession('no_anggota'),'notif_adminta' => 1])->num_rows();
-		}else if($taOrTu == 2){//tu
+		if ($taOrTu == 3) { //ta
+			$numrows = $this->db->get_where('kunker', ['id_anggota_fraksi' => getSession('no_anggota'), 'notif_adminta' => 1])->num_rows();
+		} else if ($taOrTu == 2) { //tu
 			$numrows = $this->db->get_where('kunker', ['status_disposisi' => 0, 'notif_admintu' => 1])->num_rows();
-		}else{
+		} else {
 			$numrows = 0;
 		}
 		// die($this->db->last_query());
 		echo json_encode(['numrows' => $numrows]);
-		
 	}
 
 
@@ -329,10 +328,22 @@ class Kunker extends CI_Controller
 		if ($this->form_validation->run() == FALSE) {
 			$this->update($this->input->post('id_kunker', TRUE));
 		} else {
+
+			$arr = $this->db->get_where("kunker", ['id_kunker' => $this->input->post('id_kunker', TRUE)])->row();
+			if ($_FILES['file_surat']['name'] != "") {
+				unlink("./assets/dok_permohonan/" . $arr->file_surat);
+				$file_name =  sf_upload('dok_permohonan', 'assets/dok_permohonan', 'pdf', 2048, 'file_surat');
+			} else {
+				$file_name = $arr->file_surat;
+			}
 			$data = array(
 				'id_jenis_kunjungan' => $this->input->post('id_jenis_kunjungan', TRUE),
+				'kunjungan_ke' => $this->input->post('kunjungan_ke', TRUE),
 				'nomor_surat' => $this->input->post('nomor_surat', TRUE),
 				'tanggal_surat' => $this->input->post('tanggal_surat', TRUE),
+				'tgl_berangkat' => $this->input->post('tgl_berangkat', TRUE),
+				'tgl_kembali' => $this->input->post('tgl_kembali', TRUE),
+				'jumlah_hari' => $this->input->post('jumlah_hari', TRUE),
 				'perihal_surat' => $this->input->post('perihal_surat', TRUE),
 				'lampiran_surat' => $this->input->post('lampiran_surat', TRUE),
 				'tingkat_keamanan' => $this->input->post('tingkat_keamanan', TRUE),
@@ -340,20 +351,24 @@ class Kunker extends CI_Controller
 				'id_anggota_fraksi' => $this->input->post('id_anggota_fraksi', TRUE),
 				'id_kunker_ta' => $this->input->post('id_kunker_ta', TRUE),
 				'nama_daerah_tujuan' => $this->input->post('nama_daerah_tujuan', TRUE),
-				'file_surat' => $this->input->post('file_surat', TRUE),
-				'file_nodin' => $this->input->post('file_nodin', TRUE),
-				'pemberi_disposisi' => $this->input->post('pemberi_disposisi', TRUE),
-				'isi_disposisi' => $this->input->post('isi_disposisi', TRUE),
-				'tujuan_disposisi' => $this->input->post('tujuan_disposisi', TRUE),
-				'status_disposisi' => $this->input->post('status_disposisi', TRUE),
-				'created_at' => $this->input->post('created_at', TRUE),
-				'disposisi_at' => $this->input->post('disposisi_at', TRUE),
-				'created_by' => $this->input->post('created_by', TRUE),
-				'disposisi_by' => $this->input->post('disposisi_by', TRUE),
-				'diposisi_note' => $this->input->post('diposisi_note', TRUE),
+				'file_surat' => $file_name,
+				'status_disposisi' => 0,
+				'notif_admintu' => 1,
+				'notif_adminta' => 0
 			);
 
 			$this->Kunker_model->update($this->input->post('id_kunker', TRUE), $data);
+
+			$arr_ta = $this->input->post('id_ta', TRUE);
+			$this->db->where('id_kunker', $this->input->post('id_kunker', TRUE))->delete('kunker_ta');
+			foreach ($arr_ta as $v) {
+				$data = array(
+					'id_kunker' => $this->input->post('id_kunker', TRUE),
+					'id_ta' => $v,
+				);
+				//input ke kunker_ta;
+				$this->Kunker_ta_model->insert($data);
+			}
 			$this->session->set_flashdata('message', 'Update Record Success');
 			redirect(site_url('kunker'));
 		}
@@ -385,8 +400,8 @@ class Kunker extends CI_Controller
 
 		$row = $this->Kunker_model->get_by_id($id);
 		if ($row) {
-			$fieldNotif = getSession('id_group')==2 ? 'notif_admintu' : (getSession('id_group')==3 ? 'notif_adminta' : '');
-			if($fieldNotif!=""){
+			$fieldNotif = getSession('id_group') == 2 ? 'notif_admintu' : (getSession('id_group') == 3 ? 'notif_adminta' : '');
+			if ($fieldNotif != "") {
 				$this->db->where(['id_kunker' => $id])->update('kunker', [$fieldNotif => 0]);
 			}
 			$data = $row;
@@ -410,8 +425,8 @@ class Kunker extends CI_Controller
 		$status = $this->input->post('status', TRUE);
 		$note = $this->input->post('diposisi_note', TRUE);
 		$save = $this->db->update('kunker', [
-			'notif_adminta'=>1,
-			'notif_admintu'=>0,
+			'notif_adminta' => 1,
+			'notif_admintu' => 0,
 			'status_disposisi' => $status,
 			'diposisi_note' => $note,
 			'tujuan_disposisi' => $this->input->post('tujuan_disposisi'),
@@ -475,7 +490,7 @@ class Kunker extends CI_Controller
 	public function _rules()
 	{
 		$this->form_validation->set_rules('id_jenis_kunjungan', 'id jenis kunjungan', 'trim|required');
-		$this->form_validation->set_rules('kunjungan_ke', 'kunjungan ke', 'trim|required');
+		$this->form_validation->set_rules('kunjungan_ke', 'kunjungan ke', 'trim');
 		$this->form_validation->set_rules('nomor_surat', 'nomor surat', 'trim|required');
 		$this->form_validation->set_rules('tanggal_surat', 'tanggal surat', 'trim|required');
 		$this->form_validation->set_rules('perihal_surat', 'perihal surat', 'trim|required');

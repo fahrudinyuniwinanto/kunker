@@ -131,8 +131,10 @@
                                 <input type="text" class="form-control" name="id_kunker_ta" id="id_kunker_ta" placeholder="Id Kunker Ta" value="<?php echo $id_kunker_ta; ?>" />
                             </div> -->
                             <div class="mb-3">
-                                <label class="form-label" for="varchar">File Surat Permohonan <?php echo form_error('file_surat') ?></label>
-                                <input type="file" class="form-control" name="file_surat" id="file_surat" placeholder="File Surat" value="<?php echo $file_surat; ?>" accept="application/pdf" required />
+                                <label class="form-label" for="varchar">File Surat Permohonan&nbsp <?php echo form_error('file_surat') ?></label><?php if ($file_surat) {
+                                                                                                                                                        echo '<i>' . $file_surat . '</i>';
+                                                                                                                                                    } ?>
+                                <input type="file" class="form-control" name="file_surat" id="file_surat" placeholder="File Surat" value="<?php echo $file_surat; ?>" accept="application/pdf" />
                             </div>
                         </div>
 
@@ -165,7 +167,11 @@
                                                 <td><?= $start++ ?></td>
                                                 <td><?= $v->fullname ?></td>
                                                 <td class="text-center">
-                                                    <input type="checkbox" name="id_ta[]" value="<?= $v->id_user ?>" />
+                                                    <input type="checkbox" name="id_ta[]" id="cek-<?= $v->id_user ?>" value="<?= $v->id_user ?>" <?php if ($this->db->get_where('kunker_ta', ['id_ta' => $v->id_user, 'id_kunker' => $id_kunker])->num_rows() > 0) {
+                                                                                                                                                            echo 'checked';
+                                                                                                                                                        } else {
+                                                                                                                                                            echo '';
+                                                                                                                                                        } ?> />
                                                 </td>
                                             </tr>
                                         <?php } ?>
@@ -220,7 +226,6 @@
 <script>
     $(document).ready(function() {
         <?php if ($this->uri->segment(2) == 'update') { ?>
-
             // $("#id_jenis_kunjungan").val('');
             $(".jenis_kunjungan").show();
             $(".dapil_hari").show();
