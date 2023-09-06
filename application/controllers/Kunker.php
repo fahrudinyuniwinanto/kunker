@@ -174,6 +174,7 @@ class Kunker extends CI_Controller
 			'isi_disposisi' => set_value('isi_disposisi'),
 			'tujuan_disposisi' => set_value('tujuan_disposisi'),
 			'status_disposisi' => set_value('status_disposisi'),
+			'alasan_tolak' => set_value('alasan_tolak'),
 			'created_at' => set_value('created_at'),
 			'disposisi_at' => set_value('disposisi_at'),
 			'created_by' => set_value('created_by'),
@@ -226,6 +227,7 @@ class Kunker extends CI_Controller
 					} else {
 						$data = array(
 							'id_jenis_kunjungan' => $this->input->post('id_jenis_kunjungan', TRUE),
+							'alasan_tolak' => $this->input->post('alasan_tolak', TRUE),
 							'kunjungan_ke' => $this->input->post('kunjungan_ke', TRUE),
 							'nomor_surat' => $this->input->post('nomor_surat', TRUE),
 							'tanggal_surat' => $this->input->post('tanggal_surat', TRUE),
@@ -424,6 +426,7 @@ class Kunker extends CI_Controller
 	{
 		$status = $this->input->post('status', TRUE);
 		$note = $this->input->post('diposisi_note', TRUE);
+		$alasan_tolak = $this->input->post('alasan_tolak', TRUE);
 		$save = $this->db->update('kunker', [
 			'notif_adminta' => 1,
 			'notif_admintu' => 0,
@@ -431,7 +434,8 @@ class Kunker extends CI_Controller
 			'diposisi_note' => $note,
 			'tujuan_disposisi' => $this->input->post('tujuan_disposisi'),
 			'disposisi_at' => date("Y-m-d H:i:s"),
-			'disposisi_by' => getSession('fullname')
+			'disposisi_by' => getSession('fullname'),
+			'alasan_tolak' => $alasan_tolak
 		], array('id_kunker' => $this->input->post('id_kunker')));
 		if ($save) {
 			if ($status == 1) {

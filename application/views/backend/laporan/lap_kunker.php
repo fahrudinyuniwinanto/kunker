@@ -42,7 +42,11 @@
                                 <input type="text" class="form-control date" name="tanggal_selesai" id="tanggal_selesai" placeholder="Tanggal Selesai" value="<?php echo date('Y-m-d') ?>" />
                             </div> -->
                             <div class="mb-3 form-check">
-                                <input class="form-check-input" type="radio" name="jenis_laporan" value="fraksi" required /> <label class="form-label form-check-label">Laporan Perfraksi </label> <br>
+                                <?php 
+                                if(getSession('level')!='3'){
+                                    ?>
+                                    <input class="form-check-input" type="radio" name="jenis_laporan" value="fraksi" required /> <label class="form-label form-check-label">Laporan Perfraksi </label> <br>
+                                <?php } ?>
                                 <input class="form-check-input" type="radio" name="jenis_laporan" value="anggota" required /> <label class="form-label form-check-label">Laporan Peranggota Fraksi </label>
                             </div>
                             <div class="mb-3">
