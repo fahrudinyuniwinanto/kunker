@@ -103,7 +103,7 @@ class Kunker extends CI_Controller
 	{
 
 		$row = $this->Kunker_model->get_by_id($id);
-		$this->db->where(['id_kunker' => $id])->update('kunker', ['status_notifikasi' => 0]);
+		$this->db->where(['id_kunker' => $id])->update('kunker', ['notif_adminta' => 0]);
 		if ($row) {
 			$data = array(
 				'id_kunker' => $row->id_kunker,

@@ -34,7 +34,9 @@ class Backend extends CI_Controller
 
         $this->load->library('pagination');
         $this->pagination->initialize($config);
-
+        if(getSession('level')=='3'){
+            $this->db->where('id_fraksi', getSession('id_fraksi'));
+        }
         $data = array(
 
             'content' => 'backend/dashboard',

@@ -151,7 +151,7 @@
 	});
 
 	function confirm(status) {
-		if($("#tujuan_disposisi").val() == "") {
+		if($("#tujuan_disposisi").val() == "" && status!='2') {
 			console.log($("#tujuan_disposisi").val()+'aa');
 			swal('Tujuan disposisi kosong','Silakan isi tujuan disposisi dahulu','warning');
 			return false;
