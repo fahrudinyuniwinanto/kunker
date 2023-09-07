@@ -10,7 +10,7 @@ $db['default'] = array(
     'username'     => 'root',
     'password'     => 'fah123',
     'dbdriver'     => 'mysqli',
-    'database'     => 'kunker',
+    'database'     => 'kunker1',
     'dbprefix'     => '',
     'pconnect'     => false,
     'db_debug'     => (ENVIRONMENT !== 'production'),

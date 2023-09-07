@@ -35,21 +35,36 @@ class Backend extends CI_Controller
         $this->load->library('pagination');
         $this->pagination->initialize($config);
         if(getSession('level')=='3'){
-            $this->db->where('id_fraksi', getSession('id_fraksi'));
+            $data = array(
+
+                'content' => 'backend/dashboard',
+                'kunker_data' => $kunker,
+                'q' => $q,
+                's' => $status,
+                'permohonan_masuk' => $this->db->get_where('kunker', ['id_anggota_fraksi'=>getSession('no_anggota')])->num_rows(),
+                'permohonan_pending' => $this->db->get_where('kunker', ['status_disposisi' => 0,'id_anggota_fraksi'=>getSession('no_anggota')])->num_rows(),
+                'permohonan_disetujui' => $this->db->get_where('kunker', ['status_disposisi' => 1,'id_anggota_fraksi'=>getSession('no_anggota')])->num_rows(),
+                'permohonan_ditolak' => $this->db->get_where('kunker', ['status_disposisi' => 2,'id_anggota_fraksi'=>getSession('no_anggota')])->num_rows(),
+                'start' => 0
+            );
+    
         }
-        $data = array(
+        if(getSession('level')=='2'){
+            $data = array(
 
-            'content' => 'backend/dashboard',
-            'kunker_data' => $kunker,
-            'q' => $q,
-            's' => $status,
-            'permohonan_masuk' => count($this->db->get('kunker')->result()),
-            'permohonan_pending' => $this->db->get_where('kunker', ['status_disposisi' => 0])->num_rows(),
-            'permohonan_disetujui' => $this->db->get_where('kunker', ['status_disposisi' => 1])->num_rows(),
-            'permohonan_ditolak' => $this->db->get_where('kunker', ['status_disposisi' => 2])->num_rows(),
-            'start' => 0
-        );
-
+                'content' => 'backend/dashboard',
+                'kunker_data' => $kunker,
+                'q' => $q,
+                's' => $status,
+                'permohonan_masuk' => count($this->db->get('kunker')->result()),
+                'permohonan_pending' => $this->db->get_where('kunker', ['status_disposisi' => 0])->num_rows(),
+                'permohonan_disetujui' => $this->db->get_where('kunker', ['status_disposisi' => 1])->num_rows(),
+                'permohonan_ditolak' => $this->db->get_where('kunker', ['status_disposisi' => 2])->num_rows(),
+                'start' => 0
+            );
+    
+        }
+        
         $this->load->view(layout(), $data);
     }
 
