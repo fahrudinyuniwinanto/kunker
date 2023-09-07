@@ -300,9 +300,6 @@ class Kunker extends CI_Controller
 				'disposisi_by' => set_value('disposisi_by', $row->disposisi_by),
 				'diposisi_note' => set_value('diposisi_note', $row->diposisi_note),
 
-				'id_fraksi' => set_value('id_fraksi', $this->session->userdata('id_fraksi')),
-				'no_anggota' => set_value('no_anggota', $this->session->userdata('no_anggota')),
-				'id_anggota_fraksi' => set_value('id_anggota_fraksi', $this->session->userdata('id_user')),
 				'kunjungan_ke' => set_value('kunjungan_ke'),
 				'id_kunker_ta' => set_value('id_kunker_ta'),
 				'jumlah_hari' => set_value('jumlah_hari', 3),
