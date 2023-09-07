@@ -13,7 +13,7 @@
 		<span class="float-end hidden-print">
 			<a href="<?= base_url() ?>kunker" class="btn btn-sm btn-white mb-10px"><i class="fa fa-arrow-circle-left t-plus-1 text-danger fa-fw fa-lg"></i>Kembali</a>
 			<a target="_blank" href="<?= base_url() ?>assets/dok_permohonan/<?= @$file_surat ?>" class="btn btn-sm btn-white mb-10px"><i class="fa fa-file-pdf t-plus-1 text-danger fa-fw fa-lg"></i> Lihat Surat <i>(<?= @$file_surat ?>)</i></a>
-			<a href="<?= base_url() ?>kunker/disposisi/<?= $id_kunker ?>" target="_blank" class="btn btn-sm btn-white mb-10px"><i class="fa fa-print t-plus-1 fa-fw text-danger fa-lg"></i> Cetak Disposisi</a>
+			<?php if($status_disposisi==1): ?><a href="<?= base_url() ?>kunker/disposisi/<?= $id_kunker ?>" target="_blank" class="btn btn-sm btn-white mb-10px"><i class="fa fa-print t-plus-1 fa-fw text-danger fa-lg"></i> Cetak Disposisi</a><?php endif; ?>
 		</span>
 		<?php if($alasan_tolak!=""){
 			$alasan_tolak = "<i> Alasan tolak: ".$alasan_tolak."</i>";
@@ -29,7 +29,7 @@
 			<small>Pemohon</small>
 			<address class="mt-5px mb-5px">
 				<strong class="text-dark"><?= @$nama_fraksi ?></strong><br />
-				<strong><?= @$this->db->get_where('users', ['id_user' => $id_anggota_fraksi])->row()->fullname ?></strong><br>
+				<strong><?= @$this->db->get_where('users', ['no_anggota' => $id_anggota_fraksi])->row()->fullname ?></strong><br>
 				Jenis: <?= $nama_kunker ?><br />
 			</address>
 		</div>
@@ -98,6 +98,11 @@
 						<small>PULANG</small>
 						<span class="text-dark"><?= @date('d-m-Y', strtotime($tgl_berangkat . ' + ' . $jumlah_hari_min1 . ' day')) ?></span>
 					</div>
+<div class="sub-price">
+                        <small>TOTAL</small>
+                        <span class="text-dark"><?=$jumlah_hari ?> hari</span>
+                    </div>
+
 				</div>
 			</div>
 			<div class="invoice-price-right">

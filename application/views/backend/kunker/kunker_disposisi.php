@@ -52,7 +52,7 @@
 				<td><?= $v->nomor_surat ?></td>
 				<td>Asal Surat</td>
 				<td>:</td>
-				<td><?= $v->pemberi_disposisi ?> (A-<?=$v->no_anggota?>)</td>
+				<td><?= $this->db->get_where('users',['no_anggota'=>$v->id_anggota_fraksi])->row()->fullname ?> (A-<?=$v->id_anggota_fraksi?>)</td>
 			</tr>
 			<tr>
 				<td>Lampiran</td>

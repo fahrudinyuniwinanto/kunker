@@ -30,7 +30,7 @@
             <small>Pemohon</small>
             <address class="mt-5px mb-5px">
                 <strong class="text-dark"><?= $nama_fraksi ?></strong><br />
-                <strong><?= @$this->db->get_where('users', ['id_user' => $id_anggota_fraksi])->row()->fullname ?></strong><br>
+                <strong><?= @$this->db->get_where('users', ['no_anggota' => $id_anggota_fraksi])->row()->fullname ?> [A-<?=$id_anggota_fraksi?>]</strong><br>
                 Jenis: <?= $nama_kunker ?><br />
                 <label class="badge bg-green">Kunjungan Ke-<?= $kunjungan_ke ?></label><br />
             </address>

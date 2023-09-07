@@ -11,7 +11,7 @@ class Backend extends CI_Controller
         $this->load->model('Sy_menu_model');
         $this->load->model('Kunker_model');
 
-        $this->db->query("SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+       // $this->db->query("SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
     }
 
     public function index()
@@ -86,7 +86,7 @@ class Backend extends CI_Controller
         $q = "";
         $content = "";
         if(getSession('level')=='3'){
-            $where = "aa.id_fraksi='" . getSession('id_fraksi') . "'";
+            $where = "bb.id_anggota_fraksi='" . getSession('id_user') . "'";
         }else{
             $where = "1=1";
         }

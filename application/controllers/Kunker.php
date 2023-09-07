@@ -287,6 +287,7 @@ class Kunker extends CI_Controller
 				'tingkat_keamanan' => set_value('tingkat_keamanan', $row->tingkat_keamanan),
 				'id_fraksi' => set_value('id_fraksi', $row->id_fraksi),
 				'id_anggota_fraksi' => set_value('id_anggota_fraksi', $row->id_anggota_fraksi),
+'no_anggota' => set_value('no_anggota', $row->no_anggota),
 				'id_kunker_ta' => set_value('id_kunker_ta', $row->id_kunker_ta),
 				'nama_daerah_tujuan' => set_value('nama_daerah_tujuan', $row->nama_daerah_tujuan),
 				'file_surat' => set_value('file_surat', $row->file_surat),
