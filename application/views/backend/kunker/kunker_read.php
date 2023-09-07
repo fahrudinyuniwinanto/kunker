@@ -12,7 +12,8 @@
     <div class="invoice-company">
         <span class="float-end hidden-print">
             <a href="<?= base_url() ?>kunker" class="btn btn-sm btn-white mb-10px"><i class="fa fa-arrow-circle-left t-plus-1 text-danger fa-fw fa-lg"></i>Kembali</a>
-            <?php if ($status_disposisi == 2 and $this->session->userdata('level') == 3) { ?>
+            <?php //if ($status_disposisi == 2 and $this->session->userdata('level') == 3) { ?>
+            <?php if (($status_disposisi == 2 and $this->session->userdata('level') == 3) || ($this->session->userdata('level') == 2)) { ?>
                 <a href="<?= base_url() ?>kunker/update/<?= $id_kunker ?>" class="btn btn-sm btn-white mb-10px"><i class="fa fa-edit t-plus-1 text-warning fa-fw fa-lg"></i>Ubah</a>
             <?php } ?>
             <?php if ($status_disposisi == 1) { ?>
@@ -20,7 +21,7 @@
             <?php } ?>
             <a target="_blank" href="<?= base_url() ?>assets/dok_permohonan/<?= @$file_surat ?>" class="btn btn-sm btn-white mb-10px"><i class="fa fa-file-pdf t-plus-1 text-danger fa-fw fa-lg"></i> Lihat Surat <i>(<?= @$file_surat ?>)</i></a>
         </span>
-        &nbsp;Status: <?= $status_disposisi == 1 ? '<span class="text-success"><i class="fa fa-check-square"></i> Diverifikasi</span>' : ($status_disposisi == 2 ? '<span class="text-danger"><i class="fa fa-times"></i> Ditolak</span>' : ($status_disposisi == 0 ? '<span class="text-warning"><i class="fa fa-clock"></i> Menunggu Verifikasi</span>' : '')) ?>
+        &nbsp;Status: <?= $status_disposisi == 1 ? '<span class="text-success"><i class="fa fa-check-square"></i> Diverifikasi</span>' : ($status_disposisi == 2 ? '<span class="text-danger"><i class="fa fa-times"></i> Ditolak</span> ['.@$alasan_tolak.']' : ($status_disposisi == 0 ? '<span class="text-warning"><i class="fa fa-clock"></i> Menunggu Verifikasi</span>' : '')) ?>
     </div>
     <!-- END invoice-company -->
     <!-- BEGIN invoice-header -->
@@ -96,6 +97,10 @@
                     <div class="sub-price">
                         <small>PULANG</small>
                         <span class="text-dark"><?= @date_format(date_create($tgl_kembali), 'd-m-Y') ?></span>
+                    </div>
+                    <div class="sub-price">
+                        <small>TOTAL</small>
+                        <span class="text-dark"><?=$jumlah_hari ?> hari</span>
                     </div>
                 </div>
             </div>

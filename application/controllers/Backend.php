@@ -18,7 +18,7 @@ class Backend extends CI_Controller
     {
 
         $q = urldecode($this->input->get('q', TRUE));
-        $status = urldecode($this->input->get('s', TRUE));
+        $status = $this->input->get('s', TRUE);
         $start = intval($this->input->get('start'));
         if ($q <> '') {
             $config['base_url'] = base_url() . 'backend/index.html?q=' . urlencode($q);
@@ -31,20 +31,22 @@ class Backend extends CI_Controller
         $config['page_query_string'] = TRUE;
         $config['total_rows'] = $this->Kunker_model->total_rows($q, $status);
         $kunker = $this->Kunker_model->get_limit_data($config['per_page'], $start, $q, $status);
-
+        // wfLastQuery();
         $this->load->library('pagination');
         $this->pagination->initialize($config);
-
+        if(getSession('level')=='3'){
+            $this->db->where('id_fraksi', getSession('id_fraksi'));
+        }
         $data = array(
 
             'content' => 'backend/dashboard',
             'kunker_data' => $kunker,
             'q' => $q,
             's' => $status,
-            'permohonan_masuk' => $this->db->get('kunker')->num_rows(),
-            'permohonan_pending' => $this->db->get_where('kunker', ['status_disposisi' => 0, 'YEAR(created_at)' => date('Y')])->num_rows(),
-            'permohonan_disetujui' => $this->db->get_where('kunker', ['status_disposisi' => 1, 'YEAR(created_at)' => date('Y')])->num_rows(),
-            'permohonan_ditolak' => $this->db->get_where('kunker', ['status_disposisi' => 2, 'YEAR(created_at)' => date('Y')])->num_rows(),
+            'permohonan_masuk' => count($this->db->get('kunker')->result()),
+            'permohonan_pending' => $this->db->get_where('kunker', ['status_disposisi' => 0])->num_rows(),
+            'permohonan_disetujui' => $this->db->get_where('kunker', ['status_disposisi' => 1])->num_rows(),
+            'permohonan_ditolak' => $this->db->get_where('kunker', ['status_disposisi' => 2])->num_rows(),
             'start' => 0
         );
 
@@ -68,11 +70,16 @@ class Backend extends CI_Controller
         $tahun = $this->input->post('tahun', TRUE);
         $q = "";
         $content = "";
+        if(getSession('level')=='3'){
+            $where = "aa.id_fraksi='" . getSession('id_fraksi') . "'";
+        }else{
+            $where = "1=1";
+        }
         switch ($jenis_laporan) {
             case 'fraksi':
                 $q = "SELECT aa.id_fraksi, COUNT(bb.id_fraksi) as jml_kunjungan
                 FROM fraksi as aa left join kunker as bb on aa.id_fraksi=bb.id_fraksi 
-                WHERE aa.id_fraksi='" . getSession('id_fraksi') . "' and YEAR(bb.tgl_berangkat) = '$tahun' and bb.id_jenis_kunjungan = '$jenis_kunjungan' group by bb.id_fraksi";
+                WHERE $where and YEAR(bb.tgl_berangkat) = '$tahun' and bb.id_jenis_kunjungan = '$jenis_kunjungan' group by bb.id_fraksi";
                 $content = "backend/laporan/prin_fraksi_kunker";
                 $arrLabel = [];
                 $arrData = [];
@@ -84,7 +91,7 @@ class Backend extends CI_Controller
             case 'anggota':
                 $q = "SELECT aa.id_user, aa.id_fraksi, COUNT(aa.id_user) as jml_kunjungan
                 FROM users as aa left join kunker as bb on aa.id_user=bb.id_anggota_fraksi 
-                WHERE aa.id_fraksi='" . getSession('id_fraksi') . "' and aa.id_group = '3' and YEAR(bb.tgl_berangkat) = '$tahun' and bb.id_jenis_kunjungan = '$jenis_kunjungan' group by aa.id_user";
+                WHERE $where and aa.id_group = '3' and YEAR(bb.tgl_berangkat) = '$tahun' and bb.id_jenis_kunjungan = '$jenis_kunjungan' group by aa.id_user";
                 $arrLabel = [];
                 $arrData = [];
                 foreach ($this->db->query($q)->result() as $k => $v) {

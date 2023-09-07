@@ -102,27 +102,27 @@
                                                                     echo '<label class="badge bg-danger">DITOLAK</label>';
                                                                 }
                                                                 ?></td>
-                                    <td><?= @$diposisi_note ?></td>
+                                    <td><?= $kunker->diposisi_note ?></td>
                                     <td style="text-align:center" width="150px">
                                         <?php
                                             if (is_allow('DETAIL_KUNKER')) {
-                                                echo anchor(site_url('kunker/read/' . $kunker->id_kunker), '<i class="fa fa-eye"></i>', 'class="btn btn-xs btn-success" title="Detail Data"');
+                                                echo anchor(site_url('kunker/read/' . $kunker->id_kunker), '<i class="fa fa-eye"></i> Lihat', 'class="btn btn-xs btn-success" title="Detail Data"');
                                             }
                                             if (is_allow('EDIT_KUNKER')) {
                                                 if ($kunker->status_disposisi == 2) {
                                                     echo ' &nbsp ';
-                                                    echo anchor(site_url('kunker/update/' . $kunker->id_kunker), '<i class="fa fa-edit"></i>', 'class="btn btn-xs btn-warning" title="Ubah Data"');
+                                                    echo anchor(site_url('kunker/update/' . $kunker->id_kunker), '<i class="fa fa-edit"></i> Edit', 'class="btn btn-xs btn-warning" title="Ubah Data"');
                                                 }
                                             }
                                             if (is_allow('VERIFIKASI_KUNKER')) {
                                                 echo ' &nbsp ';
-                                                echo anchor(site_url('kunker/verify/' . $kunker->id_kunker), '<i class="fa fa-check-circle"></i>', 'class="btn btn-xs btn-info" title="Verifikasi Data"');
+                                                echo anchor(site_url('kunker/verify/' . $kunker->id_kunker), '<i class="fa fa-check-circle"></i> Verifikasi', 'class="btn btn-xs btn-info" title="Verifikasi Data"');
                                             }
                                             if (is_allow('HAPUS_KUNKER')) {
                                                 //bisa dihapus selama status masih pending dan ditolak
                                                 if ($kunker->status_disposisi == 0 | $kunker->status_disposisi == 2) {
                                                     echo ' &nbsp '; ?>
-                                                <a href="#" class="btn btn-xs btn-danger" onclick="delete_confirm('<?= site_url('kunker/delete/' . $kunker->id_kunker) ?>')"><i class="fa fa-trash"></i></a>
+                                                <a href="#" class="btn btn-xs btn-danger" onclick="delete_confirm('<?= site_url('kunker/delete/' . $kunker->id_kunker) ?>')"><i class="fa fa-trash"></i> Hapus</a>
                                         <?php }
                                             }
                                             ?>

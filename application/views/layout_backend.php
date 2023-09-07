@@ -160,7 +160,7 @@ $CI->load->model('User_access_model');
                         <a href="<?= base_url('users/update/' . $this->session->userdata('id_user')) ?>"
                             class="dropdown-item">Edit Profile</a>
                         <a href="javascript:;" class="dropdown-item"><span
-                                class="badge bg-danger float-end rounded-pill">2</span>
+                                class="badge bg-danger float-end rounded-pill"></span>
                             <?= $this->session->userdata('email') ?>
                         </a>
                         <a href="javascript:;" class="dropdown-item">
