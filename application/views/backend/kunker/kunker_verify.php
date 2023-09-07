@@ -146,7 +146,7 @@
 				<a class="btn btn-danger btn-sm mb-10px" data-toggle="collapse" href="#div-btn-tolak" aria-expanded="false" aria-controls="div-btn-tolak"><i class="fa fa-times-circle t-plus-1 fa-fw fa-lg"></i> Tolak</a>
 				
 			<?php elseif (in_array($status_disposisi, [1, 2])) : ?>
-				<a href="#" class="btn btn-sm btn-disabled mb-10px">Tidak dapat merubah status</a>
+				<a href="#" class="btn btn-sm btn-disabled mb-10px">Sudah dilakukan disposisi</a>
 			<?php endif ?>
 		</p>
 

@@ -52,12 +52,12 @@
 				<td><?= $v->nomor_surat ?></td>
 				<td>Asal Surat</td>
 				<td>:</td>
-				<td><?= $v->pemberi_disposisi ?> (<?=$v->no_anggota?>)</td>
+				<td><?= $v->pemberi_disposisi ?> (A-<?=$v->no_anggota?>)</td>
 			</tr>
 			<tr>
 				<td>Lampiran</td>
 				<td>:</td>
-				<td><?= $v->lampiran_surat ?> lembar</td>
+				<td><?= $v->lampiran_surat ?></td>
 				<td>Unit Kerja Pemberi Disposisi</td>
 				<td>:</td>
 				<td>Deputi Bidang Administrasi</td>
@@ -79,7 +79,7 @@
 			<?php endforeach; ?>
 			<tr>
 				<td colspan="4">Disposisi / Catatan : <br>
-					<?=$v->diposisi_note==""?" Mohon untuk ditindaklanjuti sesuai dengan ketentuan yang berlaku'":$v->diposisi_note?><br>
+					<?=$v->diposisi_note==""?" Mohon untuk ditindaklanjuti sesuai dengan ketentuan yang berlaku":$v->diposisi_note?><br>
 					<br>
 					<br>
 					<br>

@@ -102,7 +102,7 @@
                                                                     echo '<label class="badge bg-danger">DITOLAK</label>';
                                                                 }
                                                                 ?></td>
-                                    <td><?= @$diposisi_note ?></td>
+                                    <td><?= $kunker->diposisi_note ?></td>
                                     <td style="text-align:center" width="150px">
                                         <?php
                                             if (is_allow('DETAIL_KUNKER')) {

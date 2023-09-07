@@ -7,10 +7,10 @@ $query_builder = true;
 $db['default'] = array(
     'dsn'          => '',
     'hostname'     => 'localhost',
-    'username'     => 'peternakkode',
-    'password'     => 'peternakkode**',
+    'username'     => 'root',
+    'password'     => 'fah123',
     'dbdriver'     => 'mysqli',
-    'database'     => 'peternakkode_01',
+    'database'     => 'kunker',
     'dbprefix'     => '',
     'pconnect'     => false,
     'db_debug'     => (ENVIRONMENT !== 'production'),

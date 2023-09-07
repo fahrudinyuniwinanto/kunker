@@ -18,7 +18,7 @@ class Backend extends CI_Controller
     {
 
         $q = urldecode($this->input->get('q', TRUE));
-        $status = urldecode($this->input->get('s', TRUE));
+        $status = $this->input->get('s', TRUE);
         $start = intval($this->input->get('start'));
         if ($q <> '') {
             $config['base_url'] = base_url() . 'backend/index.html?q=' . urlencode($q);
@@ -31,7 +31,7 @@ class Backend extends CI_Controller
         $config['page_query_string'] = TRUE;
         $config['total_rows'] = $this->Kunker_model->total_rows($q, $status);
         $kunker = $this->Kunker_model->get_limit_data($config['per_page'], $start, $q, $status);
-
+        // wfLastQuery();
         $this->load->library('pagination');
         $this->pagination->initialize($config);
         if(getSession('level')=='3'){
@@ -43,10 +43,10 @@ class Backend extends CI_Controller
             'kunker_data' => $kunker,
             'q' => $q,
             's' => $status,
-            'permohonan_masuk' => $this->db->get('kunker')->num_rows(),
-            'permohonan_pending' => $this->db->get_where('kunker', ['status_disposisi' => 0, 'YEAR(created_at)' => date('Y')])->num_rows(),
-            'permohonan_disetujui' => $this->db->get_where('kunker', ['status_disposisi' => 1, 'YEAR(created_at)' => date('Y')])->num_rows(),
-            'permohonan_ditolak' => $this->db->get_where('kunker', ['status_disposisi' => 2, 'YEAR(created_at)' => date('Y')])->num_rows(),
+            'permohonan_masuk' => count($this->db->get('kunker')->result()),
+            'permohonan_pending' => $this->db->get_where('kunker', ['status_disposisi' => 0])->num_rows(),
+            'permohonan_disetujui' => $this->db->get_where('kunker', ['status_disposisi' => 1])->num_rows(),
+            'permohonan_ditolak' => $this->db->get_where('kunker', ['status_disposisi' => 2])->num_rows(),
             'start' => 0
         );
 

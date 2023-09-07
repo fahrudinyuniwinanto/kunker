@@ -135,6 +135,7 @@ class Kunker extends CI_Controller
 				'created_by' => $row->created_by,
 				'disposisi_by' => $row->disposisi_by,
 				'diposisi_note' => $row->diposisi_note,
+				'alasan_tolak' => $row->alasan_tolak,
 				'content' => 'backend/kunker/kunker_read',
 			);
 			$this->load->view(
@@ -403,9 +404,11 @@ class Kunker extends CI_Controller
 		$row = $this->Kunker_model->get_by_id($id);
 		if ($row) {
 			$fieldNotif = getSession('id_group') == 2 ? 'notif_admintu' : (getSession('id_group') == 3 ? 'notif_adminta' : '');
+
 			if ($fieldNotif != "") {
 				$this->db->where(['id_kunker' => $id])->update('kunker', [$fieldNotif => 0]);
 			}
+			
 			$data = $row;
 			$data->content = 'backend/kunker/kunker_verify';
 			$data->arr_tujuan_disposisi = get_combo('karo', 'id_karo', 'karo', ['' => 'Pilih karo ...']);
