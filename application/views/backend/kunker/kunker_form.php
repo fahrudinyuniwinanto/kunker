@@ -39,7 +39,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="int">Nomor Anggota <?php echo form_error('no_anggota') ?></label>
-                                <input type="text" class="form-control" name="no_anggota" id="no_anggota" placeholder="" value="<?="A-".getSession('no_anggota') ?>" readonly />
+                                <input type="text" class="form-control" name="no_anggota" id="no_anggota" placeholder="" value="<?= "A-" . getSession('no_anggota') ?>" readonly />
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="int">Nama Anggota <?php echo form_error('id_anggota_fraksi') ?></label>
@@ -47,7 +47,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="int">Jenis Kunjungan <?php echo form_error('id_jenis_kunjungan') ?></label>
-                                <label class="badge bg-green jenis_kunjungan" for="int"><i>Kunjungan Ke-<b><span id="kunjungan_ke2"><?=$kunjungan_ke?></span></b></i> </label>
+                                <label class="badge bg-green jenis_kunjungan" for="int"><i>Kunjungan Ke-<b><span id="kunjungan_ke2"><?= $kunjungan_ke ?></span></b></i> </label>
                                 <input type="hidden" class="form-control" name="kunjungan_ke" id="kunjungan_ke" placeholder="" value="<?php echo $kunjungan_ke; ?>" readonly />
                                 <input type="hidden" class="form-control" name="maksimal_hari" id="maksimal_hari" placeholder="" value="" readonly />
                                 <?= form_dropdown('id_jenis_kunjungan', get_combo('jenis_kunjungan', 'id_jenis_kunjungan', 'nama_kunker', ['' => "--Pilih--"]), $id_jenis_kunjungan, ['class' => 'form-control', 'id' => 'id_jenis_kunjungan', 'required' => TRUE]) ?><br />
@@ -167,11 +167,11 @@
                                                 <td><?= $start++ ?></td>
                                                 <td><?= $v->fullname ?></td>
                                                 <td class="text-center">
-                                                    <input type="checkbox" name="id_ta[]" id="cek-<?= $v->id_user ?>" value="<?= $v->id_user ?>" <?php if ($this->db->get_where('kunker_ta', ['id_ta' => $v->id_user, 'id_kunker' => $id_kunker])->num_rows() > 0) {
-                                                                                                                                                            echo 'checked';
-                                                                                                                                                        } else {
-                                                                                                                                                            echo '';
-                                                                                                                                                        } ?> />
+                                                    <input type="radio" name="id_ta" id="cek-<?= $v->id_user ?>" value="<?= $v->id_user ?>" <?php if ($this->db->get_where('kunker_ta', ['id_ta' => $v->id_user, 'id_kunker' => $id_kunker])->num_rows() > 0) {
+                                                                                                                                                    echo 'checked';
+                                                                                                                                                } else {
+                                                                                                                                                    echo '';
+                                                                                                                                                } ?> />
                                                 </td>
                                             </tr>
                                         <?php } ?>
