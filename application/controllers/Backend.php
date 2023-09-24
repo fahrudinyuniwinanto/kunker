@@ -11,7 +11,7 @@ class Backend extends CI_Controller
         $this->load->model('Sy_menu_model');
         $this->load->model('Kunker_model');
 
-       // $this->db->query("SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+        // $this->db->query("SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
     }
 
     public function index()
@@ -34,22 +34,22 @@ class Backend extends CI_Controller
         // wfLastQuery();
         $this->load->library('pagination');
         $this->pagination->initialize($config);
-        if(getSession('level')=='3'){
+        if (getSession('level') == '3') {
             $data = array(
 
                 'content' => 'backend/dashboard',
                 'kunker_data' => $kunker,
                 'q' => $q,
                 's' => $status,
-                'permohonan_masuk' => $this->db->get_where('kunker', ['id_anggota_fraksi'=>getSession('no_anggota')])->num_rows(),
-                'permohonan_pending' => $this->db->get_where('kunker', ['status_disposisi' => 0,'id_anggota_fraksi'=>getSession('no_anggota')])->num_rows(),
-                'permohonan_disetujui' => $this->db->get_where('kunker', ['status_disposisi' => 1,'id_anggota_fraksi'=>getSession('no_anggota')])->num_rows(),
-                'permohonan_ditolak' => $this->db->get_where('kunker', ['status_disposisi' => 2,'id_anggota_fraksi'=>getSession('no_anggota')])->num_rows(),
+                'permohonan_masuk' => $this->db->get_where('kunker', ['id_anggota_fraksi' => getSession('no_anggota')])->num_rows(),
+                'permohonan_pending' => $this->db->get_where('kunker', ['status_disposisi' => 0, 'id_anggota_fraksi' => getSession('no_anggota')])->num_rows(),
+                'permohonan_disetujui' => $this->db->get_where('kunker', ['status_disposisi' => 1, 'id_anggota_fraksi' => getSession('no_anggota')])->num_rows(),
+                'permohonan_ditolak' => $this->db->get_where('kunker', ['status_disposisi' => 2, 'id_anggota_fraksi' => getSession('no_anggota')])->num_rows(),
                 'start' => 0
             );
-    
+
         }
-        if(getSession('level')=='2'){
+        if (getSession('level') == '2') {
             $data = array(
 
                 'content' => 'backend/dashboard',
@@ -62,9 +62,9 @@ class Backend extends CI_Controller
                 'permohonan_ditolak' => $this->db->get_where('kunker', ['status_disposisi' => 2])->num_rows(),
                 'start' => 0
             );
-    
+
         }
-        
+
         $this->load->view(layout(), $data);
     }
 
@@ -72,7 +72,16 @@ class Backend extends CI_Controller
     {
         $data = [
             'content' => 'backend/laporan/lap_kunker',
-            'kunker_data' => $this->db->get_where('kunker', [])->result(),
+        ];
+
+        $this->load->view(layout(), $data);
+    }
+
+
+    public function lap_detil_kunker()
+    {
+        $data = [
+            'content' => 'backend/laporan/lap_detil_kunker',
         ];
 
         $this->load->view(layout(), $data);
@@ -85,9 +94,9 @@ class Backend extends CI_Controller
         $tahun = $this->input->post('tahun', TRUE);
         $q = "";
         $content = "";
-        if(getSession('level')=='3'){
+        if (getSession('level') == '3') {
             $where = "bb.id_anggota_fraksi='" . getSession('id_user') . "'";
-        }else{
+        } else {
             $where = "1=1";
         }
         switch ($jenis_laporan) {
@@ -125,6 +134,38 @@ class Backend extends CI_Controller
             'data_jenis_kunjungan' => $this->db->get_where('jenis_kunjungan', ['id_jenis_kunjungan' => $jenis_kunjungan])->row(),
             'arrLabel' => $arrLabel,
             'arrData' => $arrData,
+            'content' => $content,
+        ];
+        $this->load->view("layout_print", $data);
+    }
+    public function prin_detil_kunker()
+    {
+        $jenis_laporan = $this->input->post('jenis_laporan', TRUE);
+        $jenis_kunjungan = $this->input->post('jenis_kunjungan', TRUE);
+        $tahun = $this->input->post('tahun', TRUE);
+        $q = "";
+        $content = "";
+        if (getSession('level') == '3') {
+            $where = "bb.id_anggota_fraksi='" . getSession('no_anggota') . "'";
+        } else {
+            $where = "1=1";
+        }
+
+        $q = "SELECT *from kunker as bb 
+                WHERE $where and YEAR(bb.tgl_berangkat) = '$tahun' and bb.id_jenis_kunjungan = '$jenis_kunjungan' order by bb.id_anggota_fraksi";
+        $content = "backend/laporan/prin_detil_kunker";
+        // $arrLabel = [];
+        // $arrData = [];
+        // foreach ($this->db->query($q)->result() as $k => $v) {
+        //     $arrLabel[] = $this->db->get_where('fraksi', ['id_fraksi' => $v->id_fraksi])->row('nama_fraksi');
+        //     $arrData[] = $v->jml_kunjungan;
+        // }
+        $data = [
+            'kunker_data' => $this->db->query($q)->result(),
+            'tahun' => $tahun,
+            'data_jenis_kunjungan' => $this->db->get_where('jenis_kunjungan', ['id_jenis_kunjungan' => $jenis_kunjungan])->row(),
+            // 'arrLabel' => $arrLabel,
+            // 'arrData' => $arrData,
             'content' => $content,
         ];
         $this->load->view("layout_print", $data);
