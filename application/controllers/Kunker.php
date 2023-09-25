@@ -287,7 +287,7 @@ class Kunker extends CI_Controller
 				'tingkat_keamanan' => set_value('tingkat_keamanan', $row->tingkat_keamanan),
 				'id_fraksi' => set_value('id_fraksi', $row->id_fraksi),
 				'id_anggota_fraksi' => set_value('id_anggota_fraksi', $row->id_anggota_fraksi),
-'no_anggota' => set_value('no_anggota', $row->no_anggota),
+				'no_anggota' => set_value('no_anggota', $row->no_anggota),
 				'id_kunker_ta' => set_value('id_kunker_ta', $row->id_kunker_ta),
 				'nama_daerah_tujuan' => set_value('nama_daerah_tujuan', $row->nama_daerah_tujuan),
 				'file_surat' => set_value('file_surat', $row->file_surat),
@@ -333,7 +333,7 @@ class Kunker extends CI_Controller
 			$arr = $this->db->get_where("kunker", ['id_kunker' => $this->input->post('id_kunker', TRUE)])->row();
 			if ($_FILES['file_surat']['name'] != "") {
 				unlink("./assets/dok_permohonan/" . $arr->file_surat);
-				$file_name =  sf_upload('dok_permohonan', 'assets/dok_permohonan', 'pdf', 2048, 'file_surat');
+				$file_name = sf_upload('dok_permohonan', 'assets/dok_permohonan', 'pdf', 2048, 'file_surat');
 			} else {
 				$file_name = $arr->file_surat;
 			}
@@ -406,9 +406,30 @@ class Kunker extends CI_Controller
 			if ($fieldNotif != "") {
 				$this->db->where(['id_kunker' => $id])->update('kunker', [$fieldNotif => 0]);
 			}
-			
+
 			$data = $row;
 			$data->content = 'backend/kunker/kunker_verify';
+			$data->arr_tujuan_disposisi = get_combo('karo', 'id_karo', 'karo', ['' => 'Pilih karo ...']);
+
+
+			// wfDebug($data);
+			$this->load->view(
+				layout(),
+				$data
+			);
+		} else {
+			$this->session->set_flashdata('message', 'Record Not Found');
+			redirect(site_url('kunker'));
+		}
+	}
+
+	public function verify_lanjut($id)
+	{
+		$row = $this->Kunker_model->get_by_id($id);
+		if ($row) {
+
+			$data = $row;
+			$data->content = 'backend/kunker/kunker_verify_lanjut';
 			$data->arr_tujuan_disposisi = get_combo('karo', 'id_karo', 'karo', ['' => 'Pilih karo ...']);
 
 
