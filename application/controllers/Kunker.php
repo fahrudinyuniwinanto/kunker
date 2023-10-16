@@ -423,13 +423,56 @@ class Kunker extends CI_Controller
 		}
 	}
 
-	public function verify_lanjut($id)
+	public function verify_biro_keuangan($id)
 	{
 		$row = $this->Kunker_model->get_by_id($id);
 		if ($row) {
 
 			$data = $row;
-			$data->content = 'backend/kunker/kunker_verify_lanjut';
+			$data->content = 'backend/kunker/kunker_verify_biro_keuangan';
+			$data->arr_tujuan_disposisi = get_combo('karo', 'id_karo', 'karo', ['' => 'Pilih karo ...']);
+
+
+			// wfDebug($data);
+			$this->load->view(
+				layout(),
+				$data
+			);
+		} else {
+			$this->session->set_flashdata('message', 'Record Not Found');
+			redirect(site_url('kunker'));
+		}
+	}
+
+	
+	public function verify_kabag($id)
+	{
+		$row = $this->Kunker_model->get_by_id($id);
+		if ($row) {
+
+			$data = $row;
+			$data->content = 'backend/kunker/kunker_verify_kabag';
+			$data->arr_tujuan_disposisi = get_combo('karo', 'id_karo', 'karo', ['' => 'Pilih karo ...']);
+
+
+			// wfDebug($data);
+			$this->load->view(
+				layout(),
+				$data
+			);
+		} else {
+			$this->session->set_flashdata('message', 'Record Not Found');
+			redirect(site_url('kunker'));
+		}
+	}
+
+	public function verify_kasubbag($id)
+	{
+		$row = $this->Kunker_model->get_by_id($id);
+		if ($row) {
+
+			$data = $row;
+			$data->content = 'backend/kunker/kunker_verify_kasubbag';
 			$data->arr_tujuan_disposisi = get_combo('karo', 'id_karo', 'karo', ['' => 'Pilih karo ...']);
 
 
@@ -445,6 +488,108 @@ class Kunker extends CI_Controller
 	}
 
 	public function verify_action()
+	{
+		$status = $this->input->post('status', TRUE);
+		$note = $this->input->post('diposisi_note', TRUE);
+		$alasan_tolak = $this->input->post('alasan_tolak', TRUE);
+		$save = $this->db->update('kunker', [
+			'notif_adminta' => 1,
+			'notif_admintu' => 0,
+			'status_disposisi' => $status,
+			'diposisi_note' => $note,
+			'tujuan_disposisi' => $this->input->post('tujuan_disposisi'),
+			'disposisi_at' => date("Y-m-d H:i:s"),
+			'disposisi_by' => getSession('fullname'),
+			'alasan_tolak' => $alasan_tolak
+		], array('id_kunker' => $this->input->post('id_kunker')));
+		if ($save) {
+			if ($status == 1) {
+				$res['msg'] = "Pengajuan SPPD berhasil diverifikasi";
+				$res['title'] = "Berhasil";
+				$res['icon'] = 'success';
+			} else {
+				$res['msg'] = "Pengajuan SPPD ditolak";
+				$res['title'] = "Ditolak";
+				$res['icon'] = 'success';
+			}
+		} else {
+			$res['msg'] = "Pengajuan SPPD gagal diverifikasi";
+			$res['title'] = "Error";
+			$res['icon'] = 'error';
+		}
+		echo json_encode($res);
+	}
+
+	
+	public function verify_action_biro_keuangan()
+	{
+		$status = $this->input->post('status', TRUE);
+		$note = $this->input->post('diposisi_note', TRUE);
+		$alasan_tolak = $this->input->post('alasan_tolak', TRUE);
+		$save = $this->db->update('kunker', [
+			'notif_adminta' => 1,
+			'notif_admintu' => 0,
+			'status_disposisi' => $status,
+			'diposisi_note' => $note,
+			'tujuan_disposisi' => $this->input->post('tujuan_disposisi'),
+			'disposisi_at' => date("Y-m-d H:i:s"),
+			'disposisi_by' => getSession('fullname'),
+			'alasan_tolak' => $alasan_tolak
+		], array('id_kunker' => $this->input->post('id_kunker')));
+		if ($save) {
+			if ($status == 1) {
+				$res['msg'] = "Pengajuan SPPD berhasil diverifikasi";
+				$res['title'] = "Berhasil";
+				$res['icon'] = 'success';
+			} else {
+				$res['msg'] = "Pengajuan SPPD ditolak";
+				$res['title'] = "Ditolak";
+				$res['icon'] = 'success';
+			}
+		} else {
+			$res['msg'] = "Pengajuan SPPD gagal diverifikasi";
+			$res['title'] = "Error";
+			$res['icon'] = 'error';
+		}
+		echo json_encode($res);
+	}
+
+	
+	public function verify_action_kabag()
+	{
+		$status = $this->input->post('status', TRUE);
+		$note = $this->input->post('diposisi_note', TRUE);
+		$alasan_tolak = $this->input->post('alasan_tolak', TRUE);
+		$save = $this->db->update('kunker', [
+			'notif_adminta' => 1,
+			'notif_admintu' => 0,
+			'status_disposisi' => $status,
+			'diposisi_note' => $note,
+			'tujuan_disposisi' => $this->input->post('tujuan_disposisi'),
+			'disposisi_at' => date("Y-m-d H:i:s"),
+			'disposisi_by' => getSession('fullname'),
+			'alasan_tolak' => $alasan_tolak
+		], array('id_kunker' => $this->input->post('id_kunker')));
+		if ($save) {
+			if ($status == 1) {
+				$res['msg'] = "Pengajuan SPPD berhasil diverifikasi";
+				$res['title'] = "Berhasil";
+				$res['icon'] = 'success';
+			} else {
+				$res['msg'] = "Pengajuan SPPD ditolak";
+				$res['title'] = "Ditolak";
+				$res['icon'] = 'success';
+			}
+		} else {
+			$res['msg'] = "Pengajuan SPPD gagal diverifikasi";
+			$res['title'] = "Error";
+			$res['icon'] = 'error';
+		}
+		echo json_encode($res);
+	}
+
+	
+	public function verify_action_kasubbag()
 	{
 		$status = $this->input->post('status', TRUE);
 		$note = $this->input->post('diposisi_note', TRUE);
