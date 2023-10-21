@@ -13,14 +13,14 @@
 		<span class="float-end hidden-print">
 			<a href="<?= base_url() ?>kunker" class="btn btn-sm btn-white mb-10px"><i class="fa fa-arrow-circle-left t-plus-1 text-danger fa-fw fa-lg"></i>Kembali</a>
 			<a target="_blank" href="<?= base_url() ?>assets/dok_permohonan/<?= @$file_surat ?>" class="btn btn-sm btn-white mb-10px"><i class="fa fa-file-pdf t-plus-1 text-danger fa-fw fa-lg"></i> Lihat Surat <i>(<?= @$file_surat ?>)</i></a>
-			<?php if($status_disposisi==1): ?><a href="<?= base_url() ?>kunker/disposisi/<?= $id_kunker ?>" target="_blank" class="btn btn-sm btn-white mb-10px"><i class="fa fa-print t-plus-1 fa-fw text-danger fa-lg"></i> Cetak Disposisi</a><?php endif; ?>
+			<?php if ($status_disposisi == 1) : ?><a href="<?= base_url() ?>kunker/disposisi/<?= $id_kunker ?>" target="_blank" class="btn btn-sm btn-white mb-10px"><i class="fa fa-print t-plus-1 fa-fw text-danger fa-lg"></i> Cetak Disposisi</a><?php endif; ?>
 		</span>
-		<?php if($alasan_tolak!=""){
-			$alasan_tolak = "<i> Alasan tolak: ".$alasan_tolak."</i>";
-		} else{
+		<?php if ($alasan_tolak != "") {
+			$alasan_tolak = "<i> Alasan tolak: " . $alasan_tolak . "</i>";
+		} else {
 			$alasan_tolak = "";
-		}?>
-		&nbsp;Status: <?= $status_disposisi == 1 ? '<span class="text-success"><i class="fa fa-check-square"></i> Diverifikasi</span>' : ($status_disposisi == 2 ? '<span class="text-danger"><i class="fa fa-times"></i> Ditolak</span>' : ($status_disposisi == 0 ? '<span class="text-warning"><i class="fa fa-clock"></i> Menunggu Verifikasi</span>' : '')).$alasan_tolak; ?>
+		} ?>
+		&nbsp;Status: <?= $status_disposisi == 1 ? '<span class="text-success"><i class="fa fa-check-square"></i> Diverifikasi</span>' : ($status_disposisi == 2 ? '<span class="text-danger"><i class="fa fa-times"></i> Ditolak</span>' : ($status_disposisi == 0 ? '<span class="text-warning"><i class="fa fa-clock"></i> Menunggu Verifikasi</span>' : '')) . $alasan_tolak; ?>
 	</div>
 	<!-- END invoice-company -->
 	<!-- BEGIN invoice-header -->
@@ -98,10 +98,10 @@
 						<small>PULANG</small>
 						<span class="text-dark"><?= @date('d-m-Y', strtotime($tgl_berangkat . ' + ' . $jumlah_hari_min1 . ' day')) ?></span>
 					</div>
-<div class="sub-price">
-                        <small>TOTAL</small>
-                        <span class="text-dark"><?=$jumlah_hari ?> hari</span>
-                    </div>
+					<div class="sub-price">
+						<small>TOTAL</small>
+						<span class="text-dark"><?= $jumlah_hari ?> hari</span>
+					</div>
 
 				</div>
 			</div>
@@ -120,19 +120,19 @@
 				* Maksimal <strong><?= @$maksimal_hari ?> hari</strong> dalam sekali kunjungan
 			</div>
 			<div class="col-md-4">
-				
+
 			</div>
 			<div class="col-md-4">
-			<strong><i class="fa fa-fw fa-lg fa-forward"></i> Tujuan Disposisi</strong>
-				<?=form_dropdown('tujuan_disposisi', $arr_tujuan_disposisi, $tujuan_disposisi,['class'=>'form-control mb-10px','id'=>'tujuan_disposisi'])?>
+				<!-- <strong><i class="fa fa-fw fa-lg fa-forward"></i> Tujuan Disposisi</strong>
+				<?//= form_dropdown('tujuan_disposisi', $arr_tujuan_disposisi, $tujuan_disposisi, ['class' => 'form-control mb-10px', 'id' => 'tujuan_disposisi']) ?> -->
 				<strong><i class="fa fa-fw fa-lg fa-edit"></i> Catatan Disposisi</strong>
 				<p><input type='checkbox' id='disposisi_check' name='disposisi_check' <?= ($diposisi_note == "") ? 'checked' : '' ?> /> <label for="disposisi_check">Mohon untuk ditindaklanjuti sesuai dengan ketentuan yang berlaku
 					</label>'</p>
 				<textarea style="width: 400px;" name="diposisi_note" id="diposisi_note" class="form-control mb-10px" required placeholder="Catatan Disposisi..." rows="2" <?= ($diposisi_note == "") ? 'readonly' : '' ?>><?= $diposisi_note ?></textarea>
 				<div class="collapse" id="div-btn-tolak">
-				<textarea style="width: 400px;" name="alasan_tolak" id="alasan_tolak" class="form-control mb-10px" required placeholder="Isi alasan menolak disposisi..." rows="2"></textarea>
-				<a href="#" onclick="confirm('2')" class="btn btn-sm btn-danger mb-10px">Tolak Disposisi</a>
-					</div>
+					<textarea style="width: 400px;" name="alasan_tolak" id="alasan_tolak" class="form-control mb-10px" required placeholder="Isi alasan menolak disposisi..." rows="2"></textarea>
+					<a href="#" onclick="confirm('2')" class="btn btn-sm btn-danger mb-10px">Tolak Disposisi</a>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -146,11 +146,11 @@
 		</p>
 		<p class="text-center fw-bold">
 			<a href="<?= base_url() ?>kunker" class="btn btn-sm btn-info mb-10px"><i class="fa fa-arrow-left t-plus-1 fa-fw fa-lg"></i> Kembali</a>
-			<?php if (!in_array($status_disposisi, [1, 2])) : ?>
+			<?php if (!in_array($dispo_kabag_stat, [1, 2])) : ?>
 				<a href="#" onclick="confirm('1')" class="btn btn-sm btn-success mb-10px"><i class="fa fa-check-circle t-plus-1 fa-fw fa-lg"></i> Verifikasi</a>
-				<a class="btn btn-danger btn-sm mb-10px" data-toggle="collapse" href="#div-btn-tolak" aria-expanded="false" aria-controls="div-btn-tolak"><i class="fa fa-times-circle t-plus-1 fa-fw fa-lg"></i> Tolak</a>
-				
-			<?php elseif (in_array($status_disposisi, [1, 2])) : ?>
+				<!-- <a class="btn btn-danger btn-sm mb-10px" data-toggle="collapse" href="#div-btn-tolak" aria-expanded="false" aria-controls="div-btn-tolak"><i class="fa fa-times-circle t-plus-1 fa-fw fa-lg"></i> Tolak</a> -->
+
+			<?php elseif (in_array($dispo_kabag_stat, [1, 2])) : ?>
 				<a href="#" class="btn btn-sm btn-disabled mb-10px">Sudah dilakukan disposisi</a>
 			<?php endif ?>
 		</p>
@@ -166,16 +166,16 @@
 	});
 
 	function confirm(status) {
-		if($("#tujuan_disposisi").val() == "" && status!='2') {
-			console.log($("#tujuan_disposisi").val()+'aa');
-			swal('Tujuan disposisi kosong','Silakan isi tujuan disposisi dahulu','warning');
+		if ($("#tujuan_disposisi").val() == "" && status != '2') {
+			console.log($("#tujuan_disposisi").val() + 'aa');
+			swal('Tujuan disposisi kosong', 'Silakan isi tujuan disposisi dahulu', 'warning');
 			return false;
 		}
-		console.log($("#tujuan_disposisi").val()+'bb');
+		console.log($("#tujuan_disposisi").val() + 'bb');
 		console.log('x');
 		var msgstatus = status == '1' ? 'terima' : (status == '2' ? 'tolak' : '');
 		swal({
-			title: 'Yakin ' + msgstatus + ' Permohonan SPPD?',
+			title: 'Yakin melanjutkan disposisi Permohonan SPPD?',
 			text: 'Setelah verifikasi, Anda tidak dapat merubah status lagi!',
 			type: 'warning',
 			showCancelButton: true,
@@ -187,7 +187,7 @@
 		}, function(isConfirmed) {
 			if (isConfirmed) {
 				$.ajax({
-					url: '<?= base_url() ?>kunker/verify_action',
+					url: '<?= base_url() ?>kunker/verify_action_kabag',
 					type: 'POST',
 					data: {
 						status: status,

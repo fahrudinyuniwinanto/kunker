@@ -101,7 +101,53 @@
                                                                 if ($kunker->status_disposisi == 2) {
                                                                     echo '<label class="badge bg-danger">DITOLAK</label>';
                                                                 }
-                                                                ?></td>
+                                                                ?>
+                                        <br>
+                                        <?php
+                                            echo 'keu';
+
+                                            if ($kunker->dispo_keu_stat == 0) {
+                                                echo '<label class="badge bg-warning">PENDING</label>';
+                                            }
+                                            if ($kunker->dispo_keu_stat == 1) {
+                                                echo '<label class="badge bg-success">DISETUJUI</label>';
+                                            }
+                                            if ($kunker->dispo_keu_stat == 2) {
+                                                echo '<label class="badge bg-danger">DITOLAK</label>';
+                                            }
+                                            ?>
+
+                                        <br>
+                                        <?php
+                                            echo 'kasub';
+
+                                            if ($kunker->dispo_kasubag_stat == 0) {
+                                                echo '<label class="badge bg-warning">PENDING</label>';
+                                            }
+                                            if ($kunker->dispo_kasubag_stat == 1) {
+                                                echo '<label class="badge bg-success">DISETUJUI</label>';
+                                            }
+                                            if ($kunker->dispo_kasubag_stat == 2) {
+                                                echo '<label class="badge bg-danger">DITOLAK</label>';
+                                            }
+                                            ?>
+
+
+                                        <br>
+                                        <?php
+                                            echo 'kabag';
+
+                                            if ($kunker->dispo_kabag_stat == 0) {
+                                                echo '<label class="badge bg-warning">PENDING</label>';
+                                            }
+                                            if ($kunker->dispo_kabag_stat == 1) {
+                                                echo '<label class="badge bg-success">DISETUJUI</label>';
+                                            }
+                                            if ($kunker->dispo_kabag_stat == 2) {
+                                                echo '<label class="badge bg-danger">DITOLAK</label>';
+                                            }
+                                            ?>
+                                    </td>
                                     <td><?= $kunker->diposisi_note ?></td>
                                     <td style="text-align:center" width="150px">
                                         <?php
@@ -116,7 +162,25 @@
                                             }
                                             if (is_allow('VERIFIKASI_KUNKER')) {
                                                 echo ' &nbsp ';
-                                                echo anchor(site_url('kunker/verify/' . $kunker->id_kunker), '<i class="fa fa-check-circle"></i> Verifikasi', 'class="btn btn-xs btn-info" title="Verifikasi Data"');
+                                                if (($this->session->userdata('id_group') == 2 | $this->session->userdata('id_group') == 1) || $kunker->status_disposisi == 0) {
+                                                    //untuk admintu
+                                                    echo anchor(site_url('kunker/verify/' . $kunker->id_kunker), '<i class="fa fa-check-circle"></i> Verifikasi', 'class="btn btn-xs btn-info" title="Verifikasi Data"');
+                                                }
+
+                                                if (($this->session->userdata('id_group') == 5 | $this->session->userdata('id_group') == 1) || $kunker->dispo_keu_stat == 0) {
+                                                    //untuk biro
+                                                    echo anchor(site_url('kunker/verify_biro_keuangan/' . $kunker->id_kunker), '<i class="fa fa-check-circle"></i> Verifikasi', 'class="btn btn-xs btn-info" title="Verifikasi Data"');
+                                                }
+
+                                                if (($this->session->userdata('id_group') == 7 | $this->session->userdata('id_group') == 1) || $kunker->dispo_kasubbag_stat == 0) {
+                                                    //untuk kasubbag
+                                                    echo anchor(site_url('kunker/verify_kasubbag/' . $kunker->id_kunker), '<i class="fa fa-check-circle"></i> Verifikasi', 'class="btn btn-xs btn-info" title="Verifikasi Data"');
+                                                }
+
+                                                if ($this->session->userdata('id_group') == 6 | $this->session->userdata('id_group') == 1 || $kunker->dispo_kabag_stat == 0) {
+                                                    //untuk kabag
+                                                    echo anchor(site_url('kunker/verify_kabag/' . $kunker->id_kunker), '<i class="fa fa-check-circle"></i> Verifikasi', 'class="btn btn-xs btn-info" title="Verifikasi Data"');
+                                                }
                                             }
                                             if (is_allow('HAPUS_KUNKER')) {
                                                 //bisa dihapus selama status masih pending dan ditolak

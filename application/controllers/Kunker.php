@@ -430,10 +430,10 @@ class Kunker extends CI_Controller
 
 			$data = $row;
 			$data->content = 'backend/kunker/kunker_verify_biro_keuangan';
-			$data->arr_tujuan_disposisi = get_combo('karo', 'id_karo', 'karo', ['' => 'Pilih karo ...']);
+			$data->arr_tujuan_disposisi = get_combo('kasubbag', 'id_kasubbag', 'kasubbag', ['' => 'Pilih kasubbag ...']);
 
 
-			// wfDebug($data);
+			//wfDebug($data);
 			$this->load->view(
 				layout(),
 				$data
@@ -473,7 +473,7 @@ class Kunker extends CI_Controller
 
 			$data = $row;
 			$data->content = 'backend/kunker/kunker_verify_kasubbag';
-			$data->arr_tujuan_disposisi = get_combo('karo', 'id_karo', 'karo', ['' => 'Pilih karo ...']);
+			$data->arr_tujuan_disposisi = get_combo('kabag', 'id_kabag', 'kabag', ['' => 'Pilih kabag ...']);
 
 
 			// wfDebug($data);
@@ -545,7 +545,7 @@ class Kunker extends CI_Controller
 
 			//manajemen dispo
 			'dispo_keu_stat' => $status,
-			'dipo_keu_note' => $note,
+			'dispo_keu_note' => $note,
 			'dispo_keu_at' => date("Y-m-d H:i:s"),
 
 			//tujuan dispo
@@ -555,7 +555,7 @@ class Kunker extends CI_Controller
 		], array('id_kunker' => $this->input->post('id_kunker')));
 		if ($save) {
 			if ($status == 1) {
-				$res['msg'] = "Pengajuan SPPD berhasil diverifikasi";
+				$res['msg'] = "Pengajuan SPPD berhasil didisposisi";
 				$res['title'] = "Berhasil";
 				$res['icon'] = 'success';
 			} else {
@@ -587,7 +587,7 @@ class Kunker extends CI_Controller
 
 			//manajemen dispo
 			'dispo_kasubag_stat' => $status,
-			'dipo_kasubag_note' => $note,
+			'dispo_kasubag_note' => $note,
 			'dispo_kasubag_at' => date("Y-m-d H:i:s"),
 
 			//tujuan dispo
@@ -597,7 +597,7 @@ class Kunker extends CI_Controller
 		], array('id_kunker' => $this->input->post('id_kunker')));
 		if ($save) {
 			if ($status == 1) {
-				$res['msg'] = "Pengajuan SPPD berhasil diverifikasi";
+				$res['msg'] = "Pengajuan SPPD berhasil didisposisi";
 				$res['title'] = "Berhasil";
 				$res['icon'] = 'success';
 			} else {
@@ -620,21 +620,19 @@ class Kunker extends CI_Controller
 		$note = $this->input->post('diposisi_note', TRUE);
 		$alasan_tolak = $this->input->post('alasan_tolak', TRUE);
 		$save = $this->db->update('kunker', [
-			'dispo_keu_notif_from' => 1,
-			'dispo_kasubag_notif_from' => 0,
+			//notif kebawah
+			'dispo_kasubag_notif_to' => 1,
+			'dispo_kabag_notif_from' => 0,
 
-			'dispo_keu_stat' => $status,
-			'dipo_keu_note' => $note,
-			'dispo_keu_at' => date("Y-m-d H:i:s"),
-
-			'dispo_kasubag_to' => $this->input->post('tujuan_disposisi'),
-			'dispo_kasubag_from' => getSession('fullname'),
-			'dispo_kasubag_stat' => 0,
+			//manajemen dispo
+			'dispo_kabag_stat' => $status,
+			'dispo_kabag_note' => $note,
+			'dispo_kabag_at' => date("Y-m-d H:i:s"),
 
 		], array('id_kunker' => $this->input->post('id_kunker')));
 		if ($save) {
 			if ($status == 1) {
-				$res['msg'] = "Pengajuan SPPD berhasil diverifikasi";
+				$res['msg'] = "Pengajuan SPPD berhasil didisposisi";
 				$res['title'] = "Berhasil";
 				$res['icon'] = 'success';
 			} else {
