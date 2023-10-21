@@ -38,6 +38,7 @@ class Backend extends CI_Controller
             $data = array(
 
                 'content' => 'backend/dashboard',
+
                 'kunker_data' => $kunker,
                 'q' => $q,
                 's' => $status,
@@ -47,12 +48,12 @@ class Backend extends CI_Controller
                 'permohonan_ditolak' => $this->db->get_where('kunker', ['status_disposisi' => 2, 'id_anggota_fraksi' => getSession('no_anggota')])->num_rows(),
                 'start' => 0
             );
-
         }
         if (getSession('level') == '2') {
             $data = array(
 
                 'content' => 'backend/dashboard',
+                
                 'kunker_data' => $kunker,
                 'q' => $q,
                 's' => $status,
@@ -62,7 +63,6 @@ class Backend extends CI_Controller
                 'permohonan_ditolak' => $this->db->get_where('kunker', ['status_disposisi' => 2])->num_rows(),
                 'start' => 0
             );
-
         }
 
         $this->load->view(layout(), $data);

@@ -444,7 +444,7 @@ class Kunker extends CI_Controller
 		}
 	}
 
-	
+
 	public function verify_kabag($id)
 	{
 		$row = $this->Kunker_model->get_by_id($id);
@@ -520,7 +520,7 @@ class Kunker extends CI_Controller
 		echo json_encode($res);
 	}
 
-	
+
 	public function verify_action_biro_keuangan()
 	{
 		$status = $this->input->post('status', TRUE);
@@ -554,7 +554,7 @@ class Kunker extends CI_Controller
 		echo json_encode($res);
 	}
 
-	
+
 	public function verify_action_kabag()
 	{
 		$status = $this->input->post('status', TRUE);
@@ -588,7 +588,7 @@ class Kunker extends CI_Controller
 		echo json_encode($res);
 	}
 
-	
+
 	public function verify_action_kasubbag()
 	{
 		$status = $this->input->post('status', TRUE);
@@ -629,6 +629,36 @@ class Kunker extends CI_Controller
 			'content' => 'backend/kunker/kunker_disposisi'
 		];
 		$this->load->view($data['content'], $data);
+	}
+
+	public function tracking()
+	{
+		$data = [
+			'content' => 'backend/kunker/kunker_track',
+		];
+
+		$this->load->view(layout(), $data);
+	}
+
+	public function tracking_action()
+	{
+		echo $no_surat = $this->input->post('nomor_surat', TRUE);
+
+		$row = $this->db->get_where('kunker', ['nomor_surat' => $no_surat])->row();
+		if ($row) {
+
+			$data = $row;
+			$data->content = 'backend/kunker/kunker_timeline';
+
+			// wfDebug($data);
+			$this->load->view(
+				layout(),
+				$data
+			);
+		} else {
+			$this->session->set_flashdata('message', 'Record Not Found');
+			redirect(site_url('kunker'));
+		}
 	}
 
 	public function getArrTa()
