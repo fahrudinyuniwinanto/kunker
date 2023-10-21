@@ -162,22 +162,22 @@
                                             }
                                             if (is_allow('VERIFIKASI_KUNKER')) {
                                                 echo ' &nbsp ';
-                                                if (($this->session->userdata('id_group') == 2 | $this->session->userdata('id_group') == 1) || $kunker->status_disposisi == 0) {
+                                                if (($this->session->userdata('id_group') == 2 | $this->session->userdata('id_group') == 1) and $kunker->status_disposisi == 0) {
                                                     //untuk admintu
                                                     echo anchor(site_url('kunker/verify/' . $kunker->id_kunker), '<i class="fa fa-check-circle"></i> Verifikasi', 'class="btn btn-xs btn-info" title="Verifikasi Data"');
                                                 }
 
-                                                if (($this->session->userdata('id_group') == 5 | $this->session->userdata('id_group') == 1) || $kunker->dispo_keu_stat == 0) {
+                                                if (($this->session->userdata('id_group') == 5 | $this->session->userdata('id_group') == 1) and $kunker->dispo_keu_stat == 0) {
                                                     //untuk biro
                                                     echo anchor(site_url('kunker/verify_biro_keuangan/' . $kunker->id_kunker), '<i class="fa fa-check-circle"></i> Verifikasi', 'class="btn btn-xs btn-info" title="Verifikasi Data"');
                                                 }
 
-                                                if (($this->session->userdata('id_group') == 7 | $this->session->userdata('id_group') == 1) || $kunker->dispo_kasubbag_stat == 0) {
+                                                if (($this->session->userdata('id_group') == 7 | $this->session->userdata('id_group') == 1) and $kunker->dispo_kasubag_stat == 0) {
                                                     //untuk kasubbag
                                                     echo anchor(site_url('kunker/verify_kasubbag/' . $kunker->id_kunker), '<i class="fa fa-check-circle"></i> Verifikasi', 'class="btn btn-xs btn-info" title="Verifikasi Data"');
                                                 }
 
-                                                if ($this->session->userdata('id_group') == 6 | $this->session->userdata('id_group') == 1 || $kunker->dispo_kabag_stat == 0) {
+                                                if (($this->session->userdata('id_group') == 6 | $this->session->userdata('id_group') == 1) and $kunker->dispo_kabag_stat == 0) {
                                                     //untuk kabag
                                                     echo anchor(site_url('kunker/verify_kabag/' . $kunker->id_kunker), '<i class="fa fa-check-circle"></i> Verifikasi', 'class="btn btn-xs btn-info" title="Verifikasi Data"');
                                                 }

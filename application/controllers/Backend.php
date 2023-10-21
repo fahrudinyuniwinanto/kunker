@@ -11,7 +11,7 @@ class Backend extends CI_Controller
         $this->load->model('Sy_menu_model');
         $this->load->model('Kunker_model');
 
-        // $this->db->query("SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+        $this->db->query("SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
     }
 
     public function index()
@@ -53,7 +53,7 @@ class Backend extends CI_Controller
             $data = array(
 
                 'content' => 'backend/dashboard',
-                
+
                 'kunker_data' => $kunker,
                 'q' => $q,
                 's' => $status,

@@ -68,7 +68,7 @@ class Kunker_model extends CI_Model
         $this->db->or_like('aa.disposisi_by', $q);
         $this->db->or_like('aa.diposisi_note', $q);
         $this->db->group_end();
-        if ($this->session->userdata('level') > 2) {
+        if ($this->session->userdata('level') == 3) {
             $this->db->where('aa.id_anggota_fraksi', $this->session->userdata('no_anggota'));
         }
         if ($status !== "") {
@@ -109,10 +109,10 @@ class Kunker_model extends CI_Model
         $this->db->or_like('aa.tujuan_disposisi', $q);
         $this->db->or_like('aa.status_disposisi', $q);
         $this->db->group_end();
-        if ($this->session->userdata('level') > 2) {
+        if ($this->session->userdata('level') == 3) {
             $this->db->where('aa.id_anggota_fraksi', $this->session->userdata('no_anggota'));
         }
-        if ($status!="") {
+        if ($status != "") {
             $this->db->where('aa.status_disposisi', $status);
         }
         $this->db->limit($limit, $start);
