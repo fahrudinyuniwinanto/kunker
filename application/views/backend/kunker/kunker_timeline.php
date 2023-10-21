@@ -141,26 +141,4 @@
 	</div>
 
 
-	<div class="timeline-item">
-
-		<div class="timeline-icon">
-			<a href="javascript:;">&nbsp;</a>
-		</div>
-
-
-		<div class="timeline-content">
-
-			<div class="timeline-body">
-				<div class="d-flex align-items-center">
-					<div class="spinner-border spinner-border-sm me-3" role="status">
-						<span class="visually-hidden">Loading...</span>
-					</div>
-					Loading...
-				</div>
-			</div>
-
-		</div>
-
-	</div>
-
 </div>

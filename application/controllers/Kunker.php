@@ -493,14 +493,23 @@ class Kunker extends CI_Controller
 		$note = $this->input->post('diposisi_note', TRUE);
 		$alasan_tolak = $this->input->post('alasan_tolak', TRUE);
 		$save = $this->db->update('kunker', [
+			//notif kebawah
 			'notif_adminta' => 1,
 			'notif_admintu' => 0,
+
+			//notif keatas
+			'dispo_keu_stat' => 0,
+			'dispo_keu_notif_from' => 1,
+			'dispo_keu_notif_to' => 0,
+
+			//manajemen dispo
 			'status_disposisi' => $status,
 			'diposisi_note' => $note,
 			'tujuan_disposisi' => $this->input->post('tujuan_disposisi'),
 			'disposisi_at' => date("Y-m-d H:i:s"),
 			'disposisi_by' => getSession('fullname'),
-			'alasan_tolak' => $alasan_tolak
+			'alasan_tolak' => $alasan_tolak,
+
 		], array('id_kunker' => $this->input->post('id_kunker')));
 		if ($save) {
 			if ($status == 1) {
@@ -519,7 +528,6 @@ class Kunker extends CI_Controller
 		}
 		echo json_encode($res);
 	}
-
 
 	public function verify_action_biro_keuangan()
 	{
@@ -527,48 +535,23 @@ class Kunker extends CI_Controller
 		$note = $this->input->post('diposisi_note', TRUE);
 		$alasan_tolak = $this->input->post('alasan_tolak', TRUE);
 		$save = $this->db->update('kunker', [
-			'notif_adminta' => 1,
-			'notif_admintu' => 0,
-			'status_disposisi' => $status,
-			'diposisi_note' => $note,
-			'tujuan_disposisi' => $this->input->post('tujuan_disposisi'),
-			'disposisi_at' => date("Y-m-d H:i:s"),
-			'disposisi_by' => getSession('fullname'),
-			'alasan_tolak' => $alasan_tolak
-		], array('id_kunker' => $this->input->post('id_kunker')));
-		if ($save) {
-			if ($status == 1) {
-				$res['msg'] = "Pengajuan SPPD berhasil diverifikasi";
-				$res['title'] = "Berhasil";
-				$res['icon'] = 'success';
-			} else {
-				$res['msg'] = "Pengajuan SPPD ditolak";
-				$res['title'] = "Ditolak";
-				$res['icon'] = 'success';
-			}
-		} else {
-			$res['msg'] = "Pengajuan SPPD gagal diverifikasi";
-			$res['title'] = "Error";
-			$res['icon'] = 'error';
-		}
-		echo json_encode($res);
-	}
+			//notif ke bawah
+			'notif_admintu' => 1,
+			'dispo_keu_notif_from' => 0,
 
+			//notif keatas
+			'dispo_kasubag_notif_from' => 1,
+			'dispo_kasubag_notif_to' => 0,
 
-	public function verify_action_kabag()
-	{
-		$status = $this->input->post('status', TRUE);
-		$note = $this->input->post('diposisi_note', TRUE);
-		$alasan_tolak = $this->input->post('alasan_tolak', TRUE);
-		$save = $this->db->update('kunker', [
-			'notif_adminta' => 1,
-			'notif_admintu' => 0,
-			'status_disposisi' => $status,
-			'diposisi_note' => $note,
-			'tujuan_disposisi' => $this->input->post('tujuan_disposisi'),
-			'disposisi_at' => date("Y-m-d H:i:s"),
-			'disposisi_by' => getSession('fullname'),
-			'alasan_tolak' => $alasan_tolak
+			//manajemen dispo
+			'dispo_keu_stat' => $status,
+			'dipo_keu_note' => $note,
+			'dispo_keu_at' => date("Y-m-d H:i:s"),
+
+			//tujuan dispo
+			'dispo_kasubag_from' => $this->input->post('tujuan_disposisi'),
+			'dispo_kasubag_stat' => 0,
+
 		], array('id_kunker' => $this->input->post('id_kunker')));
 		if ($save) {
 			if ($status == 1) {
@@ -595,14 +578,22 @@ class Kunker extends CI_Controller
 		$note = $this->input->post('diposisi_note', TRUE);
 		$alasan_tolak = $this->input->post('alasan_tolak', TRUE);
 		$save = $this->db->update('kunker', [
-			'notif_adminta' => 1,
-			'notif_admintu' => 0,
-			'status_disposisi' => $status,
-			'diposisi_note' => $note,
-			'tujuan_disposisi' => $this->input->post('tujuan_disposisi'),
-			'disposisi_at' => date("Y-m-d H:i:s"),
-			'disposisi_by' => getSession('fullname'),
-			'alasan_tolak' => $alasan_tolak
+			//notif kebawah
+			'dispo_keu_notif_to' => 1,
+			'dispo_kasubag_notif_from' => 0,
+
+			//notif keatas
+			'dispo_kabag_notif_from' => 1,
+
+			//manajemen dispo
+			'dispo_kasubag_stat' => $status,
+			'dipo_kasubag_note' => $note,
+			'dispo_kasubag_at' => date("Y-m-d H:i:s"),
+
+			//tujuan dispo
+			'dispo_kabag_from' => $this->input->post('tujuan_disposisi'),
+			'dispo_kabag_stat' => 0,
+
 		], array('id_kunker' => $this->input->post('id_kunker')));
 		if ($save) {
 			if ($status == 1) {
@@ -621,6 +612,44 @@ class Kunker extends CI_Controller
 		}
 		echo json_encode($res);
 	}
+
+
+	public function verify_action_kabag()
+	{
+		$status = $this->input->post('status', TRUE);
+		$note = $this->input->post('diposisi_note', TRUE);
+		$alasan_tolak = $this->input->post('alasan_tolak', TRUE);
+		$save = $this->db->update('kunker', [
+			'dispo_keu_notif_from' => 1,
+			'dispo_kasubag_notif_from' => 0,
+
+			'dispo_keu_stat' => $status,
+			'dipo_keu_note' => $note,
+			'dispo_keu_at' => date("Y-m-d H:i:s"),
+
+			'dispo_kasubag_to' => $this->input->post('tujuan_disposisi'),
+			'dispo_kasubag_from' => getSession('fullname'),
+			'dispo_kasubag_stat' => 0,
+
+		], array('id_kunker' => $this->input->post('id_kunker')));
+		if ($save) {
+			if ($status == 1) {
+				$res['msg'] = "Pengajuan SPPD berhasil diverifikasi";
+				$res['title'] = "Berhasil";
+				$res['icon'] = 'success';
+			} else {
+				$res['msg'] = "Pengajuan SPPD ditolak";
+				$res['title'] = "Ditolak";
+				$res['icon'] = 'success';
+			}
+		} else {
+			$res['msg'] = "Pengajuan SPPD gagal diverifikasi";
+			$res['title'] = "Error";
+			$res['icon'] = 'error';
+		}
+		echo json_encode($res);
+	}
+
 
 	public function disposisi($id)
 	{
