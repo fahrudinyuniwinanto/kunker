@@ -57,6 +57,12 @@ class Kunker extends CI_Controller
 			$numrows = $this->db->get_where('kunker', ['id_anggota_fraksi' => getSession('no_anggota'), 'notif_adminta' => 1])->num_rows();
 		} else if ($taOrTu == 2) { //tu
 			$numrows = $this->db->get_where('kunker', ['status_disposisi' => 0, 'notif_admintu' => 1])->num_rows();
+		} else if ($taOrTu == 5) { //biro
+			$numrows = $this->db->get_where('kunker', ['dispo_keu_stat' => 0, 'dispo_keu_notif_from' => 1])->num_rows();
+		} else if ($taOrTu == 7) { //biro
+			$numrows = $this->db->get_where('kunker', ['dispo_kasubbag_stat' => 0, 'dispo_kasubbag_notif_from' => 1])->num_rows();
+		} else if ($taOrTu == 6) { //biro
+			$numrows = $this->db->get_where('kunker', ['dispo_kabag_stat' => 0, 'dispo_kabag_notif_from' => 1])->num_rows();
 		} else {
 			$numrows = 0;
 		}
