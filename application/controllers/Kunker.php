@@ -675,18 +675,14 @@ class Kunker extends CI_Controller
 
 	public function tracking_action()
 	{
-		echo $no_surat = $this->input->post('nomor_surat', TRUE);
+		$no_surat = $this->input->post('nomor_surat', TRUE);
 
 		$row = $this->db->get_where('kunker', ['nomor_surat' => $no_surat])->row();
 		if ($row) {
-
-			$data = $row;
-			$data->content = 'backend/kunker/kunker_timeline';
-
-			// wfDebug($data);
+			$row->content = 'backend/kunker/kunker_timeline';
 			$this->load->view(
 				layout(),
-				$data
+				$row
 			);
 		} else {
 			$this->session->set_flashdata('message', 'Record Not Found');

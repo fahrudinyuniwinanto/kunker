@@ -302,6 +302,7 @@ function nama_bulan($month)
 //fungsi tanggal format indonesia
 function tanggal_indo($tanggal)
 {
+    $tanggal = date_format(date_create($tanggal),'Y-m-d');
     $bulan = array(
         1 =>   'Januari',
         'Februari',
