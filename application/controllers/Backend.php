@@ -49,7 +49,7 @@ class Backend extends CI_Controller
                 'start' => 0
             );
         }
-        if (getSession('level') == '2') {
+        if (getSession('level') == '2' | getSession('level') == '5' | getSession('level') == '6' | getSession('level') == '7') {
             $data = array(
 
                 'content' => 'backend/dashboard',
