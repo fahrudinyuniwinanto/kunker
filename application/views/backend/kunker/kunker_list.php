@@ -104,7 +104,7 @@
                                                                 ?>
                                         <br>
                                         <?php
-                                            echo 'keu';
+                                            echo 'BIRO :';
 
                                             if ($kunker->dispo_keu_stat == 0) {
                                                 echo '<label class="badge bg-warning">PENDING</label>';
@@ -119,7 +119,7 @@
 
                                         <br>
                                         <?php
-                                            echo 'kasub';
+                                            echo 'KASUBBAG';
 
                                             if ($kunker->dispo_kasubag_stat == 0) {
                                                 echo '<label class="badge bg-warning">PENDING</label>';
@@ -135,7 +135,7 @@
 
                                         <br>
                                         <?php
-                                            echo 'kabag';
+                                            echo 'KABAG';
 
                                             if ($kunker->dispo_kabag_stat == 0) {
                                                 echo '<label class="badge bg-warning">PENDING</label>';
