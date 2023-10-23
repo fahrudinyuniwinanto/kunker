@@ -11,7 +11,7 @@ $db['default'] = array(
     'username'     => 'root',
     'password'     => 'fah123',
     'dbdriver'     => 'mysqli',
-    'database'     => 'kunker1',
+    'database'     => 'kunker2',
     'dbprefix'     => '',
     'pconnect'     => false,
     'db_debug'     => (ENVIRONMENT !== 'production'),
@@ -26,25 +26,4 @@ $db['default'] = array(
     'failover'     => array(),
     'save_queries' => true,
 );
-/* 
-$db['default'] = array(
-    'dsn'          => '',
-    'hostname'     => 'localhost',
-    'username'     => 'peternakkode',
-    'password'     => 'peternakkode**',
-    'dbdriver'     => 'mysqli',
-    'database'     => 'peternakkode_01',
-    'dbprefix'     => '',
-    'pconnect'     => false,
-    'db_debug'     => (ENVIRONMENT !== 'production'),
-    'cache_on'     => false,
-    'cachedir'     => '',
-    'char_set'     => 'utf8',
-    'dbcollat'     => 'utf8_general_ci',
-    'swap_pre'     => '',
-    'encrypt'      => false,
-    'compress'     => false,
-    'stricton'     => false,
-    'failover'     => array(),
-    'save_queries' => true,
-); */
+
