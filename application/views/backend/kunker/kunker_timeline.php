@@ -7,7 +7,7 @@
 
 
 <h1 class="page-header">Hasil Pencarian <small>Surat Permohonan Kunjungan Kerja Nomor Surat:
-		<?= $nomor_surat ?>
+		<strong><?= $nomor_surat ?></strong>
 	</small></h1>
 
 

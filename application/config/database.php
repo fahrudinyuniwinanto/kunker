@@ -11,7 +11,7 @@ $db['default'] = array(
     'username'     => 'root',
     'password'     => 'fah123',
     'dbdriver'     => 'mysqli',
-    'database'     => 'kunker2',
+    'database'     => 'kunker4',
     'dbprefix'     => '',
     'pconnect'     => false,
     'db_debug'     => (ENVIRONMENT !== 'production'),
