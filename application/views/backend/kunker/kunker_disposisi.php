@@ -33,7 +33,7 @@
 			<tr>
 				<td>Nomor Registrasi</td>
 				<td>:</td>
-				<td><?= $v->nomor_surat.'/'.$v->nama_alias.'/KU.04/'.date_format(date_create($v->tanggal_surat),'m').'/'.date_format(date_create($v->tanggal_surat),'Y') ?></td>
+				<td><?= $v->nomor_surat.'/'.$v->nama_alias.'/'.date_format(date_create($v->tanggal_surat),'m').'/'.date_format(date_create($v->tanggal_surat),'Y') ?></td>
 				<td>Tingkat Keamanan</td>
 				<td>:</td>
 				<td><?= $v->tingkat_keamanan ?></td>
@@ -88,7 +88,7 @@
 					AM: <?=date_format(date_create($v->tanggal_surat),'d-m-Y')?>
 				</td>
 				<td colspan="2">Paraf,<br>
-				<?=date_format(date_create($v->created_at),'d-m-Y')?>
+				<?=date_format(date_create($v->tanggal_surat),'d-m-Y')?>
 					<br>
 					<img src="<?=base_url()?>/assets/img/qrcode.jpg" style="width:80px; height:80px; border:1px;">
 				</td>

@@ -701,7 +701,7 @@ $CI->load->model('User_access_model');
                         notificationSound.play();
                         isSoundPlayed = true;
                         // Tampilkan notifikasi Swal dengan suara
-                        swal({
+                       /*  swal({
                             title: 'Notifikasi Baru',
                             text: 'Anda memiliki notifikasi baru!',
                             type: 'success',
@@ -711,7 +711,7 @@ $CI->load->model('User_access_model');
 
                             timer: 3000, // Waktu tampilan notifikasi (3 detik)
                             showConfirmButton: false,
-                        });
+                        }); */
                     }
                 },
                 error: function (error) {
