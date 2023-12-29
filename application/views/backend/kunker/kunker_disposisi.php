@@ -33,7 +33,7 @@
 			<tr>
 				<td>Nomor Registrasi</td>
 				<td>:</td>
-				<td><?= $v->nomor_surat.'/'.$v->nama_alias.'/KU.04/'.date_format(date_create($v->tanggal_surat),'m').'/'.date_format(date_create($v->tanggal_surat),'Y') ?></td>
+				<td><?= $v->nomor_surat.'/'.$v->nama_alias.'/'.date_format(date_create($v->tanggal_surat),'m').'/'.date_format(date_create($v->tanggal_surat),'Y') ?></td>
 				<td>Tingkat Keamanan</td>
 				<td>:</td>
 				<td><?= $v->tingkat_keamanan ?></td>
