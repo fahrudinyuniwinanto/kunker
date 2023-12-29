@@ -20,7 +20,7 @@ class Kunker extends CI_Controller
 		$q = urldecode($this->input->get('q', TRUE));
 		$status = urldecode($this->input->get('s', TRUE));
 		$start = intval($this->input->get('start'));
-		if(strpos($q, 'A-') !== false){
+		if (strpos($q, 'A-') !== false) {
 			$q = str_replace('A-', '', $q);
 		}
 
@@ -259,17 +259,17 @@ class Kunker extends CI_Controller
 						//input ke kunker;
 						$this->Kunker_model->insert($data);
 						$insert_id = $this->db->insert_id();
-						$arr_ta = $this->input->post('id_ta', TRUE);
+						//$arr_ta = $this->input->post('id_ta', TRUE);
 						//print_r($arr_ta);
 						//die('sasa');
-						foreach ($arr_ta as $v) {
-							$data = array(
-								'id_kunker' => $insert_id,
-								'id_ta' => $v,
-							);
-							//input ke kunker_ta;
-							$this->Kunker_ta_model->insert($data);
-						}
+						//foreach ($arr_ta as $v) {
+						$data = array(
+							'id_kunker' => $insert_id,
+							'id_ta' => $this->input->post('id_ta', TRUE),
+						);
+						//input ke kunker_ta;
+						$this->Kunker_ta_model->insert($data);
+						//}
 
 						$this->session->set_flashdata('message', 'Data Kunjungan Berhasil Diajukan');
 						redirect(site_url('kunker'));
