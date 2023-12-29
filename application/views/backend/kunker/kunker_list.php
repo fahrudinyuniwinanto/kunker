@@ -154,12 +154,11 @@
                                             if (is_allow('DETAIL_KUNKER')) {
                                                 echo anchor(site_url('kunker/read/' . $kunker->id_kunker), '<i class="fa fa-eye"></i> Lihat', 'class="btn btn-xs btn-success" title="Detail Data"');
                                             }
-                                            if (is_allow('EDIT_KUNKER')) {
-                                                if ($kunker->status_disposisi == 2) {
-                                                    echo ' &nbsp ';
-                                                    echo anchor(site_url('kunker/update/' . $kunker->id_kunker), '<i class="fa fa-edit"></i> Edit', 'class="btn btn-xs btn-warning" title="Ubah Data"');
-                                                }
+                                            if ($kunker->status_disposisi == 2 and ($this->session->userdata('level') == 3) || ($this->session->userdata('level') == 2)) {
+                                                echo ' &nbsp ';
+                                                echo anchor(site_url('kunker/update/' . $kunker->id_kunker), '<i class="fa fa-edit"></i> Edit', 'class="btn btn-xs btn-warning" title="Ubah Data"');
                                             }
+
                                             if (is_allow('VERIFIKASI_KUNKER')) {
                                                 echo ' &nbsp ';
                                                 if (($this->session->userdata('id_group') == 2 | $this->session->userdata('id_group') == 1) and $kunker->status_disposisi == 0) {
