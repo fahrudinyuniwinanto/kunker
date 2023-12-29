@@ -88,7 +88,7 @@
 					AM: <?=date_format(date_create($v->tanggal_surat),'d-m-Y')?>
 				</td>
 				<td colspan="2">Paraf,<br>
-				<?=date_format(date_create($v->created_at),'d-m-Y')?>
+				<?=date_format(date_create($v->tanggal_surat),'d-m-Y')?>
 					<br>
 					<img src="<?=base_url()?>/assets/img/qrcode.jpg" style="width:80px; height:80px; border:1px;">
 				</td>
