@@ -369,16 +369,16 @@ class Kunker extends CI_Controller
 
 			$this->Kunker_model->update($this->input->post('id_kunker', TRUE), $data);
 
-			$arr_ta = $this->input->post('id_ta', TRUE);
+			//$arr_ta = $this->input->post('id_ta', TRUE);
 			$this->db->where('id_kunker', $this->input->post('id_kunker', TRUE))->delete('kunker_ta');
-			foreach ($arr_ta as $v) {
-				$data = array(
-					'id_kunker' => $this->input->post('id_kunker', TRUE),
-					'id_ta' => $v,
-				);
-				//input ke kunker_ta;
-				$this->Kunker_ta_model->insert($data);
-			}
+			//foreach ($arr_ta as $v) {
+			$data = array(
+				'id_kunker' => $this->input->post('id_kunker', TRUE),
+				'id_ta' => $this->input->post('id_ta', TRUE),
+			);
+			//input ke kunker_ta;
+			$this->Kunker_ta_model->insert($data);
+			//}
 			$this->session->set_flashdata('message', 'Update Record Success');
 			redirect(site_url('kunker'));
 		}
