@@ -120,7 +120,7 @@ class Kunker extends CI_Controller
 				'maksimal_kunjungan' => $row->maksimal_kunjungan,
 				'jumlah_hari' => $row->jumlah_hari_kunjungan,
 				'nama_kunker' => $row->nama_kunker,
-				'kunjungan_ke' => $row->kunjungan_ke + 1,
+				'kunjungan_ke' => $row->kunjungan_ke,
 				'tgl_berangkat' => $row->tgl_berangkat,
 				'tgl_kembali' => $row->tgl_kembali,
 				'nama_fraksi' => $row->nama_fraksi,
@@ -165,6 +165,8 @@ class Kunker extends CI_Controller
 			'id_kunker' => set_value('id_kunker'),
 			'id_jenis_kunjungan' => set_value('id_jenis_kunjungan'),
 			'kunjungan_ke' => set_value('kunjungan_ke'),
+			'maks_kunjungan' => set_value('maks_kunjungan'),
+			'maks_hari' => set_value('maks_hari'),
 			'nomor_surat' => set_value('nomor_surat'),
 			'jumlah_hari' => set_value('jumlah_hari'),
 			'tanggal_surat' => set_value('tanggal_surat'),
@@ -313,7 +315,9 @@ class Kunker extends CI_Controller
 				'disposisi_by' => set_value('disposisi_by', $row->disposisi_by),
 				'diposisi_note' => set_value('diposisi_note', $row->diposisi_note),
 
-				'kunjungan_ke' => set_value('kunjungan_ke'),
+				'kunjungan_ke' => set_value('kunjungan_ke', $row->kunjungan_ke),
+				'maks_kunjungan' => set_value('maks_kunjungan', $this->db->get_where('jenis_kunjungan', ['id_jenis_kunjungan' => $row->id_jenis_kunjungan])->row()->maksimal_kunjungan),
+				'maks_hari' => set_value('maks_hari', $this->db->get_where('jenis_kunjungan', ['id_jenis_kunjungan' => $row->id_jenis_kunjungan])->row()->jumlah_hari),
 				'id_kunker_ta' => set_value('id_kunker_ta'),
 				'jumlah_hari' => set_value('jumlah_hari', 3),
 				'data_ta' => $this->db->select('id_user, fullname')->where('id_parent', $this->session->userdata('id_user'))->where('status', '1')->get('users')->result(),
@@ -321,9 +325,9 @@ class Kunker extends CI_Controller
 
 				'content' => 'backend/kunker/kunker_form',
 			);
-			//echo '<pre>';
-			//print_r($data);
-			//die();
+			// echo '<pre>';
+			// print_r($data);
+			// die();
 			$this->load->view(layout(), $data);
 		} else {
 			$this->session->set_flashdata('message', 'Record Not Found');

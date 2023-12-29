@@ -57,8 +57,8 @@
                                 <label class="form-label" for="int"><i>Keterangan</i> </label>
                                 <div class="alert alert-warning">
 
-                                    * Maksimal kunjungan <strong><span id="maks_kunjungan"></span> kali</strong> dalam setahun<br />
-                                    * Maksimal <strong> <span id="maks_hari"></span>hari</strong> dalam sekali kunjungan
+                                    * Maksimal kunjungan <strong><span id="maks_kunjungan"><?= $maks_kunjungan ?></span> kali</strong> dalam setahun<br />
+                                    * Maksimal <strong> <span id="maks_hari"><?= $maks_kunjungan ?></span>hari</strong> dalam sekali kunjungan
 
                                 </div>
                             </div>
