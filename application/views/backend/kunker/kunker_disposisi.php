@@ -65,7 +65,7 @@
 			<tr>
 				<td>Perihal</td>
 				<td>:</td>
-				<td><?= $v->perihal_surat ?></td>
+				<td><?= $v->perihal_surat ?> <?= $this->db->get_where('users',['no_anggota'=>$v->id_anggota_fraksi])->row()->fullname ?> (A-<?=$v->id_anggota_fraksi?>)</td>
 				<td colspan="3"></td>
 			</tr>
 			<tr>
@@ -79,7 +79,8 @@
 			<?php endforeach; ?>
 			<tr>
 				<td colspan="4">Disposisi / Catatan : <br>
-					<?=$v->diposisi_note==""?" Mohon untuk ditindaklanjuti sesuai dengan ketentuan yang berlaku":$v->diposisi_note?><br>
+					<?=$v->diposisi_note==""?" Mohon untuk ditindaklanjuti sesuai dengan ketentuan yang berlaku. ":$v->diposisi_note?><br>
+					<?= $this->db->get_where('users',['no_anggota'=>$v->id_anggota_fraksi])->row()->fullname ?> (A-<?=$v->id_anggota_fraksi?>)
 					<br>
 					<br>
 					<br>
