@@ -126,31 +126,17 @@
                                 <label class="form-label" for="varchar">Perihal<?php echo form_error('perihal_surat') ?></label>
                                 <textarea type="text" class="form-control" name="perihal_surat" id="perihal_surat" placeholder="Perihal Surat" required><?php echo $perihal_surat; ?></textarea>
                             </div>
-                            <!-- <div class="mb-3">
-                                <label class="form-label" for="int">Id Kunker Ta <?php echo form_error('id_kunker_ta') ?></label>
-                                <input type="text" class="form-control" name="id_kunker_ta" id="id_kunker_ta" placeholder="Id Kunker Ta" value="<?php echo $id_kunker_ta; ?>" />
-                            </div> -->
                             <div class="mb-3">
                                 <label class="form-label" for="varchar">File Surat Permohonan&nbsp <?php echo form_error('file_surat') ?></label><?php if ($file_surat) {
-                                                                                                                                                        echo '<i>' . $file_surat . '</i>';
+                                                                                                                                                        echo '<i>' . $file_surat . '</i> <a class="btn btn-success btn-xs" target="_blank" href="' . base_url('assets/dok_permohonan/' . $file_surat) . '">Lihat</a>';
                                                                                                                                                     } ?>
                                 <input type="file" class="form-control" name="file_surat" id="file_surat" placeholder="File Surat" value="<?php echo $file_surat; ?>" accept="application/pdf" />
+                                <div id="pdf-preview-container"></div>
                             </div>
                         </div>
 
                         <div class="col-lg-4">
                             <div class="table-responsive" id="tabel-TAA">
-                                <!--<table class="table table-bordered table-hover table-condensed" style="margin-bottom: 10px">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <!-- <th class="text-center">No</th> --
-                                            <th class="text-center">Nama Tenaga Ahli Anggota (TAA)</th>
-                                            <th class="text-center">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="dynamic-fields">
-                                    </tbody>
-                                </table>-->
                                 <table class="table table-bordered table-hover table-condensed" style="margin-bottom: 10px">
                                     <thead class="thead-light">
                                         <tr>
@@ -181,33 +167,6 @@
                                 <!-- <button class="btn btn-warning" id="add-field" onclick="event.preventDefault()">Tambah Anggota</button> -->
                             </div>
                         </div>
-
-                        <!-- <div class="col-lg-4">
-                            <div class="mb-3">
-                                <label class="form-label" for="varchar">File Nodin <?php echo form_error('file_nodin') ?></label>
-                                <input type="text" class="form-control" name="file_nodin" id="file_nodin" placeholder="File Nodin" value="<?php echo $file_nodin; ?>" />
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="varchar">Pemberi Disposisi <?php echo form_error('pemberi_disposisi') ?></label>
-                                <input type="text" class="form-control" name="pemberi_disposisi" id="pemberi_disposisi" placeholder="Pemberi Disposisi" value="<?php echo $pemberi_disposisi; ?>" />
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="varchar">Isi Disposisi <?php echo form_error('isi_disposisi') ?></label>
-                                <input type="text" class="form-control" name="isi_disposisi" id="isi_disposisi" placeholder="Isi Disposisi" value="<?php echo $isi_disposisi; ?>" />
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="varchar">Tujuan Disposisi <?php echo form_error('tujuan_disposisi') ?></label>
-                                <input type="text" class="form-control" name="tujuan_disposisi" id="tujuan_disposisi" placeholder="Tujuan Disposisi" value="<?php echo $tujuan_disposisi; ?>" />
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="int">Status Disposisi <?php echo form_error('status_disposisi') ?></label>
-                                <input type="text" class="form-control" name="status_disposisi" id="status_disposisi" placeholder="Status Disposisi" value="<?php echo $status_disposisi; ?>" />
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="varchar">Diposisi Note <?php echo form_error('diposisi_note') ?></label>
-                                <input type="text" class="form-control" name="diposisi_note" id="diposisi_note" placeholder="Diposisi Note" value="<?php echo $diposisi_note; ?>" />
-                            </div>
-                        </div> -->
                     </div>
                 </div>
 
