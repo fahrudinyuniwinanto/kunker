@@ -120,7 +120,7 @@ class Kunker extends CI_Controller
 				'maksimal_kunjungan' => $row->maksimal_kunjungan,
 				'jumlah_hari' => $row->jumlah_hari_kunjungan,
 				'nama_kunker' => $row->nama_kunker,
-				'kunjungan_ke' => $row->kunjungan_ke,
+				'kunjungan_ke' => $row->kunjungan_ke + 1,
 				'tgl_berangkat' => $row->tgl_berangkat,
 				'tgl_kembali' => $row->tgl_kembali,
 				'nama_fraksi' => $row->nama_fraksi,
@@ -348,7 +348,6 @@ class Kunker extends CI_Controller
 			}
 			$data = array(
 				'id_jenis_kunjungan' => $this->input->post('id_jenis_kunjungan', TRUE),
-				'kunjungan_ke' => $this->input->post('kunjungan_ke', TRUE),
 				'nomor_surat' => $this->input->post('nomor_surat', TRUE),
 				'tanggal_surat' => $this->input->post('tanggal_surat', TRUE),
 				'tgl_berangkat' => $this->input->post('tgl_berangkat', TRUE),
