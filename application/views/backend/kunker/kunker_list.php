@@ -118,24 +118,9 @@
                                             ?>
 
                                         <br>
+
                                         <?php
-                                            echo 'KASUBBAG :';
-
-                                            if ($kunker->dispo_kasubag_stat == 0) {
-                                                echo '<label class="badge bg-warning">PENDING</label>';
-                                            }
-                                            if ($kunker->dispo_kasubag_stat == 1) {
-                                                echo '<label class="badge bg-success">DISETUJUI</label>';
-                                            }
-                                            if ($kunker->dispo_kasubag_stat == 2) {
-                                                echo '<label class="badge bg-danger">DITOLAK</label>';
-                                            }
-                                            ?>
-
-
-                                        <br>
-                                        <?php
-                                            echo 'KABAG :';
+                                            echo 'KASUBBBAG :';
 
                                             if ($kunker->dispo_kabag_stat == 0) {
                                                 echo '<label class="badge bg-warning">PENDING</label>';
@@ -144,6 +129,21 @@
                                                 echo '<label class="badge bg-success">DISETUJUI</label>';
                                             }
                                             if ($kunker->dispo_kabag_stat == 2) {
+                                                echo '<label class="badge bg-danger">DITOLAK</label>';
+                                            }
+                                            ?>
+
+                                        <br>
+                                        <?php
+                                            echo 'KABAG :';
+
+                                            if ($kunker->dispo_kasubag_stat == 0) {
+                                                echo '<label class="badge bg-warning">PENDING</label>';
+                                            }
+                                            if ($kunker->dispo_kasubag_stat == 1) {
+                                                echo '<label class="badge bg-success">DISETUJUI</label>';
+                                            }
+                                            if ($kunker->dispo_kasubag_stat == 2) {
                                                 echo '<label class="badge bg-danger">DITOLAK</label>';
                                             }
                                             ?>
