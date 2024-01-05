@@ -21,7 +21,7 @@
             <?php } ?>
             <a target="_blank" href="<?= base_url() ?>assets/dok_permohonan/<?= @$file_surat ?>" class="btn btn-sm btn-white mb-10px"><i class="fa fa-file-pdf t-plus-1 text-danger fa-fw fa-lg"></i> Lihat Surat <i>(<?= @$file_surat ?>)</i></a>
         </span>
-        &nbsp;Status: <?= $status_disposisi == 1 ? '<span class="text-success"><i class="fa fa-check-square"></i> Diverifikasi</span>' : ($status_disposisi == 2 ? '<span class="text-danger"><i class="fa fa-times"></i> Ditolak</span> ['.@$alasan_tolak.']' : ($status_disposisi == 0 ? '<span class="text-warning"><i class="fa fa-clock"></i> Menunggu Verifikasi</span>' : '')) ?>
+        &nbsp;Status: <?= $status_disposisi == 1 ? '<span class="text-success"><i class="fa fa-check-square"></i> Diverifikasi</span>' : ($status_disposisi == 2 ? '<span class="text-danger"><i class="fa fa-times"></i> Dikembalikan</span> ['.@$alasan_tolak.']' : ($status_disposisi == 0 ? '<span class="text-warning"><i class="fa fa-clock"></i> Menunggu Verifikasi</span>' : '')) ?>
     </div>
     <!-- END invoice-company -->
     <!-- BEGIN invoice-header -->
@@ -137,7 +137,7 @@
         // 	swal('','Catatan Disposisi tidak boleh kosong','warning');
         // }
         console.log('x');
-        var msgstatus = status == '1' ? 'terima' : (status == '2' ? 'tolak' : '');
+        var msgstatus = status == '1' ? 'Terima' : (status == '2' ? 'Dikembalikan' : '');
         swal({
             title: 'Yakin ' + msgstatus + ' Permohonan SPPD?',
             text: 'Setelah verifikasi, Anda tidak dapat merubah status lagi!',

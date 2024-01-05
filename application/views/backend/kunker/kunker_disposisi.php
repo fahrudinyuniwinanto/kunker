@@ -65,7 +65,9 @@
 			<tr>
 				<td>Perihal</td>
 				<td>:</td>
-				<td><?= $v->perihal_surat ?> <?= $this->db->get_where('users',['no_anggota'=>$v->id_anggota_fraksi])->row()->fullname ?> (A-<?=$v->id_anggota_fraksi?>)</td>
+				<td><?= $v->perihal_surat ?> <?= $this->db->get_where('users',['no_anggota'=>$v->id_anggota_fraksi])->row()->fullname ?> (A-<?=$v->id_anggota_fraksi?>)<br>
+				TA: <?=$this->db->get_where('users', "id_user IN (SELECT id_ta from kunker_ta where id_kunker='$v->id_kunker' )")->row()->fullname?><br>
+			Tanggal Perjalanan: <?=date_format(date_create($v->tgl_berangkat),'d-m-Y')?></td>
 				<td colspan="3"></td>
 			</tr>
 			<tr>
@@ -80,16 +82,17 @@
 			<tr>
 				<td colspan="4">Disposisi / Catatan : <br>
 					<?=$v->diposisi_note==""?" Mohon untuk ditindaklanjuti sesuai dengan ketentuan yang berlaku. ":$v->diposisi_note?><br>
-					<?= $this->db->get_where('users',['no_anggota'=>$v->id_anggota_fraksi])->row()->fullname ?> (A-<?=$v->id_anggota_fraksi?>)
+					<?= $this->db->get_where('users',['no_anggota'=>$v->id_anggota_fraksi])->row()->fullname ?> (A-<?=$v->id_anggota_fraksi?>)<br>
+					TA: <?=$this->db->get_where('users', "id_user IN (SELECT id_ta from kunker_ta where id_kunker='$v->id_kunker' )")->row()->fullname?>
 					<br>
 					<br>
 					<br>
 					<br>
 					<br><br>
-					AM: <?=date_format(date_create($v->tanggal_surat),'d-m-Y')?>
+					AM: <?=date_format(date_create($v->created_at),'d-m-Y')?>
 				</td>
 				<td colspan="2">Paraf,<br>
-				<?=date_format(date_create($v->tanggal_surat),'d-m-Y')?>
+				<?=date_format(date_create($v->created_at),'d-m-Y')?>
 					<br>
 					<img src="<?=base_url()?>/assets/img/qrcode.jpg" style="width:80px; height:80px; border:1px;">
 				</td>
