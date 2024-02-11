@@ -22,6 +22,7 @@
 	<link href="<?= base_url() ?>assets/vendor/coloradmin/assets/plugins/jvectormap-next/jquery-jvectormap.css" rel="stylesheet" />
 	<link href="<?= base_url() ?>assets/vendor/coloradmin/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
 	<link href="<?= base_url() ?>assets/vendor/coloradmin/assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
+	<link href="<?= base_url() ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 	<!-- END Color Admin -->
 </head>
 
@@ -44,6 +45,7 @@
 	<script src="<?= base_url() ?>assets/js/sf.js"></script>
 
 	<!-- Start Color Admin JS -->
+
 	<script src="<?= base_url() ?>assets/vendor/coloradmin/assets/js/vendor.min.js" type="cd38e282cd92834f2cf5392d-text/javascript"></script>
 	<script src="<?= base_url() ?>assets/vendor/coloradmin/assets/js/app.min.js" type="cd38e282cd92834f2cf5392d-text/javascript"></script>
 	<script src="<?= base_url() ?>assets/vendor/coloradmin/assets/js/theme/default.min.js" type="cd38e282cd92834f2cf5392d-text/javascript"></script>
@@ -72,6 +74,7 @@
 	<script src="<?= base_url() ?>assets/vendor/coloradmin/assets/plugins/jvectormap-next/jquery-jvectormap-world-mill.js" type="cd38e282cd92834f2cf5392d-text/javascript"></script>
 	<script src="<?= base_url() ?>assets/vendor/coloradmin/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js" type="cd38e282cd92834f2cf5392d-text/javascript"></script>
 	<script src="<?= base_url() ?>assets/vendor/coloradmin/assets/js/demo/dashboard.js" type="cd38e282cd92834f2cf5392d-text/javascript"></script>
+	<script src="<?= base_url() ?> assets/bootstrap/js/bootstrap.min.js"></script>
 	<script type="cd38e282cd92834f2cf5392d-text/javascript">
 		(function(i, s, o, g, r, a, m) {
 			i['GoogleAnalyticsObject'] = r;

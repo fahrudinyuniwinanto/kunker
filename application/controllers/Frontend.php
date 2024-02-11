@@ -50,4 +50,18 @@ class Frontend extends CI_Controller
         );
         $this->load->view('layout_frontend', $data);
     }
+
+    public function readQr($id){
+        $kunker = $this->db->query("SELECT aa.*,bb.nama_kunker,cc.fullname as anggota FROM kunker as aa
+        inner join jenis_kunjungan as bb
+        on aa.id_jenis_kunjungan = bb.id_jenis_kunjungan
+        inner join users as cc
+        on aa.id_anggota_fraksi=cc.id_user
+         WHERE aa.id_kunker = '$id'")->row();
+        $data=[
+            'kunker' => $kunker,
+            'content'=>'frontend/read_qr'
+        ];
+        $this->load->view('layout_frontend',$data);
+    }
 }
